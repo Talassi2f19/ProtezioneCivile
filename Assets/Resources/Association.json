@@ -1,0 +1,18 @@
+{
+    "p1":{
+        "a1":{"action":{"a2":true,"a3":true,"a4":true},"pos":true},
+        "a7":{"action":{"a16":true},"pos":true},
+        "a9":{"action":{"a16":true},"pos":true},
+        "a12":{"action":{"a16":true},"pos":true},
+        "a4": {"action":{"a16":true},"pos":true}
+        },
+    "p2":{
+        "a2":{"action":{"a5":true,"a6":true,"a7":true},"pos":true}
+        },
+    "p3":{
+        "a3":{"action":{"a8":true,"a9":true},"pos":true}
+        },
+    "p4":{
+        "a4":{"action":{"a10":true,"a11":true,"a12":true},"pos":true}
+        }
+}
