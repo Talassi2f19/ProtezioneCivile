@@ -40,7 +40,7 @@ public class Master : MonoBehaviour
     {
         string codice = GeneraCodiceCasuale(Info.SessionCodeLength);
         Debug.Log(codice);
-        string toSend = "{\"" + codice + "\":{\"gameStatusCode\":" + Info.GameStatus.WaitPlayer + "}}";
+        string toSend = "{\"" + codice + "\":{\"gameStatusCode\":\"" + Info.GameStatus.WaitPlayer + "\"}}";
         RestClient.Patch(Info.DBUrl + ".json", toSend).Then(r =>
         {
             Debug.Log("Stanza creata");
@@ -77,7 +77,7 @@ public class Master : MonoBehaviour
     //viene richiamata dai 4 pulsanti che passano una parametro diverso pe ressere identificati
     public void ChangeStatusGame(string str)
     {
-        string toSend = "{\"gameStatusCode\":" + str + "}";
+        string toSend = "{\"gameStatusCode\":\"" + str + "\"}";
         RestClient.Patch(Info.DBUrl + Info.SessionCode + ".json", toSend);
         if (str == Info.GameStatus.End)
         {
