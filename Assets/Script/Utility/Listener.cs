@@ -2,7 +2,7 @@ using System;
 using UnityEngine.Networking;
 
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
-//classe per la gestione semplificata di un event listener
+//classe per la gestione semplificata di un listener
 namespace Script.Utility
 {
     public class Listeners

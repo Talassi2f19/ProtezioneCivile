@@ -5,6 +5,7 @@ using UnityEngine;
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
 namespace Script
 {
+    //classe inirente al gameObject da visualizzare nell'interfaccia del master con il nome del player 
     public class PlayerMaster : MonoBehaviour
     {
         private User user;

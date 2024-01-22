@@ -6,9 +6,7 @@
 // TODO assegnazione ruoli
 
 
-// TODO azioni prefab
-// TODO azioni inplementazione dinamica
-// TODO gestire la posizione in cui appare azione
+// TODO azioni
 
 
 //MASTER

@@ -1,8 +1,9 @@
 using System.Runtime.InteropServices;
 using UnityEngine;
-
+// ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
 namespace Script.Utility
 {
+    //funzioni che si interfacciano con il browser tramite javascript (/plugin/function.jslib)
     public class WebGL : MonoBehaviour
     {
         [SerializeField]

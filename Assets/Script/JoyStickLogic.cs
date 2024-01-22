@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-
+// ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
 namespace Script
 {
+    //classe per la gestione del joystick
+    //classe reimplementata da una già esistente non funzionanate per webGL mobile
     public sealed class JoystickController : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
     {
         private Vector2 pos;

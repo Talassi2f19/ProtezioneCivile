@@ -8,6 +8,7 @@ using TMPro;
 using UnityEngine;
 
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
+//classe per la gestione della partita (master)
 public class Master : MonoBehaviour
 {
 
@@ -34,6 +35,7 @@ public class Master : MonoBehaviour
     }
 
 
+    //pulsante per creare una stanza
     public void CreaStanza()
     {
         string codice = GeneraCodiceCasuale(Info.SessionCodeLength);
@@ -71,6 +73,8 @@ public class Master : MonoBehaviour
         return new string(codice);
     }
     
+    //cambia la fase della partita
+    //viene richiamata dai 4 pulsanti che passano una parametro diverso pe ressere identificati
     public void ChangeStatusGame(string str)
     {
         string toSend = "{\"gameStatusCode\":" + str + "}";
@@ -94,6 +98,7 @@ public class Master : MonoBehaviour
         gameManager.SetActive(false);
     }
     
+    //TODO finire di implementare la possibilità di visualizzare a schermo i player quando entrano o escono, aggiungere possibilità di rimuoveli 
     private void PlayerAdd(string str)
     {
         // event: put

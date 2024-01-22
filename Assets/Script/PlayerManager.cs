@@ -7,6 +7,7 @@ using UnityEngine;
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
 namespace Script
 {
+    //classe per la gestione dei player
     public class PlayerManager : MonoBehaviour
     {
         public GameObject onlinePlayer;
@@ -22,8 +23,7 @@ namespace Script
             pl.Start(Read);
             
             //attiva il joystick
-            if(WebGL.IsMobile)
-                joyStick.SetActive(true);
+            joyStick.SetActive(WebGL.IsMobile);
         }
 
         private void OnApplicationQuit()

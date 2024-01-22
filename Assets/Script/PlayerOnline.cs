@@ -3,6 +3,7 @@ using UnityEngine;
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
 namespace Script
 {
+    //classe del gameObject playerOnline
     public class PlayerOnline : MonoBehaviour
     {
         public TextMeshProUGUI nome;

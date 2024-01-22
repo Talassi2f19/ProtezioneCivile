@@ -6,11 +6,14 @@ using UnityEngine.InputSystem;
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
 namespace Script
 {
+    //classe del gameObject di LocalPlayer
     public class PlayerLocal : MonoBehaviour
     {
         public float moveSpeed = 1f;
         public float collisionOffset = 0.05f;
         public ContactFilter2D movementFilter;
+        //differenza tra l'ultima pos inviata e quella attuale per aggiornare
+        public float distanzaInvio = 0.5f;
         
         private Vector2 movementInput;
         private List<RaycastHit2D> castCollisions;
@@ -29,7 +32,8 @@ namespace Script
             //se ci sono movimenti in input
             if (movementInput != Vector2.zero)
             {
-                //collisioni
+                //collisioni 
+                //TODO da controllare il funzionamento delle collisioni 
                 // int count = rb.Cast(
                 //     movementInput,
                 //     movementFilter,
@@ -42,7 +46,7 @@ namespace Script
                     rb.MovePosition(rb.position + movementInput * (moveSpeed * Time.fixedDeltaTime));
 
                     //se la distanza lo consente carica sul server la posizione
-                    if (Vector2.Distance(lastPosition, rb.position) >= 0.5)
+                    if (Vector2.Distance(lastPosition, rb.position) >= distanzaInvio)
                     {
                         // string toSend = JsonConvert.SerializeObject(rb.position);
                         string toSend = JsonUtility.ToJson(rb.position);

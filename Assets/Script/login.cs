@@ -8,6 +8,7 @@ using UnityEngine.UI;
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
 namespace Script
 {
+    //classe del login
     public class Login : MonoBehaviour
     {
         public GameObject nome;
@@ -16,6 +17,7 @@ namespace Script
         public GameObject found;
         public GameObject plInGame;
         
+        //pulsante entra, scena login
         public void Join()
         {
             string nomeUtente = nome.GetComponent<InputField>().text;

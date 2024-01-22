@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 // ReSharper disable CommentTypo IdentifierTypo
 namespace Script
 {
+    //classe per cambiare la fase di gioco 
     public class GameManager : MonoBehaviour
     {
         public GameObject game;
@@ -38,6 +39,7 @@ namespace Script
                 Set(Info.GameStatus.Votazione);;
             } else if (str.Contains(Info.GameStatus.Candidatura))
             {
+                //salva il nome del player per la riconnessione
 #if !UNITY_EDITOR
                 WebGL.SetCookie("user="+Info.LocalUser.name);
 #endif
@@ -66,6 +68,7 @@ namespace Script
             genericWait.SetActive(val == Info.GameStatus.GenericWait);
         }
         
+        //azione per il pulsante dello stato waitPlayer
         public void OnLeave()
         {
             RestClient.Delete(Info.DBUrl + Info.SessionCode + "/players/" + Info.LocalUser.name + ".json");
