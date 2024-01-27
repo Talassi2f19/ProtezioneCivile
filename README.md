@@ -91,3 +91,5 @@ Una volta installati tutti gli elementi necessari, è possibile iniziare a lavor
 layer 0: default (terra, erba ecc...)
 
 layer 1: player (alberi, case, staccionate ecc...)
+
+https://weeklyhow.com/unity-top-down-character-movement/#Player_Movement
