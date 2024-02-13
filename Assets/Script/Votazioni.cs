@@ -12,26 +12,26 @@ namespace Script
 {
     public class Votazioni : MonoBehaviour
     {
-        private List<string> keyName;
-        private List<GameObject> pulsantiCandidati = new List<GameObject>();
+        private List<string> nomiGiocatori;
+        private List<GameObject> pulsantiVotazioni = new List<GameObject>();
         public GameObject pulsantePrefab;
-
-        public Transform parent;
-        // Start is called before the first frame update
+        public Transform contenitore;
+        
         void Start()
         {
-            RestClient.Get(Info.DBUrl + Info.SessionCode + "/candidati.json").Then(s =>
+            RestClient.Get(Info.DBUrl + Info.SessionCode + "/candidati.json").Then(OnReceived =>
             {
-                JSONObject jsonCandidati = new JSONObject(s.Text);
-                keyName = jsonCandidati.keys;
-                Vector2 coord = Vector2.Zero; 
-                for (int i = 0; i < keyName.Count; i++)
+                JSONObject listaCandidati = new JSONObject(OnReceived.Text);
+                nomiGiocatori = listaCandidati.keys;
+                Vector2 coord = Vector2.Zero;
+                
+                for (int i = 0; i < nomiGiocatori.Count; i++)
                 {
-                    Debug.Log(keyName[i]);
-                    pulsantiCandidati.Add(GameObject.Instantiate(pulsantePrefab, parent));
-                    pulsantiCandidati[i].GetComponent<PulsanteVotazioni>().SetName(keyName[i]);
+                    Debug.Log(nomiGiocatori[i]);
+                    pulsantiVotazioni.Add(GameObject.Instantiate(pulsantePrefab, contenitore));
+                    pulsantiVotazioni[i].GetComponent<PulsanteVotazioni>().SetName(nomiGiocatori[i]);
 
-                    Vector3 coords = pulsantiCandidati[i].GetComponent<PulsanteVotazioni>().getCoords();
+                    Vector3 coords = pulsantiVotazioni[i].GetComponent<PulsanteVotazioni>().getCoords();
                     coord.X += 50 + coords.x;
                     if (coord.X > 300)
                     {
@@ -39,15 +39,15 @@ namespace Script
                         coord.X = 0;
                     }
                     Debug.Log("cord: "+coord.X  +"   "+ coord.Y);
-                    pulsantiCandidati[i].transform.position = new Vector3(coord.X, coord.Y, 0);
+                    pulsantiVotazioni[i].transform.position = new Vector3(coord.X, coord.Y, 0);
                 }
             });
         }
 
         
-        public void HasVoted()
+        public void PlayerHasVoted()
         {
-            foreach (GameObject pulsante in pulsantiCandidati)
+            foreach (GameObject pulsante in pulsantiVotazioni)
                 pulsante.GetComponent<PulsanteVotazioni>().SetOff();
         }
     }

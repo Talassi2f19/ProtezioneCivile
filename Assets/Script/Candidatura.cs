@@ -6,13 +6,13 @@ namespace Script
 {
     public class Candidatura : MonoBehaviour
     {
-        [SerializeField] private GameObject pulsante;
-        [SerializeField] private GameObject testo;
+        [SerializeField] private GameObject pulsanteCandidatura;
+        [SerializeField] private GameObject testoOnClick;
         
         void Start()
         {
-            pulsante.SetActive(true);
-            testo.SetActive(false);
+            pulsanteCandidatura.SetActive(true);
+            testoOnClick.SetActive(false);
         }
 
         public void Click()
@@ -24,8 +24,8 @@ namespace Script
                 Debug.Log(exception);
                 Debug.Log(exception.Message);
             });
-            pulsante.SetActive(false); //Scompare il pulsante
-            testo.SetActive(true);
+            pulsanteCandidatura.SetActive(false); //Scompare il pulsante
+            testoOnClick.SetActive(true);
         }
     }
 }

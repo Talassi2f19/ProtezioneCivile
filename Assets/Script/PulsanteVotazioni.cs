@@ -8,27 +8,23 @@ namespace Script
 {
     public class PulsanteVotazioni : MonoBehaviour
     {
-        private string name;
+        private string nomeGiocatore;
         public GameObject pulsante;
-        void Start()
-        {
-            
-        }
 
         public void SetName(string str)
         {
-            name = str;
-            pulsante.GetComponentInChildren<TMP_Text>().text = name;
+            nomeGiocatore = str;
+            pulsante.GetComponentInChildren<TMP_Text>().text = nomeGiocatore;
             pulsante.GetComponent<RectTransform>().sizeDelta =
                 new Vector2(pulsante.GetComponentInChildren<TMP_Text>().preferredWidth + 20,
                     pulsante.GetComponentInChildren<TMP_Text>().preferredHeight + 5);
         }
         public void ClickVotazione()
         {
-            RestClient.Get(Info.DBUrl + Info.SessionCode + "/candidati/" + name + ".json").Then(f =>
+            RestClient.Get(Info.DBUrl + Info.SessionCode + "/candidati/" + nomeGiocatore + ".json").Then(f =>
             {
                 int value = int.Parse(f.Text) + 1;
-                string send = "{\"" + name + "\":" + value + "}";
+                string send = "{\"" + nomeGiocatore + "\":" + value + "}";
                 RestClient.Patch(Info.DBUrl + Info.SessionCode + "/candidati" + ".json", send);
             });
             pulsante.GetComponent<Image>().color = Color.yellow;
