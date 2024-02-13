@@ -11,11 +11,11 @@ namespace Script
     //classe del login
     public class Login : MonoBehaviour
     {
-        public GameObject nome;
-        public GameObject sessione;
-        public GameObject notFound;
-        public GameObject found;
-        public GameObject plInGame;
+        [SerializeField] private GameObject nome;
+        [SerializeField] private GameObject sessione;
+        [SerializeField] private GameObject notFound;
+        [SerializeField] private GameObject found;
+        [SerializeField] private GameObject plInGame;
         
         //pulsante entra, scena login
         public void Join()
@@ -61,7 +61,8 @@ namespace Script
                             {
                                 Info.LocalUser = jsonObject.ToUser();
                                 Debug.Log("riconnesso");
-                                SceneManager.LoadScene("game");
+                        //TODO selezione scena rispettiva                             
+                        SceneManager.LoadScene("game");
                             });
                         }
                         else
@@ -88,9 +89,11 @@ namespace Script
             //string toSend = JsonConvert.SerializeObject(Info.LocalUser);
             string toSend = JsonUtility.ToJson(Info.LocalUser);
             // Debug.Log(toSend);
-            RestClient.Put(Info.DBUrl + Info.SessionCode + "/players/" + Info.LocalUser.name + ".json", toSend).Then( r=>
+            RestClient.Put(Info.DBUrl + Info.SessionCode + "/players/" + Info.LocalUser.name + ".json", toSend).Then( 
+                loadElezioni =>
             {
-                 SceneManager.LoadScene("game");
+                Debug.Log("Caricamento elezioni");
+                 SceneManager.LoadScene("elezioni");
             });
         }
         
@@ -117,9 +120,9 @@ namespace Script
         private void SessionExist(string str)
         {
      
-            RestClient.Get(Info.DBUrl + ".json").Then(r =>
+            RestClient.Get(Info.DBUrl + ".json").Then(onResponse =>
             {
-                JSONObject jj = new JSONObject(r.Text);
+                JSONObject jj = new JSONObject(onResponse.Text);
                 List<string> li = jj.keys;
                 
                 jj.GetField(str, jsonObject1 =>
@@ -136,9 +139,9 @@ namespace Script
                             found.SetActive(true);
                             Info.SessionCode = str;
                         }
-                    }, s=>NotF());
-                }, s=>NotF());
-            }).Catch( s=> NotF());
+                    }, fail => NotF());
+                }, fail => NotF());
+            }).Catch(exception => NotF());
         }
 
         private void NotF()
@@ -152,6 +155,5 @@ namespace Script
         {
             kk.GetComponent<Image>().color = UnityEngine.Color.white;
         }
-
     }
 }

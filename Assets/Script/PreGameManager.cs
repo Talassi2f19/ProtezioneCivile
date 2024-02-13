@@ -6,20 +6,16 @@ using UnityEngine.SceneManagement;
 namespace Script
 {
     //classe per cambiare la fase di gioco 
-    public class GameManager : MonoBehaviour
+    public class PreGameManager : MonoBehaviour
     {
-        public GameObject game;
-        public GameObject wait;
-        public GameObject candidatura;
-        public GameObject votazione;
-        public GameObject genericWait;
-
+        [SerializeField] private GameObject wait;
+        [SerializeField] private GameObject candidatura;
+        [SerializeField] private GameObject votazione;
         private Listeners GameIsStarted;
     
         private void Start()
         {
             wait.SetActive(true);
-            game.SetActive(false);
             candidatura.SetActive(false);
             votazione.SetActive(false);
 
@@ -34,38 +30,43 @@ namespace Script
             if (str.Contains(Info.GameStatus.WaitPlayer))
             {
                 Set(Info.GameStatus.WaitPlayer);
-            } else if (str.Contains(Info.GameStatus.Votazione))
+            } 
+            else if (str.Contains(Info.GameStatus.Candidatura))
             {
-                Set(Info.GameStatus.Votazione);;
-            } else if (str.Contains(Info.GameStatus.Candidatura))
+                Set(Info.GameStatus.Candidatura);
+            } 
+            else if (str.Contains(Info.GameStatus.Votazione))
             {
                 //salva il nome del player per la riconnessione
 #if !UNITY_EDITOR
                 WebGL.SetCookie("user="+Info.LocalUser.name);
 #endif
-                Set(Info.GameStatus.Candidatura);
-            } else if (str.Contains(Info.GameStatus.Gioco))
+                Set(Info.GameStatus.Votazione);
+            } 
+            else if (str.Contains(Info.GameStatus.RisultatiElezioni))
             {
-                Set(Info.GameStatus.Gioco);
-                
-            } else if (str.Contains(Info.GameStatus.End))
+                GameIsStarted.Stop();
+                SceneManager.LoadScene("risultatiElezioni");
+
+            }
+            else if (str.Contains(Info.GameStatus.Gioco))
+            {
+                GameIsStarted.Stop();
+                SceneManager.LoadScene("game");
+            }
+            else if (str.Contains(Info.GameStatus.End))
             {
                 GameIsStarted.Stop();
                 SceneManager.LoadScene("login");
                 Info.Reset();
-            } else if (str.Contains(Info.GameStatus.GenericWait))
-            {
-                Set(Info.GameStatus.GenericWait);
             }
         }
 
         private void Set(string val)
         {
             wait.SetActive(val == Info.GameStatus.WaitPlayer);
-            game.SetActive(val == Info.GameStatus.Gioco);
             candidatura.SetActive(val == Info.GameStatus.Candidatura);
             votazione.SetActive(val == Info.GameStatus.Votazione);
-            genericWait.SetActive(val == Info.GameStatus.GenericWait);
         }
         
         //azione per il pulsante dello stato waitPlayer
@@ -74,6 +75,8 @@ namespace Script
             RestClient.Delete(Info.DBUrl + Info.SessionCode + "/players/" + Info.LocalUser.name + ".json");
             GameStatus(Info.GameStatus.End);
         }
+        
+        
         
     }
 }

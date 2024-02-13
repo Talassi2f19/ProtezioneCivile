@@ -9,7 +9,7 @@ namespace Script
     public class PulsanteVotazioni : MonoBehaviour
     {
         private string nomeGiocatore;
-        public GameObject pulsante;
+        [SerializeField] private GameObject pulsante;
 
         public void SetName(string str)
         {
@@ -27,8 +27,8 @@ namespace Script
                 string send = "{\"" + nomeGiocatore + "\":" + value + "}";
                 RestClient.Patch(Info.DBUrl + Info.SessionCode + "/candidati" + ".json", send);
             });
-            pulsante.GetComponent<Image>().color = Color.yellow;
-            SendMessageUpwards("HasVoted", SendMessageOptions.DontRequireReceiver);
+            pulsante.GetComponent<Image>().color = Color.red;
+            SendMessageUpwards("PlayerHasVoted", SendMessageOptions.DontRequireReceiver);
         }
 
         public void SetOff()

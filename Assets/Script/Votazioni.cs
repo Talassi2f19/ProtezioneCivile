@@ -14,8 +14,8 @@ namespace Script
     {
         private List<string> nomiGiocatori;
         private List<GameObject> pulsantiVotazioni = new List<GameObject>();
-        public GameObject pulsantePrefab;
-        public Transform contenitore;
+        [SerializeField] private GameObject pulsantePrefab;
+        [SerializeField] private Transform contenitore;
         
         void Start()
         {
@@ -31,15 +31,17 @@ namespace Script
                     pulsantiVotazioni.Add(GameObject.Instantiate(pulsantePrefab, contenitore));
                     pulsantiVotazioni[i].GetComponent<PulsanteVotazioni>().SetName(nomiGiocatori[i]);
 
-                    Vector3 coords = pulsantiVotazioni[i].GetComponent<PulsanteVotazioni>().getCoords();
-                    coord.X += 50 + coords.x;
-                    if (coord.X > 300)
-                    {
-                        coord.Y += 50;
-                        coord.X = 0;
-                    }
-                    Debug.Log("cord: "+coord.X  +"   "+ coord.Y);
-                    pulsantiVotazioni[i].transform.position = new Vector3(coord.X, coord.Y, 0);
+                    pulsantiVotazioni[i].transform.position = new Vector3(100, 100 * i, 0);
+
+                    /*  Vector3 coords = pulsantiVotazioni[i].GetComponent<PulsanteVotazioni>().getCoords();
+                      coord.X += 50 + coords.x;
+                      if (coord.X > 300)
+                      {
+                          coord.Y += 50;
+                          coord.X = 0;
+                      }
+                      Debug.Log("cord: "+coord.X  +"   "+ coord.Y);
+                      pulsantiVotazioni[i].transform.position = new Vector3(coord.X, coord.Y, 0);*/
                 }
             });
         }

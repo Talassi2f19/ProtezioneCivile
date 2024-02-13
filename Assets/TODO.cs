@@ -1,8 +1,6 @@
 ﻿// ReSharper disable CommentTypo
 
 //CLIENT
-// TODO elezione
-// TODO candicatura
 // TODO assegnazione ruoli
 
 
