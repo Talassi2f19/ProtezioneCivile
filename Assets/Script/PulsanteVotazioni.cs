@@ -9,7 +9,7 @@ namespace Script
     public class PulsanteVotazioni : MonoBehaviour
     {
         private string nomeGiocatore;
-        public GameObject pulsante;
+        [SerializeField] private GameObject pulsante;
 
         public void SetName(string str)
         {
