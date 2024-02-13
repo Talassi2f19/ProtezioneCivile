@@ -31,7 +31,7 @@ namespace Script
                     pulsantiVotazioni.Add(GameObject.Instantiate(pulsantePrefab, contenitore));
                     pulsantiVotazioni[i].GetComponent<PulsanteVotazioni>().SetName(nomiGiocatori[i]);
 
-                    pulsantiVotazioni[i].transform.position = new Vector3(100, 100 * i, 0);
+                 
 
                     /*  Vector3 coords = pulsantiVotazioni[i].GetComponent<PulsanteVotazioni>().getCoords();
                       coord.X += 50 + coords.x;
