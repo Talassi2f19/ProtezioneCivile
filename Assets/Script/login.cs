@@ -21,7 +21,7 @@ namespace Script
         public void Join()
         {
             string nomeUtente = nome.GetComponent<InputField>().text;
-            if (nomeUtente != "" && Info.SessionCode != "")
+            if (nomeUtente != "" && nomeUtente.Length <= 16 && Info.SessionCode != "")
                 
             { // se il nome e la sessione(già validata) sono presenti
 
@@ -77,7 +77,7 @@ namespace Script
                 //evidenziare il campo obbligatorio mancante o errato
                 if(Info.SessionCode == "")
                     sessione.GetComponent<Image>().color = UnityEngine.Color.red;
-                if(nomeUtente == "")
+                if(nomeUtente == "" || nomeUtente.Length > 16)
                     nome.GetComponent<Image>().color = UnityEngine.Color.red;
             }
         }
@@ -146,11 +146,12 @@ namespace Script
             notFound.SetActive(true);
             found.SetActive(false);
             Info.SessionCode = "";
-        } 
+        }
 
         public void Color(GameObject kk)
         {
             kk.GetComponent<Image>().color = UnityEngine.Color.white;
         }
+
     }
 }
