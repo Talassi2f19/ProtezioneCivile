@@ -93,7 +93,7 @@ namespace Script
                 loadElezioni =>
             {
                 Debug.Log("Caricamento elezioni");
-                 SceneManager.LoadScene("elezioni");
+                SceneManager.LoadScene("elezioni");
             });
         }
         
