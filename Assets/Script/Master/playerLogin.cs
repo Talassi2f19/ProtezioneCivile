@@ -1,4 +1,5 @@
 using Defective.JSON;
+using Proyecto26;
 using Script;
 using Script.Utility;
 using System.Collections;
@@ -75,6 +76,11 @@ public class playerLogin : MonoBehaviour
 
     public void ProssimaScena()
     {
+        string str = "{\"gameStatusCode\":\"" + Info.GameStatus.Candidatura + "\"}";
+        RestClient.Patch(Info.DBUrl + Info.SessionCode + ".json", str).Catch(e=>
+        {
+            Debug.Log(e);
+        });
         SceneManager.LoadScene("elezione");
     }
 
