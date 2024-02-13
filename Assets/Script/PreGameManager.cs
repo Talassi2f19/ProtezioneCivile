@@ -1,5 +1,6 @@
 using Proyecto26;
 using Script.Utility;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 // ReSharper disable CommentTypo IdentifierTypo
@@ -12,7 +13,8 @@ namespace Script
         [SerializeField] private GameObject candidatura;
         [SerializeField] private GameObject votazione;
         private Listeners GameIsStarted;
-    
+        private Listeners AmIRemoved;
+        
         private void Start()
         {
             wait.SetActive(true);
@@ -21,45 +23,50 @@ namespace Script
 
             GameIsStarted = new Listeners(Info.DBUrl + Info.SessionCode +"/gameStatusCode.json");
             GameIsStarted.Start(GameStatus);
+
+            AmIRemoved = new Listeners(Info.DBUrl + Info.SessionCode + "/players/" + Info.LocalUser.name + ".json");
+            AmIRemoved.Start(CheckRemoved);
         }
 
         private void GameStatus(string str)
         {
              Debug.Log(str);
-            //controllo stato del gioco
-            if (str.Contains(Info.GameStatus.WaitPlayer))
-            {
-                Set(Info.GameStatus.WaitPlayer);
-            } 
-            else if (str.Contains(Info.GameStatus.Candidatura))
-            {
-                Set(Info.GameStatus.Candidatura);
-            } 
-            else if (str.Contains(Info.GameStatus.Votazione))
-            {
-                //salva il nome del player per la riconnessione
+             if(str.Contains("put"))
+                 str = str.Split("\"data\":\"")[1].Split("\"}")[0];
+             Debug.Log(str);
+             switch (str)
+             {
+                 case Info.GameStatus.WaitPlayer:
+                     Set(Info.GameStatus.WaitPlayer);
+                     break;
+                 
+                 case Info.GameStatus.Candidatura:
+                     Set(Info.GameStatus.Candidatura);
 #if !UNITY_EDITOR
                 WebGL.SetCookie("user="+Info.LocalUser.name);
 #endif
-                Set(Info.GameStatus.Votazione);
-            } 
-            else if (str.Contains(Info.GameStatus.RisultatiElezioni))
-            {
-                GameIsStarted.Stop();
-                SceneManager.LoadScene("risultatiElezioni");
-
-            }
-            else if (str.Contains(Info.GameStatus.Gioco))
-            {
-                GameIsStarted.Stop();
-                SceneManager.LoadScene("game");
-            }
-            else if (str.Contains(Info.GameStatus.End))
-            {
-                GameIsStarted.Stop();
-                SceneManager.LoadScene("login");
-                Info.Reset();
-            }
+                     break;
+                 
+                 case Info.GameStatus.Votazione:
+                     Set(Info.GameStatus.Votazione);
+                     break;
+                 
+                 case Info.GameStatus.RisultatiElezioni:
+                     GameIsStarted.Stop();
+                     SceneManager.LoadScene("risultatiElezioni");
+                     break;
+                 
+                 case Info.GameStatus.Gioco:
+                     GameIsStarted.Stop();
+                     SceneManager.LoadScene("game");
+                     break;
+                 
+                 case Info.GameStatus.End:
+                     GameIsStarted.Stop();
+                     SceneManager.LoadScene("login");
+                     Info.Reset();
+                     break;
+             }
         }
 
         private void Set(string val)
@@ -68,6 +75,13 @@ namespace Script
             candidatura.SetActive(val == Info.GameStatus.Candidatura);
             votazione.SetActive(val == Info.GameStatus.Votazione);
         }
+
+        private void CheckRemoved(string str)
+        {
+            if (str.Contains("\"data\":null"))
+                GameStatus(Info.GameStatus.End);
+                
+        }
         
         //azione per il pulsante dello stato waitPlayer
         public void OnLeave()
@@ -75,8 +89,6 @@ namespace Script
             RestClient.Delete(Info.DBUrl + Info.SessionCode + "/players/" + Info.LocalUser.name + ".json");
             GameStatus(Info.GameStatus.End);
         }
-        
-        
         
     }
 }
