@@ -77,10 +77,7 @@ public class playerLogin : MonoBehaviour
     public void ProssimaScena()
     {
         string str = "{\"gameStatusCode\":\"" + Info.GameStatus.Candidatura + "\"}";
-        RestClient.Patch(Info.DBUrl + Info.SessionCode + ".json", str).Catch(e=>
-        {
-            Debug.Log(e);
-        });
+        RestClient.Patch(Info.DBUrl + Info.SessionCode + ".json", str);
         playerJoin.Stop();
         SceneManager.LoadScene("elezione");
     }
