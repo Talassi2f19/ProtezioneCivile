@@ -38,7 +38,7 @@ public class playerLogin : MonoBehaviour
 
         // nessun player presente
         // event: put
-        // data: {"path":"/","data":null}
+        // data: {"path":"/","data":1}
         if (str.Contains("event: put"))
         {
             if (!str.Contains("\"path\":\"/\""))
@@ -81,6 +81,7 @@ public class playerLogin : MonoBehaviour
         {
             Debug.Log(e);
         });
+        playerJoin.Stop();
         SceneManager.LoadScene("elezione");
     }
 
