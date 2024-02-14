@@ -79,7 +79,11 @@ namespace Script
         private void CheckRemoved(string str)
         {
             if (str.Contains("\"data\":null"))
+            {
                 GameStatus(Info.GameStatus.End);
+                AmIRemoved.Stop();
+            }
+                
                 
         }
         
