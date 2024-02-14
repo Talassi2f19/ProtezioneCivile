@@ -5,7 +5,9 @@ using Proyecto26;
 using Script;
 using Script.Utility;
 using TMPro;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RisultatiElezioni : MonoBehaviour
 {
@@ -13,6 +15,8 @@ public class RisultatiElezioni : MonoBehaviour
     private List<string> candidati = new List<string>();
     private List<JSONObject> voti = new List<JSONObject>();
     [SerializeField] private GameObject vincitore;
+    private Listeners listener;
+
 
     
     void Start()
@@ -26,6 +30,10 @@ public class RisultatiElezioni : MonoBehaviour
         int posMaxVoti = maxVotiCandidato();
         vincitore.GetComponent<TMP_Text>().text = candidati[posMaxVoti];
         });
+
+        listener = new Listeners(Info.DBUrl + Info.SessionCode + "/gameStatusCode.json");
+        listener.Start(CambioScena);
+
     }
 
     private int maxVotiCandidato()
@@ -39,4 +47,12 @@ public class RisultatiElezioni : MonoBehaviour
         return pos;
     }
     
+    private void CambioScena(string str)
+    {
+        if (str.Contains(Info.GameStatus.End))
+        {
+            listener.Stop();
+            SceneManager.LoadScene("_Scenes/user/game");
+        } 
+    }
 }
