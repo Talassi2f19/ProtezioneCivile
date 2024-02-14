@@ -36,5 +36,6 @@ public class mostraRuolo : MonoBehaviour
     public void ExitRoleInfo()
     {
         gameObject.SetActive(false);
+        
     }
 }

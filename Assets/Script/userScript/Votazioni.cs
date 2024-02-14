@@ -29,28 +29,16 @@ namespace Script
                 {
                     Debug.Log(nomiGiocatori[i]);
                     pulsantiVotazioni.Add(GameObject.Instantiate(pulsantePrefab, contenitore));
-                    pulsantiVotazioni[i].GetComponent<PulsanteVotazioni>().SetName(nomiGiocatori[i]);
-
-                 
-
-                    /*  Vector3 coords = pulsantiVotazioni[i].GetComponent<PulsanteVotazioni>().getCoords();
-                      coord.X += 50 + coords.x;
-                      if (coord.X > 300)
-                      {
-                          coord.Y += 50;
-                          coord.X = 0;
-                      }
-                      Debug.Log("cord: "+coord.X  +"   "+ coord.Y);
-                      pulsantiVotazioni[i].transform.position = new Vector3(coord.X, coord.Y, 0);*/
+                    pulsantiVotazioni[i].GetComponent<PulsanteGiocatore>().SetName(nomiGiocatori[i]);
                 }
             });
         }
 
         
-        public void PlayerHasVoted()
+        public void PlayerHasSelected()
         {
             foreach (GameObject pulsante in pulsantiVotazioni)
-                pulsante.GetComponent<PulsanteVotazioni>().SetOff();
+                pulsante.GetComponent<PulsanteGiocatore>().SetOff();
         }
     }
 }

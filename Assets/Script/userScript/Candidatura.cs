@@ -8,7 +8,6 @@ namespace Script
     {
         [SerializeField] private GameObject pulsanteCandidatura;
         [SerializeField] private GameObject testoOnClick;
-        
         void Start()
         {
             pulsanteCandidatura.SetActive(true);

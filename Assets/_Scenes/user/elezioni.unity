@@ -493,7 +493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec9a46159bd579a49997271167295755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pulsantePrefab: {fileID: 7399024912391329358, guid: 89506ac6dc0d21143b58303bd530508c, type: 3}
+  pulsantePrefab: {fileID: 7399024912391329358, guid: a623cf55c7f9f4045ab6041ef5a4fc94, type: 3}
   contenitore: {fileID: 728966618}
 --- !u!224 &782873794
 RectTransform:
