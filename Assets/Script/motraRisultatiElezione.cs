@@ -7,6 +7,7 @@ using Script.Utility;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class MostraRisultatiElezione : MonoBehaviour
 {
     private JSONObject risultatiJSON;

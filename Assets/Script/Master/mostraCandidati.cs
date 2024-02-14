@@ -5,6 +5,9 @@ using Defective.JSON;
 using JetBrains.Annotations;
 using Script.Utility;
 using UnityEngine;
+using Proyecto26;
+using UnityEngine.SceneManagement;
+
 public class mostraCandidati : MonoBehaviour
 {
     private Listeners DidSomeoneApplied;
@@ -13,8 +16,13 @@ public class mostraCandidati : MonoBehaviour
     [SerializeField] private GameObject genericTextPrefab;
     [SerializeField] private Transform contenitore;
     
+    [SerializeField] private GameObject terminaVotazioni;
+    [SerializeField] private GameObject avviaVotazioni;
+    
     void Start()
     {
+        terminaVotazioni.SetActive(false);
+        avviaVotazioni.SetActive(true);
         DidSomeoneApplied = new Listeners(Info.DBUrl + Info.SessionCode + "/candidati.json");
         DidSomeoneApplied.Start(AddCandidato);
     }
@@ -44,6 +52,22 @@ public class mostraCandidati : MonoBehaviour
             candidati[candidati.Count - 1].GetComponent<genericTextPrefab>().setGenericText(nome);
         }
         
+    }
+
+    public void AvviaVotazioni()
+    {
+        string str = "{\"gameStatusCode\":\"" + Info.GameStatus.Votazione + "\"}";
+        RestClient.Patch(Info.DBUrl + Info.SessionCode + ".json", str);
+        terminaVotazioni.SetActive(true);
+        avviaVotazioni.SetActive(false);
+        DidSomeoneApplied.Stop();
+    }
+    
+    public void MostraRisultati()
+    {
+        string str = "{\"gameStatusCode\":\"" + Info.GameStatus.RisultatiElezioni + "\"}";
+        RestClient.Patch(Info.DBUrl + Info.SessionCode + ".json", str);
+        SceneManager.LoadScene("_Scenes/master/risultatiElezioni");
     }
     
 }

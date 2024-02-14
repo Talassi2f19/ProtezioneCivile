@@ -257,7 +257,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 167424899}
   m_CullTransparentMesh: 1
---- !u!1 &305578959
+--- !u!1 &250480161
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -265,39 +265,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 305578961}
-  - component: {fileID: 305578960}
+  - component: {fileID: 250480163}
+  - component: {fileID: 250480162}
   m_Layer: 0
-  m_Name: logic
+  m_Name: Mostra Candidati
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &305578960
+--- !u!114 &250480162
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 305578959}
+  m_GameObject: {fileID: 250480161}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a07a03d86cd9a274a9dba3e4e046aa49, type: 3}
+  m_Script: {fileID: 11500000, guid: fd84cc9528f65584080512cd9436f99c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  genericTextPrefab: {fileID: 3646007721177791038, guid: 948e4651290fd504c82bb3e4c719b4e5, type: 3}
+  contenitore: {fileID: 451476765}
   terminaVotazioni: {fileID: 1928014179}
   avviaVotazioni: {fileID: 617689400}
---- !u!4 &305578961
+--- !u!4 &250480163
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 305578959}
+  m_GameObject: {fileID: 250480161}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 483.85025, y: 336.5965, z: -2.9901652}
+  m_LocalPosition: {x: 1048.2831, y: 562.2771, z: -6.45046}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -354,6 +356,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genericTextPrefab: {fileID: 3646007721177791038, guid: 948e4651290fd504c82bb3e4c719b4e5, type: 3}
   contenitore: {fileID: 451476765}
+  terminaVotazioni: {fileID: 0}
+  avviaVotazioni: {fileID: 0}
 --- !u!114 &451476767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,8 +460,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 305578960}
-        m_TargetAssemblyTypeName: elezione, Assembly-CSharp
+      - m_Target: {fileID: 250480162}
+        m_TargetAssemblyTypeName: mostraCandidati, Assembly-CSharp
         m_MethodName: AvviaVotazioni
         m_Mode: 1
         m_Arguments:
@@ -896,8 +900,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 305578960}
-        m_TargetAssemblyTypeName: elezione, Assembly-CSharp
+      - m_Target: {fileID: 250480162}
+        m_TargetAssemblyTypeName: mostraCandidati, Assembly-CSharp
         m_MethodName: MostraRisultati
         m_Mode: 1
         m_Arguments:
@@ -1179,4 +1183,4 @@ SceneRoots:
   - {fileID: 2140548836}
   - {fileID: 1022426735}
   - {fileID: 687737241}
-  - {fileID: 305578961}
+  - {fileID: 250480163}
