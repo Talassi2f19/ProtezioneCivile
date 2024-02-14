@@ -21,20 +21,22 @@ public class mostraCandidati : MonoBehaviour
     
     private void AddCandidato(string str)
     {
-        Debug.Log("AddCandidato: stringValue=" + str);
+        Debug.Log("AddCandidato: stringValue =" + str);
 
         //gestisco il messaggio di keep alive periodico che arriva
         //così quel messaggio non passa per quello che viene dopo l'if
-        if (str.Contains("put"))
+        if (str.Contains("event: patch"))
         {
             List<string> nomi = new List<string>();
             
             //Contine il valore del campo "data" che viene ricevuto con il Listener
-            string dataJSON = str.Split("\"data\":")[1].Split("}")[0];
+            string dataJSON = str.Split("\"data\":")[1].Split("}")[0] + "}";
+            
+            Debug.Log("AddCandidato: stringAfterSplit =" + dataJSON);
             
             //Trasformo il contenuto in un oggetto JSON in modo da ottenerne le chiavi
             JSONObject listaJSON = new JSONObject(dataJSON);
-
+            
             //Lista dei player che si sono candidati
             nomi = listaJSON.keys;
 
