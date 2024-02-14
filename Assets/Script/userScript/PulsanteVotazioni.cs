@@ -15,9 +15,7 @@ namespace Script
         {
             nomeGiocatore = str;
             pulsante.GetComponentInChildren<TMP_Text>().text = nomeGiocatore;
-            pulsante.GetComponent<RectTransform>().sizeDelta =
-                new Vector2(pulsante.GetComponentInChildren<TMP_Text>().preferredWidth + 20,
-                    pulsante.GetComponentInChildren<TMP_Text>().preferredHeight + 5);
+            gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(pulsante.GetComponentInChildren<TMP_Text>().preferredWidth + 20, 40);
         }
         public void ClickVotazione()
         {

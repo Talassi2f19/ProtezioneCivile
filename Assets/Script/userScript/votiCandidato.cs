@@ -18,6 +18,9 @@ public class votiCandidato : MonoBehaviour
     {
         this.nomeCandidato = nomeCandidato;
         testoNomeCandidato.text = this.nomeCandidato;
+
+        Vector2 dim = new Vector2(testoNomeCandidato.GetComponent<TMP_Text>().preferredWidth + 20, 40);
+        gameObject.GetComponent<RectTransform>().sizeDelta = dim;
     }
 
     public void setNumeroVoti(int numeroVoti)
