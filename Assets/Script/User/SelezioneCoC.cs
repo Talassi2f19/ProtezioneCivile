@@ -18,7 +18,7 @@ public class SelezioneCoC : MonoBehaviour
     {
 
         GameObject mostraRuolo =  GameObject.Instantiate(mostraRuoloPrefab, mostraRuoloPrefabParent);
-        mostraRuolo.GetComponent<MostraRuolo>().setRoleName(Info.LocalUser.role);
+    //    mostraRuolo.GetComponent<MostraRuolo>().setRoleName(Info.LocalUser.role);
        /* mostraRuolo.GetComponent<MostraRuolo>().setRoleDescription("aasfafasfasfasf");
         mostraRuolo.GetComponent<MostraRuolo>().setRoleName("path/:.jojo/aihsfias");*/
 
