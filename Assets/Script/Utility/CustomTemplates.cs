@@ -24,7 +24,7 @@ namespace Script.Utility
             return di;
         }
 
-        public static Dictionary<string, JSONObject> ToDictionary(this JSONObject jsonObject)
+        public static Dictionary<string, JSONObject> ToJSONDictionary(this JSONObject jsonObject)
         {
             var di = new Dictionary<string, JSONObject>();
             var lk = jsonObject.keys;
