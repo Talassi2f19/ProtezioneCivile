@@ -53,17 +53,17 @@ namespace Script
                  
                  case Info.GameStatus.RisultatiElezioni:
                      GameIsStarted.Stop();
-                     SceneManager.LoadScene("risultatiElezioni");
+                     SceneManager.LoadScene("_Scenes/user/risultatiElezioni");
                      break;
                  
                  case Info.GameStatus.Gioco:
                      GameIsStarted.Stop();
-                     SceneManager.LoadScene("game");
+                     SceneManager.LoadScene("_Scenes/user/game");
                      break;
                  
                  case Info.GameStatus.End:
                      GameIsStarted.Stop();
-                     SceneManager.LoadScene("login");
+                     SceneManager.LoadScene("_Scenes/user/login");
                      Info.Reset();
                      break;
              }
