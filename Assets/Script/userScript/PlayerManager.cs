@@ -5,25 +5,20 @@ using Script.Utility;
 using UnityEngine;
 
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
-namespace Script
+namespace Script.userScript
 {
     //classe per la gestione dei player
     public class PlayerManager : MonoBehaviour
     {
-        public GameObject onlinePlayer;
-        public Transform parent;
+        [SerializeField] private GameObject onlinePlayer;
+        [SerializeField] private Transform parent;
         
         private Listeners pl = new Listeners(Info.DBUrl + Info.SessionCode +"/players/.json");
         private Dictionary<string, GameObject> playerList = new Dictionary<string, GameObject>();
-
-        public GameObject joyStick;
         
         private void Start()
         {
             pl.Start(Read);
-            
-            //attiva il joystick
-            joyStick.SetActive(WebGL.IsMobile);
         }
 
         private void OnApplicationQuit()
