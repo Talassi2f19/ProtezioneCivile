@@ -40,7 +40,7 @@ public class MostraRisultatiElezione : MonoBehaviour
             listaRisultati[posMaxVoti].GetComponent<votiCandidato>().highlightBestCandidate();
             //aggiorna il ruolo del player
             string str = "{\"role\":\"Sindaco\"}";
-            RestClient.Patch(Info.DBUrl + Info.SessionCode + "/players/" + Info.LocalUser.name + ".json", str);
+            RestClient.Patch(Info.DBUrl + Info.SessionCode + "/players/" + candidati[posMaxVoti] + ".json", str);
         });
     }
 
