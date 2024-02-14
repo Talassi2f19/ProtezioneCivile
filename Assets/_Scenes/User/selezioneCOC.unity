@@ -164,13 +164,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 306339834}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c68f79e7b7ce0b34a89e9ceb60485ab8, type: 3}
+  m_Script: {fileID: 11500000, guid: cb0c514bb098e1243bcd2ca1d2c26583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  schermataRuoloPrefab: {fileID: 2576933465003665113, guid: 91a6e2047b0973948afe18de17ac3f07, type: 3}
-  contenitoreSchermataRuolo: {fileID: 343056053}
-  pulsanteGiocatorePrefab: {fileID: 1905076228}
-  contenitorePulsanteGiocatore: {fileID: 1905076229}
+  mostraRuoloPrefab: {fileID: 2576933465003665113, guid: 91a6e2047b0973948afe18de17ac3f07, type: 3}
+  mostraRuoloPrefabParent: {fileID: 343056053}
+  buttonPrefab: {fileID: 7399024912391329358, guid: ca553effa6050154b866ee5fa278865c, type: 3}
+  buttonParent: {fileID: 1905076229}
 --- !u!1 &343056049
 GameObject:
   m_ObjectHideFlags: 0

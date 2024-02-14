@@ -18,7 +18,9 @@ public class SelezioneCoC : MonoBehaviour
     {
 
         GameObject mostraRuolo =  GameObject.Instantiate(mostraRuoloPrefab, mostraRuoloPrefabParent);
-        //TODO passare le variabili
+        mostraRuolo.GetComponent<MostraRuolo>().setRoleName(Info.LocalUser.role);
+       /* mostraRuolo.GetComponent<MostraRuolo>().setRoleDescription("aasfafasfasfasf");
+        mostraRuolo.GetComponent<MostraRuolo>().setRoleName("path/:.jojo/aihsfias");*/
 
         RestClient.Get(Info.DBUrl + Info.SessionCode + "/players.json").Then(e =>
         {
@@ -34,19 +36,14 @@ public class SelezioneCoC : MonoBehaviour
 
         foreach(var pl in player)
         {
-           GameObject hh =  GameObject.Instantiate(buttonPrefab, buttonParent);
-           //TODO passare le variabili da passare
+           GameObject pulsante =  GameObject.Instantiate(buttonPrefab, buttonParent);
+           pulsante.GetComponent<PulsanteGiocatore>().SetName(pl.Key);
            //pl.Key -> nome player
         }
     }
-
 
     public void PlayerHasSelected()
     {
         SceneManager.LoadScene("_Scenes/user/game");
     }
-
-
-
-
 }

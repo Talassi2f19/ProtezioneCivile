@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class mostraRuolo : MonoBehaviour
+public class MostraRuolo : MonoBehaviour
 {
     [SerializeField] private Image roleImage;
     [SerializeField] private TMP_Text name;
