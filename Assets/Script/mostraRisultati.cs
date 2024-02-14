@@ -4,6 +4,7 @@ using Defective.JSON;
 using Proyecto26;
 using Script;
 using Script.Utility;
+using TMPro;
 using UnityEngine;
 
 public class RisultatiElezioni : MonoBehaviour
@@ -11,29 +12,19 @@ public class RisultatiElezioni : MonoBehaviour
     private JSONObject risultatiJSON;
     private List<string> candidati = new List<string>();
     private List<JSONObject> voti = new List<JSONObject>();
-    private List<GameObject> listaRisultati= new List<GameObject>();
-    [SerializeField] private GameObject votoCandidatoPrefab;
-    [SerializeField] private Transform contenitore;
+    [SerializeField] private GameObject vincitore;
+
     
     void Start()
     {
         RestClient.Get(Info.DBUrl + Info.SessionCode + "/candidati.json").Then(onReceived =>
         {
-            risultatiJSON = new JSONObject(onReceived.Text);
-            candidati = risultatiJSON.keys;
-            voti = risultatiJSON.list;
+        risultatiJSON = new JSONObject(onReceived.Text);
+        candidati = risultatiJSON.keys;
+        voti = risultatiJSON.list;
 
-            int posMaxVoti = maxVotiCandidato();
-            
-            for (int i = 0; i < candidati.Count; i++)
-            {
-                Debug.Log(candidati[i] +  " - " + voti[i].intValue);
-                listaRisultati.Add(GameObject.Instantiate(votoCandidatoPrefab, contenitore));
-                listaRisultati[i].GetComponent<votiCandidato>().setNomeCandidato(candidati[i]);
-                listaRisultati[i].GetComponent<votiCandidato>().setNumeroVoti(voti[i].intValue);
-            }
-            
-            listaRisultati[posMaxVoti].GetComponent<votiCandidato>().highlightBestCandidate();
+        int posMaxVoti = maxVotiCandidato();
+        vincitore.GetComponent<TMP_Text>().text = candidati[posMaxVoti];
         });
     }
 
