@@ -22,7 +22,7 @@ namespace Script.Master
 
         private void Start()
         {
-            RestClient.Get(Info.DBUrl + Info.SessionCode + "/candidati.json").Then(onReceived =>
+            RestClient.Get(Info.DBUrl + Info.sessionCode + "/candidati.json").Then(onReceived =>
             {
                 risultatiJson = new JSONObject(onReceived.Text);
                 candidati = risultatiJson.keys;
@@ -41,7 +41,7 @@ namespace Script.Master
                 listaRisultati[posMaxVoti].GetComponent<VotiCandidato>().HighlightBestCandidate();
                 //aggiorna il ruolo del player
                 string str = "{\"role\":\"Sindaco\"}";
-                RestClient.Patch(Info.DBUrl + Info.SessionCode + "/players/" + candidati[posMaxVoti] + ".json", str);
+                RestClient.Patch(Info.DBUrl + Info.sessionCode + "/players/" + candidati[posMaxVoti] + ".json", str);
             });
         }
 
@@ -59,7 +59,7 @@ namespace Script.Master
         public void AvviaPartita()
         {
             string str = "{\"gameStatusCode\":\"" + Info.GameStatus.Gioco + "\"}";
-            RestClient.Patch(Info.DBUrl + Info.SessionCode + ".json", str);
+            RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str);
             SceneManager.LoadScene("_Scenes/master/game");
         }
     }

@@ -13,16 +13,16 @@ namespace Script.User
         [SerializeField] private GameObject candidatura;
         [SerializeField] private GameObject votazione;
         
-        private Listeners GameIsStarted;
-        private Listeners AmIRemoved;
+        private Listeners gameIsStarted;
+        private Listeners amIRemoved;
         
         private void Start()
         {
-            GameIsStarted = new Listeners(Info.DBUrl + Info.SessionCode +"/gameStatusCode.json");
-            GameIsStarted.Start(GameStatus);
+            gameIsStarted = new Listeners(Info.DBUrl + Info.sessionCode +"/gameStatusCode.json");
+            gameIsStarted.Start(GameStatus);
 
-            AmIRemoved = new Listeners(Info.DBUrl + Info.SessionCode + "/players/" + Info.localGenericUser.name + ".json");
-            AmIRemoved.Start(CheckRemoved);
+            amIRemoved = new Listeners(Info.DBUrl + Info.sessionCode + "/players/" + Info.localGenericUser.name + ".json");
+            amIRemoved.Start(CheckRemoved);
             
             wait.SetActive(true);
             candidatura.SetActive(false);
@@ -53,17 +53,17 @@ namespace Script.User
                      break;
                  
                  case Info.GameStatus.RisultatiElezioni:
-                     GameIsStarted.Stop();
+                     gameIsStarted.Stop();
                      SceneManager.LoadScene("_Scenes/user/risultatiElezioni");
                      break;
                  
                  case Info.GameStatus.Gioco:
-                     GameIsStarted.Stop();
+                     gameIsStarted.Stop();
                      SceneManager.LoadScene("_Scenes/user/game");
                      break;
                  
                  case Info.GameStatus.End:
-                     GameIsStarted.Stop();
+                     gameIsStarted.Stop();
                      SceneManager.LoadScene("_Scenes/user/login");
                      Info.Reset();
                      break;
@@ -82,14 +82,14 @@ namespace Script.User
             if (response.Contains("\"data\":null"))
             {
                 GameStatus(Info.GameStatus.End);
-                AmIRemoved.Stop();
+                amIRemoved.Stop();
             }
         }
         
         //Quando il giocatore abbandona la sessione
         public void OnLeave()
         {
-            RestClient.Delete(Info.DBUrl + Info.SessionCode + "/players/" + Info.localGenericUser.name + ".json");
+            RestClient.Delete(Info.DBUrl + Info.sessionCode + "/players/" + Info.localGenericUser.name + ".json");
             GameStatus(Info.GameStatus.End);
         }
     }

@@ -7,10 +7,11 @@ namespace Script.User
     public class AttesaRuoli : MonoBehaviour
     {
         Listeners listeners;
-        void Start()
+
+        private void Start()
         {
     
-            listeners = new Listeners(Info.DBUrl + Info.SessionCode + "/players/" + Info.localGenericUser.name + "/role.json");
+            listeners = new Listeners(Info.DBUrl + Info.sessionCode + "/players/" + Info.localGenericUser.name + "/role.json");
             //listeners = new Listeners(Info.DBUrl + "RPWB/players/ddd"  + "/role.json");
             listeners.Start(TrovaRuolo);
         }

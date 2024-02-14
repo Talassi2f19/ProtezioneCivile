@@ -3,7 +3,6 @@ using Defective.JSON;
 using Proyecto26;
 using Script.Utility;
 using UnityEngine;
-using Vector2 = System.Numerics.Vector2;
 
 namespace Script.User
 {
@@ -13,10 +12,10 @@ namespace Script.User
         private List<GameObject> pulsantiVotazioni = new List<GameObject>();
         [SerializeField] private GameObject pulsantePrefab;
         [SerializeField] private Transform contenitore;
-
+        
         private void Start()
         {
-            RestClient.Get(Info.DBUrl + Info.SessionCode + "/candidati.json").Then(onReceived =>
+            RestClient.Get(Info.DBUrl + Info.sessionCode + "/candidati.json").Then(onReceived =>
             {
                 JSONObject listaCandidati = new JSONObject(onReceived.Text);
                 nomiGiocatori = listaCandidati.keys;

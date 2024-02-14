@@ -6,8 +6,7 @@ namespace Script.Utility
     //funzioni che si interfacciano con il browser tramite javascript (/plugin/function.jslib)
     public class WebGL : MonoBehaviour
     {
-        [SerializeField]
-        public static bool IsMobile = false;
+        public static bool isMobile = false;
         
         [DllImport("__Internal")]
         private static extern bool Mobile();
@@ -18,10 +17,10 @@ namespace Script.Utility
         
         private void Start()
         {
-#if !UNITY_EDITOR
-        IsMobile = Mobile();
-#endif
-            Debug.Log("è mobile: " + (IsMobile ? "true" : "false"));
+ #if !UNITY_EDITOR
+        isMobile = Mobile();
+ #endif
+            Debug.Log("è mobile: " + (isMobile ? "true" : "false"));
         }
     }
 }

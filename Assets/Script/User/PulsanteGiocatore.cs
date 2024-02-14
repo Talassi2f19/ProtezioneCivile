@@ -21,11 +21,11 @@ namespace Script.User
         public void ClickVotazione()
         {
             PlayerSelected();
-            RestClient.Get(Info.DBUrl + Info.SessionCode + "/candidati/" + nomeGiocatore + ".json").Then(f =>
+            RestClient.Get(Info.DBUrl + Info.sessionCode + "/candidati/" + nomeGiocatore + ".json").Then(f =>
             {
                 int value = int.Parse(f.Text) + 1;
                 string send = "{\"" + nomeGiocatore + "\":" + value + "}";
-                RestClient.Patch(Info.DBUrl + Info.SessionCode + "/candidati" + ".json", send);
+                RestClient.Patch(Info.DBUrl + Info.sessionCode + "/candidati" + ".json", send);
             });
         }
 
@@ -34,7 +34,7 @@ namespace Script.User
             string patchRequest = "{\"role\":\"coc\"}";
             PlayerSelected();
 
-            RestClient.Patch(Info.DBUrl + Info.SessionCode + "/players/" + nomeGiocatore + ".json", patchRequest);
+            RestClient.Patch(Info.DBUrl + Info.sessionCode + "/players/" + nomeGiocatore + ".json", patchRequest);
         }
 
         public void PlayerSelected()

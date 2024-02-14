@@ -1,4 +1,6 @@
+using Script.Utility;
 using UnityEngine;
+
 
 namespace Script.User
 {
@@ -6,10 +8,10 @@ namespace Script.User
     {
         [SerializeField] private GameObject joyStick;
 
-        void Start()
+        private void Start()
         {
             //attiva il joystick
-            //joyStick.SetActive(WebGL.IsMobile);
+            joyStick.SetActive(WebGL.isMobile);
         }
     }
 }

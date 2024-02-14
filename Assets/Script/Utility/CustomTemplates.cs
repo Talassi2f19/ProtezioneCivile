@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Script.Utility
 {
     //custom template per la conversione dei dati JSONObject
-    public static partial class JsonTemplates
+    public static class JsonTemplates
     {
         public static GenericUser ToUser(this JSONObject jsonObject) {
             var name = jsonObject["name"] ? jsonObject["name"].stringValue : "";
@@ -24,7 +24,7 @@ namespace Script.Utility
             return di;
         }
 
-        public static Dictionary<string, JSONObject> ToJSONDictionary(this JSONObject jsonObject)
+        public static Dictionary<string, JSONObject> ToJsonDictionary(this JSONObject jsonObject)
         {
             var di = new Dictionary<string, JSONObject>();
             var lk = jsonObject.keys;

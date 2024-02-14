@@ -23,8 +23,8 @@ namespace Script.Master
         private void Start()
         {
             //mostra il codice di accesso
-            displaySessionCode.GetComponent<TMP_Text>().text = Info.SessionCode;
-            playerJoin = new Listeners(Info.DBUrl + Info.SessionCode + "/players.json");
+            displaySessionCode.GetComponent<TMP_Text>().text = Info.sessionCode;
+            playerJoin = new Listeners(Info.DBUrl + Info.sessionCode + "/players.json");
             playerJoin.Start(PlayerAdd);
         }
 
@@ -82,7 +82,7 @@ namespace Script.Master
             if (playerList.Count > 0)
             {
                 string str = "{\"gameStatusCode\":\"" + Info.GameStatus.Candidatura + "\"}";
-                RestClient.Patch(Info.DBUrl + Info.SessionCode + ".json", str);
+                RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str);
                 playerJoin.Stop();
                 SceneManager.LoadScene("_Scenes/master/elezioni");
             }

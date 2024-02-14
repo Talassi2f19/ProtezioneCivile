@@ -14,19 +14,19 @@ namespace Script.User
         private string roleName;
         private string roleDescription; //TODO vedere se tenere o meno la descrizione come attributo perché peserà tanto
     
-        public void setRoleName(string roleName)
+        public void SetRoleName(string roleName)
         {
             this.roleName = roleName;
             name.text = this.roleName;
         }
 
-        public void setRoleDescription(string roleDescription)
+        public void SetRoleDescription(string roleDescription)
         {
             this.roleDescription = roleDescription;
             description.text = this.roleDescription;
         }
     
-        public void setRoleImage(string roleImagePath)
+        public void SetRoleImage(string roleImagePath)
         {
             this.roleImagePath = roleImagePath;
             Sprite immagine = Resources.Load<Sprite>(this.roleImagePath);

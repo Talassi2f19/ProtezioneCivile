@@ -23,10 +23,10 @@ namespace Script.User
             /* mostraRuolo.GetComponent<MostraRuolo>().setRoleDescription("aasfafasfasfasf");
         mostraRuolo.GetComponent<MostraRuolo>().setRoleName("path/:.jojo/aihsfias");*/
 
-            RestClient.Get(Info.DBUrl + Info.SessionCode + "/players.json").Then(e =>
+            RestClient.Get(Info.DBUrl + Info.sessionCode + "/players.json").Then(e =>
             {
                 JSONObject json = new JSONObject(e.Text);
-                player = json.ToJSONDictionary();
+                player = json.ToJsonDictionary();
             });
             Genera();
         }

@@ -13,7 +13,7 @@ namespace Script.User
         [SerializeField] private GameObject onlinePlayer;
         [SerializeField] private Transform parent;
         
-        private Listeners pl = new Listeners(Info.DBUrl + Info.SessionCode +"/players/.json");
+        private Listeners pl = new Listeners(Info.DBUrl + Info.sessionCode +"/players/.json");
         private Dictionary<string, GameObject> playerList = new Dictionary<string, GameObject>();
         
         private void Start()
@@ -52,7 +52,6 @@ namespace Script.User
                 string n = str.Split("/", 2)[0];
                 try
                 {
-                    var t = playerList[n]; //se il player non viene trovato esce direttamente senza eseguire il resto
                     str = str.Remove(str.Length - 1);
                     str = str.Split("data\":")[1];
                     Vector2 move = new JSONObject(str).ToVector2();

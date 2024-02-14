@@ -16,7 +16,7 @@ namespace Script.Master
             RestClient.Patch(Info.DBUrl + ".json", toSend).Then(r =>
             {
                 Debug.Log("Stanza creata");
-                Info.SessionCode = codice;
+                Info.sessionCode = codice;
 
                 SceneManager.LoadScene("playerLogin");
 

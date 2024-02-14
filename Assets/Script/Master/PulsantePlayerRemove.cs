@@ -23,7 +23,7 @@ namespace Script.Master
         public void OnClick()
         {
             gameObject.SetActive(false);
-            RestClient.Delete(Info.DBUrl + Info.SessionCode + "/players/" + nomeGiocatore + ".json");
+            RestClient.Delete(Info.DBUrl + Info.sessionCode + "/players/" + nomeGiocatore + ".json");
         }
     }
 }

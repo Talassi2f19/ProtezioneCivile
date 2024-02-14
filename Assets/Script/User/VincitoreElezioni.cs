@@ -10,7 +10,7 @@ namespace Script.User
 {
     public class RisultatiElezioni : MonoBehaviour
     {
-        private JSONObject risultatiJSON;
+        private JSONObject risultatiJson;
         private List<string> candidati = new List<string>();
         private List<JSONObject> voti = new List<JSONObject>();
         [SerializeField] private GameObject vincitore;
@@ -20,17 +20,17 @@ namespace Script.User
     
         void Start()
         {
-            RestClient.Get(Info.DBUrl + Info.SessionCode + "/candidati.json").Then(onReceived =>
+            RestClient.Get(Info.DBUrl + Info.sessionCode + "/candidati.json").Then(onReceived =>
             {
-                risultatiJSON = new JSONObject(onReceived.Text);
-                candidati = risultatiJSON.keys;
-                voti = risultatiJSON.list;
+                risultatiJson = new JSONObject(onReceived.Text);
+                candidati = risultatiJson.keys;
+                voti = risultatiJson.list;
 
                 int posMaxVoti = MaxVotiCandidato();
                 vincitore.GetComponent<TMP_Text>().text = candidati[posMaxVoti];
             });
 
-            listener = new Listeners(Info.DBUrl + Info.SessionCode + "/gameStatusCode.json");
+            listener = new Listeners(Info.DBUrl + Info.sessionCode + "/gameStatusCode.json");
             listener.Start(CambioScena);
 
         }
@@ -51,7 +51,7 @@ namespace Script.User
             if (str.Contains(Info.GameStatus.Gioco))
             {
                 listener.Stop();
-                RestClient.Get(Info.DBUrl + Info.SessionCode + "/players/" + Info.localGenericUser.name + "/role.json").Then(e =>
+                RestClient.Get(Info.DBUrl + Info.sessionCode + "/players/" + Info.localGenericUser.name + "/role.json").Then(e =>
                 {
                     if(e.Text == "null")
                     {

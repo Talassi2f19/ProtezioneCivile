@@ -23,9 +23,9 @@ namespace Script.User
         {
             string nomeUtente = nome.GetComponent<InputField>().text;
             
-            if (nomeUtente != "" && nomeUtente.Length <= 16 && Info.SessionCode != "")
+            if (nomeUtente != "" && nomeUtente.Length <= 16 && Info.sessionCode != "")
             { // se il nome e la sessione(già validata) sono presenti
-                RestClient.Get(Info.DBUrl + Info.SessionCode + ".json").Then(response =>
+                RestClient.Get(Info.DBUrl + Info.sessionCode + ".json").Then(response =>
                 {
                     //richiedo la sessione
                     JSONObject jj = new JSONObject(response.Text);
@@ -71,7 +71,7 @@ namespace Script.User
             else
             {
                 //evidenziare il campo obbligatorio mancante o errato
-                if(Info.SessionCode == "")
+                if(Info.sessionCode == "")
                     sessione.GetComponent<Image>().color = UnityEngine.Color.red;
                 if(nomeUtente == "" || nomeUtente.Length > 16)
                     nome.GetComponent<Image>().color = UnityEngine.Color.red;
@@ -84,11 +84,10 @@ namespace Script.User
             //string toSend = JsonConvert.SerializeObject(Info.LocalUser);
             string toSend = JsonUtility.ToJson(Info.localGenericUser);
             // Debug.Log(toSend);
-            RestClient.Put(Info.DBUrl + Info.SessionCode + "/players/" + Info.localGenericUser.name + ".json", toSend).Then( 
-                loadElezioni =>
+            RestClient.Put(Info.DBUrl + Info.sessionCode + "/players/" + Info.localGenericUser.name + ".json", toSend).Then(e =>
             {
                 Debug.Log("Caricamento elezioni");
-                SceneManager.LoadScene("elezioni");
+                SceneManager.LoadScene("_Scenes/User/elezioni");
             });
         }
         
@@ -108,7 +107,7 @@ namespace Script.User
             {
                 notFound.SetActive(false);
                 found.SetActive(false);
-                Info.SessionCode = "";
+                Info.sessionCode = "";
             }
         }
         
@@ -118,7 +117,6 @@ namespace Script.User
             RestClient.Get(Info.DBUrl + ".json").Then(onResponse =>
             {
                 JSONObject jj = new JSONObject(onResponse.Text);
-                List<string> li = jj.keys;
                 
                 jj.GetField(str, jsonObject1 =>
                 {
@@ -132,7 +130,7 @@ namespace Script.User
                         {
                             notFound.SetActive(false);
                             found.SetActive(true);
-                            Info.SessionCode = str;
+                            Info.sessionCode = str;
                         }
                     }, fail => NotF());
                 }, fail => NotF());
@@ -143,7 +141,7 @@ namespace Script.User
         {
             notFound.SetActive(true);
             found.SetActive(false);
-            Info.SessionCode = "";
+            Info.sessionCode = "";
         }
 
         public void Color(GameObject kk)

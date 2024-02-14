@@ -2,7 +2,6 @@ using Proyecto26;
 using Script.Utility;
 using TMPro;
 using UnityEngine;
-using Script.Utility;
 
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
 namespace Script.Master
@@ -28,7 +27,7 @@ namespace Script.Master
 
         public void OnClick()
         {
-            RestClient.Delete(Info.DBUrl + Info.SessionCode + "/players/"+ id +".json");
+            RestClient.Delete(Info.DBUrl + Info.sessionCode + "/players/"+ id +".json");
         }
     
     

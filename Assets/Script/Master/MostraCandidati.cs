@@ -23,7 +23,7 @@ namespace Script.Master
     
         void Start()
         {
-            didSomeoneApplied = new Listeners(Info.DBUrl + Info.SessionCode + "/candidati.json");
+            didSomeoneApplied = new Listeners(Info.DBUrl + Info.sessionCode + "/candidati.json");
             didSomeoneApplied.Start(AddCandidato);
         
             terminaVotazioni.SetActive(false);
@@ -34,13 +34,13 @@ namespace Script.Master
         {
             if (str.Contains("event: patch")) //Solo i messaggi di inserimento candidato vengono considerati
             {
-                string nome = "";
+                string nome;
             
-                string dataJSON = str.Split("\"data\":")[1].Split("}")[0] + "}"; //Oggetto contenente il candidato
+                string dataJson = str.Split("\"data\":")[1].Split("}")[0] + "}"; //Oggetto contenente il candidato
             
-                Debug.Log("AddCandidato: stringAfterSplit =" + dataJSON);
+                Debug.Log("AddCandidato: stringAfterSplit =" + dataJson);
             
-                nome = new JSONObject(dataJSON).keys[0]; //Nome candidato
+                nome = new JSONObject(dataJson).keys[0]; //Nome candidato
             
                 //Aggiunta prefab di testo alla lista
                 candidati.Add(GameObject.Instantiate(genericTextPrefab, contenitore));
@@ -51,23 +51,23 @@ namespace Script.Master
 
         public void AvviaVotazioni()
         {
-            List<string> players = new List<string>();
+            List<string> players;
             string nomeUnicoCandidato;
-            int posPlayerElettoForzatamente = 0;
+            int posPlayerElettoForzatamente;
 
             didSomeoneApplied.Stop();
         
             if (candidati.Count > 1)
             {
                 string str = "{\"gameStatusCode\":\"" + Info.GameStatus.Votazione + "\"}";
-                RestClient.Patch(Info.DBUrl + Info.SessionCode + ".json", str);
+                RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str);
             
                 terminaVotazioni.SetActive(true);
                 avviaVotazioni.SetActive(false);
             }
             else
             {
-                RestClient.Get(Info.DBUrl + Info.SessionCode + "/players.json").Then(getPlayers =>
+                RestClient.Get(Info.DBUrl + Info.sessionCode + "/players.json").Then(getPlayers =>
                 {
                     players = new JSONObject(getPlayers.Text).keys;
 
@@ -80,7 +80,7 @@ namespace Script.Master
                         nomeUnicoCandidato = candidati[0].GetComponentInChildren<TMP_Text>().text;
                 
                     string futuroSindacoEletto = "{\"" + nomeUnicoCandidato + "\":" + players.Count + "}";
-                    RestClient.Patch(Info.DBUrl + Info.SessionCode + "/candidati.json", futuroSindacoEletto).Then(
+                    RestClient.Patch(Info.DBUrl + Info.sessionCode + "/candidati.json", futuroSindacoEletto).Then(
                         risultati =>
                         {
                             MostraRisultati();
@@ -94,7 +94,7 @@ namespace Script.Master
         public void MostraRisultati()
         {
             string changeStatusCode = "{\"gameStatusCode\":\"" + Info.GameStatus.RisultatiElezioni + "\"}";
-            RestClient.Patch(Info.DBUrl + Info.SessionCode + ".json", changeStatusCode);
+            RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", changeStatusCode);
             SceneManager.LoadScene("_Scenes/master/risultatiElezioni");
         }
     }

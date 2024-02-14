@@ -8,7 +8,8 @@ namespace Script.User
     {
         [SerializeField] private GameObject pulsanteCandidatura;
         [SerializeField] private GameObject testoOnClick;
-        void Start()
+
+        private void Start()
         {
             pulsanteCandidatura.SetActive(true);
             testoOnClick.SetActive(false);
@@ -18,7 +19,7 @@ namespace Script.User
         {
             //Viene inviato il voto al database
             string str = "{\"" + Info.localGenericUser.name + "\":0}";
-            RestClient.Patch(Info.DBUrl + Info.SessionCode + "/candidati.json", str).Catch(exception =>
+            RestClient.Patch(Info.DBUrl + Info.sessionCode + "/candidati.json", str).Catch(exception =>
             {
                 Debug.Log(exception);
                 Debug.Log(exception.Message);
