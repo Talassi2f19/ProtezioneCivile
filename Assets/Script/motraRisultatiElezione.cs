@@ -5,6 +5,7 @@ using Proyecto26;
 using Script;
 using Script.Utility;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 
@@ -37,6 +38,9 @@ public class MostraRisultatiElezione : MonoBehaviour
             }
             
             listaRisultati[posMaxVoti].GetComponent<votiCandidato>().highlightBestCandidate();
+            //aggiorna il ruolo del player
+            string str = "{\"role\":\"Sindaco\"}";
+            RestClient.Patch(Info.DBUrl + Info.SessionCode + "/players/" + Info.LocalUser.name + ".json", str);
         });
     }
 
