@@ -49,7 +49,7 @@ public class RisultatiElezioni : MonoBehaviour
     
     private void CambioScena(string str)
     {
-        if (str.Contains(Info.GameStatus.End))
+        if (str.Contains(Info.GameStatus.Gioco))
         {
             listener.Stop();
             SceneManager.LoadScene("_Scenes/user/game");
