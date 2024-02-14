@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
-namespace Script.userScript
+namespace Script.User
 {
     //classe del login
     public class Login : MonoBehaviour
@@ -80,11 +80,11 @@ namespace Script.userScript
         private void AddPlayer()
         {
             plInGame.SetActive(false);
-            Info.LocalUser.name = nome.GetComponent<InputField>().text;
+            Info.localGenericUser.name = nome.GetComponent<InputField>().text;
             //string toSend = JsonConvert.SerializeObject(Info.LocalUser);
-            string toSend = JsonUtility.ToJson(Info.LocalUser);
+            string toSend = JsonUtility.ToJson(Info.localGenericUser);
             // Debug.Log(toSend);
-            RestClient.Put(Info.DBUrl + Info.SessionCode + "/players/" + Info.LocalUser.name + ".json", toSend).Then( 
+            RestClient.Put(Info.DBUrl + Info.SessionCode + "/players/" + Info.localGenericUser.name + ".json", toSend).Then( 
                 loadElezioni =>
             {
                 Debug.Log("Caricamento elezioni");

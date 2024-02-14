@@ -1,6 +1,7 @@
 using UnityEngine;
+
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
-namespace Script
+namespace Script.User
 {
     //classe per inviare la posizione al player
     public class StickInput : MonoBehaviour

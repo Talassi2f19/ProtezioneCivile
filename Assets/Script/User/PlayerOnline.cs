@@ -1,7 +1,9 @@
 using TMPro;
 using UnityEngine;
+using Script.Utility;
+
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
-namespace Script
+namespace Script.User
 {
     //classe del gameObject playerOnline
     public class PlayerOnline : MonoBehaviour
@@ -9,20 +11,20 @@ namespace Script
         public TextMeshProUGUI nome;
         public float speed = 1;
         private Rigidbody2D rb;
-        private User user;
+        private GenericUser genericUser;
         private Vector2 posizione = Vector2.zero;
     
         private void Start()
         {
             rb = GetComponent<Rigidbody2D>();
             //sr.color = new Color(Random.value,Random.value,Random.value);
-            gameObject.name = user.name;
-            rb.position = posizione = user.cord;
+            gameObject.name = genericUser.name;
+            rb.position = posizione = genericUser.cord;
         }
     
-        public void SetUser(User user)
+        public void SetUser(GenericUser user)
         {
-            this.user = user;
+            this.genericUser = user;
             nome.text = user.name;
         }
 

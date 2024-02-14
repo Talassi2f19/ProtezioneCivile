@@ -7,16 +7,16 @@ namespace Script.Utility
     //custom template per la conversione dei dati JSONObject
     public static partial class JsonTemplates
     {
-        public static User ToUser(this JSONObject jsonObject) {
+        public static GenericUser ToUser(this JSONObject jsonObject) {
             var name = jsonObject["name"] ? jsonObject["name"].stringValue : "";
             var role = jsonObject["role"] ? jsonObject["role"].stringValue : "";
             var cord = jsonObject["cord"] ? jsonObject["cord"].ToVector2() : Vector2.zero;
-            return name == "" ? null : new User(name, role, cord);
+            return name == "" ? null : new GenericUser(name, role, cord);
         }
         
-        public static Dictionary<string, User> ToUserDictionary(this JSONObject jsonObject)
+        public static Dictionary<string, GenericUser> ToUserDictionary(this JSONObject jsonObject)
         {
-            var di = new Dictionary<string, User>();
+            var di = new Dictionary<string, GenericUser>();
             var lk = jsonObject.keys;
             var lv = jsonObject.list;
             for(int i = 0; i < lk.Count; i++)

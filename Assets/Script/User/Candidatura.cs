@@ -2,7 +2,7 @@ using Proyecto26;
 using Script.Utility;
 using UnityEngine;
 
-namespace Script
+namespace Script.User
 {
     public class Candidatura : MonoBehaviour
     {
@@ -17,7 +17,7 @@ namespace Script
         public void Click()
         {
             //Viene inviato il voto al database
-            string str = "{\"" + Info.LocalUser.name + "\":0}";
+            string str = "{\"" + Info.localGenericUser.name + "\":0}";
             RestClient.Patch(Info.DBUrl + Info.SessionCode + "/candidati.json", str).Catch(exception =>
             {
                 Debug.Log(exception);

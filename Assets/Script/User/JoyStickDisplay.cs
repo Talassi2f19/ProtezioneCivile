@@ -1,16 +1,15 @@
-using Script.Utility;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class JoyStickDisplay : MonoBehaviour
+namespace Script.User
 {
-    [SerializeField] private GameObject joyStick;
-
-    void Start()
+    public class JoyStickDisplay : MonoBehaviour
     {
-        //attiva il joystick
-        //joyStick.SetActive(WebGL.IsMobile);
+        [SerializeField] private GameObject joyStick;
+
+        void Start()
+        {
+            //attiva il joystick
+            //joyStick.SetActive(WebGL.IsMobile);
+        }
     }
 }

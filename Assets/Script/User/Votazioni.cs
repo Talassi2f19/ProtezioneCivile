@@ -1,14 +1,11 @@
-using System;
+using System.Collections.Generic;
 using Defective.JSON;
 using Proyecto26;
 using Script.Utility;
 using UnityEngine;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine.UI;
 using Vector2 = System.Numerics.Vector2;
 
-namespace Script
+namespace Script.User
 {
     public class Votazioni : MonoBehaviour
     {
@@ -16,14 +13,13 @@ namespace Script
         private List<GameObject> pulsantiVotazioni = new List<GameObject>();
         [SerializeField] private GameObject pulsantePrefab;
         [SerializeField] private Transform contenitore;
-        
-        void Start()
+
+        private void Start()
         {
-            RestClient.Get(Info.DBUrl + Info.SessionCode + "/candidati.json").Then(OnReceived =>
+            RestClient.Get(Info.DBUrl + Info.SessionCode + "/candidati.json").Then(onReceived =>
             {
-                JSONObject listaCandidati = new JSONObject(OnReceived.Text);
+                JSONObject listaCandidati = new JSONObject(onReceived.Text);
                 nomiGiocatori = listaCandidati.keys;
-                Vector2 coord = Vector2.Zero;
                 
                 for (int i = 0; i < nomiGiocatori.Count; i++)
                 {

@@ -1,10 +1,10 @@
 using Proyecto26;
 using Script.Utility;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 // ReSharper disable CommentTypo IdentifierTypo
-namespace Script
+namespace Script.User
 {
     //classe per cambiare la fase di gioco 
     public class PreGameManager : MonoBehaviour
@@ -21,7 +21,7 @@ namespace Script
             GameIsStarted = new Listeners(Info.DBUrl + Info.SessionCode +"/gameStatusCode.json");
             GameIsStarted.Start(GameStatus);
 
-            AmIRemoved = new Listeners(Info.DBUrl + Info.SessionCode + "/players/" + Info.LocalUser.name + ".json");
+            AmIRemoved = new Listeners(Info.DBUrl + Info.SessionCode + "/players/" + Info.localGenericUser.name + ".json");
             AmIRemoved.Start(CheckRemoved);
             
             wait.SetActive(true);
@@ -89,7 +89,7 @@ namespace Script
         //Quando il giocatore abbandona la sessione
         public void OnLeave()
         {
-            RestClient.Delete(Info.DBUrl + Info.SessionCode + "/players/" + Info.LocalUser.name + ".json");
+            RestClient.Delete(Info.DBUrl + Info.SessionCode + "/players/" + Info.localGenericUser.name + ".json");
             GameStatus(Info.GameStatus.End);
         }
     }

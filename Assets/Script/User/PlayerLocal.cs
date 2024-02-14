@@ -3,8 +3,9 @@ using Proyecto26;
 using Script.Utility;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
-namespace Script
+namespace Script.User
 {
     //classe del gameObject di LocalPlayer
     public class PlayerLocal : MonoBehaviour
@@ -50,7 +51,7 @@ namespace Script
                     {
                         // string toSend = JsonConvert.SerializeObject(rb.position);
                         string toSend = JsonUtility.ToJson(rb.position);
-                        RestClient.Patch(Info.DBUrl + Info.SessionCode + "/players/" + Info.LocalUser.name + "/cord.json", toSend)
+                        RestClient.Patch(Info.DBUrl + Info.SessionCode + "/players/" + Info.localGenericUser.name + "/cord.json", toSend)
                             .Catch(r => { Debug.Log(r); });
                         lastPosition = rb.position;
                     }

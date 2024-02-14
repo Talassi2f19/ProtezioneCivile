@@ -2,13 +2,15 @@ using Proyecto26;
 using Script.Utility;
 using TMPro;
 using UnityEngine;
+using Script.Utility;
+
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
-namespace Script
+namespace Script.Master
 {
     //classe inirente al gameObject da visualizzare nell'interfaccia del master con il nome del player 
     public class PlayerMaster : MonoBehaviour
     {
-        private User user;
+        private GenericUser user;
         private string id;
     
         public TMP_Text buttonText;
@@ -18,7 +20,7 @@ namespace Script
             buttonText.text = user.name;
         }
 
-        public void Set(string id, User user)
+        public void Set(string id, GenericUser user)
         {
             this.id = id;
             this.user = user;

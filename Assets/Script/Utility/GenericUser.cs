@@ -1,31 +1,31 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Script
+namespace Script.Utility
 {
     [Serializable]
-    public class User
+    public class GenericUser
     {
         public string name;
 
         public Vector2 cord;
         public string role;
         
-        public User(string name)
+        public GenericUser(string name)
         {
             this.name = name;
             role = "null";
             cord = Vector2.zero;
         }
         
-        public User()
+        public GenericUser()
         {
             name = "";
             cord = Vector2.zero;
             role = "null";
         }
         
-        public User(string name, string role, Vector2 cord)
+        public GenericUser(string name, string role, Vector2 cord)
         {
             this.name = name;
             this.role = role;

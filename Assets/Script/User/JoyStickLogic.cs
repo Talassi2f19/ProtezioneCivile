@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
-namespace Script
+namespace Script.User
 {
     //classe per la gestione del joystick
     //classe reimplementata da una già esistente non funzionanate per webGL mobile

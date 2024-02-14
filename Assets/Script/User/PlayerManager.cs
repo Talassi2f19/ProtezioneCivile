@@ -5,7 +5,7 @@ using Script.Utility;
 using UnityEngine;
 
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
-namespace Script.userScript
+namespace Script.User
 {
     //classe per la gestione dei player
     public class PlayerManager : MonoBehaviour
@@ -33,11 +33,11 @@ namespace Script.userScript
             {
                 //crea un dizionario con i player 
                 //Dictionary<string, User> kh = DeserializeUser(str.Split("\"data\":")[1]);
-               Dictionary<string, User> kh = new JSONObject(str.Split("\"data\":")[1]).ToUserDictionary();
+               Dictionary<string, GenericUser> kh = new JSONObject(str.Split("\"data\":")[1]).ToUserDictionary();
                    
                 
                 //rimuove il player locale
-                kh.Remove(Info.LocalUser.name);
+                kh.Remove(Info.localGenericUser.name);
                 
                 //si istanziano i gameObject degli altri player
                 foreach (var pl in kh)
