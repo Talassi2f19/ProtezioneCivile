@@ -10,8 +10,8 @@ public class attesaRuoli : MonoBehaviour
     void Start()
     {
     
-        //listeners = new Listeners(Info.DBUrl + Info.SessionCode + "/players/" + Info.LocalUser.name + "/role.json");
-        listeners = new Listeners(Info.DBUrl + "RPWB/players/ddd"  + "/role.json");
+        listeners = new Listeners(Info.DBUrl + Info.SessionCode + "/players/" + Info.LocalUser.name + "/role.json");
+        //listeners = new Listeners(Info.DBUrl + "RPWB/players/ddd"  + "/role.json");
         listeners.Start(TrovaRuolo);
     }
 
