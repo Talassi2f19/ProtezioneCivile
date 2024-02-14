@@ -31,7 +31,6 @@ public class RisultatiElezioni : MonoBehaviour
                 listaRisultati.Add(GameObject.Instantiate(votoCandidatoPrefab, contenitore));
                 listaRisultati[i].GetComponent<votiCandidato>().setNomeCandidato(candidati[i]);
                 listaRisultati[i].GetComponent<votiCandidato>().setNumeroVoti(voti[i].intValue);
-                listaRisultati[i].transform.position = new Vector3(100, 100 * i, 0);
             }
             
             listaRisultati[posMaxVoti].GetComponent<votiCandidato>().highlightBestCandidate();
