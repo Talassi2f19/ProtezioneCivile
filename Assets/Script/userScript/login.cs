@@ -5,8 +5,9 @@ using Script.Utility;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
-namespace Script
+namespace Script.userScript
 {
     //classe del login
     public class Login : MonoBehaviour
