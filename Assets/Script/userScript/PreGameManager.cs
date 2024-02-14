@@ -12,29 +12,30 @@ namespace Script
         [SerializeField] private GameObject wait;
         [SerializeField] private GameObject candidatura;
         [SerializeField] private GameObject votazione;
+        
         private Listeners GameIsStarted;
         private Listeners AmIRemoved;
         
         private void Start()
         {
-            wait.SetActive(true);
-            candidatura.SetActive(false);
-            votazione.SetActive(false);
-
             GameIsStarted = new Listeners(Info.DBUrl + Info.SessionCode +"/gameStatusCode.json");
             GameIsStarted.Start(GameStatus);
 
             AmIRemoved = new Listeners(Info.DBUrl + Info.SessionCode + "/players/" + Info.LocalUser.name + ".json");
             AmIRemoved.Start(CheckRemoved);
+            
+            wait.SetActive(true);
+            candidatura.SetActive(false);
+            votazione.SetActive(false);
         }
 
-        private void GameStatus(string str)
+        private void GameStatus(string status)
         {
-             Debug.Log(str);
-             if(str.Contains("put"))
-                 str = str.Split("\"data\":\"")[1].Split("\"}")[0];
-             Debug.Log(str);
-             switch (str)
+             if(status.Contains("put"))
+                 status = status.Split("\"data\":\"")[1].Split("\"}")[0];
+             Debug.Log(status);
+             
+             switch (status)
              {
                  case Info.GameStatus.WaitPlayer:
                      Set(Info.GameStatus.WaitPlayer);
@@ -76,24 +77,21 @@ namespace Script
             votazione.SetActive(val == Info.GameStatus.Votazione);
         }
 
-        private void CheckRemoved(string str)
+        private void CheckRemoved(string response)
         {
-            if (str.Contains("\"data\":null"))
+            if (response.Contains("\"data\":null"))
             {
                 GameStatus(Info.GameStatus.End);
                 AmIRemoved.Stop();
             }
-                
-                
         }
         
-        //azione per il pulsante dello stato waitPlayer
+        //Quando il giocatore abbandona la sessione
         public void OnLeave()
         {
             RestClient.Delete(Info.DBUrl + Info.SessionCode + "/players/" + Info.LocalUser.name + ".json");
             GameStatus(Info.GameStatus.End);
         }
-        
     }
 }
 

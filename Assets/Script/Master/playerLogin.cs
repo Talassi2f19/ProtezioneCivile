@@ -14,8 +14,8 @@ public class playerLogin : MonoBehaviour
     [SerializeField] private GameObject displaySessionCode;
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private Transform parent;
+    
     private Listeners playerJoin;
-
     private Dictionary<string, GameObject> playerList = new Dictionary<string, GameObject>();
 
     void Start()
@@ -79,8 +79,6 @@ public class playerLogin : MonoBehaviour
         string str = "{\"gameStatusCode\":\"" + Info.GameStatus.Candidatura + "\"}";
         RestClient.Patch(Info.DBUrl + Info.SessionCode + ".json", str);
         playerJoin.Stop();
-        SceneManager.LoadScene("elezione");
+        SceneManager.LoadScene("_Scenes/user/elezioni");
     }
-
-
 }

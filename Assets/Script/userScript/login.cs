@@ -22,14 +22,13 @@ namespace Script.userScript
         public void Join()
         {
             string nomeUtente = nome.GetComponent<InputField>().text;
+            
             if (nomeUtente != "" && nomeUtente.Length <= 16 && Info.SessionCode != "")
-                
             { // se il nome e la sessione(già validata) sono presenti
-
-                RestClient.Get(Info.DBUrl + Info.SessionCode + ".json").Then(r =>
+                RestClient.Get(Info.DBUrl + Info.SessionCode + ".json").Then(response =>
                 {
                     //richiedo la sessione
-                    JSONObject jj = new JSONObject(r.Text);
+                    JSONObject jj = new JSONObject(response.Text);
 
                     string code = jj.GetField("gameStatusCode").stringValue;
                     JSONObject playerList = jj.GetField("players");
@@ -38,20 +37,15 @@ namespace Script.userScript
                     if (code == Info.GameStatus.WaitPlayer && (playerList == null || playerList.list.Count < Info.MaxPlayer))
                     {
                         if(playerList == null)
-                        {
                             AddPlayer();
-                        }
                         else if (playerList.GetField(nomeUtente) != null)
-                        {
                             plInGame.SetActive(true);
-                        }
                         else
-                        {
                             AddPlayer();
-                        }
                     }
                     else
                     {
+                        
                         //la stanza non accetta nuovi tentativo di riconnessione
                         Debug.Log("il gioco è già iniziato");
 #if !UNITY_EDITOR
@@ -62,8 +56,8 @@ namespace Script.userScript
                             {
                                 Info.LocalUser = jsonObject.ToUser();
                                 Debug.Log("riconnesso");
-                        //TODO selezione scena rispettiva                             
-                        SceneManager.LoadScene("game");
+                                                    
+                        SceneManager.LoadScene("_Scenes/user/elezioni");
                             });
                         }
                         else

@@ -10,12 +10,13 @@ using UnityEngine.SceneManagement;
 
 public class MostraRisultatiElezione : MonoBehaviour
 {
+    [SerializeField] private GameObject votoCandidatoPrefab;
+    [SerializeField] private Transform contenitore;
+    
     private JSONObject risultatiJSON;
     private List<string> candidati = new List<string>();
     private List<JSONObject> voti = new List<JSONObject>();
     private List<GameObject> listaRisultati= new List<GameObject>();
-    [SerializeField] private GameObject votoCandidatoPrefab;
-    [SerializeField] private Transform contenitore;
     
     void Start()
     {

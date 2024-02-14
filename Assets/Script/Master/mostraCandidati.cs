@@ -12,43 +12,35 @@ using Random = System.Random;
 
 public class mostraCandidati : MonoBehaviour
 {
-    private Listeners DidSomeoneApplied;
-    private List<GameObject> candidati = new List<GameObject>();
-
     [SerializeField] private GameObject genericTextPrefab;
     [SerializeField] private Transform contenitore;
     
     [SerializeField] private GameObject terminaVotazioni;
     [SerializeField] private GameObject avviaVotazioni;
-
-    private Random generatore = new Random();
+    
+    private Listeners DidSomeoneApplied;
+    private List<GameObject> candidati = new List<GameObject>();
     
     void Start()
     {
-        terminaVotazioni.SetActive(false);
-        avviaVotazioni.SetActive(true);
         DidSomeoneApplied = new Listeners(Info.DBUrl + Info.SessionCode + "/candidati.json");
         DidSomeoneApplied.Start(AddCandidato);
+        
+        terminaVotazioni.SetActive(false);
+        avviaVotazioni.SetActive(true);
     }
     
     private void AddCandidato(string str)
     {
-        //gestisco il messaggio di keep alive periodico che arriva
-        //così quel messaggio non passa per quello che viene dopo l'if
-        if (str.Contains("event: patch"))
+        if (str.Contains("event: patch")) //Solo i messaggi di inserimento candidato vengono considerati
         {
             string nome = "";
             
-            //Contine l'oggetto contenente il nome del candidato
-            string dataJSON = str.Split("\"data\":")[1].Split("}")[0] + "}";
+            string dataJSON = str.Split("\"data\":")[1].Split("}")[0] + "}"; //Oggetto contenente il candidato
             
             Debug.Log("AddCandidato: stringAfterSplit =" + dataJSON);
             
-            //Trasformo il contenuto in un oggetto JSON in modo da ottenerne le chiavi
-            JSONObject listaJSON = new JSONObject(dataJSON);
-            
-            //Nome del player che si è candidato
-            nome = listaJSON.keys[0];
+            nome = new JSONObject(dataJSON).keys[0]; //Nome candidato
             
             //Aggiunta prefab di testo alla lista
             candidati.Add(GameObject.Instantiate(genericTextPrefab, contenitore));
@@ -79,14 +71,15 @@ public class mostraCandidati : MonoBehaviour
 
                 if (candidati.Count == 0)
                 {
-                    posPlayerElettoForzatamente = generatore.Next(0, players.Count);
+                    posPlayerElettoForzatamente = new Random().Next(0, players.Count);
                     nomeUnicoCandidato = players[posPlayerElettoForzatamente];
                 }
                 else
                     nomeUnicoCandidato = candidati[0].GetComponentInChildren<TMP_Text>().text;
                 
                 string futuroSindacoEletto = "{\"" + nomeUnicoCandidato + "\":" + players.Count + "}";
-                RestClient.Patch(Info.DBUrl + Info.SessionCode + "/candidati.json", futuroSindacoEletto).Then(e =>
+                RestClient.Patch(Info.DBUrl + Info.SessionCode + "/candidati.json", futuroSindacoEletto).Then(
+                    risultati =>
                 {
                     MostraRisultati();
                 });
@@ -102,5 +95,4 @@ public class mostraCandidati : MonoBehaviour
         RestClient.Patch(Info.DBUrl + Info.SessionCode + ".json", changeStatusCode);
         SceneManager.LoadScene("_Scenes/master/risultatiElezioni");
     }
-    
 }
