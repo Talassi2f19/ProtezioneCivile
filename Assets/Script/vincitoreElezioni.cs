@@ -52,7 +52,20 @@ public class RisultatiElezioni : MonoBehaviour
         if (str.Contains(Info.GameStatus.Gioco))
         {
             listener.Stop();
-            SceneManager.LoadScene("_Scenes/user/game");
+            RestClient.Get(Info.DBUrl + Info.SessionCode + "/players/" + Info.LocalUser.name + "/role.json").Then(e =>
+            {
+                if(e.Text == "null")
+                {
+                    SceneManager.LoadScene("_Scenes/user/attesaRuoli");
+                }
+                else
+                {
+                    Info.LocalUser.role = str;
+                    SceneManager.LoadScene("_Scenes/user/selezioneCOC");
+                }
+            });
+            
+
         } 
     }
 }

@@ -19,14 +19,15 @@ namespace Script
         }
         public void ClickVotazione()
         {
+            SetOff();
+            pulsante.GetComponent<Image>().color = Color.red;
+            SendMessageUpwards("PlayerHasVoted", SendMessageOptions.DontRequireReceiver);
             RestClient.Get(Info.DBUrl + Info.SessionCode + "/candidati/" + nomeGiocatore + ".json").Then(f =>
             {
                 int value = int.Parse(f.Text) + 1;
                 string send = "{\"" + nomeGiocatore + "\":" + value + "}";
                 RestClient.Patch(Info.DBUrl + Info.SessionCode + "/candidati" + ".json", send);
             });
-            pulsante.GetComponent<Image>().color = Color.red;
-            SendMessageUpwards("PlayerHasVoted", SendMessageOptions.DontRequireReceiver);
         }
 
         public void SetOff()
