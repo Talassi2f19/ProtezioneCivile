@@ -76,9 +76,17 @@ public class playerLogin : MonoBehaviour
 
     public void ProssimaScena()
     {
-        string str = "{\"gameStatusCode\":\"" + Info.GameStatus.Candidatura + "\"}";
-        RestClient.Patch(Info.DBUrl + Info.SessionCode + ".json", str);
-        playerJoin.Stop();
-        SceneManager.LoadScene("_Scenes/user/elezioni");
+        //TODO aggiungere limite minimo
+        if (playerList.Count > 0)
+        {
+            string str = "{\"gameStatusCode\":\"" + Info.GameStatus.Candidatura + "\"}";
+            RestClient.Patch(Info.DBUrl + Info.SessionCode + ".json", str);
+            playerJoin.Stop();
+            SceneManager.LoadScene("_Scenes/master/elezioni");
+        }
+        else
+        {
+            //TODO Messaggio di errore
+        }
     }
 }

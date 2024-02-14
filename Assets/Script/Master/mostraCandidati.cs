@@ -55,6 +55,8 @@ public class mostraCandidati : MonoBehaviour
         string nomeUnicoCandidato;
         int posPlayerElettoForzatamente = 0;
 
+        DidSomeoneApplied.Stop();
+        
         if (candidati.Count > 1)
         {
             string str = "{\"gameStatusCode\":\"" + Info.GameStatus.Votazione + "\"}";
@@ -86,7 +88,7 @@ public class mostraCandidati : MonoBehaviour
             });
         }
         
-        DidSomeoneApplied.Stop();
+        
     }
     
     public void MostraRisultati()

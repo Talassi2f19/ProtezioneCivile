@@ -6,16 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/User/login.unity
+    path: Assets/_Scenes/user/login.unity
     guid: 10bf9fdf0bc6dbc41a37d61a7595702f
   - enabled: 1
-    path: Assets/_Scenes/User/game.unity
+    path: Assets/_Scenes/user/game.unity
     guid: 27cfde0189efb9a46afd37ec36f6d917
   - enabled: 1
-    path: Assets/_Scenes/New Scene.unity
+    path: Assets/_Scenes/New scene.unity
     guid: ba03cf7cdd03ffe4c90970f25025cc5c
   - enabled: 1
-    path: Assets/_Scenes/User/elezioni.unity
+    path: Assets/_Scenes/user/elezioni.unity
     guid: 4e4b5acecccb8bc44b4de3444f19b8e5
   - enabled: 0
     path: Assets/_Scenes/master/master.unity
@@ -24,7 +24,7 @@ EditorBuildSettings:
     path: Assets/_Scenes/master/playerLogin.unity
     guid: 38fd3aac487eb6a43816b7a692b3ea27
   - enabled: 1
-    path: Assets/_Scenes/master/elezione.unity
+    path: Assets/_Scenes/master/elezioni.unity
     guid: a1bdbcdf4eac3874c875bea4624ed5cb
   - enabled: 1
     path: Assets/_Scenes/master/risultatiElezioni.unity
