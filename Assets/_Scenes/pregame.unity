@@ -808,11 +808,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6212ee09ae62e8245ae01c94ccb5f93b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game: {fileID: 0}
   wait: {fileID: 1790109480}
   candidatura: {fileID: 1065511601}
   votazione: {fileID: 474766153}
-  genericWait: {fileID: 0}
 --- !u!4 &706648249
 Transform:
   m_ObjectHideFlags: 0
