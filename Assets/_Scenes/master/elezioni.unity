@@ -314,10 +314,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 451476765}
-  - component: {fileID: 451476766}
   - component: {fileID: 451476767}
   m_Layer: 5
-  m_Name: candidati
+  m_Name: Lista Candidati
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -342,22 +341,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 225}
   m_SizeDelta: {x: 1200, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &451476766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 451476764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd84cc9528f65584080512cd9436f99c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genericTextPrefab: {fileID: 3646007721177791038, guid: 948e4651290fd504c82bb3e4c719b4e5, type: 3}
-  contenitore: {fileID: 451476765}
-  terminaVotazioni: {fileID: 0}
-  avviaVotazioni: {fileID: 0}
 --- !u!114 &451476767
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -41,6 +41,7 @@ namespace Script.User
         {
             SetOff();
             pulsante.GetComponent<Image>().color = Color.red;
+            gameObject.GetComponentInParent<RectTransform>().gameObject.SendMessage("PlayerHasSelected", SendMessageOptions.DontRequireReceiver);
             SendMessageUpwards("PlayerHasSelected", SendMessageOptions.DontRequireReceiver);
         }
     
