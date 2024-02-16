@@ -21,7 +21,7 @@ namespace Script.User
             gameIsStarted = new Listeners(Info.DBUrl + Info.sessionCode +"/gameStatusCode.json");
             gameIsStarted.Start(GameStatus);
 
-            amIRemoved = new Listeners(Info.DBUrl + Info.sessionCode + "/players/" + Info.localGenericUser.name + ".json");
+            amIRemoved = new Listeners(Info.DBUrl + Info.sessionCode + "/players/" + Info.localUser.name + ".json");
             amIRemoved.Start(CheckRemoved);
             
             wait.SetActive(true);
@@ -45,7 +45,7 @@ namespace Script.User
                      Set(Info.GameStatus.Candidatura);
                      gameObject.GetComponent<Votazioni>().MostraCandidati();
 #if !UNITY_EDITOR
-                WebGL.SetCookie("user="+Info.LocalUser.name);
+                WebGL.SetCookie("user=" + Info.localUser.name);
 #endif
                      break;
                  
@@ -90,7 +90,7 @@ namespace Script.User
         //Quando il giocatore abbandona la sessione
         public void OnLeave()
         {
-            RestClient.Delete(Info.DBUrl + Info.sessionCode + "/players/" + Info.localGenericUser.name + ".json");
+            RestClient.Delete(Info.DBUrl + Info.sessionCode + "/players/" + Info.localUser.name + ".json");
             GameStatus(Info.GameStatus.End);
         }
     }

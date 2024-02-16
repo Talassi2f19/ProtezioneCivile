@@ -9,7 +9,7 @@ namespace Script.Utility
 
         public static string sessionCode = "";
 
-        public static GenericUser localGenericUser = new GenericUser();
+        public static GenericUser localUser = new GenericUser();
 
         public const int MaxPlayer = 28;
 
@@ -28,7 +28,7 @@ namespace Script.Utility
         public static void Reset()
         {
             sessionCode = "";
-            localGenericUser = new GenericUser();
+            localUser = new GenericUser();
         }
     }
     

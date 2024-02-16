@@ -28,7 +28,7 @@ namespace Script.User
 
         private void Genera()
         {
-            player.Remove(Info.localGenericUser.name);
+            player.Remove(Info.localUser.name);
 
             foreach(var pl in player)
             {

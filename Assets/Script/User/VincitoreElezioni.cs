@@ -51,7 +51,7 @@ namespace Script.User
             if (str.Contains(Info.GameStatus.Gioco))
             {
                 listener.Stop();
-                RestClient.Get(Info.DBUrl + Info.sessionCode + "/players/" + Info.localGenericUser.name + "/role.json").Then(e =>
+                RestClient.Get(Info.DBUrl + Info.sessionCode + "/players/" + Info.localUser.name + "/role.json").Then(e =>
                 {
                     if(e.Text == "null")
                     {
@@ -59,7 +59,7 @@ namespace Script.User
                     }
                     else
                     {
-                        Info.localGenericUser.role = str;
+                        Info.localUser.role = str;
                         SceneManager.LoadScene("_Scenes/user/selezioneCOC");
                     }
                 });

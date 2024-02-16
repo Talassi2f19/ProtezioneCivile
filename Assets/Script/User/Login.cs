@@ -54,7 +54,7 @@ namespace Script.User
                         {
                             playerList.GetField(nomeUtente, jsonObject =>
                             {
-                                Info.LocalUser = jsonObject.ToUser();
+                                Info.localUser = jsonObject.ToUser();
                                 Debug.Log("riconnesso");
                                                     
                         SceneManager.LoadScene("_Scenes/user/elezioni");
@@ -80,11 +80,11 @@ namespace Script.User
         private void AddPlayer()
         {
             plInGame.SetActive(false);
-            Info.localGenericUser.name = nome.GetComponent<InputField>().text;
+            Info.localUser.name = nome.GetComponent<InputField>().text;
             //string toSend = JsonConvert.SerializeObject(Info.LocalUser);
-            string toSend = JsonUtility.ToJson(Info.localGenericUser);
+            string toSend = JsonUtility.ToJson(Info.localUser);
             // Debug.Log(toSend);
-            RestClient.Put(Info.DBUrl + Info.sessionCode + "/players/" + Info.localGenericUser.name + ".json", toSend).Then(e =>
+            RestClient.Put(Info.DBUrl + Info.sessionCode + "/players/" + Info.localUser.name + ".json", toSend).Then(e =>
             {
                 Debug.Log("Caricamento elezioni");
                 SceneManager.LoadScene("_Scenes/User/elezioni");

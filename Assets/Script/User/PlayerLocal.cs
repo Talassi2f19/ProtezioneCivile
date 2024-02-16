@@ -51,7 +51,7 @@ namespace Script.User
                     {
                         // string toSend = JsonConvert.SerializeObject(rb.position);
                         string toSend = JsonUtility.ToJson(rb.position);
-                        RestClient.Patch(Info.DBUrl + Info.sessionCode + "/players/" + Info.localGenericUser.name + "/cord.json", toSend)
+                        RestClient.Patch(Info.DBUrl + Info.sessionCode + "/players/" + Info.localUser.name + "/cord.json", toSend)
                             .Catch(r => { Debug.Log(r); });
                         lastPosition = rb.position;
                     }

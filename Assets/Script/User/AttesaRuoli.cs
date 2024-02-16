@@ -11,7 +11,7 @@ namespace Script.User
         private void Start()
         {
     
-            listeners = new Listeners(Info.DBUrl + Info.sessionCode + "/players/" + Info.localGenericUser.name + "/role.json");
+            listeners = new Listeners(Info.DBUrl + Info.sessionCode + "/players/" + Info.localUser.name + "/role.json");
             //listeners = new Listeners(Info.DBUrl + "RPWB/players/ddd"  + "/role.json");
             listeners.Start(TrovaRuolo);
         }
@@ -23,7 +23,7 @@ namespace Script.User
             {
                 listeners.Stop();
                 str = str.Split("\"data\":\"")[1].Split("\"")[0];
-                Info.localGenericUser.role = str;
+                Info.localUser.role = str;
                 SceneManager.LoadScene("_Scenes/user/game");
             }
         }
