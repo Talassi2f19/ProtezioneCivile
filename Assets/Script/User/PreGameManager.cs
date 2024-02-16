@@ -43,6 +43,7 @@ namespace Script.User
                  
                  case Info.GameStatus.Candidatura:
                      Set(Info.GameStatus.Candidatura);
+                     gameObject.GetComponent<Votazioni>().MostraCandidati();
 #if !UNITY_EDITOR
                 WebGL.SetCookie("user="+Info.LocalUser.name);
 #endif

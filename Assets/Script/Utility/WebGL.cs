@@ -6,7 +6,7 @@ namespace Script.Utility
     //funzioni che si interfacciano con il browser tramite javascript (/plugin/function.jslib)
     public class WebGL : MonoBehaviour
     {
-        public static bool isMobile = false;
+        public static bool isMobile = true;
         
         [DllImport("__Internal")]
         private static extern bool Mobile();

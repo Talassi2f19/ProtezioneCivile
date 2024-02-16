@@ -9,19 +9,14 @@ namespace Script.User
 {
     public class SelezioneCoC : MonoBehaviour
     {
-        [SerializeField] private GameObject mostraRuoloPrefab;
-        [SerializeField] private Transform mostraRuoloPrefabParent;
+        [SerializeField] private GameObject ruolo;
 
         [SerializeField] private GameObject buttonPrefab;
         [SerializeField] private Transform buttonParent;
         private Dictionary<string, JSONObject> player = new Dictionary<string, JSONObject>();
         void Start()
         {
-
-            GameObject mostraRuolo =  GameObject.Instantiate(mostraRuoloPrefab, mostraRuoloPrefabParent);
-            //    mostraRuolo.GetComponent<MostraRuolo>().setRoleName(Info.LocalUser.role);
-            /* mostraRuolo.GetComponent<MostraRuolo>().setRoleDescription("aasfafasfasfasf");
-        mostraRuolo.GetComponent<MostraRuolo>().setRoleName("path/:.jojo/aihsfias");*/
+            ruolo.SetActive(true);
 
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/players.json").Then(e =>
             {
@@ -43,9 +38,10 @@ namespace Script.User
             }
         }
 
-        public void PlayerHasSelected()
-        {
-            SceneManager.LoadScene("_Scenes/user/game");
-        }
+        // il cambio scena se ne occupa il prefab del pulsante
+        //public void PlayerHasSelected()
+        //{
+        //    SceneManager.LoadScene("_Scenes/user/game");
+        //}
     }
 }

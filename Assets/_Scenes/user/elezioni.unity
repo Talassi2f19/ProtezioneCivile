@@ -225,6 +225,8 @@ GameObject:
   m_Component:
   - component: {fileID: 696105245}
   - component: {fileID: 696105244}
+  - component: {fileID: 696105247}
+  - component: {fileID: 696105246}
   m_Layer: 0
   m_Name: Gestore Elezioni
   m_TagString: Untagged
@@ -262,6 +264,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &696105246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696105242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec9a46159bd579a49997271167295755, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pulsantePrefab: {fileID: 7399024912391329358, guid: a623cf55c7f9f4045ab6041ef5a4fc94, type: 3}
+  contenitore: {fileID: 728966618}
+--- !u!114 &696105247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696105242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88a18f38254192b488f2fdbfbadef62d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pulsanteCandidatura: {fileID: 902846796}
+  testoOnClick: {fileID: 1662090493}
 --- !u!1 &698453727
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,7 +490,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 782873794}
-  - component: {fileID: 782873793}
   m_Layer: 0
   m_Name: Votazioni
   m_TagString: Untagged
@@ -468,20 +497,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &782873793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 782873792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec9a46159bd579a49997271167295755, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pulsantePrefab: {fileID: 7399024912391329358, guid: a623cf55c7f9f4045ab6041ef5a4fc94, type: 3}
-  contenitore: {fileID: 728966618}
 --- !u!224 &782873794
 RectTransform:
   m_ObjectHideFlags: 0
@@ -586,8 +601,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2103215439}
-        m_TargetAssemblyTypeName: candidatura, Assembly-CSharp
+      - m_Target: {fileID: 696105247}
+        m_TargetAssemblyTypeName: Script.User.Candidatura, Assembly-CSharp
         m_MethodName: Click
         m_Mode: 1
         m_Arguments:
@@ -1543,7 +1558,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2103215440}
-  - component: {fileID: 2103215439}
   m_Layer: 0
   m_Name: Candidatura
   m_TagString: Untagged
@@ -1551,20 +1565,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2103215439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2103215438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88a18f38254192b488f2fdbfbadef62d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pulsanteCandidatura: {fileID: 902846796}
-  testoOnClick: {fileID: 1662090493}
 --- !u!4 &2103215440
 Transform:
   m_ObjectHideFlags: 0

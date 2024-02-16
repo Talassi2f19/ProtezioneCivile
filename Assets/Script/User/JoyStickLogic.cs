@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,44 +9,52 @@ namespace Script.User
     //classe reimplementata da una già esistente non funzionanate per webGL mobile
     public sealed class JoystickController : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
     {
-        private Vector2 pos;
-        public float movementRange = 50;
+        [SerializeField] private GameObject player;
+
+        private Vector2 relativePos;
+        private Vector2 absolutePos;
+        [SerializeField] private float movementRange = 80;
+
         
         private void Start()
         {
-           pos = ((RectTransform)transform).anchoredPosition;
+            
+            relativePos = ((RectTransform)transform).anchoredPosition;
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            absolutePos = transform.position;
             OnDrag(eventData);
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            ((RectTransform)transform).anchoredPosition = pos;
+            ((RectTransform)transform).anchoredPosition = relativePos;
             Send(Vector2.zero);
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            MoveStick(eventData.position, eventData.pressEventCamera);
+            MoveStick(eventData.position);
         }
     
-        private void MoveStick(Vector2 pointerPosition, Camera uiCamera)
+        private void MoveStick(Vector2 pointerPosition)
         {
+            pointerPosition = pointerPosition - absolutePos;
+
             pointerPosition /= transform.parent.GetComponentInParent<RectTransform>().localScale;
-            var delta = pointerPosition - pos;
+            var delta = pointerPosition - relativePos;
             delta  = Vector2.ClampMagnitude(delta, movementRange);
-            ((RectTransform)transform).anchoredPosition = pos + delta;
+            ((RectTransform)transform).anchoredPosition = relativePos + delta;
         
             var newPos = new Vector2(delta.x / movementRange, delta.y / movementRange);
             Send(newPos);
         }
 
-        private void Send(Vector2 vv)
+        private void Send(Vector2 moveValue)
         {
-            SendMessage("OnMove", vv, SendMessageOptions.DontRequireReceiver);
+            player.GetComponent<PlayerLocal>().OnMove(moveValue);
         }
     }
 }

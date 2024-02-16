@@ -28,7 +28,7 @@ namespace Script.User
 
         private void Read(string str)
         {
-            Debug.Log(str);
+            //Debug.Log(str);
             if (str.Split("\n")[0].Contains("put"))
             {
                 //crea un dizionario con i player 
