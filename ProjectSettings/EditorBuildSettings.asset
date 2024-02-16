@@ -5,16 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/User/login.unity
     guid: 10bf9fdf0bc6dbc41a37d61a7595702f
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/User/game.unity
     guid: 27cfde0189efb9a46afd37ec36f6d917
-  - enabled: 0
+  - enabled: 1
+    path: Assets/_Scenes/User/selezioneCOC.unity
+    guid: 0c84d43663d74a54db0e001c946cd42a
+  - enabled: 1
+    path: Assets/_Scenes/User/risultatiElezioni.unity
+    guid: 62e83ea65abb11746b6091681e6ab598
+  - enabled: 1
+    path: Assets/_Scenes/User/attesaRuoli.unity
+    guid: 0a0aacaf0ee96cc4aa8e5e74317c2603
+  - enabled: 1
     path: Assets/_Scenes/New Scene.unity
     guid: ba03cf7cdd03ffe4c90970f25025cc5c
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/User/elezioni.unity
     guid: 4e4b5acecccb8bc44b4de3444f19b8e5
   - enabled: 1

@@ -115528,7 +115528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c74754a1311ac40af08d2654086b9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joyStick: {fileID: 0}
+  joyStick: {fileID: 1821293534}
 --- !u!114 &497932381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115541,7 +115541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db919f8c51a4b10b01141f7ec3cf153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onlinePlayer: {fileID: 1821293534}
+  onlinePlayer: {fileID: 8190690311247596915, guid: 8514fc73d03d2674bacbbc83108266de, type: 3}
   parent: {fileID: 551427681}
 --- !u!1 &529477248
 GameObject:

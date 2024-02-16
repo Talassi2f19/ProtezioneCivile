@@ -27,6 +27,9 @@ namespace Script.User
                 voti = risultatiJson.list;
 
                 int posMaxVoti = MaxVotiCandidato();
+
+                //TODO se è il player stesso che vince le elezioni mostrare un altro messaggio
+
                 vincitore.GetComponent<TMP_Text>().text = candidati[posMaxVoti];
             });
 
@@ -53,14 +56,18 @@ namespace Script.User
                 listener.Stop();
                 RestClient.Get(Info.DBUrl + Info.sessionCode + "/players/" + Info.localUser.name + "/role.json").Then(e =>
                 {
+                    Debug.Log(e);
+                    Debug.Log(e.Text);
+                    
+                    //TODO fix
                     if(e.Text == "null")
-                    {
-                        SceneManager.LoadScene("_Scenes/user/attesaRuoli");
+                    { 
+                        Info.localUser.role = str;
+                        SceneManager.LoadScene("_Scenes/user/selezioneCOC");
                     }
                     else
                     {
-                        Info.localUser.role = str;
-                        SceneManager.LoadScene("_Scenes/user/selezioneCOC");
+                        SceneManager.LoadScene("_Scenes/user/attesaRuoli");
                     }
                 });
             

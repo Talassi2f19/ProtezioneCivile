@@ -8,7 +8,7 @@ namespace Script.User
     //classe del gameObject playerOnline
     public class PlayerOnline : MonoBehaviour
     {
-        public TextMeshProUGUI nome;
+        [SerializeField] private GameObject nome;
         public float speed = 1;
         private Rigidbody2D rb;
         private GenericUser genericUser;
@@ -25,7 +25,8 @@ namespace Script.User
         public void SetUser(GenericUser user)
         {
             this.genericUser = user;
-            nome.text = user.name;
+            nome.GetComponent<TMP_Text>().text = user.name;
+            nome.GetComponent<RectTransform>().sizeDelta = new Vector2(nome.GetComponent<TMP_Text>().preferredWidth, 25);
         }
 
         public void Move(Vector2 v)

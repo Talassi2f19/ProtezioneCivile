@@ -41,7 +41,7 @@ namespace Script.User
     
         public void ExitRoleInfo()
         {
-            gameObject.SetActive(false);
+            gameObject.transform.parent.gameObject.SetActive(false);
         
         }
     }
