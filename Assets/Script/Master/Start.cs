@@ -18,7 +18,7 @@ namespace Script.Master
                 Debug.Log("Stanza creata");
                 Info.sessionCode = codice;
 
-                SceneManager.LoadScene("playerLogin");
+                SceneManager.LoadScene("_Scenes/master/playerLogin");
 
             }).Catch(Debug.Log);
         }
