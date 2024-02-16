@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 8909111604494444117}
   - component: {fileID: 1653812298696155791}
   m_Layer: 0
-  m_Name: pulsanteGiocatore
+  m_Name: PulsanteGiocatore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

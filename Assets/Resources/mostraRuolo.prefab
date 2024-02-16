@@ -144,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1086905681626024974}
   m_Layer: 0
-  m_Name: mostraRuolo
+  m_Name: MostraRuolo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
