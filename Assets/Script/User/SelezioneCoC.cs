@@ -9,14 +9,14 @@ namespace Script.User
 {
     public class SelezioneCoC : MonoBehaviour
     {
-        [SerializeField] private GameObject ruolo;
+        [SerializeField] private GameObject schermataRuoloPrefab;
 
         [SerializeField] private GameObject buttonPrefab;
         [SerializeField] private Transform buttonParent;
         private Dictionary<string, JSONObject> player = new Dictionary<string, JSONObject>();
         void Start()
         {
-            ruolo.SetActive(true);
+            schermataRuoloPrefab.SetActive(true);
 
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/players.json").Then(e =>
             {

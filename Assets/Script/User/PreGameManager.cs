@@ -58,6 +58,11 @@ namespace Script.User
                      SceneManager.LoadScene("_Scenes/user/risultatiElezioni");
                      break;
                  
+                 case Info.GameStatus.AssegnazioneRuoli:
+                     gameIsStarted.Stop();
+                     SceneManager.LoadScene("_Scenes/User/selezioneCOC");
+                     break;
+                 
                  case Info.GameStatus.Gioco:
                      gameIsStarted.Stop();
                      SceneManager.LoadScene("_Scenes/user/game");
