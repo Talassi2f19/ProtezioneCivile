@@ -2,6 +2,7 @@
 using Defective.JSON;
 using Proyecto26;
 using Script.Utility;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -21,7 +22,7 @@ namespace Script.User
         //pulsante entra, scena login
         public void Join()
         {
-            string nomeUtente = nome.GetComponent<InputField>().text;
+            string nomeUtente = nome.GetComponent<TMP_InputField>().text;
             
             if (nomeUtente != "" && nomeUtente.Length <= 16 && Info.sessionCode != "")
             { // se il nome e la sessione(già validata) sono presenti
@@ -93,16 +94,13 @@ namespace Script.User
         
         public void SessionAutoCheck()
         {
-            string code = sessione.GetComponent<InputField>().text.ToUpper();
-            // Debug.Log(session.text);
+            string code = sessione.GetComponent<TMP_InputField>().text.ToUpper();
+            Debug.Log("Typed code: " + code + "; Code Length: " + code.Length);
+            
             if (code.Length == Info.SessionCodeLength)
-            {
                 SessionExist(code);
-            }
             else if (code.Length > Info.SessionCodeLength)
-            {
                 NotF();
-            }
             else
             {
                 notFound.SetActive(false);
