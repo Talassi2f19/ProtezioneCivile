@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 607082800}
   - component: {fileID: 607082801}
+  - component: {fileID: 607082802}
   m_Layer: 0
   m_Name: Logica Avvio
   m_TagString: Untagged
@@ -165,6 +166,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7d2ad00be25ffc439516f9f0cd7cb39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &607082802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607082798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88a436d3c96595240a1a2b4c14389e08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &870511869
