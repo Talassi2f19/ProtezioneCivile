@@ -14,6 +14,7 @@ namespace Script.User
         [SerializeField] private GameObject buttonPrefab;
         [SerializeField] private Transform buttonParent;
         private Dictionary<string, JSONObject> player = new Dictionary<string, JSONObject>();
+        
         void Start()
         {
             schermataRuoloPrefab.SetActive(true);

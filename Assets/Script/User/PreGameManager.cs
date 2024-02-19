@@ -43,7 +43,6 @@ namespace Script.User
                      
                  case Info.GameStatus.Candidatura:
                      Set(Info.GameStatus.Candidatura);
-                     votazione.GetComponent<Votazioni>().MostraCandidati();
 #if !UNITY_EDITOR
                 WebGL.SetCookie("user=" + Info.localUser.name);
 #endif
@@ -51,6 +50,7 @@ namespace Script.User
                  
                  case Info.GameStatus.Votazione:
                      Set(Info.GameStatus.Votazione);
+                     votazione.GetComponent<Votazioni>().MostraCandidati();
                      break;
                  
                  case Info.GameStatus.RisultatiElezioni:
@@ -60,7 +60,6 @@ namespace Script.User
                  
                  case Info.GameStatus.AssegnazioneRuoli:
                      gameIsStarted.Stop();
-                     SceneManager.LoadScene("_Scenes/User/selezioneCOC");
                      break;
                  
                  case Info.GameStatus.Gioco:
