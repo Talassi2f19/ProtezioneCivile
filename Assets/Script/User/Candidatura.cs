@@ -11,7 +11,7 @@ namespace Script.User
         
         private void Start()
         {
-            pulsanteCandidatura.SetActive(false);
+            pulsanteCandidatura.SetActive(true);
             testoOnClick.SetActive(false);
         }
 

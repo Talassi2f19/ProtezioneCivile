@@ -28,7 +28,7 @@ namespace Script.User
 
                 int posMaxVoti = MaxVotiCandidato();
 
-                //TODO se è il player stesso che vince le elezioni mostrare un altro messaggio
+                //TODO se ï¿½ il player stesso che vince le elezioni mostrare un altro messaggio
 
                 vincitore.GetComponent<TMP_Text>().text = candidati[posMaxVoti];
             });
@@ -51,7 +51,7 @@ namespace Script.User
     
         private void CambioScena(string str)
         {
-            if (str.Contains(Info.GameStatus.Gioco))
+            if (str.Contains(Info.GameStatus.AssegnazioneRuoli))
             {
                 listener.Stop();
                 RestClient.Get(Info.DBUrl + Info.sessionCode + "/players/" + Info.localUser.name + "/role.json").Then(e =>
