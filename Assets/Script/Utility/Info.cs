@@ -18,10 +18,11 @@ namespace Script.Utility
         public struct GameStatus
         {
             public const string WaitPlayer = "0";
-            public const string Candidatura = "1";
-            public const string Votazione = "2";
-            public const string RisultatiElezioni = "3";
-            public const string Gioco = "4";
+            public const string AttesaIniziale = "1";
+            public const string Candidatura = "2";
+            public const string Votazione = "3";
+            public const string RisultatiElezioni = "4";
+            public const string Gioco = "5";
             public const string End = "-1";
         }
 

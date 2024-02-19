@@ -41,6 +41,10 @@ namespace Script.User
                      Set(Info.GameStatus.WaitPlayer);
                      break;
                  
+                 case Info.GameStatus.AttesaIniziale:
+                     Set(Info.GameStatus.AttesaIniziale);
+                     break;
+                     
                  case Info.GameStatus.Candidatura:
                      Set(Info.GameStatus.Candidatura);
                      gameObject.GetComponent<Votazioni>().MostraCandidati();

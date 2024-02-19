@@ -8,10 +8,10 @@ namespace Script.User
     {
         [SerializeField] private GameObject pulsanteCandidatura;
         [SerializeField] private GameObject testoOnClick;
-
+        
         private void Start()
         {
-            pulsanteCandidatura.SetActive(true);
+            pulsanteCandidatura.SetActive(false);
             testoOnClick.SetActive(false);
         }
 

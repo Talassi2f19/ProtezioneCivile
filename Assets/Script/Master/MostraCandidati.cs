@@ -54,7 +54,8 @@ namespace Script.Master
             List<string> players;
             string nomeUnicoCandidato;
             int posPlayerElettoForzatamente;
-
+            
+            
             didSomeoneApplied.Stop();
         
             if (candidati.Count > 1)
