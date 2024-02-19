@@ -122,8 +122,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1653812298696155791}
-        m_TargetAssemblyTypeName: PulsanteGiocatore, Assembly-CSharp
-        m_MethodName: ClickSelezionaCoc
+        m_TargetAssemblyTypeName: Script.User.PulsanteGiocatore, Assembly-CSharp
+        m_MethodName: ClickVotazione
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

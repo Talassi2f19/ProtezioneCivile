@@ -24,7 +24,7 @@ namespace Script.User
                 listeners.Stop();
                 str = str.Split("\"data\":\"")[1].Split("\"")[0];
                 Info.localUser.role = str;
-                SceneManager.LoadScene("_Scenes/user/game");
+                SceneManager.LoadScene("_Scenes/User/game");
             }
         }
 

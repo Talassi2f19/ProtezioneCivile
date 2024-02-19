@@ -34,7 +34,6 @@ namespace Script.User
             {
                 GameObject pulsante =  GameObject.Instantiate(buttonPrefab, buttonParent);
                 pulsante.GetComponent<PulsanteGiocatore>().SetName(pl.Key);
-                //pl.Key -> nome player
             }
         }
 

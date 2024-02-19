@@ -9,7 +9,7 @@ namespace Script.User
     public class Votazioni : MonoBehaviour
     {
         private List<string> nomiGiocatori;
-        //private List<GameObject> pulsantiVotazioni = new List<GameObject>();
+        private List<GameObject> pulsantiVotazioni = new List<GameObject>();
         [SerializeField] private GameObject pulsantePrefab;
         [SerializeField] private Transform contenitore;
         
@@ -19,23 +19,28 @@ namespace Script.User
             {
                 JSONObject listaCandidati = new JSONObject(onReceived.Text);
                 nomiGiocatori = listaCandidati.keys;
-
-                GameObject tmp;
+                
+                foreach (string name in nomiGiocatori)
+                    Debug.Log("Nome candidato: " + name);
+                
+              //  GameObject tmp;
                 for (int i = 0; i < nomiGiocatori.Count; i++)
                 {
-                    //pulsantiVotazioni.Add(GameObject.Instantiate(pulsantePrefab, contenitore));
-                    //pulsantiVotazioni[i].GetComponent<PulsanteGiocatore>().SetName(nomiGiocatori[i]);
-                    tmp = GameObject.Instantiate(pulsantePrefab, contenitore);
-                    tmp.GetComponent<PulsanteGiocatore>().SetName(nomiGiocatori[i]);
+                    pulsantiVotazioni.Add(GameObject.Instantiate(pulsantePrefab, contenitore));
+                    pulsantiVotazioni[i].GetComponent<PulsanteGiocatore>().SetName(nomiGiocatori[i]);
+                    /*tmp = GameObject.Instantiate(pulsantePrefab, contenitore);
+                    tmp.GetComponent<PulsanteGiocatore>().SetName(nomiGiocatori[i]);*/
                 }
             });
         }
 
+     /*   
+        public void PlayerHasSelected()
+        {
+            foreach (GameObject pulsante in pulsantiVotazioni)
+                pulsante.GetComponent<PulsanteGiocatore>().SetOff();
+        }
         
-        //public void PlayerHasSelected()
-        //{
-        //    foreach (GameObject pulsante in pulsantiVotazioni)
-        //        pulsante.GetComponent<PulsanteGiocatore>().SetOff();
-        //}
+        */
     }
 }

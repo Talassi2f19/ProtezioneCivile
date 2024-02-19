@@ -32,29 +32,24 @@ namespace Script.User
             });
 
         }
-
-
        
         public void ClickSelezionaCoc()
         {
             string patchRequest = "{\"role\":\"coc\"}";
             //va direttamente alla scena successiva
-            SceneManager.LoadScene("_Scenes/user/game");
+            SceneManager.LoadScene("_Scenes/User/game");
 
             RestClient.Patch(Info.DBUrl + Info.sessionCode + "/players/" + nomeGiocatore + ".json", patchRequest);
         }
-
-
-
+        
         public void PlayerSelected()
         {
-            //SetOff();
+            SetOff();
             pulsante.GetComponent<Image>().color = Color.red;
-            //gameObject.GetComponentInParent<RectTransform>().gameObject.SendMessage("PlayerHasSelected", SendMessageOptions.DontRequireReceiver);
-            //SendMessageUpwards("PlayerHasSelected", SendMessageOptions.DontRequireReceiver);
+      //      gameObject.GetComponentInParent<RectTransform>().gameObject.SendMessage("PlayerHasSelected", SendMessageOptions.DontRequireReceiver);
+       //     SendMessageUpwards("PlayerHasSelected", SendMessageOptions.DontRequireReceiver);
         }
-
-
+        
         //disattiva se stesso
         public void SetOff()
         {

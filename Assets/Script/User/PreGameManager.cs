@@ -43,7 +43,7 @@ namespace Script.User
                      
                  case Info.GameStatus.Candidatura:
                      Set(Info.GameStatus.Candidatura);
-                     gameObject.GetComponent<Votazioni>().MostraCandidati();
+                     votazione.GetComponent<Votazioni>().MostraCandidati();
 #if !UNITY_EDITOR
                 WebGL.SetCookie("user=" + Info.localUser.name);
 #endif
@@ -55,7 +55,7 @@ namespace Script.User
                  
                  case Info.GameStatus.RisultatiElezioni:
                      gameIsStarted.Stop();
-                     SceneManager.LoadScene("_Scenes/user/risultatiElezioni");
+                     SceneManager.LoadScene("_Scenes/User/risultatiElezioni");
                      break;
                  
                  case Info.GameStatus.AssegnazioneRuoli:
@@ -65,12 +65,12 @@ namespace Script.User
                  
                  case Info.GameStatus.Gioco:
                      gameIsStarted.Stop();
-                     SceneManager.LoadScene("_Scenes/user/game");
+                     SceneManager.LoadScene("_Scenes/User/game");
                      break;
                  
                  case Info.GameStatus.End:
                      gameIsStarted.Stop();
-                     SceneManager.LoadScene("_Scenes/user/login");
+                     SceneManager.LoadScene("_Scenes/User/login");
                      Info.Reset();
                      break;
              }
