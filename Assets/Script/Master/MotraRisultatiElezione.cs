@@ -60,7 +60,7 @@ namespace Script.Master
         {
             string str = "{\"gameStatusCode\":\"" + Info.GameStatus.AssegnazioneRuoli + "\"}";
             RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str);
-            SceneManager.LoadScene("_Scenes/master/game");
+            SceneManager.LoadScene("_Scenes/Master/game");
         }
     }
 }

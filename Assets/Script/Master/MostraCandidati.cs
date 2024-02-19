@@ -96,7 +96,7 @@ namespace Script.Master
         {
             string changeStatusCode = "{\"gameStatusCode\":\"" + Info.GameStatus.RisultatiElezioni + "\"}";
             RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", changeStatusCode);
-            SceneManager.LoadScene("_Scenes/master/risultatiElezioni");
+            SceneManager.LoadScene("_Scenes/Master/risultatiElezioni");
         }
     }
 }

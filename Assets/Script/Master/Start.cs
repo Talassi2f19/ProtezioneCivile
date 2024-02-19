@@ -18,7 +18,7 @@ namespace Script.Master
                 Debug.Log("Stanza creata");
                 Info.sessionCode = codice;
 
-                SceneManager.LoadScene("_Scenes/master/playerLogin");
+                SceneManager.LoadScene("_Scenes/Master/playerLogin");
 
             }).Catch(Debug.Log);
         }
@@ -30,7 +30,7 @@ namespace Script.Master
             System.Random random = new System.Random((int)System.DateTime.Now.Ticks);
 
             // Genera una stringa casuale di lettere
-            const string caratteri = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const string caratteri = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             char[] codice = new char[lunghezza];
 
             for (int i = 0; i < lunghezza; i++)

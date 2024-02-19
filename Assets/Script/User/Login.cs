@@ -23,7 +23,7 @@ namespace Script.User
         public void Join()
         {
             string nomeUtente = nome.GetComponent<TMP_InputField>().text;
-            
+            Debug.Log("JOIN");
             if (nomeUtente != "" && nomeUtente.Length <= 16 && Info.sessionCode != "")
             { // se il nome e la sessione(già validata) sono presenti
                 RestClient.Get(Info.DBUrl + Info.sessionCode + ".json").Then(response =>
@@ -80,8 +80,9 @@ namespace Script.User
         }
         private void AddPlayer()
         {
+            Debug.Log("AddPlayer");
             plInGame.SetActive(false);
-            Info.localUser.name = nome.GetComponent<InputField>().text;
+            Info.localUser.name = nome.GetComponent<TMP_InputField>().text;
             //string toSend = JsonConvert.SerializeObject(Info.LocalUser);
             string toSend = JsonUtility.ToJson(Info.localUser);
             // Debug.Log(toSend);
@@ -95,7 +96,7 @@ namespace Script.User
         public void SessionAutoCheck()
         {
             string code = sessione.GetComponent<TMP_InputField>().text.ToUpper();
-            Debug.Log("Typed code: " + code + "; Code Length: " + code.Length);
+           //Debug.Log("Typed code: " + code + "; Code Length: " + code.Length);
             
             if (code.Length == Info.SessionCodeLength)
                 SessionExist(code);

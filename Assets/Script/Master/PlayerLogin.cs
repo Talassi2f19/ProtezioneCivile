@@ -84,7 +84,7 @@ namespace Script.Master
                 string str = "{\"gameStatusCode\":\"" + Info.GameStatus.Candidatura + "\"}";
                 RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str);
                 playerJoin.Stop();
-                SceneManager.LoadScene("_Scenes/master/elezioni");
+                SceneManager.LoadScene("_Scenes/Master/elezioni");
             }
             else
             {
