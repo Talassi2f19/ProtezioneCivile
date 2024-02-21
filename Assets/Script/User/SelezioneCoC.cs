@@ -20,7 +20,7 @@ namespace Script.User
          //   schermataRuoloPrefab.SetActive(false);
             schermataRuoloPrefab.SetActive(true);
 
-            RestClient.Get(Info.DBUrl + Info.sessionCode + "/players.json").Then(e =>
+            RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(e =>
             {
                 Debug.Log(e.Text);
                 JSONObject json = new JSONObject(e.Text);

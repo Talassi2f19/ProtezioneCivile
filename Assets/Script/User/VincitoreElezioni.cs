@@ -20,7 +20,7 @@ namespace Script.User
     
         void Start()
         {
-            RestClient.Get(Info.DBUrl + Info.sessionCode + "/candidati.json").Then(onReceived =>
+            RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + ".json").Then(onReceived =>
             {
                 risultatiJson = new JSONObject(onReceived.Text);
                 candidati = risultatiJson.keys;
@@ -33,7 +33,7 @@ namespace Script.User
                 vincitore.GetComponent<TMP_Text>().text = candidati[posMaxVoti];
             });
 
-            listener = new Listeners(Info.DBUrl + Info.sessionCode + "/gameStatusCode.json");
+            listener = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.GameStatusCodeKey + ".json");
             listener.Start(CambioScena);
 
         }
@@ -54,7 +54,7 @@ namespace Script.User
             if (str.Contains(Info.GameStatus.AssegnazioneRuoli))
             {
                 listener.Stop();
-                RestClient.Get(Info.DBUrl + Info.sessionCode + "/players/" + Info.localUser.name + "/role.json").Then(e =>
+                RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + "/" + Global.RuoloPlayerKey + ".json").Then(e =>
                 {
                     Debug.Log(e);
                     Debug.Log(e.Text);
@@ -62,14 +62,14 @@ namespace Script.User
                     string str = e.Text;
                     str = str.Remove(0, 1).Split("\"")[0];
                     //TODO fix
-                    if(str == "Sindaco")
+                    if(str == Global.RuoloSindaco)
                     { 
                         Info.localUser.role = str;
-                        SceneManager.LoadScene("_Scenes/User/selezioneCOC");
+                        SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/selezioneCOC");
                     }
                     else
                     {
-                        SceneManager.LoadScene("_Scenes/User/attesaRuoli");
+                        SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/attesaRuoli");
                     }
                 });
             

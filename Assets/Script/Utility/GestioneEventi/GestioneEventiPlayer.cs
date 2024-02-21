@@ -54,12 +54,12 @@ namespace Script.Utility.GestioneEventi
                     //else if (str.contains("Ruolo"))
                     //missioni[n1].elencofasi[n3].ruoli[n5] = !
                 
-                    if (path.Contains("Ruolo"))
+                    if (path.Contains(Global.RuoliFolder))
                     {
                         string nomeRuolo = arr[arr.Length - 1];
                         elencoFasi[codiceFase].ruoloFinished(nomeRuolo);
                     }
-                    else if (path.Contains("isCompleted"))
+                    else if (path.Contains(Global.IsCompletedKey))
                     {
                         elencoFasi[codiceFase].taskFinished();
                     }

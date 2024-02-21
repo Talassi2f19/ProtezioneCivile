@@ -15,7 +15,7 @@ namespace Script.User
         
         public void MostraCandidati()
         {
-            RestClient.Get(Info.DBUrl + Info.sessionCode + "/candidati.json").Then(onReceived =>
+            RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + ".json").Then(onReceived =>
             {
                 JSONObject listaCandidati = new JSONObject(onReceived.Text);
                 nomiGiocatori = listaCandidati.keys;

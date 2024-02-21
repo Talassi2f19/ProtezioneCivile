@@ -18,10 +18,10 @@ namespace Script.User
         
         private void Start()
         {
-            gameIsStarted = new Listeners(Info.DBUrl + Info.sessionCode +"/gameStatusCode.json");
+            gameIsStarted = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.GameStatusCodeKey + ".json");
             gameIsStarted.Start(GameStatus);
 
-            amIRemoved = new Listeners(Info.DBUrl + Info.sessionCode + "/players/" + Info.localUser.name + ".json");
+            amIRemoved = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json");
             amIRemoved.Start(CheckRemoved);
             
             wait.SetActive(true);
@@ -55,7 +55,7 @@ namespace Script.User
                  
                  case Info.GameStatus.RisultatiElezioni:
                      gameIsStarted.Stop();
-                     SceneManager.LoadScene("_Scenes/User/risultatiElezioni");
+                     SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/risultatiElezioni");
                      break;
                  
                  case Info.GameStatus.AssegnazioneRuoli:
@@ -64,12 +64,12 @@ namespace Script.User
                  
                  case Info.GameStatus.Gioco:
                      gameIsStarted.Stop();
-                     SceneManager.LoadScene("_Scenes/User/game");
+                     SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/game");
                      break;
                  
                  case Info.GameStatus.End:
                      gameIsStarted.Stop();
-                     SceneManager.LoadScene("_Scenes/User/login");
+                     SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/login");
                      Info.Reset();
                      break;
              }
@@ -94,7 +94,7 @@ namespace Script.User
         //Quando il giocatore abbandona la sessione
         public void OnLeave()
         {
-            RestClient.Delete(Info.DBUrl + Info.sessionCode + "/players/" + Info.localUser.name + ".json");
+            RestClient.Delete(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json");
             GameStatus(Info.GameStatus.End);
         }
     }

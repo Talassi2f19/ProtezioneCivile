@@ -37,7 +37,7 @@ namespace Script.User
         {
             PlayerSelected();
             HideAll();
-            string patchRequest = "{\"role\":\"coc\"}";
+            string patchRequest = "{\"" + Global.RuoloPlayerKey + "\":\"" + Global.RuoloCOC + "\"}";
             //va direttamente alla scena successiva
             RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + nomeGiocatore + ".json", patchRequest);
             SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/game");
