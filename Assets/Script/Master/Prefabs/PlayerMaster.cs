@@ -16,7 +16,7 @@ namespace Script.Master
     
         private void Start()
         {
-            buttonText.text = user.name;
+            buttonText.text = user.Name;
         }
 
         public void Set(string id, GenericUser user)

@@ -1,40 +1,40 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Script.Utility
 {
     [Serializable]
     public class GenericUser
     {
-        public string name;
-
-        public Vector2 cord;
-        public string role;
+        public string Name;
+        public Vector2 Coord;
+        public string Role;
         
         public GenericUser(string name)
         {
-            this.name = name;
-            role = "null";
-            cord = Vector2.zero;
+            this.Name = name;
+            Role = "null";
+            Coord = Vector2.zero;
         }
         
         public GenericUser()
         {
-            name = "";
-            cord = Vector2.zero;
-            role = "null";
+            Name = "";
+            Coord = Vector2.zero;
+            Role = "null";
         }
         
-        public GenericUser(string name, string role, Vector2 cord)
+        public GenericUser(string name, string role, Vector2 coord)
         {
-            this.name = name;
-            this.role = role;
-            this.cord = cord;
+            this.Name = name;
+            this.Role = role;
+            this.Coord = coord;
         }
 
         public override string ToString()
         {
-            return $"{nameof(name)}: {name}, {nameof(cord)}: {cord}, {nameof(role)}: {role}";
+            return $"{nameof(Name)}: {Name}, {nameof(Coord)}: {Coord}, {nameof(Role)}: {Role}";
         }
     }
 }

@@ -49,6 +49,7 @@ namespace Script.Master
                     KeyValuePair<string, GenericUser> tmp = (new JSONObject(str).ToUserDictionary()).First();
 
                     Debug.Log(str);
+                    
 
                     if (tmp.Value == null)
                     {

@@ -12,7 +12,7 @@
         public const string GameStatusCodeKey = "GameStatusCode";
         public const string NomePlayerKey = "Name";
         public const string RuoloPlayerKey = "Role";
-        public const string CoordPlayerKey = "Cord";
+        public const string CoordPlayerKey = "Coord";
         public const string IsCompletedKey = "IsCompleted";
         public const string NomeMissioneKey = "NomeMissione";
         

@@ -37,7 +37,7 @@ namespace Script.User
                    
                 
                 //rimuove il player locale
-                kh.Remove(Info.localUser.name);
+                kh.Remove(Info.localUser.Name);
                 
                 //si istanziano i gameObject degli altri player
                 foreach (var pl in kh)

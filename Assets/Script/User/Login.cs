@@ -82,11 +82,11 @@ namespace Script.User
         {
             Debug.Log("AddPlayer");
             plInGame.SetActive(false);
-            Info.localUser.name = nome.GetComponent<TMP_InputField>().text;
+            Info.localUser.Name = nome.GetComponent<TMP_InputField>().text;
             //string toSend = JsonConvert.SerializeObject(Info.LocalUser);
-            string toSend = JsonUtility.ToJson(Info.localUser);
-            // Debug.Log(toSend);
-            RestClient.Put(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", toSend).Then(e =>
+            string toSend = "{\"Coord\":{\"x\":0.0,\"y\":0.0},\"Name\":\"" + Info.localUser.Name + "\",\"Role\":\"null\"}";
+            Debug.Log(toSend);
+            RestClient.Put(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.Name + ".json", toSend).Then(e =>
             {
                 Debug.Log("Caricamento elezioni");
                 SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/elezioni");
