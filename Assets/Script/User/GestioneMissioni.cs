@@ -25,7 +25,7 @@ public class GestioneMissioni : MonoBehaviour
     */
     public void LanciaMissione(MissionScriptableObject mso)
     {
-        string missionURL = mso.getMissionURL(); // URL/CODE/Missione/Code
+        string missionURL = mso.GetMissionURL(); // URL/CODE/Missione/Code
         
         //Inserimento nella cartella della missione del suo nome
         string nomeMissione = "{\"NomeMissione\":\"" + mso.nomeMissione + "\"}";

@@ -12,7 +12,7 @@ public class MissionScriptableObject : ScriptableObject
 
     
 
-    public string getMissionURL()
+    public string GetMissionURL()
     {
         return Info.DBUrl + Info.sessionCode + "/missioni/" + codiceMissione;
     }

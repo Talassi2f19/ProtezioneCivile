@@ -37,9 +37,8 @@ namespace Script.User
         {
             string patchRequest = "{\"role\":\"coc\"}";
             //va direttamente alla scena successiva
-            SceneManager.LoadScene("_Scenes/User/game");
-
             RestClient.Patch(Info.DBUrl + Info.sessionCode + "/players/" + nomeGiocatore + ".json", patchRequest);
+            SceneManager.LoadScene("_Scenes/User/game");
         }
         
         public void PlayerSelected()
