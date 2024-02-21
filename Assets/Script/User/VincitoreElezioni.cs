@@ -60,7 +60,7 @@ namespace Script.User
                     Debug.Log(e.Text);
                     
                     //TODO fix
-                    if(e.Text == "null")
+                    if(e.Text == "Sindaco")
                     { 
                         Info.localUser.role = str;
                         SceneManager.LoadScene("_Scenes/user/selezioneCOC");
