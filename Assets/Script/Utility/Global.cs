@@ -24,6 +24,6 @@
         
         //TODO Definizione ruoli
         public const string RuoloSindaco = "Sindaco";
-        public const string RuoloCOC = "coc";
+        public const string RuoloCOC = "COC";
     }
 }
