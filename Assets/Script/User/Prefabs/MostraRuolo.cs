@@ -7,7 +7,7 @@ namespace Script.User
     public class MostraRuolo : MonoBehaviour
     {
         [SerializeField] private Image roleImage;
-        [SerializeField] private TMP_Text name;
+        [SerializeField] private new TMP_Text name;
         [SerializeField] private TMP_Text description;
     
         //private string roleImagePath;
