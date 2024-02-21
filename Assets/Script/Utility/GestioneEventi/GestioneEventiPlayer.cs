@@ -39,7 +39,7 @@ namespace Script.Utility.GestioneEventi
                     // event: put
                     // data: {"path":"/kkk/Fasi/fase1/isCompleted","data":false}
                     // data: {"path":"/kkk/Fasi/fase1/Ruolo/Sindaco","data":false}
-                    //           0 1    2    3     4     5
+                    //               0 1    2    3     4     5
                     //Valore di "data"
                     string data = str.Split("\"data\":")[1].Split("}")[0];
                     string path = str.Split("\"path\":\"")[1].Split("\",\"")[0];
