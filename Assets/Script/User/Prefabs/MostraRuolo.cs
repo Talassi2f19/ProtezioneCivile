@@ -12,7 +12,7 @@ namespace Script.User.Prefabs
     
         //private string roleImagePath;
         //private string roleName;
-        //private string roleDescription; //TODO vedere se tenere o meno la descrizione come attributo perché peserà tanto
+        //private string roleDescription;
 
 
         private void Start()

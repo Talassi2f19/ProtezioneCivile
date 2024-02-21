@@ -54,17 +54,16 @@ namespace Script.User
             if (str.Contains(Info.GameStatus.AssegnazioneRuoli))
             {
                 listener.Stop();
-                RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.Name + "/" + Global.RuoloPlayerKey + ".json").Then(e =>
+                RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + "/" + Global.RuoloPlayerKey + ".json").Then(e =>
                 {
                     Debug.Log(e);
                     Debug.Log(e.Text);
 
                     string str = e.Text;
                     str = str.Remove(0, 1).Split("\"")[0];
-                    //TODO fix
                     if(str == Ruoli.Sindaco)
                     { 
-                        Info.localUser.Role = str;
+                        Info.localUser.role = str;
                         SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/selezioneCOC");
                     }
                     else

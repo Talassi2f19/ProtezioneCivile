@@ -16,7 +16,7 @@ namespace Script.Master.Prefabs
     
         private void Start()
         {
-            buttonText.text = user.Name;
+            buttonText.text = user.name;
         }
 
         public void Set(string id, GenericUser user)

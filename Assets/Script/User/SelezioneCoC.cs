@@ -35,7 +35,7 @@ namespace Script.User
         private void Genera()
         {
             Debug.Log("Genera selezione COC");
-            players.Remove(Info.localUser.Name);
+            players.Remove(Info.localUser.name);
             Debug.Log("Numero player:" + players.Count);
             
             foreach(var pl in players)

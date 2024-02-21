@@ -21,7 +21,7 @@ namespace Script.User
             gameIsStarted = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.GameStatusCodeKey + ".json");
             gameIsStarted.Start(GameStatus);
 
-            amIRemoved = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.Name + ".json");
+            amIRemoved = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json");
             amIRemoved.Start(CheckRemoved);
             
             wait.SetActive(true);
@@ -94,7 +94,7 @@ namespace Script.User
         //Quando il giocatore abbandona la sessione
         public void OnLeave()
         {
-            RestClient.Delete(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.Name + ".json");
+            RestClient.Delete(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json");
             GameStatus(Info.GameStatus.End);
         }
     }

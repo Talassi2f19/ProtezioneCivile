@@ -18,14 +18,14 @@ namespace Script.User.Prefabs
         {
             rb = GetComponent<Rigidbody2D>();
             //sr.color = new Color(Random.value,Random.value,Random.value);
-            gameObject.name = genericUser.Name;
-            rb.position = posizione = genericUser.Coord;
+            gameObject.name = genericUser.name;
+            rb.position = posizione = genericUser.coord;
         }
     
         public void SetUser(GenericUser user)
         {
             this.genericUser = user;
-            nome.GetComponent<TMP_Text>().text = user.Name;
+            nome.GetComponent<TMP_Text>().text = user.name;
             nome.GetComponent<RectTransform>().sizeDelta = new Vector2(nome.GetComponent<TMP_Text>().preferredWidth, 25);
         }
 

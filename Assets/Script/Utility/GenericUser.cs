@@ -1,41 +1,41 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Serialization;
+// ReSharper disable IdentifierTypo
 
 namespace Script.Utility
 {
     [Serializable]
     public class GenericUser
     {
-        //TODO cambiare i nomi delle variabili
-        public string Name;
-        public Vector2 Coord;
-        public string Role;
+
+        public string name;
+        public Vector2 coord;
+        public string role;
         
         public GenericUser(string name)
         {
-            this.Name = name;
-            Role = "null";
-            Coord = Vector2.zero;
+            this.name = name;
+            role = "null";
+            coord = Vector2.zero;
         }
         
         public GenericUser()
         {
-            Name = "";
-            Coord = Vector2.zero;
-            Role = "null";
+            name = "";
+            coord = Vector2.zero;
+            role = "null";
         }
         
         public GenericUser(string name, string role, Vector2 coord)
         {
-            this.Name = name;
-            this.Role = role;
-            this.Coord = coord;
+            this.name = name;
+            this.role = role;
+            this.coord = coord;
         }
 
         public override string ToString()
         {
-            return $"{nameof(Name)}: {Name}, {nameof(Coord)}: {Coord}, {nameof(Role)}: {Role}";
+            return $"{nameof(name)}: {name}, {nameof(coord)}: {coord}, {nameof(role)}: {role}";
         }
     }
 }
