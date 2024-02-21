@@ -13,28 +13,35 @@ namespace Script.User
 
         [SerializeField] private GameObject buttonPrefab;
         [SerializeField] private Transform buttonParent;
-        private Dictionary<string, JSONObject> player = new Dictionary<string, JSONObject>();
+        private List<string> players = new List<string>();
         
         void Start()
         {
+         //   schermataRuoloPrefab.SetActive(false);
             schermataRuoloPrefab.SetActive(true);
 
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/players.json").Then(e =>
             {
+                Debug.Log(e.Text);
                 JSONObject json = new JSONObject(e.Text);
-                player = json.ToJsonDictionary();
+               // player = json.ToJsonDictionary();
+                players = json.keys;
+                Genera();
             });
-            Genera();
+            
         }
 
         private void Genera()
         {
-            player.Remove(Info.localUser.name);
-
-            foreach(var pl in player)
+            Debug.Log("Genera selezione COC");
+            players.Remove(Info.localUser.name);
+            Debug.Log("Numero player:" + players.Count);
+            
+            foreach(var pl in players)
             {
                 GameObject pulsante =  GameObject.Instantiate(buttonPrefab, buttonParent);
-                pulsante.GetComponent<PulsanteGiocatore>().SetName(pl.Key);
+                pulsante.GetComponent<PulsanteGiocatore>().SetName(pl);
+                Debug.Log("Nome giocatore: " + pl);
             }
         }
 

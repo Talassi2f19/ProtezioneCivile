@@ -35,6 +35,8 @@ namespace Script.User
        
         public void ClickSelezionaCoc()
         {
+            PlayerSelected();
+            HideAll();
             string patchRequest = "{\"role\":\"coc\"}";
             //va direttamente alla scena successiva
             RestClient.Patch(Info.DBUrl + Info.sessionCode + "/players/" + nomeGiocatore + ".json", patchRequest);
