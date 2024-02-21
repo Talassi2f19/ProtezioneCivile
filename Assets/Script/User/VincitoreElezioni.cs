@@ -63,11 +63,11 @@ namespace Script.User
                     if(e.Text == "Sindaco")
                     { 
                         Info.localUser.role = str;
-                        SceneManager.LoadScene("_Scenes/user/selezioneCOC");
+                        SceneManager.LoadScene("_Scenes/User/selezioneCOC");
                     }
                     else
                     {
-                        SceneManager.LoadScene("_Scenes/user/attesaRuoli");
+                        SceneManager.LoadScene("_Scenes/User/attesaRuoli");
                     }
                 });
             
