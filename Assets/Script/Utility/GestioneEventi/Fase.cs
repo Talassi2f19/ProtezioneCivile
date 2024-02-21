@@ -74,4 +74,17 @@ public class Fase
         
         return (ruoli[nomeRuolo] = true);
     }
+
+    public string printData()
+    {
+        string response = "";
+
+        response += "CodiceFase: " + codice;
+        response += "\nIsCompleted: " + isCompleted;
+        response += "\nRuoli";
+        foreach (var element in ruoli)
+            response += "\n\t" + element.Key + " - " + element.Value;
+
+        return response;
+    }
 }

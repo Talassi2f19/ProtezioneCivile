@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Script.Utility;
 using UnityEngine;
 
@@ -28,5 +30,22 @@ public class Missione
     public string getNome()
     {
         return nome;
+    }
+
+    public string printData()
+    {
+        string response = "";
+
+        response += "CodiceMissione: " + codice;
+        response += "\nNomeMissione: " + nome;
+        response += "\nFasi";
+
+        foreach (var element in elencoFasi)
+        {
+            response += "\n\n" + element.Key + " - " + "Fase";
+            response += "\n" + element.Value.printData();
+        }
+
+        return response;
     }
 }
