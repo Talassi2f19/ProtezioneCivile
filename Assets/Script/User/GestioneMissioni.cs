@@ -1,6 +1,7 @@
 using Proyecto26;
 using Script.Utility;
 using UnityEngine;
+// ReSharper disable CommentTypo
 
 namespace Script.User
 {
@@ -10,6 +11,8 @@ namespace Script.User
     Ogni volta che viene lanciata una missione, viene creata una cartella nel database contenente tutte le informazioni
     al riguardo
     */
+        
+        //TODO caricare una azione tramite un unica richiesta 
         public void LanciaMissione(MissionScriptableObject mso)
         {
             string missionURL = mso.GetMissionURL(); // URL/CODE/Missione/Code
