@@ -75,12 +75,19 @@ namespace Script.Utility.GestioneEventi
                 }
             
            
+                printAll();
 
-           
             }
         }
 
-    
+        private void printAll()
+        {
+            Debug.Log(missioni.Count);
+            foreach (var VARIABLE in missioni)
+            {
+                Debug.Log(VARIABLE.Key + ":" + VARIABLE.Value.printData());
+            }
+        }
     
     
     }
