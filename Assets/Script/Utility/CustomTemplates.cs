@@ -34,6 +34,8 @@ namespace Script.Utility
             return di;
         }
 
+        
+        
         public static Dictionary<string,bool> ToRuoli(this JSONObject jsonObject)
         {
             var di = new Dictionary<string, bool>();
@@ -67,7 +69,7 @@ namespace Script.Utility
         public static Fase ToFase(this JSONObject jsonObject)
         {
             Dictionary<string, bool> ruolo = jsonObject["Ruoli"].ToRuoli();
-            bool status = jsonObject["Status"].boolValue;
+            bool status = jsonObject["isCompleted"].boolValue;
             return new Fase(status, ruolo);
         }
         
