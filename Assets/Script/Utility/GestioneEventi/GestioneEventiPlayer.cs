@@ -30,11 +30,13 @@ namespace Script.Utility.GestioneEventi
                     Dictionary<string, Missione> tmp = new JSONObject(str).ToMissioneDictionary();
                     foreach (var var in tmp)
                     {
+                        Debug.Log("aggiunta");
                         missioni.Add(var.Key, var.Value);
                     }
                 }
                 else
                 {
+                    Debug.Log("modifica");
                     //modifica di un qualche stato
                     // event: put
                     // data: {"path":"/kkk/Fasi/fase1/isCompleted","data":false}
@@ -76,7 +78,7 @@ namespace Script.Utility.GestioneEventi
             
            
                 printAll();
-
+                
             }
         }
 
@@ -88,7 +90,5 @@ namespace Script.Utility.GestioneEventi
                 Debug.Log(VARIABLE.Key + ":" + VARIABLE.Value.printData());
             }
         }
-    
-    
     }
 }
