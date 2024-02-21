@@ -62,7 +62,7 @@ namespace Script.User
                     string str = e.Text;
                     str = str.Remove(0, 1).Split("\"")[0];
                     //TODO fix
-                    if(str == Global.RuoloSindaco)
+                    if(str == Ruoli.Sindaco)
                     { 
                         Info.localUser.Role = str;
                         SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/selezioneCOC");

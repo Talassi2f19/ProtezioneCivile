@@ -1,7 +1,7 @@
 ﻿namespace Script.Utility
 {
     //Questa classe contiene tutte le possibili costanti legate a percorsi relativi del DB e altro
-    public static class Global
+    public struct Global
     {
         public const string MissioniFolder = "Missioni";
         public const string FasiFolder = "Fasi";
@@ -20,10 +20,6 @@
         public const string ScenesFolder = "_Scenes";
         public const string ScenesMasterFolder = "Master";
         public const string ScenesUserFolder = "User";
-
         
-        //TODO Definizione ruoli
-        public const string RuoloSindaco = "Sindaco";
-        public const string RuoloCOC = "COC";
     }
 }

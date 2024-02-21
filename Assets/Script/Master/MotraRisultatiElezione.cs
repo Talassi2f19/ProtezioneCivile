@@ -40,7 +40,7 @@ namespace Script.Master
             
                 listaRisultati[posMaxVoti].GetComponent<VotiCandidato>().HighlightBestCandidate();
                 //aggiorna il ruolo del player
-                string str = "{\"" + Global.RuoloPlayerKey + "\":\"" + Global.RuoloSindaco + "\"}";
+                string str = "{\"" + Global.RuoloPlayerKey + "\":\"" + Ruoli.Sindaco + "\"}";
                 RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + candidati[posMaxVoti] + ".json", str);
             });
         }
