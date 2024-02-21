@@ -55,8 +55,9 @@ public class Fase
     {
         if (!isCompleted)
             return false;
+        isCompleted = true;
         
-        return (isCompleted = true);
+        return isCompleted;
     }
 
     public void setCodice(string codice)
