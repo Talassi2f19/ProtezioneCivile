@@ -48,7 +48,7 @@ namespace Script.User
                     {
                         
                         //la stanza non accetta nuovi tentativo di riconnessione
-                        Debug.Log("il gioco è già iniziato");
+                        Debug.Log("Il gioco è già iniziato");
 #if !UNITY_EDITOR
                         string cookie = WebGL.GetCookie();
                         if (cookie.Contains(nomeUtente) && playerList.keys.Contains(nomeUtente))

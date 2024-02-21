@@ -13,7 +13,7 @@ namespace Script.User
         [SerializeField] private GameObject onlinePlayer;
         [SerializeField] private Transform parent;
         
-        private Listeners pl = new Listeners(Info.DBUrl + Info.sessionCode +"/players/.json");
+        private Listeners pl = new Listeners(Info.DBUrl + Info.sessionCode +"/players.json");
         private Dictionary<string, GameObject> playerList = new Dictionary<string, GameObject>();
         
         private void Start()
