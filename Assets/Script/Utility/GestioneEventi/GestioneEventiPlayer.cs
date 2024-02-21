@@ -7,7 +7,7 @@ using UnityEngine;
 public class GestioneEventiPlayer : MonoBehaviour
 {
     private Listeners ascoltoEventi = new Listeners(Info.DBUrl + "AAAA" + "/Missioni.json");
-    private Dictionary<string, Missione> missioni;
+    private Dictionary<string, Missione> missioni = new Dictionary<string, Missione>();
     
     void Start()
     {
@@ -27,11 +27,11 @@ public class GestioneEventiPlayer : MonoBehaviour
                 // data: {"path":"/","data":{"kkk":{"Fasi":{"fase1":{"Ruoli":{"Coc":false,"Sindaco":false},"Status":true},"fase2":{"Ruoli":{"sindaco":false},"Status":false}},"Nome":"nome"}}}
                 str = str.Split("\"data\":")[1];
                 
-                JSONObject json = new JSONObject(str);
-                Missione miss = json.toMissione();
-                Debug.Log(miss.printData());
-                
-                //TODO più missioni nello stesso momento
+                Dictionary<string, Missione> tmp = new JSONObject(str).ToMissioneDictionary();
+                foreach (var var in tmp)
+                {
+                    missioni.Add(var.Key, var.Value);
+                }
             }
             else
             {

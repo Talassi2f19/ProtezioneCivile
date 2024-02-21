@@ -27,6 +27,12 @@ public class Fase
         this.isCompleted = isCompleted;
         this.ruoli = ruoli;
     }
+    public Fase(bool isCompleted, string code, Dictionary<string, bool> ruoli)
+    {
+        codice = code;
+        this.isCompleted = isCompleted;
+        this.ruoli = ruoli;
+    }
     
     public bool getIsCompleted()
     {

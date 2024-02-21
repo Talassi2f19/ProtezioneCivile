@@ -33,10 +33,8 @@ namespace Script.Utility
                 di.Add(lk[i], lv[i]);
             return di;
         }
-
         
-        
-        public static Dictionary<string,bool> ToRuoli(this JSONObject jsonObject)
+        public static Dictionary<string,bool> ToBoolDictionary(this JSONObject jsonObject)
         {
             var di = new Dictionary<string, bool>();
             var lk = jsonObject.keys;
@@ -46,31 +44,38 @@ namespace Script.Utility
             return di;
         }
 
-
-        public static Missione toMissione(this JSONObject jsonObject)
+        public static Dictionary<string, Missione> ToMissioneDictionary(this JSONObject jsonObject)
         {
-            
-            string code = jsonObject.keys[0];
-            var data = jsonObject.list[0];
-            string nome = data["Nome"].stringValue;
-            var fasi = data["Fasi"];
+            Dictionary<string, Missione> di = new Dictionary<string, Missione>();
+            var lk = jsonObject.keys;
+            var lv = jsonObject.list;
+            for (int i = 0; i < lk.Count; i++)
+            {
+                di.Add(lk[i], lv[i].ToMissione(lk[i]));
+            }
+            return di;
+        }
+
+        private static Missione ToMissione(this JSONObject jsonObject, string code)
+        {
+            string nome = jsonObject["Nome"].stringValue;
+            var fasi = jsonObject["Fasi"];
             
             Dictionary<string, Fase> di = new Dictionary<string, Fase>();
             var lk = fasi.keys;
             var lv = fasi.list;
             for (int i = 0; i < lk.Count; i++)
             {
-                di.Add(lk[i], lv[i].ToFase());
-                di[lk[i]].setCodice(lk[i]);
+                di.Add(lk[i], lv[i].ToFase(lk[i]));
             }
-            return new Missione(nome, code, di);
+            return new Missione(nome,code, di);
         }
 
-        public static Fase ToFase(this JSONObject jsonObject)
+        private static Fase ToFase(this JSONObject jsonObject, string code)
         {
-            Dictionary<string, bool> ruolo = jsonObject["Ruoli"].ToRuoli();
+            Dictionary<string, bool> ruolo = jsonObject["Ruoli"].ToBoolDictionary();
             bool status = jsonObject["isCompleted"].boolValue;
-            return new Fase(status, ruolo);
+            return new Fase(status, code, ruolo);
         }
         
     }
