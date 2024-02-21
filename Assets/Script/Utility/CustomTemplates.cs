@@ -47,20 +47,20 @@ namespace Script.Utility
 
         public static Missione toMissione(this JSONObject jsonObject)
         {
+            
             string code = jsonObject.keys[0];
             var data = jsonObject.list[0];
             string nome = data["Nome"].stringValue;
             var fasi = data["Fasi"];
             
             Dictionary<string, Fase> di = new Dictionary<string, Fase>();
-            var lk = jsonObject.keys;
-            var lv = jsonObject.list;
+            var lk = fasi.keys;
+            var lv = fasi.list;
             for (int i = 0; i < lk.Count; i++)
             {
                 di.Add(lk[i], lv[i].ToFase());
                 di[lk[i]].setCodice(lk[i]);
             }
-            
             return new Missione(nome, code, di);
         }
 
