@@ -9,9 +9,9 @@ namespace Script.Utility
     public static class JsonTemplates
     {
         public static GenericUser ToUser(this JSONObject jsonObject) {
-            var name = jsonObject["name"] ? jsonObject["name"].stringValue : "";
-            var role = jsonObject["role"] ? jsonObject["role"].stringValue : "";
-            var cord = jsonObject["cord"] ? jsonObject["cord"].ToVector2() : Vector2.zero;
+            var name = jsonObject[Global.NomePlayerKey] ? jsonObject[Global.NomePlayerKey].stringValue : "";
+            var role = jsonObject[Global.RuoloPlayerKey] ? jsonObject[Global.RuoloPlayerKey].stringValue : "";
+            var cord = jsonObject[Global.CoordPlayerKey] ? jsonObject[Global.CoordPlayerKey].ToVector2() : Vector2.zero;
             return name == "" ? null : new GenericUser(name, role, cord);
         }
         
@@ -59,8 +59,8 @@ namespace Script.Utility
 
         private static Missione ToMissione(this JSONObject jsonObject, string code)
         {
-            string nome = jsonObject["Nome"].stringValue;
-            var fasi = jsonObject["Fasi"];
+            string nome = jsonObject[Global.NomeMissioneKey].stringValue;
+            var fasi = jsonObject[Global.FasiFolder];
             
             Dictionary<string, Fase> di = new Dictionary<string, Fase>();
             var lk = fasi.keys;
@@ -74,8 +74,8 @@ namespace Script.Utility
 
         private static Fase ToFase(this JSONObject jsonObject, string code)
         {
-            Dictionary<string, bool> ruolo = jsonObject["Ruoli"].ToBoolDictionary();
-            bool status = jsonObject["isCompleted"].boolValue;
+            Dictionary<string, bool> ruolo = jsonObject[Global.RuoliFolder].ToBoolDictionary();
+            bool status = jsonObject[Global.IsCompletedKey].boolValue;
             return new Fase(status, code, ruolo);
         }
         

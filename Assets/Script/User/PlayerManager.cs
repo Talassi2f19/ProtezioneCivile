@@ -13,7 +13,7 @@ namespace Script.User
         [SerializeField] private GameObject onlinePlayer;
         [SerializeField] private Transform parent;
         
-        private Listeners pl = new Listeners(Info.DBUrl + Info.sessionCode +"/players.json");
+        private Listeners pl = new Listeners(Info.DBUrl + Info.sessionCode +"/" + Global.PlayerFolder + ".json");
         private Dictionary<string, GameObject> playerList = new Dictionary<string, GameObject>();
         
         private void Start()
@@ -46,7 +46,7 @@ namespace Script.User
                     playerList[pl.Key].GetComponent<PlayerOnline>().SetUser(pl.Value);
                 }
             }
-            else if (str.Split("\n")[0].Contains("patch") && str.Contains("cord"))
+            else if (str.Split("\n")[0].Contains("patch") && str.Contains(Global.CoordPlayerKey))
             {
                 str = str.Split("\"path\":\"/")[1];
                 string n = str.Split("/", 2)[0];

@@ -24,11 +24,11 @@ namespace Script.User
         {
             PlayerSelected();
             HideAll();
-            RestClient.Get(Info.DBUrl + Info.sessionCode + "/candidati/" + nomeGiocatore + ".json").Then(f =>
+            RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + "/" + nomeGiocatore + ".json").Then(f =>
             {
                 int value = int.Parse(f.Text) + 1;
                 string send = "{\"" + nomeGiocatore + "\":" + value + "}";
-                RestClient.Patch(Info.DBUrl + Info.sessionCode + "/candidati" + ".json", send);
+                RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + ".json", send);
             });
 
         }
@@ -39,8 +39,8 @@ namespace Script.User
             HideAll();
             string patchRequest = "{\"role\":\"coc\"}";
             //va direttamente alla scena successiva
-            RestClient.Patch(Info.DBUrl + Info.sessionCode + "/players/" + nomeGiocatore + ".json", patchRequest);
-            SceneManager.LoadScene("_Scenes/User/game");
+            RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + nomeGiocatore + ".json", patchRequest);
+            SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/game");
         }
         
         public void PlayerSelected()

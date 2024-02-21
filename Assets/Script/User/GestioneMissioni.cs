@@ -28,21 +28,21 @@ public class GestioneMissioni : MonoBehaviour
         string missionURL = mso.GetMissionURL(); // URL/CODE/Missione/Code
         
         //Inserimento nella cartella della missione del suo nome
-        string nomeMissione = "{\"NomeMissione\":\"" + mso.nomeMissione + "\"}";
+        string nomeMissione = "{\"" + Global.NomeMissioneKey + "\":\"" + mso.nomeMissione + "\"}";
         RestClient.Patch(missionURL + ".json", nomeMissione).Then(afterNome =>
         {
             //per ognuno degli step viene caricato il loro stato IsEnded e la lista di ruoli coinvolti per step
             for (int i = 0; i < mso.numeroStep; i++)
             {
                 //stato dello step
-                string statusFase = "{\"isCompleted\":false}";
+                string statusFase = "{\"" + Global.IsCompletedKey + "\":false}";
                 string[] ruoliStep = mso.ruoliPerStep[i].Split(",");
-                RestClient.Patch(missionURL + "/fasi/" + i + ".json", statusFase).Then(afterStatus =>
+                RestClient.Patch(missionURL + "/" + Global.FasiFolder + "/" + i + ".json", statusFase).Then(afterStatus =>
                 {
                     for (int j = 0; j < mso.numeroStep; j++)
                     {
                         string patchRuolo = "{\"" + ruoliStep[j] + "\":false}";
-                        RestClient.Patch(missionURL + "/fasi/" + i + "/ruoli.json", patchRuolo);
+                        RestClient.Patch(missionURL + "/" + Global.FasiFolder + "/" + i + "/" + Global.RuoliFolder + ".json", patchRuolo);
                     }
                 });
             }

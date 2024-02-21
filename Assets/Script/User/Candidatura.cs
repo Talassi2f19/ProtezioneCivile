@@ -19,7 +19,7 @@ namespace Script.User
         {
             //Viene inviato il voto al database
             string str = "{\"" + Info.localUser.name + "\":0}";
-            RestClient.Patch(Info.DBUrl + Info.sessionCode + "/candidati.json", str).Catch(exception =>
+            RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + ".json", str).Catch(exception =>
             {
                 Debug.Log(exception);
                 Debug.Log(exception.Message);

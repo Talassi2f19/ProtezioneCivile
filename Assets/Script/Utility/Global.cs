@@ -4,15 +4,15 @@
     public static class Global
     {
         public const string MissioniFolder = "Missioni";
-        public const string FaseFolder = "Fase";
+        public const string FasiFolder = "Fasi";
         public const string RuoliFolder = "Ruoli";
-        public const string PlayerFolder = "players";
-        public const string CandidatiFolder = "candidati";
+        public const string PlayerFolder = "Players";
+        public const string CandidatiFolder = "Candidati";
        
-        public const string GameStatusCodeKey = "gameStatusCode";
-        public const string NomePlayerKey = "name";
-        public const string RuoloPlayerKey = "role";
-        public const string CoordPlayerKey = "cord";
+        public const string GameStatusCodeKey = "GameStatusCode";
+        public const string NomePlayerKey = "Name";
+        public const string RuoloPlayerKey = "Role";
+        public const string CoordPlayerKey = "Cord";
         public const string IsCompletedKey = "IsCompleted";
         public const string NomeMissioneKey = "NomeMissione";
         

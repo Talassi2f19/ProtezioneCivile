@@ -14,7 +14,7 @@ public class MissionScriptableObject : ScriptableObject
 
     public string GetMissionURL()
     {
-        return Info.DBUrl + Info.sessionCode + "/missioni/" + codiceMissione;
+        return Info.DBUrl + Info.sessionCode + "/" + Global.MissioniFolder + "/" + codiceMissione;
     }
     
 }

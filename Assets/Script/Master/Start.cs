@@ -12,13 +12,13 @@ namespace Script.Master
         {
             string codice = GeneraCodiceCasuale(Info.SessionCodeLength);
             Debug.Log(codice);
-            string toSend = "{\"" + codice + "\":{\"gameStatusCode\":\"" + Info.GameStatus.WaitPlayer + "\"}}";
+            string toSend = "{\"" + codice + "\":{\"" + Global.GameStatusCodeKey + "\":\"" + Info.GameStatus.WaitPlayer + "\"}}";
             RestClient.Patch(Info.DBUrl + ".json", toSend).Then(r =>
             {
                 Debug.Log("Stanza creata");
                 Info.sessionCode = codice;
 
-                SceneManager.LoadScene("_Scenes/Master/playerLogin");
+                SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesMasterFolder + "/playerLogin");
 
             }).Catch(Debug.Log);
         }

@@ -24,7 +24,7 @@ namespace Script.Master
         {
             //mostra il codice di accesso
             displaySessionCode.GetComponent<TMP_Text>().text = Info.sessionCode;
-            playerJoin = new Listeners(Info.DBUrl + Info.sessionCode + "/players.json");
+            playerJoin = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json");
             playerJoin.Start(PlayerAdd);
         }
 
@@ -81,10 +81,10 @@ namespace Script.Master
             //TODO aggiungere limite minimo
             if (playerList.Count > 0)
             {
-                string str = "{\"gameStatusCode\":\"" + Info.GameStatus.Candidatura + "\"}";
+                string str = "{\"" + Global.GameStatusCodeKey + "\":\"" + Info.GameStatus.Candidatura + "\"}";
                 RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str);
                 playerJoin.Stop();
-                SceneManager.LoadScene("_Scenes/Master/elezioni");
+                SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesMasterFolder + "/elezioni");
             }
             else
             {

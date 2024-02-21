@@ -31,8 +31,8 @@ namespace Script.User
                     //richiedo la sessione
                     JSONObject jj = new JSONObject(response.Text);
 
-                    string code = jj.GetField("gameStatusCode").stringValue;
-                    JSONObject playerList = jj.GetField("players");
+                    string code = jj.GetField(Global.GameStatusCodeKey).stringValue;
+                    JSONObject playerList = jj.GetField(Global.PlayerFolder);
                     
                     //controllo se la partita è già iniziata e il numero di player
                     if (code == Info.GameStatus.WaitPlayer && (playerList == null || playerList.list.Count < Info.MaxPlayer))
@@ -58,7 +58,7 @@ namespace Script.User
                                 Info.localUser = jsonObject.ToUser();
                                 Debug.Log("riconnesso");
                                                     
-                        SceneManager.LoadScene("_Scenes/user/elezioni");
+                        SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/elezioni");
                             });
                         }
                         else
@@ -86,10 +86,10 @@ namespace Script.User
             //string toSend = JsonConvert.SerializeObject(Info.LocalUser);
             string toSend = JsonUtility.ToJson(Info.localUser);
             // Debug.Log(toSend);
-            RestClient.Put(Info.DBUrl + Info.sessionCode + "/players/" + Info.localUser.name + ".json", toSend).Then(e =>
+            RestClient.Put(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", toSend).Then(e =>
             {
                 Debug.Log("Caricamento elezioni");
-                SceneManager.LoadScene("_Scenes/User/elezioni");
+                SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/elezioni");
             });
         }
         
@@ -119,7 +119,7 @@ namespace Script.User
                 
                 jj.GetField(str, jsonObject1 =>
                 {
-                    jsonObject1.GetField("gameStatusCode", jsonObject2 =>
+                    jsonObject1.GetField(Global.GameStatusCodeKey, jsonObject2 =>
                     {
                         if (jsonObject2.ToString() == Info.GameStatus.End)
                         {

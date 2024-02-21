@@ -27,7 +27,7 @@ namespace Script.Master
 
         public void OnClick()
         {
-            RestClient.Delete(Info.DBUrl + Info.sessionCode + "/players/"+ id +".json");
+            RestClient.Delete(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + id +".json");
         }
     
     

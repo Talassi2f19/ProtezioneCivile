@@ -23,7 +23,7 @@ namespace Script.Master
     
         void Start()
         {
-            didSomeoneApplied = new Listeners(Info.DBUrl + Info.sessionCode + "/candidati.json");
+            didSomeoneApplied = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + ".json");
             didSomeoneApplied.Start(AddCandidato);
         
             terminaVotazioni.SetActive(false);
@@ -60,7 +60,7 @@ namespace Script.Master
         
             if (candidati.Count > 1)
             {
-                string str = "{\"gameStatusCode\":\"" + Info.GameStatus.Votazione + "\"}";
+                string str = "{\"" + Global.GameStatusCodeKey + "\":\"" + Info.GameStatus.Votazione + "\"}";
                 RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str);
             
                 terminaVotazioni.SetActive(true);
@@ -68,7 +68,7 @@ namespace Script.Master
             }
             else
             {
-                RestClient.Get(Info.DBUrl + Info.sessionCode + "/players.json").Then(getPlayers =>
+                RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(getPlayers =>
                 {
                     players = new JSONObject(getPlayers.Text).keys;
 
@@ -81,7 +81,7 @@ namespace Script.Master
                         nomeUnicoCandidato = candidati[0].GetComponentInChildren<TMP_Text>().text;
                 
                     string futuroSindacoEletto = "{\"" + nomeUnicoCandidato + "\":" + players.Count + "}";
-                    RestClient.Patch(Info.DBUrl + Info.sessionCode + "/candidati.json", futuroSindacoEletto).Then(
+                    RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + ".json", futuroSindacoEletto).Then(
                         risultati =>
                         {
                             MostraRisultati();
@@ -94,9 +94,9 @@ namespace Script.Master
     
         public void MostraRisultati()
         {
-            string changeStatusCode = "{\"gameStatusCode\":\"" + Info.GameStatus.RisultatiElezioni + "\"}";
+            string changeStatusCode = "{\"" + Global.GameStatusCodeKey + "\":\"" + Info.GameStatus.RisultatiElezioni + "\"}";
             RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", changeStatusCode);
-            SceneManager.LoadScene("_Scenes/Master/risultatiElezioni");
+            SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesMasterFolder + "/risultatiElezioni");
         }
     }
 }
