@@ -58,9 +58,11 @@ namespace Script.User
                 {
                     Debug.Log(e);
                     Debug.Log(e.Text);
-                    
+
+                    string str = e.Text;
+                    str = str.Remove(0, 1).Split("\"")[0];
                     //TODO fix
-                    if(e.Text == "Sindaco")
+                    if(str == "Sindaco")
                     { 
                         Info.localUser.role = str;
                         SceneManager.LoadScene("_Scenes/User/selezioneCOC");
