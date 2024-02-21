@@ -37,12 +37,12 @@ public class GestioneMissioni : MonoBehaviour
                 //stato dello step
                 string statusFase = "{\"isEnded\":false}";
                 string[] ruoliStep = mso.ruoliPerStep[i].Split(",");
-                RestClient.Patch(missionURL + "/fasi/" + i + ".json", statusFase).Then(afterStatus =>
+                RestClient.Patch(missionURL + "/" + i + ".json", statusFase).Then(afterStatus =>
                 {
                     for (int j = 0; j < mso.numeroStep; j++)
                     {
                         string patchRuolo = "{\"" + ruoliStep[j] + "\":false}";
-                        RestClient.Patch(missionURL + "/fasi/" + i + "/ruoli.json", patchRuolo);
+                        RestClient.Patch(missionURL + "/" + i + "/ruoli.json", patchRuolo);
                     }
                 });
             }
