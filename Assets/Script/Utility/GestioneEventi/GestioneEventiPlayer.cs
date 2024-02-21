@@ -44,18 +44,24 @@ namespace Script.Utility.GestioneEventi
                     string data = str.Split("\"data\":")[1].Split("}")[0];
                     string path = str.Split("\"path\":\"")[1].Split("\",\"")[0];
                     string[] arr = path.Split("/");
-                
+                    string codiceMissione = arr[1];
+                    string codiceFase = arr[3];
+
+                    Dictionary<string, Fase> elencoFasi = missioni[codiceMissione].getElencoFasi();
                 
                     //if str.contains("isCompleted")" 
                     //missioni[n1].elencofasi[n3].iscomnpleterd = !
                     //else if (str.contains("Ruolo"))
                     //missioni[n1].elencofasi[n3].ruoli[n5] = !
                 
-                    if (path.Contains("Codice/Fasi/CodiceFase/Ruoli/"))
+                    if (path.Contains("Ruolo"))
                     {
-                    
-                        string ruoloSoggetto = arr[arr.Length - 1];
-                    
+                        string nomeRuolo = arr[arr.Length - 1];
+                        elencoFasi[codiceFase].ruoloFinished(nomeRuolo);
+                    }
+                    else if (path.Contains("isCompleted"))
+                    {
+                        elencoFasi[codiceFase].taskFinished();
                     }
                 
                     //Distinguere diversi casi:
