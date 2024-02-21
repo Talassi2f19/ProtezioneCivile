@@ -30,7 +30,8 @@ namespace Script.Master
             System.Random random = new System.Random((int)System.DateTime.Now.Ticks);
 
             // Genera una stringa casuale di lettere
-            const string caratteri = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            
+            const string caratteri = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             char[] codice = new char[lunghezza];
 
             for (int i = 0; i < lunghezza; i++)

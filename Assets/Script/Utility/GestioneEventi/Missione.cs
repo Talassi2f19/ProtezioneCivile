@@ -11,13 +11,20 @@ public class Missione
     //Dizionario che contiene la coppia CodiceFase - Fase
     //CodiceFase è il codice interno alla missione della fase
     //Fase è l'oggetto fase in se che contiene tutti i dati legati a quella fase
-    private Dictionary<int, Fase> elencoFasi { get; set; }
+    private Dictionary<string, Fase> elencoFasi { get; set; }
 
     public Missione()
     {
         nome = "";
         codice = "";
-        elencoFasi = new Dictionary<int, Fase>();
+        elencoFasi = new Dictionary<string, Fase>();
+    }
+    
+    public Missione(string nome, string codice, Dictionary<string, Fase> elencoFasi)
+    {
+        this.nome = nome;
+        this.codice = codice;
+        this.elencoFasi = elencoFasi;
     }
 
     public string getCodice()

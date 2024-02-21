@@ -6,7 +6,7 @@ using UnityEngine;
 public class Fase
 {
     private bool isCompleted; //Determina se la fase è stata completata o meno
-    private int codice; //Codice della fase
+    private string codice; //Codice della fase
 
     //Dizionario che contiene la coppia nomeRuolo: hasFinished
     //nomeRuolo corrisponde al nome del ruolo coinvolto nella fase
@@ -17,13 +17,13 @@ public class Fase
     public Fase()
     {
         isCompleted = false;
-        codice = 0;
+        codice = "0";
         ruoli = new Dictionary<string, bool>();
     }
 
     public Fase(bool isCompleted, Dictionary<string, bool> ruoli)
     {
-        codice = 0;
+        codice = "0";
         this.isCompleted = isCompleted;
         this.ruoli = ruoli;
     }
@@ -33,7 +33,7 @@ public class Fase
         return isCompleted;
     }
 
-    public int getCodice()
+    public string getCodice()
     {
         return codice;
     }
@@ -53,12 +53,10 @@ public class Fase
         return (isCompleted = true);
     }
 
-    public void setCodice(int codice)
+    public void setCodice(string codice)
     {
         this.codice = codice;
-
-        if (this.codice < 1)
-            this.codice = 0;
+        
     }
 
     public void insertRuolo(string nomeRuolo, bool hasFinished)
@@ -74,4 +72,5 @@ public class Fase
         
         return (ruoli[nomeRuolo] = true);
     }
+    
 }
