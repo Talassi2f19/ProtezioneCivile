@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class Fase
 {
-    private bool isCompleted; //Determina se la fase è stata completata o meno
+    public bool isCompleted; //Determina se la fase è stata completata o meno
     private string codice; //Codice della fase
 
     //Dizionario che contiene la coppia nomeRuolo: hasFinished
     //nomeRuolo corrisponde al nome del ruolo coinvolto nella fase
     //hasFinished è un booleano che indica se i compiti assegnati a questo ruolo sono stati TUTTI portati a termine o meno
-    private Dictionary<string, bool> ruoli;
+    public Dictionary<string, bool> ruoli;
 
 
     public Fase()

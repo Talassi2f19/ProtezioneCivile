@@ -61,7 +61,7 @@ namespace Script.Utility.GestioneEventi
                     }
                     else if (path.Contains(Global.IsCompletedKey))
                     {
-                        elencoFasi[codiceFase].taskFinished();
+                        elencoFasi[codiceFase].isCompleted = true;
                     }
                 
                     //Distinguere diversi casi:
