@@ -26,7 +26,7 @@ public class GestioneMissioni : MonoBehaviour
     public void LanciaMissione(MissionScriptableObject mso)
     {
         string missionURL = mso.GetMissionURL(); // URL/CODE/Missione/Code
-        
+        Debug.Log("Missione lanciata");
         //Inserimento nella cartella della missione del suo nome
         string nomeMissione = "{\"" + Global.NomeMissioneKey + "\":\"" + mso.nomeMissione + "\"}";
         RestClient.Patch(missionURL + ".json", nomeMissione).Then(afterNome =>
