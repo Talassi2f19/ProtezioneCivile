@@ -7,6 +7,7 @@ namespace Script.Utility
     [Serializable]
     public class GenericUser
     {
+        //TODO cambiare i nomi delle variabili
         public string Name;
         public Vector2 Coord;
         public string Role;

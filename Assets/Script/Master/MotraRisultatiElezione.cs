@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Defective.JSON;
 using Proyecto26;
 using Script.User;
+using Script.User.Prefabs;
 using Script.Utility;
 using UnityEngine;
 using UnityEngine.SceneManagement;

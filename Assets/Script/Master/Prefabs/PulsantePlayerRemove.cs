@@ -2,9 +2,10 @@ using Proyecto26;
 using Script.Utility;
 using TMPro;
 using UnityEngine;
+
 // ReSharper disable CommentTypo
 
-namespace Script.Master
+namespace Script.Master.Prefabs
 {
     public class PulsantePlayerRemove : MonoBehaviour
     {

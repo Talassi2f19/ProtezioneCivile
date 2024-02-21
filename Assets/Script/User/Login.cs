@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Defective.JSON;
+﻿using Defective.JSON;
 using Proyecto26;
 using Script.Utility;
 using TMPro;

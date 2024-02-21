@@ -1,20 +1,22 @@
-using UnityEngine;
 using System.Collections.Generic;
-using Script.Utility;
+using UnityEngine;
 
-[CreateAssetMenu(fileName = "Missione", menuName = "ScriptableObjects/MissionScriptableObject", order = 1)]
-public class MissionScriptableObject : ScriptableObject
+namespace Script.Utility
 {
-    public int codiceMissione;
-    public string nomeMissione = "Telecomunicazioni";
-    public int numeroStep;
-    public List<string> ruoliPerStep;
-
-    
-
-    public string GetMissionURL()
+    [CreateAssetMenu(fileName = "Missione", menuName = "ScriptableObjects/MissionScriptableObject", order = 1)]
+    public class MissionScriptableObject : ScriptableObject
     {
-        return Info.DBUrl + Info.sessionCode + "/" + Global.MissioniFolder + "/" + codiceMissione;
-    }
+        public int codiceMissione;
+        public string nomeMissione = "Telecomunicazioni";
+        public int numeroStep;
+        public List<string> ruoliPerStep;
+
     
+
+        public string GetMissionURL()
+        {
+            return Info.DBUrl + Info.sessionCode + "/" + Global.MissioniFolder + "/" + codiceMissione;
+        }
+    
+    }
 }

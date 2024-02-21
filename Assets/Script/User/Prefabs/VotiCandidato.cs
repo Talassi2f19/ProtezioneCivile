@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Script.User
+namespace Script.User.Prefabs
 {
     public class VotiCandidato : MonoBehaviour
     {

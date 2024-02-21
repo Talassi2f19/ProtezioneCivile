@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using Defective.JSON;
 using Proyecto26;
+using Script.User.Prefabs;
 using Script.Utility;
 using UnityEngine;
-
+// ReSharper disable CommentTypo
+// ReSharper disable StringLiteralTypo
+// ReSharper disable IdentifierTypo
 namespace Script.User
 {
     public class Votazioni : MonoBehaviour
@@ -12,6 +15,7 @@ namespace Script.User
         private List<GameObject> pulsantiVotazioni = new List<GameObject>();
         [SerializeField] private GameObject pulsantePrefab;
         [SerializeField] private Transform contenitore;
+        
         
         public void MostraCandidati()
         {

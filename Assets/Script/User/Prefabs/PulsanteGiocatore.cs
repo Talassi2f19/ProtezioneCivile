@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Script.User
+namespace Script.User.Prefabs
 {
     public class PulsanteGiocatore : MonoBehaviour
     {
@@ -37,7 +37,7 @@ namespace Script.User
         {
             PlayerSelected();
             HideAll();
-            string patchRequest = "{\"" + Global.RuoloPlayerKey + "\":\"" + Ruoli.COC + "\"}";
+            string patchRequest = "{\"" + Global.RuoloPlayerKey + "\":\"" + Ruoli.Coc + "\"}";
             //va direttamente alla scena successiva
             RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + nomeGiocatore + ".json", patchRequest);
             SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/game");

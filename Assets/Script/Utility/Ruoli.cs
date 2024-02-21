@@ -3,6 +3,6 @@
     public struct Ruoli
     {
         public const string Sindaco = "Sindaco";
-        public const string COC = "COC";
+        public const string Coc = "COC";
     }
 }

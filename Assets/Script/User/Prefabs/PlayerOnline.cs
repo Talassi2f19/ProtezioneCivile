@@ -1,9 +1,9 @@
+using Script.Utility;
 using TMPro;
 using UnityEngine;
-using Script.Utility;
 
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
-namespace Script.User
+namespace Script.User.Prefabs
 {
     //classe del gameObject playerOnline
     public class PlayerOnline : MonoBehaviour

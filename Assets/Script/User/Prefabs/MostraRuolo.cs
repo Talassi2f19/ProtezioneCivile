@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Script.User
+namespace Script.User.Prefabs
 {
     public class MostraRuolo : MonoBehaviour
     {

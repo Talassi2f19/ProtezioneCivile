@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Script.Master
+namespace Script.Master.Prefabs
 {
     public class GenericTextPrefab : MonoBehaviour
     {
