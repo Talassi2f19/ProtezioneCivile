@@ -61,7 +61,7 @@ namespace Script.Master
 
         public void AvviaPartita()
         {
-            string str = "{\"" + Global.GameStatusCodeKey + "\":\"" + Info.GameStatus.AssegnazioneRuoli + "\"}";
+            string str = "{\"" + Global.GameStatusCodeKey + "\":\"" + GameStatus.Gioco + "\"}";
             RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str);
             SceneManager.LoadScene(Scene.Master.Game);
         }

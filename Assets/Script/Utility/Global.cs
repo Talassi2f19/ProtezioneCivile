@@ -40,6 +40,15 @@ namespace Script.Utility
             public const string Game = Scene.Folder + "/" + Scene.Master.MFolder + "/game" ;
             public const string Elezioni = Scene.Folder + "/" + Scene.Master.MFolder + "/elezioni" ;
         }
-        
+    }
+    
+    public struct GameStatus
+    {
+        public const string WaitPlayer = "0";
+        public const string Candidatura = "1";
+        public const string Votazione = "2";
+        public const string RisultatiElezioni = "3";
+        public const string Gioco = "4";
+        public const string End = "-1";
     }
 }

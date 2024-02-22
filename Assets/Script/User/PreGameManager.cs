@@ -20,7 +20,7 @@ namespace Script.User
         private void Start()
         {
             gameIsStarted = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.GameStatusCodeKey + ".json");
-            gameIsStarted.Start(GameStatus);
+            gameIsStarted.Start(Game);
 
             amIRemoved = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json");
             amIRemoved.Start(CheckRemoved);
@@ -30,7 +30,7 @@ namespace Script.User
             votazione.SetActive(false);
         }
 
-        private void GameStatus(string status)
+        private void Game(string status)
         {
              if(status.Contains("put"))
                  status = status.Split("\"data\":\"")[1].Split("\"}")[0];
@@ -38,38 +38,34 @@ namespace Script.User
              
              switch (status)
              {
-                 case Info.GameStatus.WaitPlayer:
-                     Set(Info.GameStatus.WaitPlayer);
+                 case GameStatus.WaitPlayer:
+                     Set(GameStatus.WaitPlayer);
                      break;
                      
-                 case Info.GameStatus.Candidatura:
-                     Set(Info.GameStatus.Candidatura);
+                 case GameStatus.Candidatura:
+                     Set(GameStatus.Candidatura);
 #if !UNITY_EDITOR
                 WebGL.SetCookie("user=" + Info.localUser.name);
 #endif
                      break;
                  
-                 case Info.GameStatus.Votazione:
-                     Set(Info.GameStatus.Votazione);
+                 case GameStatus.Votazione:
+                     Set(GameStatus.Votazione);
                      votazione.GetComponent<Votazioni>().MostraCandidati();
                      break;
                  
-                 case Info.GameStatus.RisultatiElezioni:
+                 case GameStatus.RisultatiElezioni:
                      gameIsStarted.Stop();
                      SceneManager.LoadScene(Scene.User.RisultatiElezioni);
                      break;
                  
-                 case Info.GameStatus.AssegnazioneRuoli:
-                     gameIsStarted.Stop();
-                     break;
-                 
-                 case Info.GameStatus.Gioco:
+                 case GameStatus.Gioco:
                      gameIsStarted.Stop();
                      //TODO(?) possibiole attesa x ruolo
                      SceneManager.LoadScene(Scene.User.Game);
                      break;
                  
-                 case Info.GameStatus.End:
+                 case GameStatus.End:
                      gameIsStarted.Stop();
                      SceneManager.LoadScene(Scene.User.Login);
                      Info.Reset();
@@ -79,16 +75,16 @@ namespace Script.User
 
         private void Set(string val)
         {
-            wait.SetActive(val == Info.GameStatus.WaitPlayer);
-            candidatura.SetActive(val == Info.GameStatus.Candidatura);
-            votazione.SetActive(val == Info.GameStatus.Votazione);
+            wait.SetActive(val == GameStatus.WaitPlayer);
+            candidatura.SetActive(val == GameStatus.Candidatura);
+            votazione.SetActive(val == GameStatus.Votazione);
         }
 
         private void CheckRemoved(string response)
         {
             if (response.Contains("\"data\":null"))
             {
-                GameStatus(Info.GameStatus.End);
+                Game(GameStatus.End);
                 amIRemoved.Stop();
             }
         }
@@ -97,7 +93,7 @@ namespace Script.User
         public void OnLeave()
         {
             RestClient.Delete(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json");
-            GameStatus(Info.GameStatus.End);
+            Game(GameStatus.End);
         }
     }
 }

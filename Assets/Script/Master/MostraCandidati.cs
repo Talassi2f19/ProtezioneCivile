@@ -64,7 +64,7 @@ namespace Script.Master
         
             if (candidati.Count > 1)
             {
-                string str = "{\"" + Global.GameStatusCodeKey + "\":\"" + Info.GameStatus.Votazione + "\"}";
+                string str = "{\"" + Global.GameStatusCodeKey + "\":\"" + GameStatus.Votazione + "\"}";
                 RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str);
             
                 terminaVotazioni.SetActive(true);
@@ -98,7 +98,7 @@ namespace Script.Master
     
         public void MostraRisultati()
         {
-            string changeStatusCode = "{\"" + Global.GameStatusCodeKey + "\":\"" + Info.GameStatus.RisultatiElezioni + "\"}";
+            string changeStatusCode = "{\"" + Global.GameStatusCodeKey + "\":\"" + GameStatus.RisultatiElezioni + "\"}";
             RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", changeStatusCode);
             SceneManager.LoadScene(Scene.Master.RisultatiElezioni);
         }

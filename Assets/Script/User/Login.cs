@@ -35,7 +35,7 @@ namespace Script.User
                     JSONObject playerList = jj.GetField(Global.PlayerFolder);
                     
                     //controllo se la partita è già iniziata e il numero di player
-                    if (code == Info.GameStatus.WaitPlayer && (playerList == null || playerList.list.Count < Info.MaxPlayer))
+                    if (code == GameStatus.WaitPlayer && (playerList == null || playerList.list.Count < Info.MaxPlayer))
                     {
                         if(playerList == null)
                             AddPlayer();
@@ -121,7 +121,7 @@ namespace Script.User
                 {
                     jsonObject1.GetField(Global.GameStatusCodeKey, jsonObject2 =>
                     {
-                        if (jsonObject2.ToString() == Info.GameStatus.End)
+                        if (jsonObject2.ToString() == GameStatus.End)
                         {
                             NotF();
                         }

@@ -85,7 +85,7 @@ namespace Script.Master
             //TODO aggiungere limite minimo
             if (playerList.Count > 0)
             {
-                string str = "{\"" + Global.GameStatusCodeKey + "\":\"" + Info.GameStatus.Candidatura + "\"}";
+                string str = "{\"" + Global.GameStatusCodeKey + "\":\"" + GameStatus.Candidatura + "\"}";
                 RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str);
                 playerJoin.Stop();
                 SceneManager.LoadScene(Scene.Master.Elezioni);
