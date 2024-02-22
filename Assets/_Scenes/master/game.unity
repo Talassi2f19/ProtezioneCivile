@@ -469,7 +469,7 @@ MonoBehaviour:
         m_MethodName: LanciaMissione
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 1029e6971d4aabc4db3621201a3f1493, type: 2}
+          m_ObjectArgument: {fileID: 11400000, guid: b0e8416d00a6bdb45b8045e0b4d766b0, type: 2}
           m_ObjectArgumentAssemblyTypeName: MissionScriptableObject, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0

@@ -19,12 +19,14 @@ namespace Script.Master
         [SerializeField] private GameObject displaySessionCode;
         [SerializeField] private GameObject playerPrefab;
         [SerializeField] private Transform parent;
-    
+        [SerializeField] private GameObject popUpPrefab;
+        
         private Listeners playerJoin;
         private Dictionary<string, GameObject> playerList = new Dictionary<string, GameObject>();
 
         private void Start()
         {
+            popUpPrefab.SetActive(false);
             //mostra il codice di accesso
             displaySessionCode.GetComponent<TMP_Text>().text = Info.sessionCode;
             playerJoin = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json");
@@ -82,7 +84,6 @@ namespace Script.Master
 
         public void ProssimaScena()
         {
-
             if (playerList.Count > Info.MinPlayer)
             {
                 string str = "{\"" + Global.GameStatusCodeKey + "\":\"" + GameStatus.Candidatura + "\"}";
@@ -91,9 +92,7 @@ namespace Script.Master
                 SceneManager.LoadScene(Scene.Master.Elezioni);
             }
             else
-            {
-                //TODO Messaggio di errore
-            }
+                popUpPrefab.SetActive(true);
         }
     }
 }

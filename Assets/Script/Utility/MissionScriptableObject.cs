@@ -11,8 +11,7 @@ namespace Script.Utility
         public int numeroStep;
         public List<string> ruoliPerStep;
 
-    
-
+        
         public string GetMissionPositionURL()
         {
             return Info.DBUrl + Info.sessionCode + "/" + Global.MissioniFolder;

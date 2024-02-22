@@ -11,10 +11,12 @@ namespace Script.Utility
     
     public enum Ruoli
     {
+
         Null,
         Sindaco,
         Coc
     }
+
     
     public static class RuoliConverter
     {
