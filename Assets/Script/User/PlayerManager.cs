@@ -38,17 +38,17 @@ namespace Script.User
             {
                 //crea un dizionario con i player 
                 //Dictionary<string, User> kh = DeserializeUser(str.Split("\"data\":")[1]);
-               Dictionary<string, GenericUser> kh = new JSONObject(str.Split("\"data\":")[1]).ToUserDictionary();
+               Dictionary<string, GenericUser> players = new JSONObject(str.Split("\"data\":")[1]).ToUserDictionary();
                    
                 
                 //rimuove il player locale
-                kh.Remove(Info.localUser.name);
+                players.Remove(Info.localUser.name);
                 
                 //si istanziano i gameObject degli altri player
-                foreach (var pl in kh)
+                foreach (var player in players)
                 {
-                    playerList.Add(pl.Key, GameObject.Instantiate(onlinePlayer, parent));
-                    playerList[pl.Key].GetComponent<PlayerOnline>().SetUser(pl.Value);
+                    playerList.Add(player.Key, GameObject.Instantiate(onlinePlayer, parent));
+                    playerList[player.Key].GetComponent<PlayerOnline>().SetUser(player.Value);
                 }
             }
             else if (str.Split("\n")[0].Contains("patch") && str.Contains(Global.CoordPlayerKey))
