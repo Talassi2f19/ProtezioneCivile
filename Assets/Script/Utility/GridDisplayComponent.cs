@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 //TODO provare a rimuovere qualche warning
 namespace Script.Utility
@@ -21,18 +22,18 @@ namespace Script.Utility
             FixedRowCount = 2
         }
 
-        protected Vector2 m_CellSize = new Vector2(100, 100);
-        public Vector2 cellSize
+        protected Vector2 mCellSize = new Vector2(100, 100);
+        public Vector2 CellSize
         {
-            get { return m_CellSize; }
-            set { SetProperty(ref m_CellSize, value); }
+            get { return mCellSize; }
+            set { SetProperty(ref mCellSize, value); }
         }
 
-        [SerializeField] protected Vector2 m_Spacing = Vector2.zero;
-        public Vector2 spacing
+        [SerializeField] protected Vector2 mSpacing = Vector2.zero;
+        public Vector2 Spacing
         {
-            get { return m_Spacing; }
-            set { SetProperty(ref m_Spacing, value); }
+            get { return mSpacing; }
+            set { SetProperty(ref mSpacing, value); }
         }
 
         protected FlowLayoutGroup()
@@ -57,8 +58,8 @@ namespace Script.Utility
             preferredColumns = Mathf.CeilToInt(Mathf.Sqrt(rectChildren.Count));
 
             SetLayoutInputForAxis(
-                padding.horizontal + (cellSize.x + spacing.x) * minColumns - spacing.x,
-                padding.horizontal + (cellSize.x + spacing.x) * preferredColumns - spacing.x,
+                padding.horizontal + (CellSize.x + Spacing.x) * minColumns - Spacing.x,
+                padding.horizontal + (CellSize.x + Spacing.x) * preferredColumns - Spacing.x,
                 -1, 0);
         }
 
@@ -67,10 +68,10 @@ namespace Script.Utility
             int minRows = 0;
 
             float width = rectTransform.rect.size.x;
-            int cellCountX = Mathf.Max(1, Mathf.FloorToInt((width - padding.horizontal + spacing.x + 0.001f) / (cellSize.x + spacing.x)));
+            int cellCountX = Mathf.Max(1, Mathf.FloorToInt((width - padding.horizontal + Spacing.x + 0.001f) / (CellSize.x + Spacing.x)));
             //      minRows = Mathf.CeilToInt(rectChildren.Count / (float)cellCountX);
             minRows = 1;
-            float minSpace = padding.vertical + (cellSize.y + spacing.y) * minRows - spacing.y;
+            float minSpace = padding.vertical + (CellSize.y + Spacing.y) * minRows - Spacing.y;
             SetLayoutInputForAxis(minSpace, minSpace, -1, 1);
         }
 
@@ -112,23 +113,23 @@ namespace Script.Utility
             int cellCountX = 1;
             int cellCountY = 1;
 
-            if (cellSize.x + spacing.x <= 0)
+            if (CellSize.x + Spacing.x <= 0)
                 cellCountX = int.MaxValue;
             else
-                cellCountX = Mathf.Max(1, Mathf.FloorToInt((width - padding.horizontal + spacing.x + 0.001f) / (cellSize.x + spacing.x)));
+                cellCountX = Mathf.Max(1, Mathf.FloorToInt((width - padding.horizontal + Spacing.x + 0.001f) / (CellSize.x + Spacing.x)));
 
-            if (cellSize.y + spacing.y <= 0)
+            if (CellSize.y + Spacing.y <= 0)
                 cellCountY = int.MaxValue;
             else
-                cellCountY = Mathf.Max(1, Mathf.FloorToInt((height - padding.vertical + spacing.y + 0.001f) / (cellSize.y + spacing.y)));
+                cellCountY = Mathf.Max(1, Mathf.FloorToInt((height - padding.vertical + Spacing.y + 0.001f) / (CellSize.y + Spacing.y)));
 
             cellsPerMainAxis = cellCountX;
             actualCellCountX = Mathf.Clamp(cellCountX, 1, rectChildren.Count);
             actualCellCountY = Mathf.Clamp(cellCountY, 1, Mathf.CeilToInt(rectChildren.Count / (float)cellsPerMainAxis));
 
             Vector2 requiredSpace = new Vector2(
-                actualCellCountX * cellSize.x + (actualCellCountX - 1) * spacing.x,
-                actualCellCountY * cellSize.y + (actualCellCountY - 1) * spacing.y
+                actualCellCountX * CellSize.x + (actualCellCountX - 1) * Spacing.x,
+                actualCellCountY * CellSize.y + (actualCellCountY - 1) * Spacing.y
             );
             Vector2 startOffset = new Vector2(
                 GetStartOffset(0, requiredSpace.x),
@@ -143,7 +144,7 @@ namespace Script.Utility
                 SetChildAlongAxis(rectChildren[i], 0, startOffset.x + totalWidth /*+ currentSpacing[0]*/, rectChildren[i].rect.size.x);
                 SetChildAlongAxis(rectChildren[i], 1, startOffset.y + totalHeight  /*+ currentSpacing[1]*/, rectChildren[i].rect.size.y);
 
-                currentSpacing = spacing;
+                currentSpacing = Spacing;
 
                 totalWidth += rectChildren[i].rect.width + currentSpacing[0];
 

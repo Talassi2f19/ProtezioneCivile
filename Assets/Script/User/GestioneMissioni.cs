@@ -1,4 +1,3 @@
-using MK.FlexGridLayout.Core;
 using Proyecto26;
 using Script.Utility;
 using Script.Utility.GestioneEventi;
@@ -19,12 +18,12 @@ namespace Script.User
             string missionURL = mso.GetMissionPositionURL();
             Debug.Log("Missione lanciata");
 
-            string patchRequest = getJSONCurrentMission(mso);
+            string patchRequest = GetJSONCurrentMission(mso);
             
             RestClient.Patch(missionURL + ".json", patchRequest);
         }
         
-        private string getJSONCurrentMission(MissioneDef mso)
+        private string GetJSONCurrentMission(MissioneDef mso)
         {
             string patchRequest = "{\"";
             patchRequest += mso.codiceMissione + "\":";
