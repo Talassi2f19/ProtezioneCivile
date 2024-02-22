@@ -10,7 +10,7 @@ namespace Script.Utility
         public const string PlayerFolder = "Players";
         public const string CandidatiFolder = "Candidati";
        
-        public const string GameStatusCodeKey = "GameStatusCode";
+        public const string GameStatusCodeKey = "GameStatus";
         public const string NomePlayerKey = "Name";
         public const string RuoloPlayerKey = "Role";
         public const string CoordPlayerKey = "Coord";
