@@ -8,3 +8,7 @@
 
 
 //TODO Gestire in modo decente la l'accesso agli attributi di Utility/GestioneEveneti/Fase.cs
+
+
+
+//TODO fix joystick mostra ruolo
