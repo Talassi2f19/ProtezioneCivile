@@ -33,7 +33,7 @@ namespace Script.User
 
                 
                 string nomeVincitore = candidati[MaxVotiCandidato()];
-                //TODO se � il player stesso che vince le elezioni mostrare un altro messaggio
+                
                 if (nomeVincitore == Info.localUser.name)
                 {
                     meMedesimo.SetActive(true);
