@@ -19,6 +19,9 @@ namespace Script.User
             Debug.Log("Missione lanciata");
 
             string patchRequest = GetJSONCurrentMission(mso);
+            Debug.Log(patchRequest);
+            
+            Debug.Log(missionURL);
             
             RestClient.Patch(missionURL + ".json", patchRequest);
         }
