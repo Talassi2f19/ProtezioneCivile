@@ -58,7 +58,7 @@ namespace Script.User
                                 Info.localUser = jsonObject.ToUser();
                                 Debug.Log("riconnesso");
                                                     
-                        SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/elezioni");
+                        SceneManager.LoadScene(Scene.User.Elezioni);
                             });
                         }
                         else
