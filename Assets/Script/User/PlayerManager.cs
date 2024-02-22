@@ -70,6 +70,8 @@ namespace Script.User
             }
         }
 
+        //TODO non mostrare il controller se non si è da mobile
+        
         public void ShowMostraRuolo()
         {
             mostraRuoloPrefab.SetActive(true);

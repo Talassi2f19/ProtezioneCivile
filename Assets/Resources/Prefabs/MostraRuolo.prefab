@@ -292,7 +292,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 319}
+  m_AnchoredPosition: {x: 0, y: 310}
   m_SizeDelta: {x: 900, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5924084264001485859
@@ -666,7 +666,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 262, y: -70}
-  m_SizeDelta: {x: 760, y: 571}
+  m_SizeDelta: {x: 775, y: 571}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6117498884867925211
 CanvasRenderer:
@@ -697,6 +697,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: loremIpsum Dolor Sit amet lorem ipsum dolor sit amet lorem ipsum dolor
+    sit amet ioremIpsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor
+    sit amet ioremIpsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor
+    sit amet ioremIpsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor
+    sit amet ioremIpsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor
+    sit amet ioremIpsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor
     sit amet
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -736,9 +741,9 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 7.5
   m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
+  m_paragraphSpacing: 10
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
