@@ -1,5 +1,7 @@
+using MK.FlexGridLayout.Core;
 using Proyecto26;
 using Script.Utility;
+using Script.Utility.GestioneEventi;
 using UnityEngine;
 // ReSharper disable CommentTypo
 
@@ -12,7 +14,7 @@ namespace Script.User
     al riguardo
     */
         
-        public void LanciaMissione(MissionScriptableObject mso)
+        public void LanciaMissione(MissioneDef mso)
         {
             string missionURL = mso.GetMissionPositionURL();
             Debug.Log("Missione lanciata");
@@ -22,7 +24,7 @@ namespace Script.User
             RestClient.Patch(missionURL + ".json", patchRequest);
         }
         
-        private string getJSONCurrentMission(MissionScriptableObject mso)
+        private string getJSONCurrentMission(MissioneDef mso)
         {
             string patchRequest = "{\"";
             patchRequest += mso.codiceMissione + "\":";
@@ -30,17 +32,15 @@ namespace Script.User
             patchRequest += Global.FasiFolder + "\":";
             patchRequest += "{";
             
-            for (int i = 0; i < mso.numeroStep; i++)
+            for (int i = 0; i < mso.fasi.Count; i++)
             {
-                string[] ruoliStep = mso.ruoliPerStep[i].Split(",");
-
                 patchRequest += "\"" + "F" + i + "\":";
                 patchRequest += "{";
                 patchRequest += "\"" + Global.IsCompletedKey + "\":false, \"" + Global.RuoliFolder + "\":";
                 patchRequest += "{";
 
-                for (int j = 0; j < ruoliStep.Length; j++)
-                    patchRequest += "\"" + ruoliStep[j] + "\": false";
+                for (int j = 0; j < mso.fasi[i].Ruoli.Count; j++)
+                    patchRequest += "\"" + mso.fasi[i].Ruoli[j] + "\": false";
 
                 patchRequest += "}";
                 patchRequest += "}";

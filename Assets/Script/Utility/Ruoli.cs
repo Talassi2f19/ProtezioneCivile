@@ -12,9 +12,9 @@
         Coc
     }
 
-    public class RuoliConverter
-    {
-        public string converti()
-    }
+//    public class RuoliConverter
+  //  {
+ //       public string converti()
+ //   }
     
 }
