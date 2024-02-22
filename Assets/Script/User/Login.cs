@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Scene = Script.Utility.Scene;
 
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
 namespace Script.User
@@ -88,7 +89,7 @@ namespace Script.User
             RestClient.Put(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", toSend).Then(e =>
             {
                 Debug.Log("Caricamento elezioni");
-                SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/elezioni");
+                SceneManager.LoadScene(Scene.User.Elezioni);
             });
         }
         

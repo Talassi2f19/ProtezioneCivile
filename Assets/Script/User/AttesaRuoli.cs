@@ -1,6 +1,7 @@
 using Script.Utility;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Scene = Script.Utility.Scene;
 
 namespace Script.User
 {
@@ -24,7 +25,7 @@ namespace Script.User
                 listeners.Stop();
                 str = str.Split("\"data\":\"")[1].Split("\"")[0];
                 Info.localUser.role = str;
-                SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/game");
+                SceneManager.LoadScene(Scene.User.Game);
             }
         }
 

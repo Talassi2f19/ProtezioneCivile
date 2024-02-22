@@ -2,6 +2,7 @@ using Proyecto26;
 using Script.Utility;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Scene = Script.Utility.Scene;
 
 // ReSharper disable CommentTypo IdentifierTypo
 namespace Script.User
@@ -55,7 +56,7 @@ namespace Script.User
                  
                  case Info.GameStatus.RisultatiElezioni:
                      gameIsStarted.Stop();
-                     SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/risultatiElezioni");
+                     SceneManager.LoadScene(Scene.User.RisultatiElezioni);
                      break;
                  
                  case Info.GameStatus.AssegnazioneRuoli:
@@ -64,12 +65,13 @@ namespace Script.User
                  
                  case Info.GameStatus.Gioco:
                      gameIsStarted.Stop();
-                     SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/game");
+                     //TODO(?) possibiole attesa x ruolo
+                     SceneManager.LoadScene(Scene.User.Game);
                      break;
                  
                  case Info.GameStatus.End:
                      gameIsStarted.Stop();
-                     SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/login");
+                     SceneManager.LoadScene(Scene.User.Login);
                      Info.Reset();
                      break;
              }

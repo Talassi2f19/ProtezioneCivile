@@ -7,6 +7,8 @@ using Script.Utility;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Scene = Script.Utility.Scene;
+
 // ReSharper disable FieldCanBeMadeReadOnly.Local
 // ReSharper disable CommentTypo
 
@@ -86,7 +88,7 @@ namespace Script.Master
                 string str = "{\"" + Global.GameStatusCodeKey + "\":\"" + Info.GameStatus.Candidatura + "\"}";
                 RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str);
                 playerJoin.Stop();
-                SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesMasterFolder + "/elezioni");
+                SceneManager.LoadScene(Scene.Master.Elezioni);
             }
             else
             {

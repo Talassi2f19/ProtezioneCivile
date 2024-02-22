@@ -2,6 +2,7 @@ using Proyecto26;
 using Script.Utility;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Scene = Script.Utility.Scene;
 
 namespace Script.Master
 {
@@ -18,7 +19,7 @@ namespace Script.Master
                 Debug.Log("Stanza creata");
                 Info.sessionCode = codice;
 
-                SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesMasterFolder + "/playerLogin");
+                SceneManager.LoadScene(Scene.Master.PlayerLogin);
 
             }).Catch(Debug.Log);
         }

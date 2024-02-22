@@ -5,6 +5,7 @@ using Script.Utility;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Scene = Script.Utility.Scene;
 
 namespace Script.User
 {
@@ -14,23 +15,36 @@ namespace Script.User
         private List<string> candidati = new List<string>();
         private List<JSONObject> voti = new List<JSONObject>();
         [SerializeField] private GameObject vincitore;
+        [SerializeField] private GameObject meMedesimo;
+        [SerializeField] private GameObject vincitoreGenerico;
         private Listeners listener;
 
 
     
         void Start()
         {
+            meMedesimo.SetActive(false);
+            vincitoreGenerico.SetActive(false);
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + ".json").Then(onReceived =>
             {
                 risultatiJson = new JSONObject(onReceived.Text);
                 candidati = risultatiJson.keys;
                 voti = risultatiJson.list;
 
-                int posMaxVoti = MaxVotiCandidato();
-
+                
+                string nomeVincitore = candidati[MaxVotiCandidato()];
                 //TODO se � il player stesso che vince le elezioni mostrare un altro messaggio
-
-                vincitore.GetComponent<TMP_Text>().text = candidati[posMaxVoti];
+                if (nomeVincitore == Info.localUser.name)
+                {
+                    meMedesimo.SetActive(true);
+                    vincitoreGenerico.SetActive(false);
+                }
+                else
+                {
+                    meMedesimo.SetActive(false);
+                    vincitoreGenerico.SetActive(true);
+                    vincitore.GetComponent<TMP_Text>().text = nomeVincitore;
+                }
             });
 
             listener = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.GameStatusCodeKey + ".json");
@@ -59,16 +73,16 @@ namespace Script.User
                     Debug.Log(e);
                     Debug.Log(e.Text);
 
-                    string str = e.Text;
-                    str = str.Remove(0, 1).Split("\"")[0];
-                    if(str == Ruoli.Sindaco)
+                    string str1 = e.Text;
+                    str1 = str1.Remove(0, 1).Split("\"")[0];
+                    if(str1 == Ruoli.Sindaco)
                     { 
-                        Info.localUser.role = str;
-                        SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/selezioneCOC");
+                        Info.localUser.role = str1;
+                        SceneManager.LoadScene(Scene.User.SelezioneCoc);
                     }
                     else
                     {
-                        SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/attesaRuoli");
+                        SceneManager.LoadScene(Scene.User.AttesaRuoli);
                     }
                 });
             

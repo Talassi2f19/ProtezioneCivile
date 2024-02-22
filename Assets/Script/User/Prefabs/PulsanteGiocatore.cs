@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Scene = Script.Utility.Scene;
 
 namespace Script.User.Prefabs
 {
@@ -40,7 +41,7 @@ namespace Script.User.Prefabs
             string patchRequest = "{\"" + Global.RuoloPlayerKey + "\":\"" + Ruoli.Coc + "\"}";
             //va direttamente alla scena successiva
             RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + nomeGiocatore + ".json", patchRequest);
-            SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesUserFolder + "/game");
+            SceneManager.LoadScene(Scene.User.Game);
         }
         
         public void PlayerSelected()

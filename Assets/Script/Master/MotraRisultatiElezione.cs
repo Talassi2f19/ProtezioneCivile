@@ -6,6 +6,8 @@ using Script.User.Prefabs;
 using Script.Utility;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Scene = Script.Utility.Scene;
+
 // ReSharper disable IdentifierTypo
 // ReSharper disable StringLiteralTypo
 
@@ -61,7 +63,7 @@ namespace Script.Master
         {
             string str = "{\"" + Global.GameStatusCodeKey + "\":\"" + Info.GameStatus.AssegnazioneRuoli + "\"}";
             RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str);
-            SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesMasterFolder + "/game");
+            SceneManager.LoadScene(Scene.Master.Game);
         }
     }
 }

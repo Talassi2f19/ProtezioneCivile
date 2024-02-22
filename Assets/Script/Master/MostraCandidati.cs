@@ -7,6 +7,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = System.Random;
+using Scene = Script.Utility.Scene;
+
+
 // ReSharper disable IdentifierTypo
 
 namespace Script.Master
@@ -97,7 +100,7 @@ namespace Script.Master
         {
             string changeStatusCode = "{\"" + Global.GameStatusCodeKey + "\":\"" + Info.GameStatus.RisultatiElezioni + "\"}";
             RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", changeStatusCode);
-            SceneManager.LoadScene(Global.ScenesFolder + "/" + Global.ScenesMasterFolder + "/risultatiElezioni");
+            SceneManager.LoadScene(Scene.Master.RisultatiElezioni);
         }
     }
 }
