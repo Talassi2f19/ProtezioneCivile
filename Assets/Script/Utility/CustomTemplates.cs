@@ -57,28 +57,30 @@ namespace Script.Utility
             }
             return di;
         }
-
         
-        //TODO gestire se non trova le chiavi
         private static Missione ToMissione(this JSONObject jsonObject, string code)
         {
-            string nome = jsonObject[Global.NomeMissioneKey].stringValue;
-            var fasi = jsonObject[Global.FasiFolder];
-            
             Dictionary<string, Fase> di = new Dictionary<string, Fase>();
-            var lk = fasi.keys;
-            var lv = fasi.list;
-            for (int i = 0; i < lk.Count; i++)
+            string nome = jsonObject[Global.NomeMissioneKey] ? jsonObject[Global.NomeMissioneKey].stringValue : "";
+            var fasi = jsonObject[Global.FasiFolder] ? jsonObject[Global.FasiFolder] : null;
+
+            if (fasi != null)
             {
-                di.Add(lk[i], lv[i].ToFase(lk[i]));
+                var lk = fasi.keys;
+                var lv = fasi.list;
+                for (int i = 0; i < lk.Count; i++)
+                {
+                    di.Add(lk[i], lv[i].ToFase(lk[i]));
+                }
             }
+
             return new Missione(nome,code, di);
         }
 
         private static Fase ToFase(this JSONObject jsonObject, string code)
         {
-            Dictionary<string, bool> ruolo = jsonObject[Global.RuoliFolder].ToBoolDictionary();
-            bool status = jsonObject[Global.IsCompletedKey].boolValue;
+            Dictionary<string, bool> ruolo = jsonObject[Global.RuoliFolder] ? jsonObject[Global.RuoliFolder].ToBoolDictionary() : new Dictionary<string, bool>();
+            bool status = jsonObject[Global.IsCompletedKey] && jsonObject[Global.IsCompletedKey].boolValue;
             return new Fase(status, code, ruolo);
         }
         
