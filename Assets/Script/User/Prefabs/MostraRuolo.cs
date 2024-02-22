@@ -17,7 +17,7 @@ namespace Script.User.Prefabs
 
         private void Start()
         {
-            //TODO carica in base al ruolo in autoamtico
+            //TODO carica in base al ruolo in automatico
         }
 
         //public void SetRoleName(string roleName)

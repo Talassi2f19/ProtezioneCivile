@@ -15,7 +15,6 @@ namespace Script.Master.Prefabs
             testo.text = this.genericText;
 
             gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(testo.preferredWidth + 20, 40);
-
         }
     }
 }
