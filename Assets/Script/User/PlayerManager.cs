@@ -13,12 +13,16 @@ namespace Script.User
     {
         [SerializeField] private GameObject onlinePlayer;
         [SerializeField] private Transform parent;
+        [SerializeField] private GameObject mostraRuoloPrefab;
+        [SerializeField] private GameObject infoRuolo;
+        [SerializeField] private GameObject joyStick;
         
         private Listeners pl = new Listeners(Info.DBUrl + Info.sessionCode +"/" + Global.PlayerFolder + ".json");
         private Dictionary<string, GameObject> playerList = new Dictionary<string, GameObject>();
         
         private void Start()
         {
+            ShowMostraRuolo();
             pl.Start(Read);
         }
 
@@ -64,6 +68,21 @@ namespace Script.User
                     // ignored
                 }
             }
+        }
+
+        //TODO non mostrare il controller se non si è da mobile
+        
+        public void ShowMostraRuolo()
+        {
+            mostraRuoloPrefab.SetActive(true);
+            infoRuolo.SetActive(false);
+            joyStick.SetActive(false);
+        }
+
+        public void CloseMostraRuolo()
+        {
+            infoRuolo.SetActive(true);
+            joyStick.SetActive(true);
         }
     }
 }
