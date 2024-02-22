@@ -83,10 +83,5 @@ namespace Script.Utility
             bool status = jsonObject[Global.IsCompletedKey] && jsonObject[Global.IsCompletedKey].boolValue;
             return new Fase(status, code, ruolo);
         }
-        
-        
-        
-        
-        
     }
 }

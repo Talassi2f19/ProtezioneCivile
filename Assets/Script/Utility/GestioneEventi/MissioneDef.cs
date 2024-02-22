@@ -10,11 +10,6 @@ namespace Script.Utility.GestioneEventi
         public string codiceMissione;
         public string nomeMissione;
         public List<FaseDef> fasi;
-        
-        public string GetMissionPositionURL()
-        {
-            return Info.DBUrl + Info.sessionCode + "/" + Global.MissioniFolder;
-        }
     }
 
     [Serializable]
