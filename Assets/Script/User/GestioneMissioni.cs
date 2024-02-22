@@ -1,3 +1,4 @@
+using Defective.JSON;
 using Proyecto26;
 using Script.Utility;
 using Script.Utility.GestioneEventi;
@@ -15,45 +16,41 @@ namespace Script.User
         
         public void LanciaMissione(MissioneDef mso)
         {
-            string missionURL = mso.GetMissionPositionURL();
             Debug.Log("Missione lanciata");
+            
+            RestClient.Post(Info.DBUrl + Info.sessionCode + "/" + Global.MissioniFolder + ".json",GeneraJson(mso) ).Then(d =>
+            {
+                Debug.Log(d.Text); //codice missione
+            }).Catch(g =>
+            {
+                Debug.Log(g);
+            });
 
-            string patchRequest = GetJSONCurrentMission(mso);
-            Debug.Log(patchRequest);
-            
-            Debug.Log(missionURL);
-            
-            RestClient.Patch(missionURL + ".json", patchRequest);
         }
         
-        private string GetJSONCurrentMission(MissioneDef mso)
+        private string GeneraJson(MissioneDef missioneDef)
         {
-            string patchRequest = "{\"";
-            patchRequest += mso.codiceMissione + "\":";
-            patchRequest += "{\"";
-            patchRequest += Global.FasiFolder + "\":";
-            patchRequest += "{";
-            
-            for (int i = 0; i < mso.fasi.Count; i++)
+            JSONObject a = new JSONObject();
+            a.AddField(Global.NomeMissioneKey , missioneDef.nomeMissione);
+            a.AddField(Global.FasiFolder, b =>
             {
-                patchRequest += "\"" + "F" + i + "\":";
-                patchRequest += "{";
-                patchRequest += "\"" + Global.IsCompletedKey + "\":false, \"" + Global.RuoliFolder + "\":";
-                patchRequest += "{";
-
-                for (int j = 0; j < mso.fasi[i].Ruoli.Count; j++)
-                    patchRequest += "\"" + mso.fasi[i].Ruoli[j] + "\": false";
-
-                patchRequest += "}";
-                patchRequest += "}";
-            }
-            patchRequest += "}";
-            patchRequest += ",\"" + Global.NomeMissioneKey + "\":\"" + mso.nomeMissione + "\"";
-
-            patchRequest += "}";
-            patchRequest += "}";
-
-            return patchRequest;
+                int i = 0;
+                foreach (var kk in missioneDef.fasi)
+                {
+                    b.AddField("F"+ i++, c =>
+                    {
+                        c.AddField(Global.IsCompletedKey, false);
+                        c.AddField(Global.RuoliFolder, d =>
+                        {
+                            foreach (var rr in kk.Ruoli)
+                            {
+                                d.AddField(rr.ToString(), false);
+                            }
+                        });
+                    });
+                }
+            });
+            return a.ToString();
         }
     }
 }

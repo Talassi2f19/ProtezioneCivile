@@ -58,6 +58,8 @@ namespace Script.Utility
             return di;
         }
 
+        
+        //TODO gestire se non trova le chiavi
         private static Missione ToMissione(this JSONObject jsonObject, string code)
         {
             string nome = jsonObject[Global.NomeMissioneKey].stringValue;
@@ -79,6 +81,10 @@ namespace Script.Utility
             bool status = jsonObject[Global.IsCompletedKey].boolValue;
             return new Fase(status, code, ruolo);
         }
+        
+        
+        
+        
         
     }
 }
