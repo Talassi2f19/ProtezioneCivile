@@ -13,7 +13,7 @@ namespace Script.Utility
 
         public const int MaxPlayer = 28;
         
-        public const int MinPlayer = 10;             //TODO aggiungere limite minimo
+        public const int MinPlayer = 0;             //TODO modificare limite minimo
         
         public const int SessionCodeLength = 4;
         

@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-//TODO Check Warning
 namespace Script.Utility
 {
     [AddComponentMenu("Layout/Flow Layout Group", 153)]
