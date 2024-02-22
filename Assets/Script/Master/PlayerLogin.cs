@@ -82,8 +82,8 @@ namespace Script.Master
 
         public void ProssimaScena()
         {
-            //TODO aggiungere limite minimo
-            if (playerList.Count > 0)
+
+            if (playerList.Count > Info.MinPlayer)
             {
                 string str = "{\"" + Global.GameStatusCodeKey + "\":\"" + GameStatus.Candidatura + "\"}";
                 RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str);

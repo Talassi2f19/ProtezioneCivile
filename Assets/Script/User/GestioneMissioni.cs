@@ -12,32 +12,46 @@ namespace Script.User
     al riguardo
     */
         
-        //TODO caricare una azione tramite un unica richiesta 
         public void LanciaMissione(MissionScriptableObject mso)
         {
-            string missionURL = mso.GetMissionURL(); // URL/CODE/Missione/Code
+            string missionURL = mso.GetMissionPositionURL();
             Debug.Log("Missione lanciata");
-            //Inserimento nella cartella della missione del suo nome
-            string nomeMissione = "{\"" + Global.NomeMissioneKey + "\":\"" + mso.nomeMissione + "\"}";
-            RestClient.Patch(missionURL + ".json", nomeMissione).Then(afterNome =>
+
+            string patchRequest = getJSONCurrentMission(mso);
+            
+            RestClient.Patch(missionURL + ".json", patchRequest);
+        }
+        
+        private string getJSONCurrentMission(MissionScriptableObject mso)
+        {
+            string patchRequest = "{\"";
+            patchRequest += mso.codiceMissione + "\":";
+            patchRequest += "{\"";
+            patchRequest += Global.FasiFolder + "\":";
+            patchRequest += "{";
+            
+            for (int i = 0; i < mso.numeroStep; i++)
             {
-                //per ognuno degli step viene caricato il loro stato IsEnded e la lista di ruoli coinvolti per step
-                for (int i = 0; i < mso.numeroStep; i++)
-                {
-                    //stato dello step
-                    string statusFase = "{\"" + Global.IsCompletedKey + "\":false}";
-                    string[] ruoliStep = mso.ruoliPerStep[i].Split(",");
-                    RestClient.Patch(missionURL + "/" + Global.FasiFolder + "/" + i + ".json", statusFase).Then(afterStatus =>
-                    {
-                        for (int j = 0; j < mso.numeroStep; j++)
-                        {
-                            //BUG possibile bux di i
-                            string patchRuolo = "{\"" + ruoliStep[j] + "\":false}";
-                            RestClient.Patch(missionURL + "/" + Global.FasiFolder + "/" + i + "/" + Global.RuoliFolder + ".json", patchRuolo);
-                        }
-                    });
-                }
-            });
+                string[] ruoliStep = mso.ruoliPerStep[i].Split(",");
+
+                patchRequest += "\"" + "F" + i + "\":";
+                patchRequest += "{";
+                patchRequest += "\"" + Global.IsCompletedKey + "\":false, \"" + Global.RuoliFolder + "\":";
+                patchRequest += "{";
+
+                for (int j = 0; j < ruoliStep.Length; j++)
+                    patchRequest += "\"" + ruoliStep[j] + "\": false";
+
+                patchRequest += "}";
+                patchRequest += "}";
+            }
+            patchRequest += "}";
+            patchRequest += ",\"" + Global.NomeMissioneKey + "\":\"" + mso.nomeMissione + "\"";
+
+            patchRequest += "}";
+            patchRequest += "}";
+
+            return patchRequest;
         }
     }
 }
