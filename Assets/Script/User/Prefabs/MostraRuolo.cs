@@ -42,7 +42,6 @@ namespace Script.User.Prefabs
         public void ExitRoleInfo()
         {
             gameObject.transform.parent.gameObject.SetActive(false);
-        
         }
     }
 }
