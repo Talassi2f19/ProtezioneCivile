@@ -11,7 +11,7 @@ namespace Script.User.Prefabs
     public class PulsanteGiocatore : MonoBehaviour
     {
         protected string nomeGiocatore;
-        [SerializeField] protected GameObject pulsante;
+        [SerializeField] private GameObject pulsante;
     
         public void SetName(string str)
         {

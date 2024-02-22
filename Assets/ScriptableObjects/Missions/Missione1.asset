@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f038cb3f3c74c249c149300917c83bc, type: 3}
   m_Name: Missione1
   m_EditorClassIdentifier: 
-  nome: 
-  fasi: []
+  codiceMissione: 
+  nomeMissione: 
+  fasi:
+  - Ruoli: 0000000001000000
+  - Ruoli: 01000000
+  - Ruoli: 00000000

@@ -8,7 +8,7 @@
     
     public enum RuoliEnum
     {
-        Sindaco,
+        Ruoli,
         Coc
     }
 

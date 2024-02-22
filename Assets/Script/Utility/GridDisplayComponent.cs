@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
-//TODO provare a rimuovere qualche warning
+//TODO Check Warning
 namespace Script.Utility
 {
     [AddComponentMenu("Layout/Flow Layout Group", 153)]
