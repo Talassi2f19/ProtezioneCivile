@@ -10,7 +10,7 @@ namespace Script.Utility
     {
         public static GenericUser ToUser(this JSONObject jsonObject) {
             var name = jsonObject[Global.NomePlayerKey] ? jsonObject[Global.NomePlayerKey].stringValue : "";
-            var role = jsonObject[Global.RuoloPlayerKey] ? jsonObject[Global.RuoloPlayerKey].stringValue : "";
+            var role = jsonObject[Global.RuoloPlayerKey] ? RuoliConverter.ToRuoli(jsonObject[Global.RuoloPlayerKey].stringValue) : Ruoli.Null;
             var cord = jsonObject[Global.CoordPlayerKey] ? jsonObject[Global.CoordPlayerKey].ToVector2() : Vector2.zero;
             return name == "" ? null : new GenericUser(name, role, cord);
         }

@@ -14,6 +14,6 @@ namespace Script.Utility.GestioneEventi
     [Serializable]
     public class FaseDef
     {
-        public List<RuoliEnum> Ruoli;
+        public List<Ruoli> Ruoli;
     }
 }

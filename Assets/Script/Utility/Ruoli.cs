@@ -1,20 +1,36 @@
 ﻿namespace Script.Utility
 {//TODO Definizione ruoli
-    public struct Ruoli
-    {
-        public const string Sindaco = "Sindaco";
-        public const string Coc = "COC";
-    }
+    // public struct Ruoli
+    // {
+    //     public const string Sindaco = "Sindaco";
+    //     public const string Coc = "COC";
+    // }
     
-    public enum RuoliEnum
+    public enum Ruoli
     {
+        Null,
         Sindaco,
         Coc
     }
-
-    public class RuoliConverter
-    {
-        public string converti()
-    }
     
+    public static class RuoliConverter
+    {
+        public static string Converti(Ruoli code)
+        {
+            switch (code)
+            {
+                case Ruoli.Sindaco:
+                    return "Sindaco";
+                case Ruoli.Coc:
+                    return "COC";
+                
+                default: return "Error";
+            }
+        }
+
+        public static Ruoli ToRuoli(string s)
+        {
+            return (Ruoli)int.Parse(s);
+        }
+    }
 }

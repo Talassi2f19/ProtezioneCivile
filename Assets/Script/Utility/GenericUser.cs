@@ -10,12 +10,12 @@ namespace Script.Utility
 
         public string name;
         public Vector2 coord;
-        public string role;
+        public Ruoli role;
         
         public GenericUser(string name)
         {
             this.name = name;
-            role = "null";
+            role = Ruoli.Null;
             coord = Vector2.zero;
         }
         
@@ -23,10 +23,10 @@ namespace Script.Utility
         {
             name = "";
             coord = Vector2.zero;
-            role = "null";
+            role = Ruoli.Null;
         }
         
-        public GenericUser(string name, string role, Vector2 coord)
+        public GenericUser(string name, Ruoli role, Vector2 coord)
         {
             this.name = name;
             this.role = role;

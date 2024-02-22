@@ -4,6 +4,7 @@ using Proyecto26;
 using Script.Utility;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.Controls;
 using UnityEngine.SceneManagement;
 using Scene = Script.Utility.Scene;
 
@@ -75,9 +76,10 @@ namespace Script.User
 
                     string str1 = e.Text;
                     str1 = str1.Remove(0, 1).Split("\"")[0];
-                    if(str1 == Ruoli.Sindaco)
+                    int h = int.Parse(str1);
+                    if(RuoliConverter.ToRuoli(str1) == Ruoli.Sindaco)
                     { 
-                        Info.localUser.role = str1;
+                        Info.localUser.role = Ruoli.Sindaco;
                         SceneManager.LoadScene(Scene.User.SelezioneCoc);
                     }
                     else

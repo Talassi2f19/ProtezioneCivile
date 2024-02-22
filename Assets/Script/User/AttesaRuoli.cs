@@ -24,7 +24,7 @@ namespace Script.User
             {
                 listeners.Stop();
                 str = str.Split("\"data\":\"")[1].Split("\"")[0];
-                Info.localUser.role = str;
+                Info.localUser.role = RuoliConverter.ToRuoli(str);
                 SceneManager.LoadScene(Scene.User.Game);
             }
         }
