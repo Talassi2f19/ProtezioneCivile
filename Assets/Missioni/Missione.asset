@@ -9,13 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae716952e473fc24394c9d63447e36cf, type: 3}
-  m_Name: Mission1
+  m_Script: {fileID: 11500000, guid: 8f038cb3f3c74c249c149300917c83bc, type: 3}
+  m_Name: Missione
   m_EditorClassIdentifier: 
-  codiceMissione: 1
-  nomeMissione: Telecomunicazioni
-  numeroStep: 3
-  ruoliPerStep:
-  - Sindaco
-  - Referente
-  - ResponsabileTLC
+  codiceMissione: 
+  nomeMissione: 
+  fasi: []
