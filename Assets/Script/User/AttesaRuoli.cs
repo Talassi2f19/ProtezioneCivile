@@ -1,3 +1,4 @@
+using System;
 using Script.Utility;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -24,7 +25,7 @@ namespace Script.User
             {
                 listeners.Stop();
                 str = str.Split("\"data\":\"")[1].Split("\"")[0];
-                Info.localUser.role = RuoliConverter.ToRuoli(str);
+                Info.localUser.role = Enum.Parse<Ruoli>(str);
                 SceneManager.LoadScene(Scene.User.Game);
             }
         }

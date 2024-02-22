@@ -1,4 +1,7 @@
-﻿namespace Script.Utility
+﻿using System;
+using UnityEngine;
+
+namespace Script.Utility
 {//TODO Definizione ruoli
     // public struct Ruoli
     // {
@@ -17,6 +20,7 @@
     {
         public static string Converti(Ruoli code)
         {
+            
             switch (code)
             {
                 case Ruoli.Sindaco:
@@ -26,11 +30,6 @@
                 
                 default: return "Error";
             }
-        }
-
-        public static Ruoli ToRuoli(string s)
-        {
-            return (Ruoli)int.Parse(s);
         }
     }
 }

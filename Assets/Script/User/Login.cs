@@ -84,7 +84,7 @@ namespace Script.User
             plInGame.SetActive(false);
             Info.localUser.name = nome.GetComponent<TMP_InputField>().text;
             //string toSend = JsonConvert.SerializeObject(Info.LocalUser);
-            string toSend = "{\"Coord\":{\"x\":0.0,\"y\":0.0},\"Name\":\"" + Info.localUser.name + "\",\"Role\":\"null\"}";
+            string toSend = "{\"Coord\":{\"x\":0.0,\"y\":0.0},\"Name\":\"" + Info.localUser.name + "\",\"Role\":\""+Ruoli.Null+"\"}";
             Debug.Log(toSend);
             RestClient.Put(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", toSend).Then(e =>
             {

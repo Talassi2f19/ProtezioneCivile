@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Defective.JSON;
 using Script.Utility.GestioneEventi;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace Script.Utility
     {
         public static GenericUser ToUser(this JSONObject jsonObject) {
             var name = jsonObject[Global.NomePlayerKey] ? jsonObject[Global.NomePlayerKey].stringValue : "";
-            var role = jsonObject[Global.RuoloPlayerKey] ? RuoliConverter.ToRuoli(jsonObject[Global.RuoloPlayerKey].stringValue) : Ruoli.Null;
+            var role = jsonObject[Global.RuoloPlayerKey] ? Enum.Parse<Ruoli>(jsonObject[Global.RuoloPlayerKey].stringValue) : Ruoli.Null;
             var cord = jsonObject[Global.CoordPlayerKey] ? jsonObject[Global.CoordPlayerKey].ToVector2() : Vector2.zero;
             return name == "" ? null : new GenericUser(name, role, cord);
         }

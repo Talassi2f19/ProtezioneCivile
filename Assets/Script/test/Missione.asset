@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Missione
   m_EditorClassIdentifier: 
   nome: 
-  fasi: []
+  fasi:
+  - Ruoli: 00000000010000000000000001000000
+  - Ruoli: 0100000000000000

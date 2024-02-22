@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Defective.JSON;
 using Proyecto26;
@@ -76,8 +77,7 @@ namespace Script.User
 
                     string str1 = e.Text;
                     str1 = str1.Remove(0, 1).Split("\"")[0];
-                    int h = int.Parse(str1);
-                    if(RuoliConverter.ToRuoli(str1) == Ruoli.Sindaco)
+                    if(Enum.Parse<Ruoli>(str1) == Ruoli.Sindaco)
                     { 
                         Info.localUser.role = Ruoli.Sindaco;
                         SceneManager.LoadScene(Scene.User.SelezioneCoc);
