@@ -9,16 +9,37 @@ using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
+    private Dictionary<string, Missione> missioni = new Dictionary<string, Missione>();
     private void Start()
     {
-        
-     
-
-        RestClient.Post(Info.DBUrl + ".json", ddas(jhgh)).Then(d =>
-        {
-            Debug.Log(d.Text); //codice missione
+        RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.MissioniFolder + ".json").Then(e =>
+        { 
+            Debug.Log(e.Text);
+            JSONObject hh = new JSONObject(e.Text);
+            Debug.Log(hh);
+            printAll();
+            missioni = hh.ToMissioneDictionary();
+            printAll();
         });
     }
+    private void printAll()
+    {
+        Debug.Log(missioni.Count);
+        foreach (var VARIABLE in missioni)
+        {
+            Debug.Log(VARIABLE.Key + ":" + VARIABLE.Value.printData());
+        }
+    }
+    // private void Start()
+    // {
+    //     
+    //  
+    //
+    //     RestClient.Post(Info.DBUrl + ".json", ddas(jhgh)).Then(d =>
+    //     {
+    //         Debug.Log(d.Text); //codice missione
+    //     });
+    // }
 
  public MissioneDef jhgh;
     private string ddas(MissioneDef missioneDef)

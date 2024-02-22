@@ -465,12 +465,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1576186472}
-        m_TargetAssemblyTypeName: GestioneMissioni, Assembly-CSharp
+        m_TargetAssemblyTypeName: Script.User.GestioneMissioni, Assembly-CSharp
         m_MethodName: LanciaMissione
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: b0e8416d00a6bdb45b8045e0b4d766b0, type: 2}
-          m_ObjectArgumentAssemblyTypeName: MissionScriptableObject, Assembly-CSharp
+          m_ObjectArgument: {fileID: 11400000, guid: 951dbf9d1ef79b649b66ff410eb21cf0, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Script.Utility.GestioneEventi.MissioneDef,
+            Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
