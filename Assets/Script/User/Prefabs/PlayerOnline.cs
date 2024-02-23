@@ -42,47 +42,44 @@ namespace Script.User.Prefabs
 
         private void FixedUpdate()
         {
-            double dist;
+            
+            
             if (playerOnlineHitbox.position != posizione)
             {
-                dist = GetDistance();
+                Animazione(playerOnlineHitbox.position - posizione);
                 
                 transform.position = Vector2.MoveTowards(transform.position, posizione, speed * Time.deltaTime);
             }
             else
-                dist = 0;
-            Animazione((float)dist);
-        }
-
-        private double GetDistance()
-        {
-            return Math.Sqrt(Math.Pow(playerOnlineHitbox.position.x - posizione.x, 2) + Math.Pow(playerOnlineHitbox.position.y - posizione.y, 2));
+            {
+                Animazione(Vector2.zero);
+            }
+            
         }
         
-        private void Animazione(float distance)
+        private void Animazione(Vector2 movementInput)
         {
-
-            if (posizione.x == 0 && posizione.y == 0)
+            if (movementInput.x == 0 && movementInput.y == 0)
                 anim.SetBool("IsStill", true);
             else
                 anim.SetBool("IsStill", false);
             
-            if (posizione.x > (Math.Sqrt(2) / 2 * distance)) //destra
+            if (movementInput.x > Math.Sqrt(2) / 2) //destra
                 anim.SetBool("IsRight", true);
             else
                 anim.SetBool("IsRight", false);
         
-            if (posizione.x < - Math.Sqrt(2) / 2) //sinistra
+            if (movementInput.x < - Math.Sqrt(2) / 2) //sinistra
                 anim.SetBool("IsLeft", true);
             else
                 anim.SetBool("IsLeft", false);
         
-            if (posizione.y > Math.Sqrt(2) / 2 && (posizione.x >= (- Math.Sqrt(2) / 2 * distance) && posizione.x <= (Math.Sqrt(2) / 2 * distance))) //avanti
+            if (movementInput.y > Math.Sqrt(2) / 2 && (movementInput.x >= - Math.Sqrt(2) / 2 && movementInput.x <= Math.Sqrt(2) / 2)) //avanti
                 anim.SetBool("IsUp", true);
             else
                 anim.SetBool("IsUp", false);
         
-            if (posizione.y < - Math.Sqrt(2) / 2 && (posizione.x >= (- Math.Sqrt(2) / 2 * distance) && posizione.x <= (Math.Sqrt(2) / 2 * distance))) //indietro
+            if (movementInput.y < - Math.Sqrt(2) / 2 && (movementInput.x >= - Math.Sqrt(2) / 2 && movementInput.x <= Math.Sqrt(2) / 2)) //indietro
                 anim.SetBool("IsDown", true);
             else
                 anim.SetBool("IsDown", false);
