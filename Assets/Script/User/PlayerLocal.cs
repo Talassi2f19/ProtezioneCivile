@@ -93,22 +93,22 @@ namespace Script.User
             else
                 animation.SetBool("IsStill", false);
             
-            if (movementInput.x >= Math.Sqrt(2) / 2 || (movementInput.x == (Math.Sqrt(2) / 2) && movementInput.y == (Math.Sqrt(2) / 2))) //destra
+            if (movementInput.x > Math.Sqrt(2) / 2) //destra
                 animation.SetBool("IsRight", true);
             else
                 animation.SetBool("IsRight", false);
         
-            if (movementInput.x <= - Math.Sqrt(2) / 2) //sinistra
+            if (movementInput.x < - Math.Sqrt(2) / 2) //sinistra
                 animation.SetBool("IsLeft", true);
             else
                 animation.SetBool("IsLeft", false);
         
-            if (movementInput.y > Math.Sqrt(2) / 2) //avanti
+            if (movementInput.y > Math.Sqrt(2) / 2 && (movementInput.x >= - Math.Sqrt(2) / 2 && movementInput.x <= Math.Sqrt(2) / 2)) //avanti
                 animation.SetBool("IsUp", true);
             else
                 animation.SetBool("IsUp", false);
         
-            if (movementInput.y < - Math.Sqrt(2) / 2) //indietro
+            if (movementInput.y < - Math.Sqrt(2) / 2 && (movementInput.x >= - Math.Sqrt(2) / 2 && movementInput.x <= Math.Sqrt(2) / 2)) //indietro
                 animation.SetBool("IsDown", true);
             else
                 animation.SetBool("IsDown", false);
