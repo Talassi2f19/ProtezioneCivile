@@ -49,7 +49,7 @@ namespace Script.User.Prefabs
             
             if (playerOnlineHitbox.position != posizione)
             {
-                var tmp = Vector2.ClampMagnitude(playerOnlineHitbox.position - posizione, dist);
+                var tmp = Vector2.Scale(playerOnlineHitbox.position - posizione, new Vector2(dist,dist));
                 Debug.Log(playerOnlineHitbox.position - posizione + "///" + tmp);
                 Animazione(tmp);
                 
