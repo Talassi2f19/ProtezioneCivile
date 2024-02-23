@@ -41,15 +41,15 @@ public class NewBehaviourScript : MonoBehaviour
     //     });
     // }
 
- public MissioneDef jhgh;
-    private string ddas(MissioneDef missioneDef)
+ public MissioneObj jhgh;
+    private string ddas(MissioneObj missioneObj)
     {
         JSONObject a = new JSONObject();
-        a.AddField(Global.NomeMissioneKey , missioneDef.nomeMissione);
+        a.AddField(Global.NomeMissioneKey , missioneObj.nomeMissione);
         a.AddField(Global.FasiFolder, b =>
         {
             int i = 0;
-            foreach (var kk in missioneDef.fasi)
+            foreach (var kk in missioneObj.fasi)
             {
                 b.AddField("F"+ i++, c =>
                 {

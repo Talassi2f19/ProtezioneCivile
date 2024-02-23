@@ -72,8 +72,6 @@ namespace Script.User
                 listener.Stop();
                 RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + "/" + Global.RuoloPlayerKey + ".json").Then(e =>
                 {
-                    Debug.Log(e);
-                    Debug.Log(e.Text);
 
                     string str1 = e.Text;
                     str1 = str1.Remove(0, 1).Split("\"")[0];
