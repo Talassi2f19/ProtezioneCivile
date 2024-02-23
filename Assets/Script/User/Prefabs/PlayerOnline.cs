@@ -11,11 +11,14 @@ namespace Script.User.Prefabs
     public class PlayerOnline : MonoBehaviour
     {
         [SerializeField] private GameObject nome;
-        public float speed = 1;
+        [SerializeField] private float speed = 1;
         private Rigidbody2D playerOnlineHitbox;
         private GenericUser genericUser;
         private Vector2 posizione = Vector2.zero;
         private Animator anim;
+
+
+        public float dist = 1;
         
         private void Start()
         {
@@ -46,7 +49,9 @@ namespace Script.User.Prefabs
             
             if (playerOnlineHitbox.position != posizione)
             {
-                Animazione(playerOnlineHitbox.position - posizione);
+                var tmp = Vector2.ClampMagnitude(playerOnlineHitbox.position - posizione, dist);
+                Debug.Log(playerOnlineHitbox.position - posizione + "///" + tmp);
+                Animazione(tmp);
                 
                 transform.position = Vector2.MoveTowards(transform.position, posizione, speed * Time.deltaTime);
             }

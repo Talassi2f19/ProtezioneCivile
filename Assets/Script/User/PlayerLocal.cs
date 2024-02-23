@@ -11,11 +11,11 @@ namespace Script.User
     //classe del gameObject di LocalPlayer
     public class PlayerLocal : MonoBehaviour
     {
-        public float moveSpeed = 1f;
-        public float collisionOffset = 0.05f;
-        public ContactFilter2D movementFilter;
+        [SerializeField] private float moveSpeed = 1f;
+        [SerializeField] private float collisionOffset = 0.05f;
+        [SerializeField] private ContactFilter2D movementFilter;
         //differenza tra l'ultima pos inviata e quella attuale per aggiornare
-        public float distanzaInvio = 0.5f;
+        [SerializeField] private float distanzaInvio = 0.5f;
         
         private Animator anim;
         private Vector2 movementInput;
