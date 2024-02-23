@@ -61,7 +61,6 @@ namespace Script.User
                  
                  case GameStatus.Gioco:
                      gameIsStarted.Stop();
-                     //TODO(?) possibiole attesa x ruolo
                      SceneManager.LoadScene(Scene.User.Game);
                      break;
                  

@@ -14,7 +14,7 @@ namespace Script.User
     al riguardo
     */
         
-        public void LanciaMissione(MissioneDef mso)
+        public void LanciaMissione(MissioneObj mso)
         {
             Debug.Log("Missione lanciata");
             
@@ -28,14 +28,14 @@ namespace Script.User
 
         }
         
-        private string GeneraJson(MissioneDef missioneDef)
+        private string GeneraJson(MissioneObj missioneObj)
         {
             JSONObject a = new JSONObject();
-            a.AddField(Global.NomeMissioneKey , missioneDef.nomeMissione);
+            a.AddField(Global.NomeMissioneKey , missioneObj.nomeMissione);
             a.AddField(Global.FasiFolder, b =>
             {
                 int i = 0;
-                foreach (var kk in missioneDef.fasi)
+                foreach (var kk in missioneObj.fasi)
                 {
                     b.AddField("F"+ i++, c =>
                     {
