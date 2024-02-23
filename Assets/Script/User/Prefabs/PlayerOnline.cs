@@ -18,7 +18,7 @@ namespace Script.User.Prefabs
         private Animator anim;
 
 
-        public float dist = 1;
+        [SerializeField] private float dist = -50;
         
         private void Start()
         {
@@ -50,7 +50,7 @@ namespace Script.User.Prefabs
             if (playerOnlineHitbox.position != posizione)
             {
                 var tmp = Vector2.Scale(playerOnlineHitbox.position - posizione, new Vector2(dist,dist));
-                Debug.Log(playerOnlineHitbox.position - posizione + "///" + tmp);
+                //Debug.Log(playerOnlineHitbox.position - posizione + "///" + tmp);
                 Animazione(tmp);
                 
                 transform.position = Vector2.MoveTowards(transform.position, posizione, speed * Time.deltaTime);
