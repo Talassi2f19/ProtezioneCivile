@@ -108,9 +108,6 @@ namespace Script.User
             else
                 animation.SetBool("IsDown", false);
             
-            // Debug.Log(a+","+b+","+c+","+d);
         }
     }
 }
-
-
