@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace Script.Utility
-{//TODO Definizione ruoli
+{
     public enum Ruoli
     {
         Null,
