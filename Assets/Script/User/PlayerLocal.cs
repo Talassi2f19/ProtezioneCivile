@@ -15,7 +15,8 @@ namespace Script.User
         public ContactFilter2D movementFilter;
         //differenza tra l'ultima pos inviata e quella attuale per aggiornare
         public float distanzaInvio = 0.5f;
-        
+
+        private Animator animation;
         private Vector2 movementInput;
         private List<RaycastHit2D> castCollisions;
         private Rigidbody2D rb;
@@ -24,6 +25,7 @@ namespace Script.User
 
         private void Start()
         {
+            animation = gameObject.GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
             lastPosition = rb.position;
         }
@@ -81,43 +83,30 @@ namespace Script.User
 
         private void Animazione()
         {
-            bool a = false;
-            bool b = false;
-            bool c = false;
-            bool d = false;
+            if (movementInput.x == 0 && movementInput.y == 0)
+                animation.SetBool("IsStill", true);
+            else
+                animation.SetBool("IsStill", false);
             
             if (movementInput.x > 0) //destra
-            {
-                a = true;
-            }
+                animation.SetBool("IsRight", true);
             else
-            {
-                a = false;
-            }
+                animation.SetBool("IsRight", false);
+        
             if (movementInput.x < 0) //sinistra
-            {
-                b = true;
-            }
+                animation.SetBool("IsLeft", true);
             else
-            {
-                b = false;
-            }
+                animation.SetBool("IsLeft", false);
+        
             if (movementInput.y > 0) //avanti
-            {
-                c = true;
-            }
+                animation.SetBool("IsUp", true);
             else
-            {
-                c = false;
-            }   
+                animation.SetBool("IsUp", false);
+        
             if (movementInput.y < 0) //indietro
-            {
-                d = true;
-            }
+                animation.SetBool("IsDown", true);
             else
-            {
-                d = false;
-            }
+                animation.SetBool("IsDown", false);
             
             // Debug.Log(a+","+b+","+c+","+d);
         }
