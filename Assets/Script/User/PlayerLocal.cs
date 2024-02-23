@@ -44,18 +44,26 @@ namespace Script.User
                 //se non ci sono state collisioni sposta il player
                 // if (count == 0)
                 {
+                    //muove il player
                     rb.MovePosition(rb.position + movementInput * (moveSpeed * Time.fixedDeltaTime));
+                    
+                    //animazione
+                    Animazione();
+                    
+                    
 
                     //se la distanza lo consente carica sul server la posizione
                     if (Vector2.Distance(lastPosition, rb.position) >= distanzaInvio)
                     {
-                        // string toSend = JsonConvert.SerializeObject(rb.position);
                         string toSend = JsonUtility.ToJson(rb.position);
-                        RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + "/" + Global.CoordPlayerKey + ".json", toSend)
-                            .Catch(r => { Debug.Log(r); });
+                        RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + "/" + Global.CoordPlayerKey + ".json", toSend);
                         lastPosition = rb.position;
                     }
                 }
+            }
+            else
+            {
+                Animazione();
             }
         }
 
@@ -69,6 +77,49 @@ namespace Script.User
         public void OnMove(Vector2 moveValue)
         {
             movementInput = moveValue;
+        }
+
+        private void Animazione()
+        {
+            bool a = false;
+            bool b = false;
+            bool c = false;
+            bool d = false;
+            
+            if (movementInput.x > 0) //destra
+            {
+                a = true;
+            }
+            else
+            {
+                a = false;
+            }
+            if (movementInput.x < 0) //sinistra
+            {
+                b = true;
+            }
+            else
+            {
+                b = false;
+            }
+            if (movementInput.y > 0) //avanti
+            {
+                c = true;
+            }
+            else
+            {
+                c = false;
+            }   
+            if (movementInput.y < 0) //indietro
+            {
+                d = true;
+            }
+            else
+            {
+                d = false;
+            }
+            
+            // Debug.Log(a+","+b+","+c+","+d);
         }
     }
 }
