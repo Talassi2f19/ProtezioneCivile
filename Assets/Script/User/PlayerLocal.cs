@@ -16,8 +16,8 @@ namespace Script.User
         public ContactFilter2D movementFilter;
         //differenza tra l'ultima pos inviata e quella attuale per aggiornare
         public float distanzaInvio = 0.5f;
-
-        private Animator animation;
+        
+        private Animator anim;
         private Vector2 movementInput;
         private List<RaycastHit2D> castCollisions;
         private Rigidbody2D rb;
@@ -26,7 +26,7 @@ namespace Script.User
 
         private void Start()
         {
-            animation = gameObject.GetComponent<Animator>();
+            anim = gameObject.GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
             lastPosition = rb.position;
         }
@@ -89,31 +89,31 @@ namespace Script.User
         private void Animazione()
         {
             if (movementInput.x == 0 && movementInput.y == 0)
-                animation.SetBool("IsStill", true);
+                anim.SetBool("IsStill", true);
             else
-                animation.SetBool("IsStill", false);
+                anim.SetBool("IsStill", false);
             
             if (movementInput.x > Math.Sqrt(2) / 2) //destra
-                animation.SetBool("IsRight", true);
+                anim.SetBool("IsRight", true);
             else
-                animation.SetBool("IsRight", false);
+                anim.SetBool("IsRight", false);
         
             if (movementInput.x < - Math.Sqrt(2) / 2) //sinistra
-                animation.SetBool("IsLeft", true);
+                anim.SetBool("IsLeft", true);
             else
-                animation.SetBool("IsLeft", false);
+                anim.SetBool("IsLeft", false);
         
             if (movementInput.y > Math.Sqrt(2) / 2 && (movementInput.x >= - Math.Sqrt(2) / 2 && movementInput.x <= Math.Sqrt(2) / 2)) //avanti
-                animation.SetBool("IsUp", true);
+                anim.SetBool("IsUp", true);
             else
-                animation.SetBool("IsUp", false);
+                anim.SetBool("IsUp", false);
         
             if (movementInput.y < - Math.Sqrt(2) / 2 && (movementInput.x >= - Math.Sqrt(2) / 2 && movementInput.x <= Math.Sqrt(2) / 2)) //indietro
-                animation.SetBool("IsDown", true);
+                anim.SetBool("IsDown", true);
             else
-                animation.SetBool("IsDown", false);
+                anim.SetBool("IsDown", false);
 
-            Debug.Log(movementInput.x + " - " + movementInput.y);
+      //      Debug.Log(movementInput.x + " - " + movementInput.y);
         }
     }
 }

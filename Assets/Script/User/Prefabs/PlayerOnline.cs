@@ -1,6 +1,7 @@
 using Script.Utility;
 using TMPro;
 using UnityEngine;
+using System;
 
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
 namespace Script.User.Prefabs
@@ -13,9 +14,11 @@ namespace Script.User.Prefabs
         private Rigidbody2D rb;
         private GenericUser genericUser;
         private Vector2 posizione = Vector2.zero;
-    
+        private Animator anim;
+        
         private void Start()
         {
+            anim = gameObject.GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
             //sr.color = new Color(Random.value,Random.value,Random.value);
             gameObject.name = genericUser.name;
@@ -42,6 +45,36 @@ namespace Script.User.Prefabs
             {
                 transform.position = Vector2.MoveTowards(transform.position, posizione, speed * Time.deltaTime);
             }
+        }
+        
+        private void Animazione()
+        {
+            if (posizione.x == 0 && posizione.y == 0)
+                anim.SetBool("IsStill", true);
+            else
+                anim.SetBool("IsStill", false);
+            
+            if (posizione.x > Math.Sqrt(2) / 2) //destra
+                anim.SetBool("IsRight", true);
+            else
+                anim.SetBool("IsRight", false);
+        
+            if (posizione.x < - Math.Sqrt(2) / 2) //sinistra
+                anim.SetBool("IsLeft", true);
+            else
+                anim.SetBool("IsLeft", false);
+        
+            if (posizione.y > Math.Sqrt(2) / 2 && (posizione.x >= - Math.Sqrt(2) / 2 && posizione.x <= Math.Sqrt(2) / 2)) //avanti
+                anim.SetBool("IsUp", true);
+            else
+                anim.SetBool("IsUp", false);
+        
+            if (posizione.y < - Math.Sqrt(2) / 2 && (posizione.x >= - Math.Sqrt(2) / 2 && posizione.x <= Math.Sqrt(2) / 2)) //indietro
+                anim.SetBool("IsDown", true);
+            else
+                anim.SetBool("IsDown", false);
+
+            //      Debug.Log(movementInput.x + " - " + movementInput.y);
         }
     }
 }
