@@ -59,7 +59,8 @@ namespace Script.Master
                     if (tmp.Value == null)
                     {
                         //utente da rimuovere
-                        playerList[tmp.Key].SetActive(false);
+                        Destroy(playerList[tmp.Key]);
+                        // playerList[tmp.Key].SetActive(false);
                         playerList.Remove(tmp.Key);
                         Debug.Log("player left:" + tmp.Key);
                     }

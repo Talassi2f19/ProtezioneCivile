@@ -82,7 +82,7 @@ namespace Script.User
         public void CloseMostraRuolo()
         {
             infoRuolo.SetActive(true);
-            joyStick.SetActive(true);
+            joyStick.SetActive(WebGL.isMobile);
         }
     }
 }
