@@ -116525,7 +116525,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 303381490436191626, guid: f82ab94a6147fbf4e80caf2f2b60b9c2, type: 3}
   m_PrefabInstance: {fileID: 5809332503149516608}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1646921534
+--- !u!95 &1646921540
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -116535,7 +116535,7 @@ Animator:
   m_GameObject: {fileID: 853748439}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e1cadf2b3a46a2c4885b8eeed9134cb9, type: 2}
+  m_Controller: {fileID: 9100000, guid: 021bebbfbf28cd24c986d4686941d02d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -116727,7 +116727,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8190690311247596915, guid: f82ab94a6147fbf4e80caf2f2b60b9c2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1646921534}
+      addedObject: {fileID: 1646921540}
   m_SourcePrefab: {fileID: 100100000, guid: f82ab94a6147fbf4e80caf2f2b60b9c2, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
