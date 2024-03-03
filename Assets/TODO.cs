@@ -1,13 +1,10 @@
 ﻿// ReSharper disable CommentTypo
 
 //CLIENT
-// TODO elezione
-// TODO candicatura
 // TODO assegnazione ruoli
 
 
 // TODO azioni
 
 
-//MASTER
-// TODO master rimuovi un player
+//TODO Gestire in modo decente la l'accesso agli attributi di Utility/GestioneEveneti/Fase.cs
