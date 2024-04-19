@@ -198,7 +198,7 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  distanzaInvio: 0.5
+  distanzaInvio: 0.05
 --- !u!50 &4758457443890008951
 Rigidbody2D:
   serializedVersion: 4

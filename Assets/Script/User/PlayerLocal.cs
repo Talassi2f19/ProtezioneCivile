@@ -15,7 +15,7 @@ namespace Script.User
         [SerializeField] private float collisionOffset = 0.05f;
         [SerializeField] private ContactFilter2D movementFilter;
         //differenza tra l'ultima pos inviata e quella attuale per aggiornare
-        [SerializeField] private float distanzaInvio = 0.5f;
+        [SerializeField] private float distanzaInvio = 0.05f;
         
         private Animator anim;
         private Vector2 movementInput;
