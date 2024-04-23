@@ -11,7 +11,7 @@ namespace Script.Utility
 
         public static GenericUser localUser = new GenericUser();
 
-        public const int MaxPlayer = 28;
+        public const int MaxPlayer = 30;
         
         public const int MinPlayer = 0;             //TODO modificare limite minimo
         

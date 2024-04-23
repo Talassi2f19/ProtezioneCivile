@@ -1,44 +1,44 @@
-using System.Collections.Generic;
 using Proyecto26;
 using Script.Utility;
 using UnityEngine;
 
-
-
-public class GeneraRuoli
+namespace Script.User
 {
-    public void generaRuoli()
+    public class GeneraRuoli
     {
-        
-        //scarica la lista di tutti i player
-         RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(e =>
-        //RestClient.Get(Info.DBUrl + "UMZJ" + "/" + Global.PlayerFolder + ".json").Then(e =>
+        public void Genera()
         {
-            //sostisuisci i valori "null" con il ruolo desiganto e ricarica la lista di tutti i player
-            RestClient.Put(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json", Sostituisci(e.Text)).Catch(exception => Debug.LogError(exception));
-        //    RestClient.Put(Info.DBUrl + "UMZJ" + "/" + Global.PlayerFolder + ".json", Sostituisci(e.Text)).Catch(exception => Debug.LogError(exception));
-        });
         
-    }
-
-    private string Sostituisci(string s)
-    {
-        string[] jj = s.Split(Ruoli.Null.ToString());
-        string def = "";
-        if (jj.Length - 1 <= PrecedenzaRuoli.lista.Length)
-        {
-            int j = 0;
-            for (int i = 0; i < jj.Length-1; i++)
+            //scarica la lista di tutti i player
+            RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(e =>
+                //RestClient.Get(Info.DBUrl + "UMZJ" + "/" + Global.PlayerFolder + ".json").Then(e =>
             {
-                def += jj[i] + PrecedenzaRuoli.lista[j];
-                j++;
-            }
-            def += jj[jj.Length-1];
+                //sostisuisci i valori "null" con il ruolo desiganto e ricarica la lista di tutti i player
+                RestClient.Put(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json", Sostituisci(e.Text)).Catch(exception => Debug.LogError(exception));
+                //    RestClient.Put(Info.DBUrl + "UMZJ" + "/" + Global.PlayerFolder + ".json", Sostituisci(e.Text)).Catch(exception => Debug.LogError(exception));
+            });
+        
         }
-        else
+
+        private string Sostituisci(string s)
         {
-            Debug.LogError("Errore nella generazione dei ruoli");
+            string[] jj = s.Split(Ruoli.Null.ToString());
+            string def = "";
+            if (jj.Length - 1 <= PrecedenzaRuoli.lista.Length)
+            {
+                int j = 0;
+                for (int i = 0; i < jj.Length-1; i++)
+                {
+                    def += jj[i] + PrecedenzaRuoli.lista[j];
+                    j++;
+                }
+                def += jj[jj.Length-1];
+            }
+            else
+            {
+                Debug.LogError("Errore nella generazione dei ruoli");
+            }
+            return def;
         }
-        return def;
     }
 }

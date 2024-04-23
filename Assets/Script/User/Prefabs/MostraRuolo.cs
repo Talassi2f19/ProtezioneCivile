@@ -1,3 +1,4 @@
+using Script.Utility;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +19,7 @@ namespace Script.User.Prefabs
         private void Start()
         {
             //TODO carica in base al ruolo in automatico
+            name.text = Info.localUser.role.ToString();
         }
 
         //public void SetRoleName(string roleName)
