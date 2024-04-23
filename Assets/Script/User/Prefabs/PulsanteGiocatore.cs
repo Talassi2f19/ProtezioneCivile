@@ -33,15 +33,24 @@ namespace Script.User.Prefabs
             });
 
         }
-       
+        
         public void ClickSelezionaCoc()
         {
             PlayerSelected();
             HideAll();
             string patchRequest = "{\"" + Global.RuoloPlayerKey + "\":\"" + Ruoli.Coc + "\"}";
             //va direttamente alla scena successiva
-            RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + nomeGiocatore + ".json", patchRequest);
-            SceneManager.LoadScene(Scene.User.Game);
+            RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + nomeGiocatore + ".json", patchRequest).Then(
+                e =>
+                {
+                    //genera gli altri ruoli
+
+                    GeneraRuoli generaRuoli = new GeneraRuoli();
+                    generaRuoli.generaRuoli();
+                    
+                    //cambia scena
+                    SceneManager.LoadScene(Scene.User.Game);
+                });
         }
         
         public void PlayerSelected()
