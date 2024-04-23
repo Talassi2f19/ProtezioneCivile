@@ -46,7 +46,7 @@ namespace Script.User.Prefabs
                     //genera gli altri ruoli
 
                     GeneraRuoli generaRuoli = new GeneraRuoli();
-                    generaRuoli.generaRuoli();
+                    generaRuoli.Genera();
                     
                     //cambia scena
                     SceneManager.LoadScene(Scene.User.Game);
