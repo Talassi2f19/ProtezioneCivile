@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using UnityEngine.Networking;
 
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
@@ -25,13 +26,14 @@ namespace Script.Utility
             downloadHandler.DataReceived += method;
             webReq.downloadHandler = downloadHandler;
             webReq.SendWebRequest();
-    
         }
         public void Stop()
         {
             try
             {
                 webReq.Abort();
+                webReq.Dispose();
+                webReq = null;
                 // Debug.Log("stop");
             }
             catch (Exception)
