@@ -8,7 +8,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - collider
   - Water
   - UI
   - 
@@ -40,4 +40,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: back
+    uniqueID: 1935452293
+    locked: 0
+  - name: collider
+    uniqueID: 2148293331
+    locked: 0
+  - name: onlinepl
+    uniqueID: 515190929
+    locked: 0
+  - name: player
+    uniqueID: 3977251529
     locked: 0
