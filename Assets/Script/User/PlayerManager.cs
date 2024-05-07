@@ -37,9 +37,7 @@ namespace Script.User
             if (str.Split("\n")[0].Contains("put"))
             {
                 //crea un dizionario con i player 
-                //Dictionary<string, User> kh = DeserializeUser(str.Split("\"data\":")[1]);
-               Dictionary<string, GenericUser> players = new JSONObject(str.Split("\"data\":")[1]).ToUserDictionary();
-                   
+                Dictionary<string, GenericUser> players = new JSONObject(str.Split("\"data\":")[1]).ToUserDictionary();
                 
                 //rimuove il player locale
                 players.Remove(Info.localUser.name);
@@ -47,8 +45,16 @@ namespace Script.User
                 //si istanziano i gameObject degli altri player
                 foreach (var player in players)
                 {
-                    playerList.Add(player.Key, GameObject.Instantiate(onlinePlayer, parent));
-                    playerList[player.Key].GetComponent<PlayerOnline>().SetUser(player.Value);
+
+                    try
+                    {
+                        playerList.Add(player.Key, Instantiate(onlinePlayer ,player.Value.coord,new Quaternion(), parent));
+                        playerList[player.Key].GetComponent<PlayerOnline>().SetUser(player.Value);
+                    }
+                    catch
+                    {
+                        // ignored
+                    }
                 }
             }
             else if (str.Split("\n")[0].Contains("patch") && str.Contains(Global.CoordPlayerKey))
@@ -63,14 +69,12 @@ namespace Script.User
                     
                     playerList[n].GetComponent<PlayerOnline>().Move(move);
                 }
-                catch (Exception)
+                catch
                 {
                     // ignored
                 }
             }
         }
-
-        //TODO non mostrare il controller se non si è da mobile
         
         public void ShowMostraRuolo()
         {

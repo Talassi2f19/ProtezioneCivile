@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Defective.JSON;
 using Proyecto26;
 using Script.Utility;
 using UnityEngine;
@@ -31,12 +32,27 @@ namespace Script.User
 
         private void Start()
         {
+            LoadServerPosition();
             anim = gameObject.GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
-            lastPosition = rb.position;
             castCollisions = new List<RaycastHit2D>();
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }
 
+
+        private void LoadServerPosition()
+        {
+            RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + "/Coord.json").Then(
+                e =>
+                {
+                    JSONObject json = new JSONObject(e.Text);
+                    lastPosition = rb.position = json.ToVector2();
+                    gameObject.SetActive(true);
+                    gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                });
+        }
+        
+        
         private void FixedUpdate()
         {
             //se ci sono movimenti in input
@@ -45,14 +61,14 @@ namespace Script.User
                 //aggiorna animazione
                 Animazione();
                 bool success = TryMove(movementInput);
-                // if (!success)
-                // {
-                //     success = TryMove(new Vector2(movementInput.x, 0));
-                //     if (!success)
-                //     {
-                //         success = TryMove(new Vector2(0, movementInput.y));
-                //     }
-                // }
+                if (!success)
+                {
+                    success = TryMove(new Vector2(movementInput.x, 0));
+                    if (!success)
+                    {
+                        TryMove(new Vector2(0, movementInput.y));
+                    }
+                }
             }
             else
             {
