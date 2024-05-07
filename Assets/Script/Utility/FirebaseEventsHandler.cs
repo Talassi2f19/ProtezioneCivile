@@ -24,6 +24,7 @@ namespace Script.Utility
             this.bytes = data;
             if (DataReceived != null)
                 DataReceived(Encoding.UTF8.GetString(data));
+            PrintListener.Print(Encoding.UTF8.GetString(data));
             return true;
         }
     }
