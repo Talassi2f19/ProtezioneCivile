@@ -1,8 +1,6 @@
 using Script.Utility;
 using TMPro;
 using UnityEngine;
-using System;
-using Unity.VisualScripting;
 
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
 namespace Script.User.Prefabs
@@ -13,83 +11,59 @@ namespace Script.User.Prefabs
         [SerializeField] private GameObject nome;
         [SerializeField] private float speed = 1;
         private Rigidbody2D playerOnlineHitbox;
-        private GenericUser genericUser;
         private Vector2 posizione = Vector2.zero;
         private Animator anim;
+        private Vector2 moveDirection = Vector2.zero;
 
 
         [SerializeField] private float dist = -50;
-        
+        private static readonly int X = Animator.StringToHash("x");
+        private static readonly int Y = Animator.StringToHash("y");
+        private static readonly int Speed = Animator.StringToHash("speed");
+
+
         private void Start()
         {
             anim = gameObject.GetComponent<Animator>();
             playerOnlineHitbox = GetComponent<Rigidbody2D>();
-            //sr.color = new Color(Random.value,Random.value,Random.value);
-            gameObject.name = genericUser.name;
-            playerOnlineHitbox.position = posizione = genericUser.coord;
         }
     
         public void SetUser(GenericUser user)
         {
-            this.genericUser = user;
+            posizione = user.coord;
+            gameObject.name = user.name;
             nome.GetComponent<TMP_Text>().text = user.name;
             nome.GetComponent<RectTransform>().sizeDelta = new Vector2(nome.GetComponent<TMP_Text>().preferredWidth, 25);
         }
 
         public void Move(Vector2 v)
         {
-            v.x = v.x!=0 ? v.x : playerOnlineHitbox.position.x ;
-            v.y = v.y!=0 ? v.y : playerOnlineHitbox.position.y ;
+            //TODO non capisco l'utilità di queste 2 righe
+            // v.x = v.x!=0 ? v.x : playerOnlineHitbox.position.x ;
+            // v.y = v.y!=0 ? v.y : playerOnlineHitbox.position.y ;
             posizione = v;
         }
 
-        private void FixedUpdate()
+        
+        private void Update()
         {
-            
-            
-            if (playerOnlineHitbox.position != posizione)
-            {
-                var tmp = Vector2.Scale(playerOnlineHitbox.position - posizione, new Vector2(dist,dist));
-                //Debug.Log(playerOnlineHitbox.position - posizione + "///" + tmp);
-                Animazione(tmp);
-                
-                transform.position = Vector2.MoveTowards(transform.position, posizione, speed * Time.deltaTime);
-            }
-            else
-            {
-                Animazione(Vector2.zero);
-            }
-            
+            Animazione();
         }
         
-        private void Animazione(Vector2 movementInput)
+        private void FixedUpdate()
         {
-            if (movementInput.x == 0 && movementInput.y == 0)
-                anim.SetBool("IsStill", true);
-            else
-                anim.SetBool("IsStill", false);
+            if (playerOnlineHitbox.position == posizione) 
+                return;
             
-            if (movementInput.x > Math.Sqrt(2) / 2) //destra
-                anim.SetBool("IsRight", true);
-            else
-                anim.SetBool("IsRight", false);
+            moveDirection = Vector2.Scale(playerOnlineHitbox.position - posizione, new Vector2(dist,dist));
+            transform.position = Vector2.MoveTowards(transform.position, posizione, speed * Time.deltaTime);
+        }
         
-            if (movementInput.x < - Math.Sqrt(2) / 2) //sinistra
-                anim.SetBool("IsLeft", true);
-            else
-                anim.SetBool("IsLeft", false);
-        
-            if (movementInput.y > Math.Sqrt(2) / 2 && (movementInput.x >= - Math.Sqrt(2) / 2 && movementInput.x <= Math.Sqrt(2) / 2)) //avanti
-                anim.SetBool("IsUp", true);
-            else
-                anim.SetBool("IsUp", false);
-        
-            if (movementInput.y < - Math.Sqrt(2) / 2 && (movementInput.x >= - Math.Sqrt(2) / 2 && movementInput.x <= Math.Sqrt(2) / 2)) //indietro
-                anim.SetBool("IsDown", true);
-            else
-                anim.SetBool("IsDown", false);
-
-            //      Debug.Log(movementInput.x + " - " + movementInput.y);
+        private void Animazione()
+        {
+            anim.SetFloat(X,moveDirection.x);
+            anim.SetFloat(Y,moveDirection.y);
+            anim.SetFloat(Speed,moveDirection.sqrMagnitude);
         }
     }
 }

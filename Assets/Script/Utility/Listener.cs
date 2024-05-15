@@ -15,13 +15,19 @@ namespace Script.Utility
             this.url = url;
         }
 
+        public bool IsStarted()
+        {
+            return webReq != null;
+        }
+
         public void Start(FirebaseEventsHandler.DataReceivedEvents method)
         {
-            // Debug.Log("start");
+            if(IsStarted())
+                return;
+            
+            Debug.Log("start");
             webReq = new UnityWebRequest(url);
             webReq.SetRequestHeader("Accept", "text/event-stream");
-            //senza questa funziona
-            // webReq.SetRequestHeader("Cache-Control", "no-cache");
             FirebaseEventsHandler downloadHandler = new FirebaseEventsHandler();
             downloadHandler.DataReceived += method;
             webReq.downloadHandler = downloadHandler;
@@ -34,13 +40,12 @@ namespace Script.Utility
                 webReq.Abort();
                 webReq.Dispose();
                 webReq = null;
-                // Debug.Log("stop");
+                Debug.Log("stop");
             }
             catch (Exception)
             {
-                // Debug.Log("already stopped");
+                Debug.Log("already stopped");
             }
-        
         }
     }
 }

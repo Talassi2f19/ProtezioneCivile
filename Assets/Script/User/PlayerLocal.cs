@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Defective.JSON;
 using Proyecto26;
@@ -12,68 +11,58 @@ namespace Script.User
     //classe del gameObject di LocalPlayer
     public class PlayerLocal : MonoBehaviour
     {
-        [SerializeField] private float moveSpeed = 1f;
-        [SerializeField] private float collisionOffset = 0.05f;
+        [SerializeField] private float moveSpeed;
+        [SerializeField] private float collisionOffset;
         [SerializeField] private ContactFilter2D movementFilter;
-        //differenza tra l'ultima pos inviata e quella attuale per aggiornare
-        [SerializeField] private float distanzaInvio = 0.05f;
+        [SerializeField] private float distanzaInvio;
         
-        private Animator anim;
+        private Animator animator;
         private Vector2 movementInput;
         private List<RaycastHit2D> castCollisions;
         private Rigidbody2D rb;
-
+        private SpriteRenderer spriteRenderer;
         private Vector2 lastPosition;
-        private static readonly int IsStill = Animator.StringToHash("IsStill");
-        private static readonly int IsRight = Animator.StringToHash("IsRight");
-        private static readonly int IsLeft = Animator.StringToHash("IsLeft");
-        private static readonly int IsUp = Animator.StringToHash("IsUp");
-        private static readonly int IsDown = Animator.StringToHash("IsDown");
+        private static readonly int X = Animator.StringToHash("x");
+        private static readonly int Y = Animator.StringToHash("y");
+        private static readonly int Speed = Animator.StringToHash("speed");
 
         private void Start()
         {
-            LoadServerPosition();
-            anim = gameObject.GetComponent<Animator>();
+            animator = GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
             castCollisions = new List<RaycastHit2D>();
-            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            spriteRenderer.enabled = false;
+            LoadServerPosition();
         }
-
-
+        
         private void LoadServerPosition()
         {
-            RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + "/Coord.json").Then(
-                e =>
-                {
-                    JSONObject json = new JSONObject(e.Text);
-                    lastPosition = rb.position = json.ToVector2();
-                    gameObject.SetActive(true);
-                    gameObject.GetComponent<SpriteRenderer>().enabled = true;
-                });
+            RestClient.Get(Info.DBUrl + Info.sessionCode + "/Game/Posizione/"+ Info.localUser.name+"/Coord.json").Then(
+            e =>
+            {
+                JSONObject json = new JSONObject(e.Text);
+                lastPosition = rb.position = json.ToVector2();
+                gameObject.SetActive(true);
+                spriteRenderer.enabled = true;
+            });
         }
         
-        
+        private void Update()
+        {
+            Animazione();
+        }
+
         private void FixedUpdate()
         {
             //se ci sono movimenti in input
-            if (movementInput != Vector2.zero)
-            {
-                //aggiorna animazione
-                Animazione();
-                bool success = TryMove(movementInput);
-                if (!success)
-                {
-                    success = TryMove(new Vector2(movementInput.x, 0));
-                    if (!success)
-                    {
-                        TryMove(new Vector2(0, movementInput.y));
-                    }
-                }
-            }
-            else
-            {
-                Animazione();
-            }
+            if (movementInput == Vector2.zero)
+                return;
+            if(TryMove(movementInput))
+                return;
+            if(TryMove(new Vector2(movementInput.x, 0)))
+               return;
+            TryMove(new Vector2(0, movementInput.y));
         }
 
         private bool TryMove(Vector2 direction)
@@ -85,23 +74,23 @@ namespace Script.User
                 castCollisions,
                 moveSpeed * Time.fixedDeltaTime * collisionOffset);
             // se non ci sono state collisioni sposta il player
-            if (count == 0)
-            {
-                //muove il player
-                rb.MovePosition(rb.position + direction * (moveSpeed * Time.fixedDeltaTime));
-                
-                //se la distanza lo consente carica sul server la posizione
-                if (Vector2.Distance(lastPosition, rb.position) >= distanzaInvio)
-                {
-                    string toSend = JsonUtility.ToJson(rb.position);
-                    RestClient.Patch(
-                        Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + "/" +
-                        Global.CoordPlayerKey + ".json", toSend);
-                    lastPosition = rb.position;
-                }
-                return true;
-            }
-            return false;
+            if (count != 0) 
+                return false;
+            //muove il player
+            rb.MovePosition(rb.position + direction * (moveSpeed * Time.fixedDeltaTime));
+            InviaPosizioneFirebase();
+            return true;
+        }
+        
+        private void InviaPosizioneFirebase()
+        {
+            if (Vector2.Distance(lastPosition, rb.position) < distanzaInvio) 
+                return;
+            
+            string toSend = JsonUtility.ToJson(rb.position);
+            RestClient.Patch(
+                Info.DBUrl + Info.sessionCode + "/Game/Posizione/" + Info.localUser.name + "/Coord.json", toSend);
+            lastPosition = rb.position;
         }
 
         //funzione che viene richiamata da input system
@@ -118,31 +107,9 @@ namespace Script.User
         
         private void Animazione()
         {
-            if (movementInput.x == 0 && movementInput.y == 0)
-                anim.SetBool(IsStill, true);
-            else
-                anim.SetBool(IsStill, false);
-            
-            if (movementInput.x > Math.Sqrt(2) / 2) //destra
-                anim.SetBool(IsRight, true);
-            else
-                anim.SetBool(IsRight, false);
-        
-            if (movementInput.x < - Math.Sqrt(2) / 2) //sinistra
-                anim.SetBool(IsLeft, true);
-            else
-                anim.SetBool(IsLeft, false);
-        
-            if (movementInput.y > Math.Sqrt(2) / 2 && (movementInput.x >= - Math.Sqrt(2) / 2 && movementInput.x <= Math.Sqrt(2) / 2)) //avanti
-                anim.SetBool(IsUp, true);
-            else
-                anim.SetBool(IsUp, false);
-        
-            if (movementInput.y < - Math.Sqrt(2) / 2 && (movementInput.x >= - Math.Sqrt(2) / 2 && movementInput.x <= Math.Sqrt(2) / 2)) //indietro
-                anim.SetBool(IsDown, true);
-            else
-                anim.SetBool(IsDown, false);
-
+            animator.SetFloat(X,movementInput.x);
+            animator.SetFloat(Y,movementInput.y);
+            animator.SetFloat(Speed,movementInput.sqrMagnitude);
         }
     }
 }

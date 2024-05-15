@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Defective.JSON;
+using Script.test;
 using Script.Utility.GestioneEventi;
 using UnityEngine;
 // ReSharper disable CommentTypo IdentifierTypo
@@ -83,5 +84,14 @@ namespace Script.Utility
             bool status = jsonObject[Global.IsCompletedKey] && jsonObject[Global.IsCompletedKey].boolValue;
             return new Fase(status, code, ruolo);
         }
+
+        public static Task ToTask(this JSONObject jsonObject, string id)
+        {
+            string nomeDestinatario = jsonObject["Destinatario"].stringValue;
+            int codTask = jsonObject["CodTask"].intValue;
+            string idRisposta = jsonObject["IdRisposta"].stringValue;
+            return new Task(nomeDestinatario, codTask, id, idRisposta);
+        }
+        
     }
 }

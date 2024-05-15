@@ -8,15 +8,12 @@ namespace Script.User
     {
         public void Genera()
         {
-        
             //scarica la lista di tutti i player
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(e =>
-                //RestClient.Get(Info.DBUrl + "UMZJ" + "/" + Global.PlayerFolder + ".json").Then(e =>
             {
                 //sostisuisci i valori "null" con il ruolo desiganto e ricarica la lista di tutti i player
                 RestClient.Put(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json", Sostituisci(e.Text)).Catch(exception => Debug.LogError(exception));
-                //    RestClient.Put(Info.DBUrl + "UMZJ" + "/" + Global.PlayerFolder + ".json", Sostituisci(e.Text)).Catch(exception => Debug.LogError(exception));
-            });
+           });
         
         }
 

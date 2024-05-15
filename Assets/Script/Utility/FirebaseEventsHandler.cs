@@ -11,26 +11,20 @@ namespace Script.Utility
     {
         public delegate void DataReceivedEvents(string data);
         public event DataReceivedEvents DataReceived;
-        // private byte[] bytes;
-
-        // protected override byte[] GetData()
-        // {
-        //     return bytes;
-        // }
 
         protected override bool ReceiveData(byte[] data, int dataLength)
         {
             if (data == null || data.Length < 1)
                 return false;
-            // bytes = data;
-            if (DataReceived != null)
+            
+            if (DataReceived == null) 
+                return true;
+            
+            String encodedData = Encoding.UTF8.GetString(data);
+            foreach (var tmp in encodedData.TrimEnd('\n').Split("\n\n"))
             {
-                String encodedData = Encoding.UTF8.GetString(data);
-                foreach (var tmp in encodedData.TrimEnd('\n').Split("\n\n"))
-                {
-                    DataReceived(tmp);
-                    Print(tmp);
-                }
+                DataReceived(tmp.Trim());
+                Print(tmp.Trim());
             }
             return true;
         }
@@ -40,12 +34,12 @@ namespace Script.Utility
         private static int counter = 0;
         private void Print(String text)
         {
-            String kk = "<color=brown>" + counter++ + "</color>";
+            String str = "<color=brown>" + counter++ + "</color>";
             foreach (String tmp in text.Split("\n"))
             {
-                kk += "<color=orange>" + tmp + "</color>\n";
+                str += "<color=orange>" + tmp + "</color>\n";
             }
-            Debug.LogWarning(kk);
+            Debug.Log(str);
         }
     }
 }

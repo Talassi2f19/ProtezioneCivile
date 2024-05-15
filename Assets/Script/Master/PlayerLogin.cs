@@ -37,7 +37,7 @@ namespace Script.Master
         {
             // player aggiutno
             // event: put
-            // data: {"path":"/s","data":{"cord":{"x":0.0,"y":0.0},"name":"s","role":"null"}}
+            // data: {"path":"/s","data":{"name":"s","role":"null"}}
 
             // player rimosso
             // event: put
