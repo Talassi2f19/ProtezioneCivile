@@ -1,4 +1,3 @@
-
 using System;
 using Defective.JSON;
 
@@ -6,10 +5,10 @@ namespace Script.test
 {
     public class Task
     {
-        public String id { get; set; }
-        public String idRisposta{ get; set; }
-        public String destinatario{ get; set; }
-        public int codTask{ get; set; }
+        public String id { get ;}
+        public String idRisposta{ get; }
+        public String destinatario{ get; }
+        public int codTask{ get; }
 
         public Task(string nomeDestinatario, int codTask, string id = "", string idRisposta = "")
         {

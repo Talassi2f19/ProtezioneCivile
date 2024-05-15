@@ -7,7 +7,7 @@ using Script.Utility;
 using Script.Utility.GestioneEventi;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public partial class NewBehaviourScript : MonoBehaviour
 {
     private Dictionary<string, Missione> missioni = new Dictionary<string, Missione>();
     private void Start()
