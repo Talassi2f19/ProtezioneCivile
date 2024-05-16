@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Defective.JSON;
@@ -20,17 +21,48 @@ namespace Script.Master
         [SerializeField] private GameObject playerPrefab;
         [SerializeField] private Transform parent;
         [SerializeField] private GameObject popUpPrefab;
+        [SerializeField] private GameObject errore;
         
         private Listeners playerJoin;
         private Dictionary<string, GameObject> playerList = new Dictionary<string, GameObject>();
-
+        private TextMeshProUGUI errorText;
+        
         private void Start()
         {
             popUpPrefab.SetActive(false);
+            errore.SetActive(false);
+            errorText = errore.GetComponentInChildren<TextMeshProUGUI>();
             //mostra il codice di accesso
             displaySessionCode.GetComponent<TMP_Text>().text = Info.sessionCode;
             playerJoin = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json");
             playerJoin.Start(PlayerAdd);
+        }
+
+        private void ErroriDisplay(int value)
+        {
+            if (value == 0)
+            {
+                errore.SetActive(false);
+                return;
+            }
+
+            // stanza.GetComponent<Image>().color = Color.white;
+            String messaggio = "";
+            switch (value)
+            {
+                case 1:
+                    messaggio = "Numero di giocatori insufficiente";
+                    break;
+                case 2:
+                    messaggio = "Limite massimo di giocatori raggiunto";
+                    break;
+                default:
+                    messaggio = "errore";
+                    break;
+            }
+
+            errore.SetActive(true);
+            errorText.text = "Errore: " + messaggio;
         }
 
         private void PlayerAdd(string str)
@@ -67,10 +99,17 @@ namespace Script.Master
                     else
                     {
                         //utente da aggiungere
-                        playerList.Add(tmp.Key, GameObject.Instantiate(playerPrefab, parent));
-                        playerList[tmp.Key].GetComponent<PulsantePlayerRemove>().SetName(tmp.Key);
-                        playerList[tmp.Key].SetActive(true);
-                        Debug.Log("player join:" + tmp.Key);
+                        if ((playerList.Count + 1) <= 30)
+                        {
+                            playerList.Add(tmp.Key, GameObject.Instantiate(playerPrefab, parent));
+                            playerList[tmp.Key].GetComponent<PulsantePlayerRemove>().SetName(tmp.Key);
+                            playerList[tmp.Key].SetActive(true);
+                            Debug.Log("player join:" + tmp.Key);
+                        }
+                        else
+                        {
+                            ErroriDisplay(2);
+                        }
                     }
                 }
 
@@ -93,7 +132,10 @@ namespace Script.Master
                 SceneManager.LoadScene(Scene.Master.Elezioni);
             }
             else
-                popUpPrefab.SetActive(true);
+            {
+                //popUpPrefab.SetActive(true);
+                ErroriDisplay(1);
+            }
         }
     }
 }
