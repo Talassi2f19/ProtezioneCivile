@@ -57,23 +57,21 @@ namespace Script.User
             RestClient.Get(Info.DBUrl + ".json").Then(e =>
             {
                 JSONObject json = new JSONObject(e.Text, 0, -1, 3, false);
-                Debug.Log(json);
                 if (!json.keys.Contains(codStanza.ToUpper().Trim()))
                 {
                     ErroriDisplay(1);
                     return;
                 }
-                stanza.GetComponent<Image>().color = Color.green;
+             
                 ErroriDisplay(0);
-                
                 json = json.GetField(codStanza);
-
-                if (json.GetField(Global.PlayerFolder).keys.Count > Info.MaxPlayer)
+                JSONObject playerList = json.GetField(Global.PlayerFolder);
+                
+                if (playerList != null && playerList.keys.Count >= Info.MaxPlayer)
                 {
                     ErroriDisplay(6);
                     return;
                 }
-                
                 Info.sessionCode = codStanza;
                 Info.localUser.name = nome;
                 
@@ -82,13 +80,13 @@ namespace Script.User
                 {
                     //connessione assicurata
                     //controllo univocità nome
-                    if (json.GetField(Global.PlayerFolder).keys.Contains(nome))
+                    if (playerList != null && playerList.keys.Contains(nome))
                     {
                         ErroriDisplay(2);
                         return;
                     }
                     //inserisci
-                        
+
                     string toSend = "{\"Name\":\"" + Info.localUser.name + "\",\"Role\":\"" + Ruoli.Null + "\"}";
                     RestClient.Put(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", toSend).Then(e =>
                     {
@@ -116,14 +114,14 @@ namespace Script.User
                     }
                 }
 #endif
+                if (json.GetField(Global.GameStatusCodeKey).stringValue != GameStatus.WaitPlayer)
+                {
+                    ErroriDisplay(5);
+                    return;
+                }
+                ErroriDisplay(-1);
             });
         }
-        
-
-        // private void ControlloUsername()
-        // {
-        //     
-        // }
         
         private void ErroriDisplay(int value)
         {
@@ -133,7 +131,6 @@ namespace Script.User
                 errore.SetActive(false);
                 return;
             }
-            // stanza.GetComponent<Image>().color = Color.white;
             String messaggio = "";
             switch (value)
             {
