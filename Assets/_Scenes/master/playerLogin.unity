@@ -600,7 +600,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  mSpacing: {x: 0, y: 0}
+  mSpacing: {x: 20, y: 0}
 --- !u!1 &1241936265
 GameObject:
   m_ObjectHideFlags: 0

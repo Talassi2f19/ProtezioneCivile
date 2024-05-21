@@ -18,7 +18,7 @@ namespace Script.Master.Prefabs
             pulsante.GetComponentInChildren<TMP_Text>().text = nomeGiocatore;
           
             //Vector2 dim = new Vector2(pulsante.GetComponentInChildren<TMP_Text>().preferredWidth + 20, pulsante.GetComponentInChildren<TMP_Text>().preferredHeight + 10);
-            Vector2 dim = new Vector2(pulsante.GetComponentInChildren<TMP_Text>().preferredWidth + 20, 40);
+            Vector2 dim = new Vector2(125 + pulsante.GetComponentInChildren<TMP_Text>().preferredWidth + 20, 40 + 20);
             gameObject.GetComponent<RectTransform>().sizeDelta = dim;
         }
         public void OnClick()
