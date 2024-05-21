@@ -156,6 +156,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 8006358844259942955, guid: ec416c2a778a9664f8c688991167154d, type: 3}
   parent: {fileID: 1141514284}
   popUpPrefab: {fileID: 1474009017}
+  errore: {fileID: 1307031779}
 --- !u!4 &166908333
 Transform:
   m_ObjectHideFlags: 0
