@@ -51,10 +51,11 @@ namespace Script.User.Prefabs
         
         private void FixedUpdate()
         {
-            if (playerOnlineHitbox.position == posizione) 
-                return;
+            //if (playerOnlineHitbox.position == posizione) 
+              //  return;
             
-            moveDirection = Vector2.Scale(playerOnlineHitbox.position - posizione, new Vector2(dist,dist));
+            moveDirection = playerOnlineHitbox.position - posizione;
+            moveDirection.Normalize();
             transform.position = Vector2.MoveTowards(transform.position, posizione, speed * Time.deltaTime);
         }
         
