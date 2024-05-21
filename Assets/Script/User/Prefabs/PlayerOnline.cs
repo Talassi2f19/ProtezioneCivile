@@ -38,9 +38,8 @@ namespace Script.User.Prefabs
 
         public void Move(Vector2 v)
         {
-            //TODO non capisco l'utilità di queste 2 righe
-            // v.x = v.x!=0 ? v.x : playerOnlineHitbox.position.x ;
-            // v.y = v.y!=0 ? v.y : playerOnlineHitbox.position.y ;
+            v.x = v.x!=0 ? v.x : playerOnlineHitbox.position.x ;
+            v.y = v.y!=0 ? v.y : playerOnlineHitbox.position.y ;
             posizione = v;
         }
 
