@@ -157,31 +157,8 @@ namespace Script.User
             taskList.Remove(value);
             RestClient.Delete(Info.DBUrl + Info.sessionCode + "/Game/Task/" + value + ".json");
         }
-
-
         
         
         
-        public bool flag;
-        public bool flag1;
-        public string jio;
-        private void Update()
-        {
-            if (flag)
-            {
-                flag = false;
-                foreach (var VARIABLE in taskList)
-                {
-                    Debug.Log(VARIABLE.Key + ":" + VARIABLE.Value);
-                }
-            }
-
-            if (flag1)
-            {
-                flag1 = false;
-                taskList.Remove(jio);
-            }
-                
-        }
     }
 }

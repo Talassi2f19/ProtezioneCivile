@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nome: {fileID: 649844656897949579}
-  speed: 1
+  speed: 0.8
   dist: -50
 --- !u!212 &202528584503883729
 SpriteRenderer:

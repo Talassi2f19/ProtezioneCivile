@@ -9,7 +9,7 @@ namespace Script.User.Prefabs
     public class PlayerOnline : MonoBehaviour
     {
         [SerializeField] private GameObject nome;
-        [SerializeField] private float speed = 1;
+        [SerializeField] private float speed = 0.8f;
         private Rigidbody2D playerOnlineHitbox;
         private Vector2 posizione = Vector2.zero;
         private Animator anim;
@@ -51,8 +51,12 @@ namespace Script.User.Prefabs
         
         private void FixedUpdate()
         {
-            //if (playerOnlineHitbox.position == posizione) 
-              //  return;
+            // if (playerOnlineHitbox.position == posizione)
+            // {
+            //     moveDirection = Vector2.zero;
+            //     return;
+            // }
+                
             
             moveDirection = playerOnlineHitbox.position - posizione;
             moveDirection.Normalize();
@@ -61,8 +65,8 @@ namespace Script.User.Prefabs
         
         private void Animazione()
         {
-            anim.SetFloat(X,moveDirection.x);
-            anim.SetFloat(Y,moveDirection.y);
+            anim.SetFloat(X,moveDirection.x * -1);
+            anim.SetFloat(Y,moveDirection.y * -1);
             anim.SetFloat(Speed,moveDirection.sqrMagnitude);
         }
     }

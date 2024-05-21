@@ -6,16 +6,16 @@ namespace Script.User
 {
     public class Candidatura : MonoBehaviour
     {
-        [SerializeField] private GameObject pulsanteCandidatura;
+        [SerializeField] private GameObject candidatura;
         [SerializeField] private GameObject testoOnClick;
         
         private void Start()
         {
-            pulsanteCandidatura.SetActive(true);
+            candidatura.SetActive(false);
             testoOnClick.SetActive(false);
         }
 
-        public void Click()
+        public void ClickCandidati()
         {
             //Viene inviato il voto al database
             string str = "{\"" + Info.localUser.name + "\":0}";
@@ -24,9 +24,13 @@ namespace Script.User
                 Debug.Log(exception);
                 Debug.Log(exception.Message);
             });
-            pulsanteCandidatura.SetActive(false); //Scompare il pulsante
+            candidatura.SetActive(false); //Scompare il pulsante
+            testoOnClick.SetActive(true);
+        }
+        public void ClickNonCandidati()
+        {
+            candidatura.SetActive(false); //Scompare il pulsante
             testoOnClick.SetActive(true);
         }
     }
 }
-//{"":""}

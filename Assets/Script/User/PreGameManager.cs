@@ -13,21 +13,21 @@ namespace Script.User
         [SerializeField] private GameObject wait;
         [SerializeField] private GameObject candidatura;
         [SerializeField] private GameObject votazione;
+        [SerializeField] private GameObject testoOnClick;
         
         private Listeners gameIsStarted;
         private Listeners amIRemoved;
         
         private void Start()
         {
+            wait.SetActive(true);
+            candidatura.SetActive(false);
+            votazione.SetActive(false);
             gameIsStarted = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.GameStatusCodeKey + ".json");
             gameIsStarted.Start(Game);
 
             amIRemoved = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json");
             amIRemoved.Start(CheckRemoved);
-            
-            wait.SetActive(true);
-            candidatura.SetActive(false);
-            votazione.SetActive(false);
         }
 
         private void Game(string status)
@@ -56,16 +56,19 @@ namespace Script.User
                  
                  case GameStatus.RisultatiElezioni:
                      gameIsStarted.Stop();
+                     amIRemoved.Stop();
                      SceneManager.LoadScene(Scene.User.RisultatiElezioni);
                      break;
                  
                  case GameStatus.Gioco:
                      gameIsStarted.Stop();
+                     amIRemoved.Stop();
                      SceneManager.LoadScene(Scene.User.Game);
                      break;
                  
                  case GameStatus.End:
                      gameIsStarted.Stop();
+                     amIRemoved.Stop();
                      SceneManager.LoadScene(Scene.User.Login);
                      Info.Reset();
                      break;
@@ -77,6 +80,7 @@ namespace Script.User
             wait.SetActive(val == GameStatus.WaitPlayer);
             candidatura.SetActive(val == GameStatus.Candidatura);
             votazione.SetActive(val == GameStatus.Votazione);
+            testoOnClick.SetActive(false);
         }
 
         private void CheckRemoved(string response)
@@ -94,6 +98,26 @@ namespace Script.User
             RestClient.Delete(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json");
             Game(GameStatus.End);
         }
+        
+        
+        
+        
+        public void ClickCandidati()
+        {
+            //Viene inviato il voto al database
+            string str = "{\"" + Info.localUser.name + "\":0}";
+            RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + ".json", str).Catch(exception => Debug.Log(exception.Message));
+            candidatura.SetActive(false); //Scompare il pulsante
+            testoOnClick.SetActive(true);
+        }
+        public void ClickNonCandidati()
+        {
+            candidatura.SetActive(false); //Scompare il pulsante
+            testoOnClick.SetActive(true);
+        }
+        
+        
+        
     }
 }
 
