@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Script.Utility;
+using Unity.VisualScripting;
 using UnityEditor.MPE;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -19,6 +20,7 @@ namespace Script.test
         [SerializeField]private GameObject prefAttivita;
         [SerializeField]private GameObject prefNotifiche;
         [SerializeField]private GameObject prefTaskSegr;
+        [SerializeField] private GameObject pallinoRosso;
         
         [SerializeField]private Transform parent;
 
@@ -27,7 +29,12 @@ namespace Script.test
 
         public int nn;
         public Ruoli rsda;
-        
+
+        private void Start()
+        {
+            Inizializza();
+        }
+
         private void Update(){
             if (flag)
             {
@@ -97,7 +104,12 @@ namespace Script.test
                     switch (value)
                     {
                         case 1:
+                            pallinoRosso.SetActive(true);
                             schede[0].transform.GetChild(0).GetChild(5).GetComponent<Button>().interactable = true;
+                            break;
+                        case 23:
+                            pallinoRosso.SetActive(true);
+                            Debug.LogWarning("NOTIFICA DELLE INFORMAZIONI");
                             break;
                     }
                    break;
@@ -105,17 +117,56 @@ namespace Script.test
                     switch (value)
                     {
                         case 10:
+                            pallinoRosso.SetActive(true);
                             schede[0].transform.GetChild(0).GetChild(4).GetComponent<Button>().interactable = true;
                             schede[1].transform.GetChild(1).GetComponent<TaskSegretaria>().SetCodice(10);
                             break;
                         case 20:
+                            pallinoRosso.SetActive(true);
                             schede[0].transform.GetChild(0).GetChild(4).GetComponent<Button>().interactable = true;
                             schede[1].transform.GetChild(1).GetComponent<TaskSegretaria>().SetCodice(20);
+                            break;
+                        case 22:
+                            pallinoRosso.SetActive(true);
+                            schede[0].transform.GetChild(0).GetChild(4).GetComponent<Button>().interactable = true;
+                            schede[1].transform.GetChild(1).GetComponent<TaskSegretaria>().SetCodice(22);
+                            break;
+                    }
+                    break;
+                case Ruoli.Coc:
+                    switch (value)
+                    {
+                        case 11:
+                            pallinoRosso.SetActive(true);
+                            schede[0].transform.GetChild(0).GetChild(5).GetComponent<Button>().interactable = true;
+                            break;
+                        case 19:
+                            pallinoRosso.SetActive(true);
+                            Debug.LogWarning("NOTIFICA DELLE INFORMAZIONI");
+                            break;
+                    }
+                    break;
+                case Ruoli.Giornalista:
+                    switch (value)
+                    {
+                        case 21:
+                            pallinoRosso.SetActive(true);
+                            schede[0].transform.GetChild(0).GetChild(5).GetComponent<Button>().interactable = true;
+                            break;
+                        case 18:
+                            pallinoRosso.SetActive(true);
+                            schede[0].transform.GetChild(0).GetChild(6).GetComponent<Button>().interactable = true;
                             break;
                     }
                     break;
             }
-        }   
+        }
+
+        public void OpenManager()
+        {
+            schede[0].SetActive(true);
+            pallinoRosso.SetActive(false);
+        }
 
     }
 }
