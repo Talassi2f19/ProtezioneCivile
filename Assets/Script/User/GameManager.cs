@@ -5,6 +5,7 @@ using Proyecto26;
 using Script.test;
 using Script.User.Prefabs;
 using Script.Utility;
+using TMPro;
 using UnityEngine;
 
 namespace Script.User
@@ -14,20 +15,24 @@ namespace Script.User
         [SerializeField] private GameObject onlinePlayer;
         [SerializeField] private Transform parent;
         [SerializeField] private JoyStick joyStick;
+        [SerializeField] private TextMeshProUGUI testoNomePlayer;
 
 
         private Listeners listeners;
         private Dictionary<string, GameObject> playerList = new Dictionary<string, GameObject>();
 
         private Dictionary<string, Task> taskList = new Dictionary<string, Task>();
+
+        [SerializeField]private TaskManager taskManager;
         
         private void Start()
         {
+            testoNomePlayer.text = Info.localUser.name;
             joyStick.Enable(true);
             listeners = new Listeners(Info.DBUrl + Info.sessionCode + "/Game.json");
             listeners.Start(Parse);
             CaricaPlayer();
-            FirstLoadTask();
+            // FirstLoadTask();
         }
 
         private void Parse(string data)
@@ -69,14 +74,23 @@ namespace Script.User
             
             if (data.StartsWith("event: put\ndata: {\"path\":\"/Task"))
             {
-                data = data.Split("data: ")[1];
-                Task tmp = GetTask(new JSONObject(data));
-                if (tmp == null)
-                {
-                    taskList.Remove(new JSONObject(data).GetField("path").stringValue.Split("/")[2]);
-                    return;
-                }
-                GestisciTask(tmp);
+                // event: put
+                // data: {"path":"/Task/-NyblKDKNWqsCpdQe5Pq","data":{"CodeTask":1}}
+                Debug.Log("hey");
+                string kk = data.Split("\"CodeTask\":")[1].Split("}")[0];
+                
+                Debug.Log("è passato");
+                int codice = Convert.ToInt32(kk);
+                taskManager.Assegna(codice);
+
+                // data = data.Split("data: ")[1];
+                // Task tmp = GetTask(new JSONObject(data));
+                // if (tmp == null)
+                // {
+                //     taskList.Remove(new JSONObject(data).GetField("path").stringValue.Split("/")[2]);
+                //     return;
+                // }
+                // GestisciTask(tmp);
             }
         }
 
@@ -115,48 +129,48 @@ namespace Script.User
             playerList[nome].GetComponent<PlayerOnline>().Move(newPos);
         }
 
-        private Task GetTask(JSONObject value)
-        {
-            if (value.GetField("data").isNull)
-                return null;
-            
-            String id = value.GetField("path").stringValue.Split("/")[2];
-            return value.GetField("data").ToTask(id);
-        }
+        // private Task GetTask(JSONObject value)
+        // {
+        //     if (value.GetField("data").isNull)
+        //         return null;
+        //     
+        //     String id = value.GetField("path").stringValue.Split("/")[2];
+        //     return value.GetField("data").ToTask(id);
+        // }
 
-        private void GestisciTask(Task value)
-        {
-            if (value.idRisposta == "")
-            { //TODO aggiungere il controllo sull'utente e sul tipo si task
-                taskList.Add(value.id,value);   
-                // TODO esegui cose della task
-                return;
-            }
+        // private void GestisciTask(Task value)
+        // {
+        //     if (value.idRisposta == "")
+        //     { //TODO aggiungere il controllo sull'utente e sul tipo si task
+        //         taskList.Add(value.id,value);   
+        //         // TODO esegui cose della task
+        //         return;
+        //     }
+        //
+        //     if (taskList.ContainsKey(value.idRisposta))
+        //     {
+        //         //task completata
+        //         EliminaTask(value.idRisposta);
+        //     }
+        // }
 
-            if (taskList.ContainsKey(value.idRisposta))
-            {
-                //task completata
-                EliminaTask(value.idRisposta);
-            }
-        }
+        // private void FirstLoadTask()
+        // {
+        //     RestClient.Get(Info.DBUrl + Info.sessionCode + "/Game/Task.json").Then(e =>
+        //     {
+        //         JSONObject value = new JSONObject(e.Text);
+        //         for(int i = 0; i < value.count; i++)
+        //         {
+        //             GestisciTask(value.list[i].ToTask(value.keys[i]));
+        //         }
+        //     });
+        // }
 
-        private void FirstLoadTask()
-        {
-            RestClient.Get(Info.DBUrl + Info.sessionCode + "/Game/Task.json").Then(e =>
-            {
-                JSONObject value = new JSONObject(e.Text);
-                for(int i = 0; i < value.count; i++)
-                {
-                    GestisciTask(value.list[i].ToTask(value.keys[i]));
-                }
-            });
-        }
-
-        private void EliminaTask(String value)
-        {
-            taskList.Remove(value);
-            RestClient.Delete(Info.DBUrl + Info.sessionCode + "/Game/Task/" + value + ".json");
-        }
+        // private void EliminaTask(String value)
+        // {
+        //     taskList.Remove(value);
+        //     RestClient.Delete(Info.DBUrl + Info.sessionCode + "/Game/Task/" + value + ".json");
+        // }
         
         
         
