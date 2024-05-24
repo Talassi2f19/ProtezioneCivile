@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Defective.JSON;
 using Proyecto26;
@@ -70,5 +71,6 @@ namespace Script.Master
             RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str);
             SceneManager.LoadScene(Scene.Master.Game);
         }
+        
     }
 }

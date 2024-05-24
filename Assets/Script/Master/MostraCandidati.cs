@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Defective.JSON;
 using Proyecto26;
@@ -21,10 +22,11 @@ namespace Script.Master
         
         [SerializeField] private GameObject votazioni;
         [SerializeField] private GameObject candidatura;
-        [SerializeField] private GameObject avviaVotazioni;
+        [SerializeField] private TextMeshProUGUI testoContatore;
     
         private Listeners didSomeoneApplied;
         private List<GameObject> candidati = new List<GameObject>();
+        private int numeroPlayer = 30;
     
         void Start()
         {
@@ -33,6 +35,11 @@ namespace Script.Master
         
             votazioni.SetActive(false);
             candidatura.SetActive(true);
+            
+            RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(e =>
+            {
+                numeroPlayer = new JSONObject(e.Text, 0, -1, 1).keys.Count;
+            });
         }
     
         private void AddCandidato(string str)
@@ -71,7 +78,7 @@ namespace Script.Master
             
                 votazioni.SetActive(true);
                 candidatura.SetActive(false);
-                Debug.Log(didSomeoneApplied);
+                AvviaAggiornamento();
             }
             else
             {
@@ -95,15 +102,53 @@ namespace Script.Master
                         });
                 });
             }
-        
-        
         }
     
         public void MostraRisultati()
         {
+            InterrompiAggiornamento();
             string changeStatusCode = "{\"" + Global.GameStatusCodeKey + "\":\"" + GameStatus.RisultatiElezioni + "\"}";
             RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", changeStatusCode);
             SceneManager.LoadScene(Scene.Master.RisultatiElezioni);
         }
+        
+        private void AvviaAggiornamento()
+        {
+            Debug.Log("avvia aggiornamento");
+            StartCoroutine(CallFunctionEverySecond());
+        }
+        
+        private void InterrompiAggiornamento()
+        {
+            Debug.Log("interrompi aggiornamento");
+            isRunning = false;
+        }
+
+        private bool isRunning = true;
+        private IEnumerator CallFunctionEverySecond()
+        {
+            while (isRunning)
+            {
+                AggiornaContatoreVotanti();
+                // Aspetta un secondo prima di ripetere
+                yield return new WaitForSeconds(1);
+            }
+        }
+
+        private void AggiornaContatoreVotanti()
+        {
+            Debug.Log("exe");
+            RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + ".json").Then(e =>
+            {
+                int nVoti = 0;
+                foreach (var var in new JSONObject(e.Text).list)
+                {
+                    nVoti += var.intValue;
+                }
+                testoContatore.text = nVoti + " / " + numeroPlayer;
+            });
+            
+        }
+        
     }
 }

@@ -290,7 +290,7 @@ MonoBehaviour:
   contenitore: {fileID: 451476765}
   votazioni: {fileID: 1947777299}
   candidatura: {fileID: 1370600491}
-  avviaVotazioni: {fileID: 617689400}
+  testoContatore: {fileID: 2055346113}
 --- !u!4 &250480163
 Transform:
   m_ObjectHideFlags: 0
@@ -340,7 +340,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000061035156, y: 348}
+  m_AnchoredPosition: {x: 0, y: 437}
   m_SizeDelta: {x: 1100, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &392089724
@@ -579,7 +579,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 250480162}
-        m_TargetAssemblyTypeName: mostraCandidati, Assembly-CSharp
+        m_TargetAssemblyTypeName: Script.Master.MostraCandidati, Assembly-CSharp
         m_MethodName: AvviaVotazioni
         m_Mode: 1
         m_Arguments:
@@ -1196,7 +1196,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1947777300
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1276,7 +1276,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 01 / 30
+  m_text: 0 / 30
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

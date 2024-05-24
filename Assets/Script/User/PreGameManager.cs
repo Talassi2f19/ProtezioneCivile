@@ -1,3 +1,4 @@
+using System;
 using Proyecto26;
 using Script.Utility;
 using UnityEngine;
@@ -28,6 +29,12 @@ namespace Script.User
 
             amIRemoved = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json");
             amIRemoved.Start(CheckRemoved);
+        }
+
+        private void OnApplicationQuit()
+        {
+            amIRemoved.Stop();
+            gameIsStarted.Stop();
         }
 
         private void Game(string status)
@@ -77,6 +84,7 @@ namespace Script.User
 
         private void Set(string val)
         {
+            Debug.Log(val);
             wait.SetActive(val == GameStatus.WaitPlayer);
             candidatura.SetActive(val == GameStatus.Candidatura);
             votazione.SetActive(val == GameStatus.Votazione);
