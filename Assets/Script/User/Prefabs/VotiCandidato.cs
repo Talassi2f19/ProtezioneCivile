@@ -26,12 +26,12 @@ namespace Script.User.Prefabs
             testoNumeroVoti.text = this.numeroVoti.ToString();
         }
 
-        public void HighlightBestCandidate()
-        {
-            testoNomeCandidato.color = Color.red;
-            testoNomeCandidato.fontStyle = FontStyles.Bold;
-            testoNumeroVoti.color = Color.red;
-            testoNumeroVoti.fontStyle = FontStyles.Bold;
-        }
+        // public void HighlightBestCandidate()
+        // {
+        //     testoNomeCandidato.color = Color.red;
+        //     testoNomeCandidato.fontStyle = FontStyles.Bold;
+        //     testoNumeroVoti.color = Color.red;
+        //     testoNumeroVoti.fontStyle = FontStyles.Bold;
+        // }
     }
 }

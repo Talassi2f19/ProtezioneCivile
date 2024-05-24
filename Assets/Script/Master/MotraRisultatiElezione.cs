@@ -4,6 +4,7 @@ using Proyecto26;
 using Script.User;
 using Script.User.Prefabs;
 using Script.Utility;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Scene = Script.Utility.Scene;
@@ -17,7 +18,8 @@ namespace Script.Master
     {
         [SerializeField] private GameObject votoCandidatoPrefab;
         [SerializeField] private Transform contenitore;
-    
+        [SerializeField] private GameObject vincitore;
+        
         private JSONObject risultatiJson;
         private List<string> candidati = new List<string>();
         private List<JSONObject> voti = new List<JSONObject>();
@@ -31,17 +33,20 @@ namespace Script.Master
                 candidati = risultatiJson.keys;
                 voti = risultatiJson.list;
 
+                
                 int posMaxVoti = MaxVotiCandidato();
             
                 for (int i = 0; i < candidati.Count; i++)
                 {
                     Debug.Log(candidati[i] +  " - " + voti[i].intValue);
-                    listaRisultati.Add(GameObject.Instantiate(votoCandidatoPrefab, contenitore));
+                    //listaRisultati.Add(GameObject.Instantiate(votoCandidatoPrefab, contenitore));
                     listaRisultati[i].GetComponent<VotiCandidato>().SetNomeCandidato(candidati[i]);
                     listaRisultati[i].GetComponent<VotiCandidato>().SetNumeroVoti(voti[i].intValue);
                 }
-            
-                listaRisultati[posMaxVoti].GetComponent<VotiCandidato>().HighlightBestCandidate();
+
+                //TODO da aggiustare perché non visualizza il nome
+                vincitore.GetComponent<TMP_Text>().text = candidati[posMaxVoti];
+                //listaRisultati[posMaxVoti].GetComponent<VotiCandidato>().HighlightBestCandidate();
                 //aggiorna il ruolo del player
                 string str = "{\"" + Global.RuoloPlayerKey + "\":\"" + Ruoli.Sindaco + "\"}";
                 RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + candidati[posMaxVoti] + ".json", str);

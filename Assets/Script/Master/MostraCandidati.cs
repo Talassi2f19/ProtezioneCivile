@@ -18,8 +18,9 @@ namespace Script.Master
     {
         [SerializeField] private GameObject genericTextPrefab;
         [SerializeField] private Transform contenitore;
-    
-        [SerializeField] private GameObject terminaVotazioni;
+        
+        [SerializeField] private GameObject votazioni;
+        [SerializeField] private GameObject candidatura;
         [SerializeField] private GameObject avviaVotazioni;
     
         private Listeners didSomeoneApplied;
@@ -30,8 +31,8 @@ namespace Script.Master
             didSomeoneApplied = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + ".json");
             didSomeoneApplied.Start(AddCandidato);
         
-            terminaVotazioni.SetActive(false);
-            avviaVotazioni.SetActive(true);
+            votazioni.SetActive(false);
+            candidatura.SetActive(true);
         }
     
         private void AddCandidato(string str)
@@ -45,7 +46,8 @@ namespace Script.Master
                 Debug.Log("AddCandidato: stringAfterSplit =" + dataJson);
             
                 nome = new JSONObject(dataJson).keys[0]; //Nome candidato
-            
+                //TODO inserire script per visualizzare quanti candidati mancano nella schermata con scritta n / 30
+                
                 //Aggiunta prefab di testo alla lista
                 candidati.Add(GameObject.Instantiate(genericTextPrefab, contenitore));
                 //Inserisco il nome nel prefab del neocandidato
@@ -67,8 +69,9 @@ namespace Script.Master
                 string str = "{\"" + Global.GameStatusCodeKey + "\":\"" + GameStatus.Votazione + "\"}";
                 RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str);
             
-                terminaVotazioni.SetActive(true);
-                avviaVotazioni.SetActive(false);
+                votazioni.SetActive(true);
+                candidatura.SetActive(false);
+                Debug.Log(didSomeoneApplied);
             }
             else
             {
