@@ -15,6 +15,7 @@ namespace Script.User
         [SerializeField] private float collisionOffset;
         [SerializeField] private ContactFilter2D movementFilter;
         [SerializeField] private float distanzaInvio;
+        [SerializeField] private Skin skin;
         
         private Animator animator;
         private Vector2 movementInput;
@@ -28,11 +29,13 @@ namespace Script.User
 
         private void Start()
         {
+             spriteRenderer = GetComponent<SpriteRenderer>();
+             spriteRenderer.enabled = false;
+            
+            skin.SetSkin(Info.localUser.role);
             animator = GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
-            spriteRenderer = GetComponent<SpriteRenderer>();
             castCollisions = new List<RaycastHit2D>();
-            spriteRenderer.enabled = false;
             LoadServerPosition();
         }
         

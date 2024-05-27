@@ -249,6 +249,7 @@ GameObject:
   - component: {fileID: -1504051821803715255}
   - component: {fileID: 202528584503883729}
   - component: {fileID: 8755415470095706726}
+  - component: {fileID: 9017517894793376311}
   m_Layer: 0
   m_Name: playerOnline
   m_TagString: Player
@@ -387,3 +388,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9017517894793376311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8190690311247596915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abac9eb9ce0d84d46855db04ddd27694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 8755415470095706726}
+  coc: {fileID: 22100000, guid: 176e80e6fa06a4a42830f95f7c558623, type: 2}
+  cri: {fileID: 22100000, guid: 98f888ffa22b4ca40a26b731b7c23c74, type: 2}
+  ggev: {fileID: 22100000, guid: 99efec26c3ca1f143af42b5b0e41a2b0, type: 2}
+  giornalista: {fileID: 22100000, guid: b195117e601e81647822d26483529397, type: 2}
+  medico: {fileID: 22100000, guid: d884f17da29f7f7449044ae7358f5225, type: 2}
+  pc: {fileID: 22100000, guid: 1d2aeb402059e0d4d95e452fe3aa66ab, type: 2}
+  pompiere: {fileID: 22100000, guid: 3a8716f780d37504ca45335411b36f05, type: 2}
+  segreteria: {fileID: 22100000, guid: 2ad3cacc4674cc548b9f0319df18ed96, type: 2}
+  sindaco: {fileID: 22100000, guid: 4f78e57998cbade4085873fe5179a3a2, type: 2}
+  tlc: {fileID: 22100000, guid: dd6af5ef2c5e8cb43b9702011b05d44b, type: 2}
+  vigile: {fileID: 22100000, guid: a86246ba55c825c4caff8e81cfac6b7c, type: 2}
+  normale: {fileID: 22100000, guid: 25764b8391781984f90c63fb50b518e9, type: 2}

@@ -20,32 +20,12 @@ namespace Script.test
         [SerializeField] private GameObject pallinoRosso;
         
         [SerializeField]private Transform parent;
-
-        public bool flag;
-        public bool flag1;
-
-        public int nn;
-        public Ruoli rsda;
-
+        
         private void Start()
         {
             Inizializza();
         }
 
-        private void Update(){
-            if (flag)
-            {
-                flag = false;
-                Info.localUser.role = rsda;
-                Inizializza();
-            }
-
-            if (flag1)
-            {
-                flag1 = false;
-                Assegna(nn);
-            }
-        }
 
         private List<GameObject> schede = new List<GameObject>();
 
@@ -62,7 +42,7 @@ namespace Script.test
                 case Ruoli.Giornalista:
                     schede.Add( Instantiate(prefGiornalista, parent));
                     break;
-                case Ruoli.Segretaria:
+                case Ruoli.Segreteria:
                     schede.Add( Instantiate(prefSegretaria, parent));
                     schede.Add( Instantiate(prefTaskSegr, parent));
                     break;
@@ -110,7 +90,7 @@ namespace Script.test
                             break;
                     }
                    break;
-                case Ruoli.Segretaria:
+                case Ruoli.Segreteria:
                     switch (value)
                     {
                         case 10:

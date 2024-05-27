@@ -11,12 +11,12 @@
         RefPC, //referente Protezione Civile
         VolPC, //volontario Protezione Civile
         Giornalista,
-        Tlc, //telecomunicazioni
+        RefTlc, //telecomunicazioni
         RefPolizia, //referente Polizia
         VolPolizia, //"volontario" polizia 
         RefFuoco, //referente vigile del Fuoco
         VolFuoco, //volontario Vigile del Fuovo
-        Segretaria,
+        Segreteria,
         RefGgev, // referente Guardie Giurate Ecologiche Volontarie
         VolGgev //volontario Guardie Giurate Ecologiche Volontarie
     }
@@ -33,10 +33,10 @@
             //2 
             Ruoli.RefPC,
             Ruoli.Giornalista,
-            Ruoli.Tlc,
+            Ruoli.RefTlc,
             Ruoli.RefPolizia,
-            Ruoli.RefFuoco,
-            Ruoli.Segretaria,
+            Ruoli.RefFuoco, // eliminare
+            Ruoli.Segreteria,
             Ruoli.Medico,
             Ruoli.RefCri,
             Ruoli.RefGgev,

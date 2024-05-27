@@ -21,7 +21,7 @@ namespace Script.Utility
         
         public GenericUser()
         {
-            name = "";
+            name = "admin";
             coord = Vector2.zero;
             role = Ruoli.Null;
         }

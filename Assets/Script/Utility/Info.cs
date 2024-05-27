@@ -7,7 +7,7 @@ namespace Script.Utility
         //public const string DBUrl = "https://prova-3266d-default-rtdb.europe-west1.firebasedatabase.app/";
         public const string DBUrl = "https://prtcv-de7d0-default-rtdb.europe-west1.firebasedatabase.app/";
 
-        public static string sessionCode = "";
+        public static string sessionCode = "ADMIN";
 
         public static GenericUser localUser = new GenericUser();
 

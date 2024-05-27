@@ -10,13 +10,13 @@ namespace Script.User.Prefabs
     {
         [SerializeField] private GameObject nome;
         [SerializeField] private float speed = 0.8f;
+        [SerializeField] private Skin skin;
+        
         private Rigidbody2D playerOnlineHitbox;
         private Vector2 posizione = Vector2.zero;
         private Animator anim;
         private Vector2 moveDirection = Vector2.zero;
-
-
-        [SerializeField] private float dist = -50;
+        
         private static readonly int X = Animator.StringToHash("x");
         private static readonly int Y = Animator.StringToHash("y");
         private static readonly int Speed = Animator.StringToHash("speed");
@@ -24,12 +24,14 @@ namespace Script.User.Prefabs
 
         private void Start()
         {
+            
             anim = gameObject.GetComponent<Animator>();
             playerOnlineHitbox = GetComponent<Rigidbody2D>();
         }
     
         public void SetUser(GenericUser user)
         {
+            skin.SetSkin(user.role);
             posizione = user.coord;
             gameObject.name = user.name;
             nome.GetComponent<TMP_Text>().text = user.name;
