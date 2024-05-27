@@ -415,7 +415,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4479993161254380604
 Transform:
   m_ObjectHideFlags: 0
@@ -1867,7 +1867,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f1cb60de829914c98fd41ca77a0f7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  codice: 10
   bSindaco: {fileID: 2316283239868089691}
   bCoc: {fileID: 676930487152044440}
   bGiornalista: {fileID: 8868084906106207373}
@@ -1877,6 +1876,7 @@ MonoBehaviour:
   buttAvanti: {fileID: 5787830588696323046}
   buttInvia: {fileID: 610328807714120585}
   testo: {fileID: 5817138080599328337}
+  flag: 0
 --- !u!1 &8558251876001048323
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Defective.JSON;
@@ -37,21 +38,21 @@ namespace Script.Master
                 
                 int posMaxVoti = MaxVotiCandidato();
             
-                for (int i = 0; i < candidati.Count; i++)
-                {
-                    Debug.Log(candidati[i] +  " - " + voti[i].intValue);
-                    //listaRisultati.Add(GameObject.Instantiate(votoCandidatoPrefab, contenitore));
-                    listaRisultati[i].GetComponent<VotiCandidato>().SetNomeCandidato(candidati[i]);
-                    listaRisultati[i].GetComponent<VotiCandidato>().SetNumeroVoti(voti[i].intValue);
-                }
+                // for (int i = 0; i < candidati.Count; i++)
+                // {
+                //     Debug.Log(candidati[i] +  " - " + voti[i].intValue);
+                //     //listaRisultati.Add(GameObject.Instantiate(votoCandidatoPrefab, contenitore));
+                //     listaRisultati[i].GetComponent<VotiCandidato>().SetNomeCandidato(candidati[i]);
+                //     listaRisultati[i].GetComponent<VotiCandidato>().SetNumeroVoti(voti[i].intValue);
+                // }
 
                 //TODO da aggiustare perché non visualizza il nome
                 vincitore.GetComponent<TMP_Text>().text = candidati[posMaxVoti];
                 //listaRisultati[posMaxVoti].GetComponent<VotiCandidato>().HighlightBestCandidate();
                 //aggiorna il ruolo del player
                 string str = "{\"" + Global.RuoloPlayerKey + "\":\"" + Ruoli.Sindaco + "\"}";
-                RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + candidati[posMaxVoti] + ".json", str);
-            });
+                RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + candidati[posMaxVoti] + ".json", str).Catch(Debug.LogWarning);;
+            }).Catch(Debug.LogWarning);
         }
 
         private int MaxVotiCandidato()

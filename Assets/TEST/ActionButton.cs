@@ -1,3 +1,5 @@
+using System;
+using Defective.JSON;
 using Proyecto26;
 using Script.Utility;
 using UnityEngine;
@@ -6,18 +8,27 @@ namespace Script.test
 {
     public class ActionButton : MonoBehaviour
     {
-        [SerializeField]
-        private string code = "";
+        public bool flax;
 
-        public void SetCode(string code)
+        private void Update()
         {
-            this.code = code;
+            if (flax)
+            {
+                flax = false;
+                chiama();    
+            }
         }
-        
-        public void Send()
+
+        public void chiama()
         {
-            string toSend = "{\"code\":\"" + code + "\"}";
-            RestClient.Post(Info.DBUrl + "event.json", toSend);
+            RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + ".json").Then(e =>
+            {
+                int h = 0;
+                foreach (var var in new JSONObject(e.Text).list)
+                {
+                    h += var.intValue;
+                }
+            });
         }
     }
 }

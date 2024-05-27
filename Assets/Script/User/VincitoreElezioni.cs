@@ -27,6 +27,7 @@ namespace Script.User
         {
             meMedesimo.SetActive(false);
             vincitoreGenerico.SetActive(false);
+            //TODO il sindaco deve essere selezionato in base al ruolo caricato dal master e non dal conteggio dei candicdati
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + ".json").Then(onReceived =>
             {
                 risultatiJson = new JSONObject(onReceived.Text);
