@@ -5,7 +5,6 @@ using Proyecto26;
 using Script.test;
 using Script.User.Prefabs;
 using Script.Utility;
-using TMPro;
 using UnityEngine;
 
 namespace Script.User
@@ -15,7 +14,6 @@ namespace Script.User
         [SerializeField] private GameObject onlinePlayer;
         [SerializeField] private Transform parent;
         [SerializeField] private JoyStick joyStick;
-        [SerializeField] private TextMeshProUGUI testoNomePlayer;
 
 
         private Listeners listeners;
@@ -27,7 +25,6 @@ namespace Script.User
         
         private void Start()
         {
-            testoNomePlayer.text = Info.localUser.name;
             joyStick.Enable(true);
             listeners = new Listeners(Info.DBUrl + Info.sessionCode + "/Game.json");
             listeners.Start(Parse);

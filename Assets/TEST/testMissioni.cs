@@ -22,6 +22,10 @@ public partial class NewBehaviourScript : MonoBehaviour
             printAll();
         });
     }
+
+    public MissioneObj missionObject;
+
+
     private void printAll()
     {
         Debug.Log(missioni.Count);
@@ -41,15 +45,14 @@ public partial class NewBehaviourScript : MonoBehaviour
     //     });
     // }
 
- public MissioneObj jhgh;
-    private string ddas(MissioneObj missioneObj)
+    private string ddas(MissioneObj missionObject)
     {
         JSONObject a = new JSONObject();
-        a.AddField(Global.NomeMissioneKey , missioneObj.nomeMissione);
+        a.AddField(Global.NomeMissioneKey , missionObject.nomeMissione);
         a.AddField(Global.FasiFolder, b =>
         {
             int i = 0;
-            foreach (var kk in missioneObj.fasi)
+            foreach (var kk in missionObject.fasi)
             {
                 b.AddField("F"+ i++, c =>
                 {
