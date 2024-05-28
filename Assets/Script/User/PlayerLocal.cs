@@ -4,6 +4,7 @@ using Proyecto26;
 using Script.Utility;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
 namespace Script.User
@@ -17,6 +18,8 @@ namespace Script.User
         [SerializeField] private float distanzaInvio;
         [SerializeField] private Skin skin;
         
+        [SerializeField] private TextMeshProUGUI testoNomePlayer;
+
         private Animator animator;
         private Vector2 movementInput;
         private List<RaycastHit2D> castCollisions;
@@ -29,8 +32,9 @@ namespace Script.User
 
         private void Start()
         {
-             spriteRenderer = GetComponent<SpriteRenderer>();
-             spriteRenderer.enabled = false;
+            testoNomePlayer.text = "Tu";
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer.enabled = false;
             
             skin.SetSkin(Info.localUser.role);
             animator = GetComponent<Animator>();
