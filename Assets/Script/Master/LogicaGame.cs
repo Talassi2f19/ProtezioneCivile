@@ -71,6 +71,6 @@ public class LogicaGame : MonoBehaviour
 
     public void MessaggiChiudi()
     {
-        azioni.SetActive(false);
+        messaggi.SetActive(false);
     }
 }
