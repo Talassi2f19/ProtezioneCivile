@@ -14,8 +14,12 @@ namespace Script.User
         private void Start()
         {
             listeners = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + "/" + Global.RuoloPlayerKey + ".json");
-            //listeners = new Listeners(Info.DBUrl + "RPWB/players/ddd"  + "/role.json");
             listeners.Start(TrovaRuolo);
+        }
+
+        private void OnApplicationQuit()
+        {
+            listeners.Stop();
         }
 
         private void TrovaRuolo(string str)

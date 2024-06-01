@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Defective.JSON;
@@ -60,6 +61,11 @@ namespace Script.Master
                 //Inserisco il nome nel prefab del neocandidato
                 candidati[candidati.Count - 1].GetComponent<GenericTextPrefab>().SetGenericText(nome);
             }
+        }
+
+        private void OnApplicationQuit()
+        {
+            didSomeoneApplied.Stop();
         }
 
         public void AvviaVotazioni()

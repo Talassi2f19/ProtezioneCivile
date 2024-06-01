@@ -32,6 +32,11 @@ namespace Script.User
             // FirstLoadTask();
         }
 
+        private void OnApplicationQuit()
+        {
+            listeners.Stop();
+        }
+
         private void Parse(string data)
         {
             //da ignorare

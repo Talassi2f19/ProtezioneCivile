@@ -38,6 +38,11 @@ namespace Script.Master
             playerJoin.Start(PlayerAdd);
         }
 
+        private void OnApplicationQuit()
+        {
+            playerJoin.Stop();
+        }
+
         private void ErroriDisplay(int value)
         {
             if (value == 0)

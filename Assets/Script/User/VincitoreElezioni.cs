@@ -90,5 +90,10 @@ namespace Script.User
 
             } 
         }
+
+        private void OnApplicationQuit()
+        {
+            listener.Stop();
+        }
     }
 }
