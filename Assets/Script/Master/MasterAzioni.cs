@@ -41,4 +41,15 @@ public class MasterAzioni : MonoBehaviour
         tipo2.SetActive(false);
         tipo3.SetActive(true);
     }
+
+    public void ClearTipo()
+    {
+        buttonTipo1.GetComponent<Image>().color = Color.white;
+        buttonTipo2.GetComponent<Image>().color = Color.white;
+        buttonTipo3.GetComponent<Image>().color = Color.white;
+        tipo1.SetActive(false);
+        tipo2.SetActive(false);
+        tipo3.SetActive(false);
+    }
+    
 }
