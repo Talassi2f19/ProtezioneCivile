@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Script.Master;
 using UnityEngine;
-
+// ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
 public class LogicaGame : MonoBehaviour
 {
     [SerializeField] private GameObject menuIcon;

@@ -12,10 +12,10 @@ namespace Script.User.Prefabs
         [SerializeField] private float speed = 0.8f;
         [SerializeField] private Skin skin;
         
-        private Rigidbody2D playerOnlineHitbox;
         private Vector2 posizione = Vector2.zero;
         private Animator anim;
         private Vector2 moveDirection = Vector2.zero;
+        private GenericUser localUser;
         
         private static readonly int X = Animator.StringToHash("x");
         private static readonly int Y = Animator.StringToHash("y");
@@ -24,24 +24,23 @@ namespace Script.User.Prefabs
 
         private void Start()
         {
-            
             anim = gameObject.GetComponent<Animator>();
-            playerOnlineHitbox = GetComponent<Rigidbody2D>();
+            skin.SetSkin(localUser.role);
+            posizione = localUser.coord;
+            gameObject.name = localUser.name;
+            nome.GetComponent<TMP_Text>().text = localUser.name;
+            nome.GetComponent<RectTransform>().sizeDelta = new Vector2(nome.GetComponent<TMP_Text>().preferredWidth, 25);
         }
     
         public void SetUser(GenericUser user)
         {
-            skin.SetSkin(user.role);
-            posizione = user.coord;
-            gameObject.name = user.name;
-            nome.GetComponent<TMP_Text>().text = user.name;
-            nome.GetComponent<RectTransform>().sizeDelta = new Vector2(nome.GetComponent<TMP_Text>().preferredWidth, 25);
+            localUser = user;
         }
 
         public void Move(Vector2 v)
         {
-            v.x = v.x!=0 ? v.x : playerOnlineHitbox.position.x ;
-            v.y = v.y!=0 ? v.y : playerOnlineHitbox.position.y ;
+            v.x = v.x!=0 ? v.x : transform.position.x ;
+            v.y = v.y!=0 ? v.y : transform.position.y ;
             posizione = v;
         }
 
@@ -53,16 +52,11 @@ namespace Script.User.Prefabs
         
         private void FixedUpdate()
         {
-            // if (playerOnlineHitbox.position == posizione)
-            // {
-            //     moveDirection = Vector2.zero;
-            //     return;
-            // }
-                
-            
-            moveDirection = playerOnlineHitbox.position - posizione;
+            var position = transform.position;
+            moveDirection = position - (Vector3)posizione;
             moveDirection.Normalize();
-            transform.position = Vector2.MoveTowards(transform.position, posizione, speed * Time.deltaTime);
+            position = Vector2.MoveTowards(position, posizione, speed * Time.deltaTime);
+            transform.position = position;
         }
         
         private void Animazione()

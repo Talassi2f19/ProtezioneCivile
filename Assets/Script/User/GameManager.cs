@@ -6,7 +6,7 @@ using Script.test;
 using Script.User.Prefabs;
 using Script.Utility;
 using UnityEngine;
-
+// ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
 namespace Script.User
 {
     public class GameManager : MonoBehaviour
@@ -117,9 +117,11 @@ namespace Script.User
         {
             Dictionary<String, GenericUser> userDictionary = userList.ToUserDictionary();
             userDictionary.Remove(Info.localUser.name);
+            Debug.Log(userDictionary.Count);
             foreach (var tmp in userDictionary)
             {
                 playerList.Add(tmp.Key, Instantiate(onlinePlayer ,tmp.Value.coord,new Quaternion(), parent));
+                playerList[tmp.Key].name = tmp.Key;
                 playerList[tmp.Key].GetComponent<PlayerOnline>().SetUser(tmp.Value);
             }
         }
