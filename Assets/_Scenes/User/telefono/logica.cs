@@ -16,7 +16,7 @@ public class logica : MonoBehaviour
     
     public void Indietro() //tasto indietro
     {
-        transform.parent.parent.parent.gameObject.SetActive(false);
+        transform.parent.parent.gameObject.SetActive(false);
     }
 
     public void Notifiche() //mostra pagina notifiche
