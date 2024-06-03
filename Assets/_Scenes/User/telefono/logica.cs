@@ -7,11 +7,13 @@ using UnityEngine.UI;
 
 public class logica : MonoBehaviour
 {
-    private List<GameObject> schede = new List<GameObject>();
+    [SerializeField]private List<GameObject> schede = new List<GameObject>();
 
     public void SetListaSchede(List<GameObject> value)
     {
         schede = value;
+        Debug.Log("ad" +schede.Count);
+        Debug.Log(transform.parent.name);
     }
     
     public void Indietro() //tasto indietro

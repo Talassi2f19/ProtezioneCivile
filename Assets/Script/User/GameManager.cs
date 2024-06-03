@@ -117,7 +117,6 @@ namespace Script.User
         {
             Dictionary<String, GenericUser> userDictionary = userList.ToUserDictionary();
             userDictionary.Remove(Info.localUser.name);
-            Debug.Log(userDictionary.Count);
             foreach (var tmp in userDictionary)
             {
                 playerList.Add(tmp.Key, Instantiate(onlinePlayer ,tmp.Value.coord,new Quaternion(), parent));

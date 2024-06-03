@@ -21,14 +21,32 @@ namespace Script.test
         
         [SerializeField]private Transform parent;
         
+        private List<GameObject> schede = new List<GameObject>();
+
         private void Start()
         {
             Inizializza();
         }
 
+        // public bool flag;
+        // public Ruoli r;
+        // private void Update()
+        // {
+        //     if (flag)
+        //     {
+        //         flag = false;
+        //         Info.localUser.role = r;
+        //         foreach (var var in schede)
+        //         {
+        //             DestroyImmediate(var);
+        //         }
+        //
+        //         schede = new List<GameObject>();
+        //         Inizializza();
+        //     }
+        // }
 
-        private List<GameObject> schede = new List<GameObject>();
-
+        
         private void Inizializza()
         {
             switch (Info.localUser.role)
@@ -59,17 +77,9 @@ namespace Script.test
             }
             schede.Add( Instantiate(prefAttivita, parent));
             schede.Add( Instantiate(prefNotifiche, parent));
-            
             foreach (var var in schede)
-            {
-                try
-                {
-                    var.GetComponentInChildren<logica>().SetListaSchede(schede);
-                }
-                catch (Exception e)
-                {
-                    // ignored
-                }
+            { 
+                var.GetComponentInChildren<logica>().SetListaSchede(schede);
             }
             
         }
