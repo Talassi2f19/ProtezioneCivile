@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Script.Utility
@@ -17,7 +18,18 @@ namespace Script.Utility
         [SerializeField]private AnimatorOverrideController tlc;
         [SerializeField]private AnimatorOverrideController vigile;
         [SerializeField]private AnimatorOverrideController normale;
-    
+        
+        // public bool flag;
+        // public Ruoli r;
+        // private void Update()
+        // {
+        //     if (flag)
+        //     {
+        //         flag = false;
+        //         SetSkin(r);
+        //     }
+        // }
+        
         public void SetSkin(Ruoli ruolo)
         {
             switch (ruolo)
