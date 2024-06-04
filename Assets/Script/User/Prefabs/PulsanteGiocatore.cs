@@ -25,13 +25,19 @@ namespace Script.User.Prefabs
         {
             PlayerSelected();
             HideAll();
+            /*
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + "/" + nomeGiocatore + ".json").Then(f =>
             {
                 int value = int.Parse(f.Text) + 1;
                 string send = "{\"" + nomeGiocatore + "\":" + value + "}";
                 RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + ".json", send);
             });
-
+            */
+            RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json").Then(f =>
+            {
+                string toSend = "{\"Voto\":" + nomeGiocatore + "}";
+                RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", send);
+            });
         }
         
         public void ClickSelezionaCoc()

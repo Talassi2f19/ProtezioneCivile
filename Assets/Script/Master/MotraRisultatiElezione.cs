@@ -22,10 +22,19 @@ namespace Script.Master
         [SerializeField] private Transform contenitore;
         [SerializeField] private GameObject vincitore;
         
+        /*
         private JSONObject risultatiJson;
         private List<string> candidati = new List<string>();
         private List<JSONObject> voti = new List<JSONObject>();
         private List<GameObject> listaRisultati= new List<GameObject>();
+        */
+
+    
+        // TODO: contare i voti secondo la proprietà Voto negli giocatori
+        // INCOMPLETO
+        private JSONObject playersJson;
+        private List<string> playersName = new List<string>();
+        private List<JSONObject> playersData = new List<JSONObject>();
 
         private void Start()
         {
@@ -51,8 +60,13 @@ namespace Script.Master
                 //listaRisultati[posMaxVoti].GetComponent<VotiCandidato>().HighlightBestCandidate();
                 //aggiorna il ruolo del player
                 string str = "{\"" + Global.RuoloPlayerKey + "\":\"" + Ruoli.Sindaco + "\"}";
-                RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + candidati[posMaxVoti] + ".json", str).Catch(Debug.LogWarning);;
+                RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + candidati[posMaxVoti] + ".json", str).Then(e => {
+                    string changeStatusCode = "{\"" + Global.GameStatusCodeKey + "\":\"" + GameStatus.RisultatiElezioni + "\"}";
+                    RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", changeStatusCode);
+                });
             }).Catch(Debug.LogWarning);
+
+            
         }
 
         private int MaxVotiCandidato()

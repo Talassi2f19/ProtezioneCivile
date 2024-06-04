@@ -13,9 +13,16 @@ namespace Script.User
 {
     public class RisultatiElezioni : MonoBehaviour
     {
+        /*
         private JSONObject risultatiJson;
         private List<string> candidati = new List<string>();
         private List<JSONObject> voti = new List<JSONObject>();
+        */
+
+        private JSONObject playersJson;
+        private List<string> playersName = new List<string>();
+        private List<JSONObject> playersData = new List<JSONObject>();
+
         [SerializeField] private GameObject vincitore;
         [SerializeField] private GameObject meMedesimo;
         [SerializeField] private GameObject vincitoreGenerico;
@@ -28,6 +35,7 @@ namespace Script.User
             meMedesimo.SetActive(false);
             vincitoreGenerico.SetActive(false);
             //TODO il sindaco deve essere selezionato in base al ruolo caricato dal master e non dal conteggio dei candicdati
+            /*
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + ".json").Then(onReceived =>
             {
                 risultatiJson = new JSONObject(onReceived.Text);
@@ -49,12 +57,38 @@ namespace Script.User
                     vincitore.GetComponent<TMP_Text>().text = nomeVincitore;
                 }
             });
+            */
+            RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(onReceived =>
+            {
+                playersJson = new JSONObject(onReceived.Text);
+                playersName = playersJson.keys;
+                playersData = playersJson.list;
+                
+                int i = 0;
+                while (i < playersName.Count && playersData[i].TryGetValue(Global.RuoloPlayerKey) != Ruoli.Sindaco)
+                    i++;
+                if (i >= playersName.Count)
+                    Debug.log("è successo qualcosa di veramente storto");
 
+                string nomeVincitore = playersName[i];
+                
+                if (nomeVincitore == Info.localUser.name)
+                {
+                    meMedesimo.SetActive(true);
+                    vincitoreGenerico.SetActive(false);
+                }
+                else
+                {
+                    meMedesimo.SetActive(false);
+                    vincitoreGenerico.SetActive(true);
+                    vincitore.GetComponent<TMP_Text>().text = nomeVincitore;
+                }
+            });
             listener = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.GameStatusCodeKey + ".json");
             listener.Start(CambioScena);
 
         }
-
+/*
         private int MaxVotiCandidato()
         {
             int pos = 0;
@@ -65,7 +99,7 @@ namespace Script.User
             }
             return pos;
         }
-    
+*/
         private void CambioScena(string str)
         {
             if (str.Contains(GameStatus.Gioco))

@@ -113,8 +113,6 @@ namespace Script.Master
         public void MostraRisultati()
         {
             InterrompiAggiornamento();
-            string changeStatusCode = "{\"" + Global.GameStatusCodeKey + "\":\"" + GameStatus.RisultatiElezioni + "\"}";
-            RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", changeStatusCode);
             SceneManager.LoadScene(Scene.Master.RisultatiElezioni);
         }
         
