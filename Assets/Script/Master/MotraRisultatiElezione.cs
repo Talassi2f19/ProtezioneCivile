@@ -38,12 +38,22 @@ namespace Script.Master
 
         private void Start()
         {
-            RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + ".json").Then(onReceived =>
+            RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(onReceived =>
             {
-                risultatiJson = new JSONObject(onReceived.Text);
-                candidati = risultatiJson.keys;
-                voti = risultatiJson.list;
 
+                playersJson = new JSONObject(onReceived.Text);
+                playersName = playersJson.keys;
+                playersData = playersJson.list;
+
+                for (int i = 0; i < playersName.Count; i++) {
+                    if (playersJson.ContainsKey(playersData[i]["Voto"])) {
+                        if (!playersJson[playersData[i]["Voto"]].ContainsKey("NrVoti"))
+                            playersJson[playersData[i]["Voto"]].Add("NrVoti", 0);
+                        playersJson[playersData[i]["Voto"]]["NrVoti"]++;
+                    }
+                }
+
+                playersData = playersJson.list;
                 
                 int posMaxVoti = MaxVotiCandidato();
             
@@ -56,7 +66,7 @@ namespace Script.Master
                 // }
 
                 //TODO da aggiustare perché non visualizza il nome
-                vincitore.GetComponent<TMP_Text>().text = candidati[posMaxVoti];
+                vincitore.GetComponent<TMP_Text>().text = playersName[posMaxVoti];
                 //listaRisultati[posMaxVoti].GetComponent<VotiCandidato>().HighlightBestCandidate();
                 //aggiorna il ruolo del player
                 string str = "{\"" + Global.RuoloPlayerKey + "\":\"" + Ruoli.Sindaco + "\"}";
@@ -71,12 +81,19 @@ namespace Script.Master
 
         private int MaxVotiCandidato()
         {
-            int pos = 0;
-            for (int i = 1; i < candidati.Count; i++)
+            int pos = -1;
+            for (int i = 0; i < playersName.Count; i++)
             {
-                if (voti[pos].intValue < voti[i].intValue)
-                    pos = i;
+                if (playerData[pos].ContainsKey("NrVoti")) {
+                    if (pos == -1 || playersData[pos]["NrVoti"] < playersData[i]["NrVoti"])
+                        pos = i;
+                }
             }
+            if (pos == -1) {
+                System.Random random = new System.Random((int)System.DateTime.Now.Ticks);
+                pos = random.Next(0, playersName.Count - 1);
+            }
+                
             return pos;
         }
 

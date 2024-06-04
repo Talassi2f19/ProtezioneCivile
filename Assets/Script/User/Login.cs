@@ -54,6 +54,12 @@ namespace Script.User
                 return;
             }
 
+            if (nome.ToUpper == "NULL")
+            {
+                ErroriDisplay(8);
+                return;
+            }
+
             RestClient.Get(Info.DBUrl + ".json").Then(e =>
             {
                 JSONObject json = new JSONObject(e.Text, 0, -1, 3, false);
@@ -154,6 +160,9 @@ namespace Script.User
                     break;
                 case 7:
                     messaggio = "Impossibile riconnettersi";
+                    break;
+                case 8:
+                    messaggio = "Username non accettabile";
                     break;
                 default:
                     messaggio = "errore";

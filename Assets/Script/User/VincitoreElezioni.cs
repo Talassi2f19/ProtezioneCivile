@@ -65,7 +65,7 @@ namespace Script.User
                 playersData = playersJson.list;
                 
                 int i = 0;
-                while (i < playersName.Count && playersData[i].TryGetValue(Global.RuoloPlayerKey) != Ruoli.Sindaco)
+                while (i < playersName.Count && playersData[i][Global.RuoloPlayerKey] != Ruoli.Sindaco)
                     i++;
                 if (i >= playersName.Count)
                     Debug.log("è successo qualcosa di veramente storto");

@@ -142,12 +142,13 @@ namespace Script.Master
         private void AggiornaContatoreVotanti()
         {
             Debug.Log("exe");
-            RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + ".json").Then(e =>
+            RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(e =>
             {
                 int nVoti = 0;
-                foreach (var var in new JSONObject(e.Text).list)
+                foreach (JSONObject p in new JSONObject(e.Text).list)
                 {
-                    nVoti += var.intValue;
+                    if (p.ContainsKey("Voto"))
+                        nVoti++;
                 }
                 testoContatore.text = nVoti + " / " + numeroPlayer;
             });
