@@ -15,14 +15,16 @@ namespace Script.User.Prefabs
         [SerializeField] private Image roleImage;
         [SerializeField] private new TMP_Text name;
         [SerializeField] private TMP_Text description;
-    
+
+        private string roleImageName;
+
         //private string roleImagePath;
         //private string roleName;
         //private string roleDescription;
 
 
         private void Start()
-        {
+        {  
             //TODO carica in base al ruolo in automatico
             name.text = Info.localUser.role.ToString();
 
@@ -34,23 +36,9 @@ namespace Script.User.Prefabs
             
             name.text = dizionario[keyRole].GetField("name").ToString();
             description.text = dizionario[keyRole].GetField("Descrizione").ToString();
+            roleImageName = dizionario[keyRole].GetField("Sprite").ToString();
 
-            string path = dizionario[keyRole].GetField("Path").ToString();
-
-        }
-
-        private Texture2D LoadPNG(string path)
-        {
-            Texture2D tex = null;
-            byte[] fileData;
-
-            if (File.Exists(path))
-            {
-                fileData = File.ReadAllBytes(path);
-                tex = new Texture2D(2, 2);
-                tex.LoadImage(fileData); //..this will auto-resize the texture dimensions.
-            }
-            return tex;
+            roleImage.sprite = Resources.Load<Sprite>(roleImageName);
         }
 
         private string searchRoleKey(JSONObject json)
