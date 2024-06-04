@@ -63,12 +63,12 @@ namespace Script.User
                 playersJson = new JSONObject(onReceived.Text);
                 playersName = playersJson.keys;
                 playersData = playersJson.list;
-                
+
                 int i = 0;
-                while (i < playersName.Count && playersData[i][Global.RuoloPlayerKey] != Ruoli.Sindaco)
+                while (i < playersName.Count && playersData[i][Global.RuoloPlayerKey].stringValue != Ruoli.Sindaco.ToString())
                     i++;
                 if (i >= playersName.Count)
-                    Debug.log("è successo qualcosa di veramente storto");
+                    Debug.Log("è successo qualcosa di veramente storto");
 
                 string nomeVincitore = playersName[i];
                 

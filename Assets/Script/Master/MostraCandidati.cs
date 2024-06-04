@@ -147,7 +147,7 @@ namespace Script.Master
                 int nVoti = 0;
                 foreach (JSONObject p in new JSONObject(e.Text).list)
                 {
-                    if (p.ContainsKey("Voto"))
+                    if (p.HasField("Voto"))
                         nVoti++;
                 }
                 testoContatore.text = nVoti + " / " + numeroPlayer;

@@ -54,7 +54,7 @@ namespace Script.User
                 return;
             }
 
-            if (nome.ToUpper == "NULL")
+            if (nome.ToUpper() == "NULL")
             {
                 ErroriDisplay(8);
                 return;

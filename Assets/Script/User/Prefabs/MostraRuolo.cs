@@ -1,7 +1,12 @@
+using Defective.JSON;
 using Script.Utility;
+using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System;
 
 namespace Script.User.Prefabs
 {
@@ -20,6 +25,40 @@ namespace Script.User.Prefabs
         {
             //TODO carica in base al ruolo in automatico
             name.text = Info.localUser.role.ToString();
+
+            JSONObject json = new JSONObject(File.ReadAllText("../../../FileUtili/infoRuoli.json"));
+
+            string keyRole = searchRoleKey(json);
+
+            Dictionary<string, JSONObject> dizionario = json.ToJsonDictionary();
+            
+            name.text = dizionario[keyRole].GetField("name").ToString();
+            description.text = dizionario[keyRole].GetField("Descrizione").ToString();
+
+            string path = dizionario[keyRole].GetField("Path").ToString();
+
+        }
+
+        private Texture2D LoadPNG(string path)
+        {
+            Texture2D tex = null;
+            byte[] fileData;
+
+            if (File.Exists(path))
+            {
+                fileData = File.ReadAllBytes(path);
+                tex = new Texture2D(2, 2);
+                tex.LoadImage(fileData); //..this will auto-resize the texture dimensions.
+            }
+            return tex;
+        }
+
+        private string searchRoleKey(JSONObject json)
+        {
+            int j = 0;
+            while (json.keys[j] != (Info.localUser.role.ToString() + ".json"))
+                j++;
+            return json.keys[j];
         }
 
         //public void SetRoleName(string roleName)

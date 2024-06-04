@@ -46,10 +46,10 @@ namespace Script.Master
                 playersData = playersJson.list;
 
                 for (int i = 0; i < playersName.Count; i++) {
-                    if (playersJson.ContainsKey(playersData[i]["Voto"])) {
-                        if (!playersJson[playersData[i]["Voto"]].ContainsKey("NrVoti"))
-                            playersJson[playersData[i]["Voto"]].Add("NrVoti", 0);
-                        playersJson[playersData[i]["Voto"]]["NrVoti"]++;
+                    if (playersJson.HasField(playersData[i]["Voto"].stringValue)) {
+                        if (!playersJson[playersData[i]["Voto"].stringValue].HasField("NrVoti"))
+                            playersJson[playersData[i]["Voto"].stringValue].AddField("NrVoti", 0);
+                        playersJson[playersData[i]["Voto"].stringValue].SetField("NrVoti", playersJson[playersData[i]["Voto"].stringValue]["NrVoti"].intValue + 1);
                     }
                 }
 
@@ -70,7 +70,7 @@ namespace Script.Master
                 //listaRisultati[posMaxVoti].GetComponent<VotiCandidato>().HighlightBestCandidate();
                 //aggiorna il ruolo del player
                 string str = "{\"" + Global.RuoloPlayerKey + "\":\"" + Ruoli.Sindaco + "\"}";
-                RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + candidati[posMaxVoti] + ".json", str).Then(e => {
+                RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + playersName[posMaxVoti] + ".json", str).Then(e => {
                     string changeStatusCode = "{\"" + Global.GameStatusCodeKey + "\":\"" + GameStatus.RisultatiElezioni + "\"}";
                     RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", changeStatusCode);
                 });
@@ -84,8 +84,8 @@ namespace Script.Master
             int pos = -1;
             for (int i = 0; i < playersName.Count; i++)
             {
-                if (playerData[pos].ContainsKey("NrVoti")) {
-                    if (pos == -1 || playersData[pos]["NrVoti"] < playersData[i]["NrVoti"])
+                if (playersData[pos].HasField("NrVoti")) {
+                    if (pos == -1 || playersData[pos]["NrVoti"].intValue < playersData[i]["NrVoti"].intValue)
                         pos = i;
                 }
             }

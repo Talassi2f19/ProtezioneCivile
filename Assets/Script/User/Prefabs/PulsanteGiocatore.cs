@@ -36,7 +36,7 @@ namespace Script.User.Prefabs
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json").Then(f =>
             {
                 string toSend = "{\"Voto\":" + nomeGiocatore + "}";
-                RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", send);
+                RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", toSend);
             });
         }
         
