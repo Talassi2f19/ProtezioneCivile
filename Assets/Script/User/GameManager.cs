@@ -109,8 +109,8 @@ namespace Script.User
                     userList.Merge(new JSONObject(b.Text));
                     
                     CaricaPlayer2(userList);
-                });
-            });
+                }).Catch(Debug.LogError);
+            }).Catch(Debug.LogError);
         }
 
         private void CaricaPlayer2(JSONObject userList)

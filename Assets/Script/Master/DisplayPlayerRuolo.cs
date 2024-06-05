@@ -21,7 +21,7 @@ namespace Script.Master
                     string testo = json.list[i].GetField("Name").stringValue + " - " + json.list[i].GetField("Role").stringValue;
                     Instantiate(prefab, parent).GetComponent<GenericTextPrefab>().SetGenericText(testo);
                 }
-            });
+            }).Catch(Debug.LogError);
         }
     
     }

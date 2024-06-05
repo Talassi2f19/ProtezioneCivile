@@ -24,7 +24,7 @@ namespace Script.Master.Prefabs
         public void OnClick()
         {
             gameObject.SetActive(false);
-            RestClient.Delete(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + nomeGiocatore + ".json");
+            RestClient.Delete(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + nomeGiocatore + ".json").Catch(Debug.LogError);
         }
     }
 }

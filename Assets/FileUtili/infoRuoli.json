@@ -1,0 +1,82 @@
+{
+    "Sindaco": {
+      "Nome": "",
+      "Descrizione": "",
+      "Sprite": ""
+    },
+    "Coc": {
+      "Nome": "",
+      "Descrizione": "",
+      "Sprite": ""
+    },
+    "RefCri": {
+      "Nome": "",
+      "Descrizione": "",
+      "Sprite": ""
+    },
+    "VolCri": {
+      "Nome": "",
+      "Descrizione": "",
+      "Sprite": ""
+    },
+    "Medico": {
+      "Nome": "",
+      "Descrizione": "",
+      "Sprite": ""
+    },
+    "RefPC": {
+      "Nome": "",
+      "Descrizione": "",
+      "Sprite": ""
+    },
+    "VolPC": {
+      "Nome": "",
+      "Descrizione": "",
+      "Sprite": ""
+    },
+    "Giornalista": {
+      "Nome": "",
+      "Descrizione": "",
+      "Sprite": ""
+    },
+    "RefTlc": {
+      "Nome": "",
+      "Descrizione": "",
+      "Sprite": ""
+    },
+    "RefPolizia": {
+      "Nome": "",
+      "Descrizione": "",
+      "Sprite": ""
+    },
+    "VolPolizia": {
+      "Nome": "",
+      "Descrizione": "",
+      "Sprite": ""
+    },
+    "RefFuoco": {
+      "Nome": "",
+      "Descrizione": "",
+      "Sprite": ""
+    },
+    "VolFuoco": {
+      "Nome": "",
+      "Descrizione": "",
+      "Sprite": ""
+    },
+    "Segreteria": {
+      "Nome": "",
+      "Descrizione": "",
+      "Sprite": ""
+    },
+    "RefGgev": {
+      "Nome": "",
+      "Descrizione": "",
+      "Sprite": ""
+    },
+    "VolGgev": {
+      "Nome": "",
+      "Descrizione": "",
+      "Sprite": ""
+    }
+  }

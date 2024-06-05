@@ -97,7 +97,7 @@ namespace Script.User
                     RestClient.Put(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", toSend).Then(e =>
                     {
                         SceneManager.LoadScene(Scene.User.Elezioni);
-                    });
+                    }).Catch(Debug.LogError);
                     return;
                 }
 #if !UNITY_EDITOR                
@@ -112,7 +112,7 @@ namespace Script.User
                             Debug.Log(e.Text);
                             Info.localUser.role = Enum.Parse<Ruoli>(e.Text);
                             SceneManager.LoadScene(Scene.User.Elezioni);
-                        });
+                        }).Catch(Debug.LogError);
                     }
                     else
                     {
@@ -126,7 +126,7 @@ namespace Script.User
                     return;
                 }
                 ErroriDisplay(-1);
-            });
+            }).Catch(Debug.LogError);
         }
         
         private void ErroriDisplay(int value)

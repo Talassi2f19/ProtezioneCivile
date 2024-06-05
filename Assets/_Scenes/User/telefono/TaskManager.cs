@@ -18,6 +18,8 @@ namespace Script.test
         [SerializeField]private GameObject prefNotifiche;
         [SerializeField]private GameObject prefTaskSegr;
         [SerializeField] private GameObject pallinoRosso;
+        [SerializeField] private GameObject playerRuoli;
+        
         
         [SerializeField]private Transform parent;
         
@@ -75,8 +77,9 @@ namespace Script.test
                     schede.Add( Instantiate(prefGenerico, parent));
                     break;
             }
-            schede.Add( Instantiate(prefAttivita, parent));
-            schede.Add( Instantiate(prefNotifiche, parent));
+            schede.Add( Instantiate(playerRuoli, parent)); //[^3]
+            schede.Add( Instantiate(prefAttivita, parent)); //[^2]
+            schede.Add( Instantiate(prefNotifiche, parent)); //[^1]
             foreach (var var in schede)
             { 
                 var.GetComponentInChildren<logica>().SetListaSchede(schede);

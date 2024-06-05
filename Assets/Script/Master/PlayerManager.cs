@@ -97,8 +97,8 @@ namespace Script.Master
                 {
                     userList.Merge(new JSONObject(b.Text));
                     CaricaPlayer2(userList);
-                });
-            });
+                }).Catch(Debug.LogError);
+            }).Catch(Debug.LogError);
         }
 
         private void CaricaPlayer2(JSONObject userList)
@@ -117,7 +117,6 @@ namespace Script.Master
         {
             String nome = value.GetField("path").stringValue.Split("/")[2];
             Vector2 newPos = value.GetField("data").ToVector2();
-            Debug.Log(newPos);
 
             newPos.x = newPos.x != 0 ? newPos.x : playerList[nome].transform.position.x;
             newPos.y = newPos.y != 0 ? newPos.y : playerList[nome].transform.position.y;

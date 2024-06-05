@@ -26,6 +26,11 @@ public class logica : MonoBehaviour
         schede[^1].SetActive(true);
     }
 
+    public void MostraRuoli() //mostra pagina notifiche
+    {
+        schede[^3].SetActive(true);
+    }
+    
     public void Attivita() //mostr pagina con attività da fare
     {
         schede[^2].SetActive(true);

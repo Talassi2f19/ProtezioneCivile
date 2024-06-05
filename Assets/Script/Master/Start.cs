@@ -21,7 +21,7 @@ namespace Script.Master
 
                 SceneManager.LoadScene(Scene.Master.PlayerLogin);
 
-            }).Catch(Debug.Log);
+            }).Catch(Debug.LogError);
         }
 
         private string GeneraCodiceCasuale(int lunghezza)

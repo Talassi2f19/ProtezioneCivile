@@ -28,7 +28,7 @@ namespace Script.User
                // player = json.ToJsonDictionary();
                 players = json.keys;
                 Genera();
-            });
+            }).Catch(Debug.LogError);
             
         }
 

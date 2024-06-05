@@ -132,7 +132,7 @@ namespace Script.Master
             if (playerList.Count > Info.MinPlayer)
             {
                 string str = "{\"" + Global.GameStatusCodeKey + "\":\"" + GameStatus.Candidatura + "\"}";
-                RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str);
+                RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str).Catch(Debug.LogError);
                 playerJoin.Stop();
                 SceneManager.LoadScene(Scene.Master.Elezioni);
             }

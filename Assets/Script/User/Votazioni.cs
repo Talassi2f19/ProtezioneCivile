@@ -35,7 +35,7 @@ namespace Script.User
                     /*tmp = GameObject.Instantiate(pulsantePrefab, contenitore);
                     tmp.GetComponent<PulsanteGiocatore>().SetName(nomiGiocatori[i]);*/
                 }
-            });
+            }).Catch(Debug.LogError);
         }
 
      /*   

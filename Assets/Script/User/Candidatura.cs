@@ -23,7 +23,7 @@ namespace Script.User
             {
                 Debug.Log(exception);
                 Debug.Log(exception.Message);
-            });
+            }).Catch(Debug.LogError);
             candidatura.SetActive(false); //Scompare il pulsante
             testoOnClick.SetActive(true);
         }

@@ -25,7 +25,6 @@ namespace Script.User.Prefabs
 
         private void Start()
         {  
-            //TODO carica in base al ruolo in automatico
             name.text = Info.localUser.role.ToString();
 
             JSONObject json = new JSONObject(File.ReadAllText("../../../FileUtili/infoRuoli.json"));

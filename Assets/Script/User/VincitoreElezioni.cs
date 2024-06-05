@@ -83,7 +83,7 @@ namespace Script.User
                     vincitoreGenerico.SetActive(true);
                     vincitore.GetComponent<TMP_Text>().text = nomeVincitore;
                 }
-            });
+            }).Catch(Debug.LogError);
             listener = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.GameStatusCodeKey + ".json");
             listener.Start(CambioScena);
 
@@ -119,7 +119,7 @@ namespace Script.User
                     {
                         SceneManager.LoadScene(Scene.User.AttesaRuoli);
                     }
-                });
+                }).Catch(Debug.LogError);
             
 
             } 

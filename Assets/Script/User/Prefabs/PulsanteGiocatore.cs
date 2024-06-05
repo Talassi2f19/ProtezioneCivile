@@ -36,8 +36,8 @@ namespace Script.User.Prefabs
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json").Then(f =>
             {
                 string toSend = "{\"Voto\":" + nomeGiocatore + "}";
-                RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", toSend);
-            });
+                RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", toSend).Catch(Debug.LogError);
+            }).Catch(Debug.LogError);
         }
         
         public void ClickSelezionaCoc()
@@ -56,7 +56,7 @@ namespace Script.User.Prefabs
                     
                     //cambia scena
                     SceneManager.LoadScene(Scene.User.Game);
-                });
+                }).Catch(Debug.LogError);
         }
         
         public void PlayerSelected()

@@ -13,7 +13,7 @@ namespace Script.User
             {
                 //sostisuisci i valori "null" con il ruolo desiganto e ricarica la lista di tutti i player
                 RestClient.Put(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json", Sostituisci(e.Text)).Catch(exception => Debug.LogError(exception));
-           });
+           }).Catch(Debug.LogError);
         
         }
 

@@ -52,7 +52,7 @@ namespace Script.User
                 lastPosition = rb.position = json.ToVector2();
                 gameObject.SetActive(true);
                 spriteRenderer.enabled = true;
-            });
+            }).Catch(Debug.LogError);
         }
         
         private void Update()
@@ -96,7 +96,7 @@ namespace Script.User
             
             string toSend = JsonUtility.ToJson(rb.position);
             RestClient.Patch(
-                Info.DBUrl + Info.sessionCode + "/Game/Posizione/" + Info.localUser.name + "/Coord.json", toSend);
+                Info.DBUrl + Info.sessionCode + "/Game/Posizione/" + Info.localUser.name + "/Coord.json", toSend).Catch(Debug.LogError);
             lastPosition = rb.position;
         }
 

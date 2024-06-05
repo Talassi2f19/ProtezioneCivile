@@ -27,7 +27,7 @@ namespace Script.Master.Prefabs
 
         public void OnClick()
         {
-            RestClient.Delete(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + id +".json");
+            RestClient.Delete(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + id +".json").Catch(Debug.LogError);
         }
     
     

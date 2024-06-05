@@ -162,9 +162,8 @@ MonoBehaviour:
   prefNotifiche: {fileID: 784393442889063326, guid: 59ef89d0dcdbe434a96deb5f95f698f3, type: 3}
   prefTaskSegr: {fileID: 784393442889063326, guid: 59aaefd62384a5a43a9aee683d5ffaf7, type: 3}
   pallinoRosso: {fileID: 0}
+  playerRuoli: {fileID: 784393442889063326, guid: 3169b72a7bb3fb24e8d97880b9f9f14b, type: 3}
   parent: {fileID: 441874527}
-  flag: 0
-  r: 0
 --- !u!4 &441874527
 Transform:
   m_ObjectHideFlags: 0

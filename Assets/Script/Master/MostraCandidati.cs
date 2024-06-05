@@ -40,7 +40,7 @@ namespace Script.Master
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(e =>
             {
                 numeroPlayer = new JSONObject(e.Text, 0, -1, 1).keys.Count;
-            });
+            }).Catch(Debug.LogError);
         }
     
         private void AddCandidato(string str)
@@ -80,7 +80,7 @@ namespace Script.Master
             if (candidati.Count > 1)
             {
                 string str = "{\"" + Global.GameStatusCodeKey + "\":\"" + GameStatus.Votazione + "\"}";
-                RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str);
+                RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str).Catch(Debug.LogError);
             
                 votazioni.SetActive(true);
                 candidatura.SetActive(false);
@@ -105,8 +105,8 @@ namespace Script.Master
                         risultati =>
                         {
                             MostraRisultati();
-                        });
-                });
+                        }).Catch(Debug.LogError);
+                }).Catch(Debug.LogError);
             }
         }
     
@@ -151,7 +151,7 @@ namespace Script.Master
                         nVoti++;
                 }
                 testoContatore.text = nVoti + " / " + numeroPlayer;
-            });
+            }).Catch(Debug.LogError);
             
         }
         

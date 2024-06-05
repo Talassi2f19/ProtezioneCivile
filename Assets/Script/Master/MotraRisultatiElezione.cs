@@ -72,9 +72,9 @@ namespace Script.Master
                 string str = "{\"" + Global.RuoloPlayerKey + "\":\"" + Ruoli.Sindaco + "\"}";
                 RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + playersName[posMaxVoti] + ".json", str).Then(e => {
                     string changeStatusCode = "{\"" + Global.GameStatusCodeKey + "\":\"" + GameStatus.RisultatiElezioni + "\"}";
-                    RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", changeStatusCode);
-                });
-            }).Catch(Debug.LogWarning);
+                    RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", changeStatusCode).Catch(Debug.LogError);
+                }).Catch(Debug.LogError);
+            }).Catch(Debug.LogError);
 
             
         }
@@ -100,7 +100,7 @@ namespace Script.Master
         public void AvviaPartita()
         {
             string str = "{\"" + Global.GameStatusCodeKey + "\":\"" + GameStatus.Gioco + "\"}";
-            RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str);
+            RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str).Catch(Debug.LogError);
             SceneManager.LoadScene(Scene.Master.Game);
         }
         
