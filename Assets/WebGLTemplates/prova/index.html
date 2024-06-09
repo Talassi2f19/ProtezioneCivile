@@ -36,30 +36,6 @@
       </div>
     </div>
     <script>
-
-        function rotateScreen() {
-            if (screen.orientation) {
-                // Verifica se l'orientamento è orizzontale
-                if (screen.orientation.type.includes("landscape")) {
-                    // Rimuovi l'overlay se l'orientamento è corretto
-                    document.getElementById('overlay').style.display = 'none';
-                    document.getElementById('unity-container').style.display = 'flex';
-                } else {
-                    // Mostra l'overlay se l'orientamento non è corretto
-                    document.getElementById('overlay').style.display = 'flex';
-                    document.getElementById('unity-container').style.display = 'none';
-                }
-            } else {
-                console.error('La funzione screen.orientation non è supportata su questo dispositivo.');
-            }
-        }
-
-        // Chiama la funzione al caricamento della pagina
-        rotateScreen();
-
-        // Aggiungi un listener per la gestione dell'evento di cambio orientamento
-        window.addEventListener('orientationchange', rotateScreen);
-
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
       var loadingBar = document.querySelector("#unity-loading-bar");
@@ -93,6 +69,13 @@
         }
         updateBannerVisibility();
       }
+
+      var overlay = document.querySelector("#overlay");
+      // controllo dell'orientamento dello schermo se landscape(90 | -90) o portrait(0)
+      window.addEventListener('orientationchange', function() {
+        console.log(window.orientation.toString());
+        overlay.style.display = window.orientation.toString() == "90" || window.orientation.toString() == "-90" ? "none" : "block"; 
+      }, false);
 
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}";
