@@ -1,7 +1,8 @@
 using System;
 using Defective.JSON;
 
-namespace Script.test
+// ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
+namespace TEST
 {
     public class Task
     {

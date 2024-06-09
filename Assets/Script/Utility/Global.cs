@@ -30,6 +30,7 @@ namespace Script.Utility
             public const string AttesaRuoli = Scene.Folder + "/" + Scene.User.UFolder + "/attesaRuoli" ;
             public const string RisultatiElezioni = Scene.Folder + "/" + Scene.User.UFolder + "/risultatiElezioni" ;
             public const string SelezioneCoc = Scene.Folder + "/" + Scene.User.UFolder + "/selezioneCOC" ;
+            public const string EndGame = Scene.Folder + "/" + Scene.User.UFolder + "/EndGame" ;
         }
         public struct Master
         {
@@ -39,6 +40,7 @@ namespace Script.Utility
             public const string PlayerLogin = Scene.Folder + "/" + Scene.Master.MFolder + "/playerLogin" ;
             public const string Game = Scene.Folder + "/" + Scene.Master.MFolder + "/game" ;
             public const string Elezioni = Scene.Folder + "/" + Scene.Master.MFolder + "/elezioni" ;
+            public const string EndGame = Scene.Folder + "/" + Scene.Master.MFolder + "/EndGame" ;
         }
     }
     

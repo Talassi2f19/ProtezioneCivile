@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using Defective.JSON;
-using Script.User.Prefabs;
-using Script.Utility;
-using UnityEngine;
+﻿using UnityEngine;
 
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
 namespace Script.User
 {
     //classe per la gestione dei player
-    public class PlayerManager : MonoBehaviour
+    public class MostraRuoloManager : MonoBehaviour
     {
         [SerializeField] private GameObject mostraRuoloPrefab;
         [SerializeField] private GameObject infoRuolo;
         [SerializeField] private JoyStick joyStick;
-        
-        
+
+        private void Start()
+        {
+            joyStick.Enable(true);
+        }
+
         public void ShowMostraRuolo()
         {
             mostraRuoloPrefab.SetActive(true);
@@ -25,6 +24,7 @@ namespace Script.User
 
         public void CloseMostraRuolo()
         {
+            mostraRuoloPrefab.SetActive(false);
             infoRuolo.SetActive(true);
             joyStick.Enable(true);
         }

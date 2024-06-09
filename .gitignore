@@ -74,5 +74,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 
-# Build scene
-ProjectSettings/EditorBuildSettings.asset
+Assets/_Scenes/User/telefono/~$codiciTask.xlsx.meta
+Assets/_Scenes/User/telefono/~$codiciTask.xlsx

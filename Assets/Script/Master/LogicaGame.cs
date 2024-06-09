@@ -1,4 +1,9 @@
+using Proyecto26;
+using Script.Utility;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Scene = Script.Utility.Scene;
+
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
 public class LogicaGame : MonoBehaviour
 {
@@ -29,7 +34,10 @@ public class LogicaGame : MonoBehaviour
 
     public void TerminaConferma()
     {
-        Debug.Log("conferma");
+        RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "\"CodeTask\":-1");
+        string str = "{\"" + Global.GameStatusCodeKey + "\":\"" + GameStatus.End + "\"}";
+        RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str).Catch(Debug.LogError);
+        SceneManager.LoadScene(Scene.Master.EndGame);
     }
 
     public void TerminaAnnulla()

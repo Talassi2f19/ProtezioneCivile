@@ -10,13 +10,13 @@
         Medico,
         RefPC, //referente Protezione Civile
         VolPC, //volontario Protezione Civile
-        Giornalista,
         RefTlc, //telecomunicazioni
         RefPolizia, //referente Polizia
         VolPolizia, //"volontario" polizia 
         RefFuoco, //referente vigile del Fuoco
         VolFuoco, //volontario Vigile del Fuovo
         Segreteria,
+        // Giornalista, //rimuovere
         RefGgev, // referente Guardie Giurate Ecologiche Volontarie
         VolGgev //volontario Guardie Giurate Ecologiche Volontarie
     }
@@ -32,38 +32,38 @@
             //sindaco, coc
             //2 
             Ruoli.RefPC,
-            Ruoli.Giornalista,
             Ruoli.RefTlc,
             Ruoli.RefPolizia,
-            Ruoli.RefFuoco, // eliminare
+            Ruoli.RefFuoco,
             Ruoli.Segreteria,
             Ruoli.Medico,
             Ruoli.RefCri,
             Ruoli.RefGgev,
-            //11
+            //10
             //facolatativi in base al numero di player
             Ruoli.VolPC,
-            Ruoli.VolPolizia,
-            Ruoli.VolFuoco,
             Ruoli.VolCri,
             Ruoli.VolGgev,
-            //16
-            Ruoli.VolPC,
             Ruoli.VolPolizia,
             Ruoli.VolFuoco,
+            //15
+            Ruoli.VolPC,
             Ruoli.VolCri,
             Ruoli.VolGgev,
-            //21
-            Ruoli.VolPC,
             Ruoli.VolPolizia,
             Ruoli.VolFuoco,
+            //20
+            Ruoli.VolPC,
             Ruoli.VolCri,
             Ruoli.VolGgev,
-            //26
-            Ruoli.VolPC,
             Ruoli.VolPolizia,
             Ruoli.VolFuoco,
-            Ruoli.VolCri
+            //25
+            Ruoli.VolPC,
+            Ruoli.VolCri,
+            Ruoli.VolGgev,
+            Ruoli.VolPolizia,
+            Ruoli.VolFuoco,
             //30
         };
     }

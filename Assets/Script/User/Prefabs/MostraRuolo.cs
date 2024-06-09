@@ -28,25 +28,16 @@ namespace Script.User.Prefabs
             name.text = Info.localUser.role.ToString();
 
             JSONObject json = new JSONObject(File.ReadAllText("../../../FileUtili/infoRuoli.json"));
-
-            string keyRole = searchRoleKey(json);
-
+            
             Dictionary<string, JSONObject> dizionario = json.ToJsonDictionary();
             
-            name.text = dizionario[keyRole].GetField("name").ToString();
-            description.text = dizionario[keyRole].GetField("Descrizione").ToString();
-            roleImageName = dizionario[keyRole].GetField("Sprite").ToString();
+            name.text = dizionario[Info.localUser.role.ToString()].GetField("name").ToString();
+            description.text = dizionario[Info.localUser.role.ToString()].GetField("Descrizione").ToString();
+            roleImageName = dizionario[Info.localUser.role.ToString()].GetField("Sprite").ToString();
 
             roleImage.sprite = Resources.Load<Sprite>(roleImageName);
         }
-
-        private string searchRoleKey(JSONObject json)
-        {
-            int j = 0;
-            while (json.keys[j] != (Info.localUser.role.ToString() + ".json"))
-                j++;
-            return json.keys[j];
-        }
+        
 
         //public void SetRoleName(string roleName)
         //{
