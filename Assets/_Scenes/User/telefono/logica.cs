@@ -58,7 +58,7 @@ namespace _Scenes.User.telefono
         
         public void SindacoCOC(GameObject tmp) //convoca il coc
         {
-            RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":2").Catch(Debug.Log);
+            RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":2}").Catch(Debug.Log);
             tmp.SetActive(false);
         }
 
@@ -95,6 +95,8 @@ namespace _Scenes.User.telefono
         
         public void TaskAssenga(int code)
         {
+            Debug.Log(schede[2].name);
+            Debug.Log(schede[2].GetComponentInChildren<TaskAssegna>());
             schede[2].GetComponentInChildren<TaskAssegna>().SetCodice(code);
             schede[2].SetActive(true);
         }

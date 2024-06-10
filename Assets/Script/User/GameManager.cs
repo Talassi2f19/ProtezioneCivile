@@ -116,6 +116,8 @@ namespace Script.User
         private void CaricaPlayer2(JSONObject userList)
         {
             userList.RemoveField(Info.localUser.name);
+            if(!userList)
+                return;
             foreach (JSONObject json in userList.list)
             {
                 if(json.GetField("Virtual"))
@@ -125,7 +127,6 @@ namespace Script.User
                 playerList[n].name = n;
                 playerList[n].GetComponent<PlayerOnline>().Set(json);
             }
-            
         }
 
         private void MuoviPlayer(JSONObject value)

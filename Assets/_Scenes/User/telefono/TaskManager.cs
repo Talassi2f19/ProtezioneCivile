@@ -133,27 +133,27 @@ namespace _Scenes.User.telefono
                             break;
                         case 70:
                             NuovaNotifica("Il COC ha richiesto che autorizzi la richiesta per ottenere più volontari PC");
-                            schede[1].GetComponentInChildren<taskSeleziona>().NuovaTask(70);
+                            schede[1].GetComponentInChildren<TaskSeleziona>().NuovaTask(70);
                             // altri volontari step 2 pc
                             break;
                         case 71:
                             NuovaNotifica("Il COC ha richiesto che autorizzi la richiesta per ottenere più volontari GGEV");
-                            schede[1].GetComponentInChildren<taskSeleziona>().NuovaTask(71);
+                            schede[1].GetComponentInChildren<TaskSeleziona>().NuovaTask(71);
                             // altri volontari step 2 ggev
                             break;
                         case 72:
                             NuovaNotifica("Il COC ha richiesto che autorizzi la richiesta per ottenere più volontari CRI");
-                            schede[1].GetComponentInChildren<taskSeleziona>().NuovaTask(72);
+                            schede[1].GetComponentInChildren<TaskSeleziona>().NuovaTask(72);
                             // altri volontari step 2 cri
                             break;
                         case 73:
                             NuovaNotifica("Il COC ha richiesto che autorizzi la richiesta per ottenere più vigili");
-                            schede[1].GetComponentInChildren<taskSeleziona>().NuovaTask(73);
+                            schede[1].GetComponentInChildren<TaskSeleziona>().NuovaTask(73);
                             // altri volontari step 2 polizia
                             break;
                         case 74:
                             NuovaNotifica("Il COC ha richiesto che autorizzi la richiesta per ottenere più pompieri");
-                            schede[1].GetComponentInChildren<taskSeleziona>().NuovaTask(74);
+                            schede[1].GetComponentInChildren<TaskSeleziona>().NuovaTask(74);
                             // altri volontari step 2 pompiere
                             break;
                     }
@@ -163,7 +163,7 @@ namespace _Scenes.User.telefono
                     {
                         case 2:
                             NuovaNotifica("Sei stato attivato dal sindaco! Distribuisci in modo corretto i vari incarichi");
-                            taskSeleziona tmp = schede[1].GetComponentInChildren<taskSeleziona>();
+                            TaskSeleziona tmp = schede[1].GetComponentInChildren<TaskSeleziona>();
                             tmp.NuovaTask(1110);
                             tmp.NuovaTask(1111);
                             tmp.NuovaTask(1112);
@@ -179,52 +179,52 @@ namespace _Scenes.User.telefono
                             break;
                         case 60:
                             NuovaNotifica("Il referente PC ha bisogno di più volontari");
-                            schede[3].GetComponentInChildren<taskSeleziona>().NuovaTask(60);
+                            schede[3].GetComponentInChildren<TaskSeleziona>().NuovaTask(60);
                             // altri volontari step 1 pc
                             break;
                         case 61:
                             NuovaNotifica("Il referente GGEV ha bisogno di più volontari");
-                            schede[3].GetComponentInChildren<taskSeleziona>().NuovaTask(61);
+                            schede[3].GetComponentInChildren<TaskSeleziona>().NuovaTask(61);
                             // altri volontari step 1 ggev
                             break;
                         case 62:
                             NuovaNotifica("Il referente CRI ha bisogno di più volontari");
-                            schede[3].GetComponentInChildren<taskSeleziona>().NuovaTask(62);
+                            schede[3].GetComponentInChildren<TaskSeleziona>().NuovaTask(62);
                             // altri volontari step 1 cri
                             break;
                         case 63:
                             NuovaNotifica("Il referente della polizia ha bisogno di più poliziotti");
-                            schede[3].GetComponentInChildren<taskSeleziona>().NuovaTask(63);
+                            schede[3].GetComponentInChildren<TaskSeleziona>().NuovaTask(63);
                             // altri volontari step 1 polizia
                             break;
                         case 64:
                             NuovaNotifica("Il referente dei pompieri ha bisogno di più volontari");
-                            schede[3].GetComponentInChildren<taskSeleziona>().NuovaTask(64);
+                            schede[3].GetComponentInChildren<TaskSeleziona>().NuovaTask(64);
                             // altri volontari step 1 pompiere
                             break;
                         case 75:
                             NuovaNotifica("Il sindaco ha approvato la richiesta di volontari PC, ora mandala alla segreteria provinciale");
-                            schede[3].GetComponentInChildren<taskSeleziona>().NuovaTask(75);
+                            schede[3].GetComponentInChildren<TaskSeleziona>().NuovaTask(75);
                             // altri volontari step 3 pc
                             break;
                         case 76:
                             NuovaNotifica("Il sindaco ha approvato la richiesta di volontari GGEV, ora mandala alla segreteria provinciale");
-                            schede[3].GetComponentInChildren<taskSeleziona>().NuovaTask(76);
+                            schede[3].GetComponentInChildren<TaskSeleziona>().NuovaTask(76);
                             // altri volontari step 3 ggev
                             break;
                         case 77:
                             NuovaNotifica("Il sindaco ha approvato la richiesta di volontari CRI, ora mandala alla segreteria provinciale");
-                            schede[3].GetComponentInChildren<taskSeleziona>().NuovaTask(77);
+                            schede[3].GetComponentInChildren<TaskSeleziona>().NuovaTask(77);
                             // altri volontari step 3 cri
                             break;
                         case 78:
                             NuovaNotifica("Il sindaco ha approvato la richiesta di polizia, ora mandala alla segreteria provinciale");
-                            schede[3].GetComponentInChildren<taskSeleziona>().NuovaTask(78);
+                            schede[3].GetComponentInChildren<TaskSeleziona>().NuovaTask(78);
                             // altri volontari step 3 polizia
                             break;
                         case 79:
                             NuovaNotifica("Il sindaco ha approvato la richiesta di pompieri, ora mandala alla segreteria provinciale");
-                            schede[3].GetComponentInChildren<taskSeleziona>().NuovaTask(79);
+                            schede[3].GetComponentInChildren<TaskSeleziona>().NuovaTask(79);
                             // altri volontari step 3 pompiere
                             break;
                     }
@@ -245,11 +245,11 @@ namespace _Scenes.User.telefono
                     {
                         case 30:
                             NuovaNotifica("task 30");
-                            schede[2].GetComponentInChildren<taskSeleziona>().NuovaTask(30);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask(30);
                             break;
                         case 31:
                             NuovaNotifica("task 31");
-                            schede[2].GetComponentInChildren<taskSeleziona>().NuovaTask(31);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask(31);
                             break;
                         case 67:
                             NuovaNotifica("Richiesta volontari annulata");
@@ -259,15 +259,15 @@ namespace _Scenes.User.telefono
                             break;
                         case 102:
                             NuovaNotifica("task 102");
-                            schede[2].GetComponentInChildren<taskSeleziona>().NuovaTask(102);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask(102);
                             break;
                         case 105:
                             NuovaNotifica("task 105");
-                            schede[2].GetComponentInChildren<taskSeleziona>().NuovaTask(105);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask(105);
                             break;
                         case 106:
                             NuovaNotifica("task 106");
-                            schede[2].GetComponentInChildren<taskSeleziona>().NuovaTask(106);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask(106);
                             break;
                     }
                     break;
@@ -276,11 +276,11 @@ namespace _Scenes.User.telefono
                     {
                         case 20:
                             NuovaNotifica("task 10");
-                            schede[2].GetComponentInChildren<taskSeleziona>().NuovaTask(10);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask(10);
                             break;
                         case 21:
                             NuovaNotifica("task 10");
-                            schede[2].GetComponentInChildren<taskSeleziona>().NuovaTask(10);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask(10);
                             break;
                         case 66:
                             NuovaNotifica("Richiesta volontari annulata");
@@ -290,7 +290,7 @@ namespace _Scenes.User.telefono
                             break;
                         case 104:
                             NuovaNotifica("task 104");
-                            schede[2].GetComponentInChildren<taskSeleziona>().NuovaTask(104);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask(104);
                             break;
                     }
                     break;
@@ -299,19 +299,19 @@ namespace _Scenes.User.telefono
                     {
                         case 10:
                             NuovaNotifica("task 10");
-                            schede[2].GetComponentInChildren<taskSeleziona>().NuovaTask(10);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask(10);
                             break;
                         case 11:
                             NuovaNotifica("task 11");
-                            schede[2].GetComponentInChildren<taskSeleziona>().NuovaTask(11);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask(11);
                             break;
                         case 12:
                             NuovaNotifica("task 12");
-                            schede[2].GetComponentInChildren<taskSeleziona>().NuovaTask(12);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask(12);
                             break;
                         case 13:
                             NuovaNotifica("task 13");
-                            schede[2].GetComponentInChildren<taskSeleziona>().NuovaTask(13);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask(13);
                             break;
                         case 65:
                             NuovaNotifica("Richiesta volontari annulata");
@@ -326,11 +326,11 @@ namespace _Scenes.User.telefono
                     {
                         case 40:
                             NuovaNotifica("task 40");
-                            schede[2].GetComponentInChildren<taskSeleziona>().NuovaTask(40);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask(40);
                             break;
                         case 41:
                             NuovaNotifica("task 41");
-                            schede[2].GetComponentInChildren<taskSeleziona>().NuovaTask(41);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask(41);
                             break;
                         case 68:
                             NuovaNotifica("Richiesta volontari annulata");
@@ -340,7 +340,7 @@ namespace _Scenes.User.telefono
                             break;
                         case 107:
                             NuovaNotifica("task 107");
-                            schede[2].GetComponentInChildren<taskSeleziona>().NuovaTask(107);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask(107);
                             break;
                     }
                     break;
@@ -349,7 +349,7 @@ namespace _Scenes.User.telefono
                     {
                         case 50:
                             NuovaNotifica("task 50");
-                            schede[2].GetComponentInChildren<taskSeleziona>().NuovaTask(50);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask(50);
                             break;
                         case 69:
                             NuovaNotifica("Richiesta volontari annulata");
@@ -359,15 +359,15 @@ namespace _Scenes.User.telefono
                             break;
                         case 100:
                             NuovaNotifica("task 100");
-                            schede[2].GetComponentInChildren<taskSeleziona>().NuovaTask(100);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask(100);
                             break;
                         case 101:
                             NuovaNotifica("task 101");
-                            schede[2].GetComponentInChildren<taskSeleziona>().NuovaTask(101);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask(101);
                             break;
                         case 103:
                             NuovaNotifica("task 103");
-                            schede[2].GetComponentInChildren<taskSeleziona>().NuovaTask(103);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask(103);
                             break;
                     }
                     break;
@@ -376,23 +376,23 @@ namespace _Scenes.User.telefono
                     {
                         case 80:
                             NuovaNotifica("Richiesta di volontari PC");
-                            schede[1].GetComponentInChildren<taskSeleziona>().NuovaTask(80);
+                            schede[1].GetComponentInChildren<TaskSeleziona>().NuovaTask(80);
                             break;
                         case 81:
                             NuovaNotifica("Richiesta di volontari GGEV");
-                            schede[1].GetComponentInChildren<taskSeleziona>().NuovaTask(81);
+                            schede[1].GetComponentInChildren<TaskSeleziona>().NuovaTask(81);
                             break;
                         case 82:
                             NuovaNotifica("Richiesta di volontari CRI");
-                            schede[1].GetComponentInChildren<taskSeleziona>().NuovaTask(82);
+                            schede[1].GetComponentInChildren<TaskSeleziona>().NuovaTask(82);
                             break;
                         case 83:
                             NuovaNotifica("Richiesta di polizia");
-                            schede[1].GetComponentInChildren<taskSeleziona>().NuovaTask(83);
+                            schede[1].GetComponentInChildren<TaskSeleziona>().NuovaTask(83);
                             break;
                         case 84:
                             NuovaNotifica("Richiesta di vigili del fuoco");
-                            schede[1].GetComponentInChildren<taskSeleziona>().NuovaTask(84);
+                            schede[1].GetComponentInChildren<TaskSeleziona>().NuovaTask(84);
                             break;
                     }
                     break;

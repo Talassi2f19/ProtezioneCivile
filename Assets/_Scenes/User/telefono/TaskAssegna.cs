@@ -21,7 +21,7 @@ namespace _Scenes.User.telefono
         [SerializeField]private TextMeshProUGUI testo;
 
         private int selected = 0;
-    
+
 
         // public bool flag;
         //
@@ -33,6 +33,28 @@ namespace _Scenes.User.telefono
         //         SetCodice(10);
         //     }
         // }
+
+    
+        // public void Set(String strTesto, Ruoli ruoloCorretto, int codiceInvio )
+        // {
+        //     testo.text = strTesto;
+        // }
+
+        private void OnEnable()
+        {
+            buttAvanti.SetActive(false);
+            buttInvia.SetActive(true);
+    
+            gameObject1.SetActive(true);
+            gameObject2.SetActive(true);
+            gameObject3.SetActive(true);
+            gameObject4.SetActive(true);
+            gameObject5.SetActive(true);
+        
+            corretto.SetActive(false);
+            sbagliato.SetActive(false);
+        }
+
 
         public void SetCodice(int value)
         {
@@ -74,7 +96,7 @@ namespace _Scenes.User.telefono
                     break;
             }
         }
-
+    
         public void Click(int n)
         {
             gameObject1.GetComponent<Image>().color = Color.white;
@@ -111,17 +133,17 @@ namespace _Scenes.User.telefono
         {
             if(selected == 0)
                 return;
-        
+    
             buttAvanti.SetActive(true);
             buttInvia.SetActive(false);
-        
+    
             gameObject1.SetActive(false);
             gameObject2.SetActive(false);
             gameObject3.SetActive(false);
             gameObject4.SetActive(false);
             gameObject5.SetActive(false);
 
-        
+    
             //1 refPC
             //2 refCri
             //3 refGGEV
@@ -207,12 +229,31 @@ namespace _Scenes.User.telefono
                     RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":50}");
                     break;
             }
-        
+    
         }
 
         public void Avanti()
         {
             transform.parent.gameObject.SetActive(false);
+        
+        
+            gameObject1.GetComponent<Image>().color = Color.white;
+            gameObject2.GetComponent<Image>().color = Color.white;
+            gameObject3.GetComponent<Image>().color = Color.white;
+            gameObject4.GetComponent<Image>().color = Color.white;
+            gameObject5.GetComponent<Image>().color = Color.white;
+        
+            buttAvanti.SetActive(false);
+            buttInvia.SetActive(true);
+    
+            gameObject1.SetActive(true);
+            gameObject2.SetActive(true);
+            gameObject3.SetActive(true);
+            gameObject4.SetActive(true);
+            gameObject5.SetActive(true);
+        
+            corretto.SetActive(false);
+            sbagliato.SetActive(false);
         }
     
     }
