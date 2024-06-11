@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
-using Script.Master;
 using Script.Utility;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using Scene = Script.Utility.Scene;
 
@@ -35,6 +32,8 @@ namespace _Scenes.User.telefono
         private void Start()
         {
             Inizializza();
+            Testo.Load();
+            Debug.Log(Testo.testi[1]);
         }
         
         public Ruoli r;
