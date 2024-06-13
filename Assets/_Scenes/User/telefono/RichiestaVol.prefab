@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 6516260241236430783, guid: 27ffc487ae04f444d8e90caa1635bedb, type: 3}
-  avanti: {fileID: 3998506900746235531}
+  avanti: {fileID: 6038090088994992003}
   parent: {fileID: 6677135270477041466}
   logica: {fileID: 0}
   volontariTaks: {fileID: 0}

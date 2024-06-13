@@ -15,7 +15,6 @@ namespace _Scenes.User.telefono
         [SerializeField]private GameObject prefRefTlc;
         [SerializeField]private GameObject prefSegreteria;
         [SerializeField]private GameObject prefReferenti;
-        [SerializeField]private GameObject prefAttivita;
         [SerializeField]private GameObject prefNotifiche;
         [SerializeField]private GameObject pallinoRosso;
         [SerializeField]private GameObject playerRuoli;
@@ -24,7 +23,8 @@ namespace _Scenes.User.telefono
         [SerializeField]private GameObject mostraVolontari;
         [SerializeField]private GameObject assegnaVolontari;
         [SerializeField]private GameObject richiesteVolontari;
-        
+        [SerializeField]private GameObject plInfo;
+
         [SerializeField]private Transform parent;
         
         private List<GameObject> schede = new List<GameObject>();
@@ -85,8 +85,8 @@ namespace _Scenes.User.telefono
                     schede.Add( Instantiate(prefGenerico, parent));
                     break;
             }
-            schede.Add( Instantiate(playerRuoli, parent)); //[^3]
-            schede.Add( Instantiate(prefAttivita, parent)); //[^2]
+            schede.Add( Instantiate(plInfo, parent)); //[^3]
+            schede.Add( Instantiate(playerRuoli, parent)); //[^2]
             schede.Add( Instantiate(prefNotifiche, parent)); //[^1]
             foreach (var var in schede)
             { 
@@ -97,6 +97,7 @@ namespace _Scenes.User.telefono
 
         public void OpenMessaggi()
         {
+            OpenManager();
             schede[^1].SetActive(true);
         }
         

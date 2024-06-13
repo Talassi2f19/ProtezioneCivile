@@ -34,7 +34,7 @@ public class LogicaGame : MonoBehaviour
 
     public void TerminaConferma()
     {
-        RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "\"CodeTask\":-1");
+        RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":-1}").Catch(Debug.LogError);
         string str = "{\"" + Global.GameStatusCodeKey + "\":\"" + GameStatus.End + "\"}";
         RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str).Catch(Debug.LogError);
         SceneManager.LoadScene(Scene.Master.EndGame);

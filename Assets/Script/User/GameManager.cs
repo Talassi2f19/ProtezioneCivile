@@ -13,6 +13,7 @@ namespace Script.User
 {
     public class GameManager : MonoBehaviour
     {
+        
         [SerializeField] private GameObject onlinePlayer;
         [SerializeField] private Transform parent;
 
@@ -22,12 +23,15 @@ namespace Script.User
         private Dictionary<string, Task> taskList = new Dictionary<string, Task>();
 
         [SerializeField]private TaskManager taskManager;
+        [SerializeField] private JoyStick joyStick;
         
         private void Start()
         {
+            joyStick.Enable(true);
             listeners = new Listeners(Info.DBUrl + Info.sessionCode + "/Game.json");
             listeners.Start(Parse);
             CaricaPlayer();
+            
             // FirstLoadTask();
         }
 

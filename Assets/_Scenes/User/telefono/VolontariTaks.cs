@@ -17,11 +17,18 @@ namespace _Scenes.User.telefono
         [SerializeField]private GameObject prefab;
         [SerializeField]private Transform container;
         [SerializeField] private Logica logica;
+        
+        [SerializeField]private Button bottoneConferma;
+        [SerializeField]private TextMeshProUGUI numeroVolontariText;
         private int codice;
+        private int nVolontari;
 
         public void Assegna(int cod)
         {
             codice = cod;
+            nVolontari = GenNumVolontari();
+            numeroVolontariText.text = "Volontari richiesti: " + nVolontari;
+            ResetLista();
             Aggiorna();
             part1.SetActive(false);
             part1A.SetActive(false);
@@ -31,16 +38,25 @@ namespace _Scenes.User.telefono
         private void OnEnable()
         {
             Fine();
+        }
+
+        private void ResetLista()
+        {
+            bottoneConferma.interactable = false;
             selezionati = new List<string>();
+            foreach (Transform child in container)
+            {
+                if(child.gameObject.activeSelf)
+                    child.GetComponent<Image>().color = Color.white;
+            }
         }
     
 
-        private void Fine()
+        public void Fine()
         {
             part1.SetActive(true);
             part1A.SetActive(true);
             part2.SetActive(false);
-            selezionati = new List<string>();
         }
     
         private Ruoli roleType;
@@ -70,6 +86,7 @@ namespace _Scenes.User.telefono
         {
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(e =>
             {
+                ResetLista();
                 foreach (Transform figlio in container)
                 {
                     // Destroy(figlio.gameObject);
@@ -81,11 +98,14 @@ namespace _Scenes.User.telefono
     
         private void Mostra(JSONObject json)
         {
+            Debug.Log("das" + json);
+            if(!json)
+                return;
             foreach (var var in json.list)
             {
                 if (var.GetField("Role").stringValue == roleType.ToString())
                 {
-                    if (var.GetField("Occupato").boolValue == false)
+                    if (!var.GetField("Occupato") || var.GetField("Occupato").boolValue == false)
                     {
                         GameObject tmp = Instantiate(prefab, container);
                         tmp.GetComponentInChildren<Button>().onClick.AddListener(()=>Selected(var.GetField("Name").stringValue, tmp));
@@ -108,6 +128,55 @@ namespace _Scenes.User.telefono
             {
                 bottone.GetComponentInChildren<Image>().color = Color.green;
                 selezionati.Add(nome);
+            }
+            
+            bottoneConferma.interactable = selezionati.Count == nVolontari;
+        }
+
+        private int GenNumVolontari()
+        {
+            switch (codice)
+            {
+                case 10:
+                    return 2;
+                case 11:
+                    return 2;
+                case 12:
+                    return 2;
+                case 13:
+                    return 2;
+                case 20:
+                    return 2;
+                case 21:
+                    return 2;
+                case 30:
+                    return 2;
+                case 31:
+                    return 2;
+                case 40:
+                    return 2;
+                case 41:
+                    return 2;
+                case 50:
+                    return 2;
+                case 100:
+                    return 2;
+                case 101:
+                    return 2;
+                case 102:
+                    return 2;
+                case 103:
+                    return 2;
+                case 104:
+                    return 2;
+                case 105:
+                    return 2;
+                case 106:
+                    return 2;
+                case 107:
+                    return 2;
+                default:
+                    return 1;
             }
         }
     
@@ -196,7 +265,6 @@ namespace _Scenes.User.telefono
             logica.NuovaNotifiche("Hai richiesto più volontari");
             String json = "{\"CodeTask\":"+codiceDaInviare+"}";
             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", json).Catch(Debug.Log);
-        
         }
     }
 }

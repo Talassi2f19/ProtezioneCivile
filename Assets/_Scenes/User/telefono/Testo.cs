@@ -14,7 +14,6 @@ namespace _Scenes.User.telefono
             if (testi != null)
                 return;
             
-            Debug.Log("Load");
             testi = new Dictionary<int, string>();
             
             string filePath = Path.Combine(Application.dataPath, "_Scenes/User/telefono/Testi.json");

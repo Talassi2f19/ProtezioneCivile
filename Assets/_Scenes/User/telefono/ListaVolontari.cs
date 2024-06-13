@@ -37,6 +37,11 @@ namespace _Scenes.User.telefono
 
         private void OnEnable()
         {
+            Aggiorna();
+        }
+        
+        public void Aggiorna()
+        {
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(e =>
             {
                 foreach (Transform figlio in parent)
@@ -56,7 +61,7 @@ namespace _Scenes.User.telefono
                 {
                     GameObject tmp = Instantiate(prefab, parent);
                     tmp.GetComponentInChildren<TextMeshProUGUI>().text = var.GetField("Name").stringValue;
-                    if (var.GetField("Occupato").boolValue)
+                    if (var.GetField("Occupato") && var.GetField("Occupato").boolValue)
                     {
                         tmp.GetComponentInChildren<Image>().color = Color.red;
                     }

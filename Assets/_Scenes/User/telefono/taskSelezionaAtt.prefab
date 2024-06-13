@@ -450,9 +450,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 6516260241236430783, guid: 27ffc487ae04f444d8e90caa1635bedb, type: 3}
-  avanti: {fileID: 5787830588696323046}
+  avanti: {fileID: 7071962074133195641}
   parent: {fileID: 8003578699869192480}
   logica: {fileID: 5212703651242991347}
+  volontariTaks: {fileID: 0}
+  richiesteVolontari: {fileID: 0}
 --- !u!1 &8638603379310414261
 GameObject:
   m_ObjectHideFlags: 0

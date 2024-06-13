@@ -37,14 +37,9 @@ namespace _Scenes.User.telefono
 
         public void MostraRuoli() //mostra pagina notifiche
         {
-            schede[^3].SetActive(true);
-        }
-    
-        public void Attivita() //mostr pagina con attività da fare
-        {
             schede[^2].SetActive(true);
         }
-
+        
         public void RefTlcInforma(GameObject tmp)
         {
             tmp.SetActive(false);
@@ -109,6 +104,10 @@ namespace _Scenes.User.telefono
         public void ReferentiAssegnaVolontari()
         {
             schede[2].SetActive(true);
+        }
+        public void OpenPlInfo()
+        {
+            schede[^3].SetActive(true);
         }
         
     }

@@ -103,17 +103,18 @@ namespace Script.Master
 
         private void CaricaPlayer2(JSONObject userList)
         {
-            userList.RemoveField(Info.localUser.name);
             if(!userList)
                 return;
             foreach (JSONObject json in userList.list)
             {
-                if(json.GetField("Virtual"))
-                    return;
-                string n = json.GetField("Name").stringValue;
-                playerList.Add(n, Instantiate(prefab ,json.GetField("Coord").ToVector2(),new Quaternion(), parent));
-                playerList[n].name = n;
-                //playerList[n].GetComponent<PlayerOnline>().Set(json);
+                if (!json.GetField("Virtual"))
+                {
+                    string n = json.GetField("Name").stringValue;
+                    playerList.Add(n, Instantiate(prefab ,json.GetField("Coord").ToVector2(),new Quaternion(), parent));
+                    playerList[n].name = n;
+                    //playerList[n].GetComponent<PlayerOnline>().Set(json);
+                }
+                
             }
         }
 
