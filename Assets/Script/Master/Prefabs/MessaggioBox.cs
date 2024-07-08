@@ -33,7 +33,7 @@ namespace Script.Master.Prefabs
     
         public void Click()
         {
-            transform.parent.parent.gameObject.GetComponent<MessaggiMaster>().MessaggioSelezionato(id);
+            transform.parent.parent.gameObject.GetComponent<NotificaManager>().MessaggioSelezionato(id);
         }
     }
 }

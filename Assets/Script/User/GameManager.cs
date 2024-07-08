@@ -37,7 +37,8 @@ namespace Script.User
 
         private void OnApplicationQuit()
         {
-            listeners.Stop();
+            if(listeners != null)
+                listeners.Stop();
         }
 
         private void Parse(string data)

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Script.Master
 {
-    public class MessaggiMaster : MonoBehaviour
+    public class NotificaManager : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI displayTesto;
         [SerializeField] private Transform container;
@@ -27,7 +27,7 @@ namespace Script.Master
             count++;
             AggiornaContainer();
         }
-    
+        
         private void AggiornaContainer()
         {
             RectTransform rectTransform = container.GetComponent<RectTransform>();

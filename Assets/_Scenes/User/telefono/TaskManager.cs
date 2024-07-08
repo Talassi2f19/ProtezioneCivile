@@ -1,7 +1,12 @@
 ﻿using System.Collections.Generic;
+using minigame.AllestimentoCRI;
+using minigame.incendio;
+using minigame.PuntiRaccolta;
+using Script.User;
 using Script.Utility;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Scene = Script.Utility.Scene;
 
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
@@ -9,6 +14,7 @@ namespace _Scenes.User.telefono
 {
     public class TaskManager : MonoBehaviour
     {
+        [Header("TELEFONO")]
         [SerializeField]private GameObject prefGenerico;
         [SerializeField]private GameObject prefCOC;
         [SerializeField]private GameObject prefSindaco;
@@ -24,11 +30,26 @@ namespace _Scenes.User.telefono
         [SerializeField]private GameObject assegnaVolontari;
         [SerializeField]private GameObject richiesteVolontari;
         [SerializeField]private GameObject plInfo;
-
         [SerializeField]private Transform parent;
         
+        [Header("MINIGIOCHI")]
+        [SerializeField] private TrovaDispersi trovaDispersi;
+        [SerializeField] private TogliTane rimuoviTane;
+        [SerializeField] private TogliAcqua togliAcqua;
+        [SerializeField] private SpegniIncendio spegniIncendio;
+        [SerializeField] private PuntiRaccolta puntiRaccolta;
+        [SerializeField] private AllestimentoCRI allestimentoCri;
+        
+        // [Header("MAPPA")]
+        // [SerializeField]private Transform mappa;
+        
+        
+        [Header("setRuolo")]
+        [SerializeField]private Ruoli r;
+                
         private List<GameObject> schede = new List<GameObject>();
-
+        
+       
         private void Start()
         {
             Inizializza();
@@ -36,7 +57,7 @@ namespace _Scenes.User.telefono
             Debug.Log(Testo.testi[1]);
         }
         
-        public Ruoli r;
+       
 
         [ContextMenu("setRuolo")]
         public void Hh()
@@ -82,7 +103,7 @@ namespace _Scenes.User.telefono
                     schede.Add( Instantiate(assegnaVolontari, parent)); //2
                     break;
                 default:
-                    schede.Add( Instantiate(prefGenerico, parent));
+                    schede.Add( Instantiate(prefGenerico, parent)); //0
                     break;
             }
             schede.Add( Instantiate(plInfo, parent)); //[^3]
@@ -106,7 +127,7 @@ namespace _Scenes.User.telefono
          schede[0].SetActive(true);
         }
         
-        public void Assegna(int value, string PlName = "")
+        public void Assegna(int value, string plName = "")
         {
             if (value == -1)
             {
@@ -119,6 +140,23 @@ namespace _Scenes.User.telefono
                 NuovaNotifica("Informazioni da TLC");
                 return;
             }
+
+            if (value == 18000)
+            {
+                puntiRaccolta.Genera(false);
+                return;
+            }
+            if (value == 30000)
+            {
+                allestimentoCri.Genera(false);
+                return;
+            }
+                
+            // if (Info.localUser.role != Ruoli.VolFuoco && (value == 2000 || value == 2001 || value == 2002))
+            // {
+            //     plFind.GeneraOverlay(value);
+            //     return;
+            // }
             switch (Info.localUser.role)
             {
                 case Ruoli.Sindaco:
@@ -169,7 +207,6 @@ namespace _Scenes.User.telefono
                             tmp.NuovaTask(1112);
                             tmp.NuovaTask(1113);
                             tmp.NuovaTask(1120);
-                            tmp.NuovaTask(1121);
                             tmp.NuovaTask(1130);
                             tmp.NuovaTask(1131);
                             tmp.NuovaTask(1140);
@@ -275,10 +312,6 @@ namespace _Scenes.User.telefono
                     switch (value)
                     {
                         case 20:
-                            NuovaNotifica("task 10");
-                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask(10);
-                            break;
-                        case 21:
                             NuovaNotifica("task 10");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask(10);
                             break;
@@ -415,8 +448,14 @@ namespace _Scenes.User.telefono
                     switch (value)
                     {
                         case 35:
+                            if(Info.localUser.name != plName)
+                                return;
+                            NuovaNotifica("Trova la zona e costruisci un ambiete per fornire le cure mediche durante l'emergenza");
+                            allestimentoCri.Genera(true);
                             break;
                         case 36:
+                            if(Info.localUser.name != plName)
+                                return;
                             break;
                     }
                     break;
@@ -424,12 +463,24 @@ namespace _Scenes.User.telefono
                     switch (value)
                     {
                         case 15:
+                            if(Info.localUser.name != plName)
+                                return;
                             break;
                         case 16:
+                            if(Info.localUser.name != plName)
+                                return;
+                            NuovaNotifica("Cerca e svuolta la zona allagata");
+                            togliAcqua.Genera(true);
                             break;
                         case 17:
+                            if(Info.localUser.name != plName)
+                                return;
                             break;
                         case 18:
+                            if(Info.localUser.name != plName)
+                                return;
+                            NuovaNotifica("Trova la zona e contruisci un ambiente sicuro come punto di raccolta per i cittadini");
+                            puntiRaccolta.Genera(true);
                             break;
                     }
                     break;
@@ -437,10 +488,14 @@ namespace _Scenes.User.telefono
                     switch (value)
                     {
                         case 25:
-                            break;
-                        case 26:
+                            if(Info.localUser.name != plName)
+                                return;
+                            NuovaNotifica("Cerca le tane sull'argine e chiudile");
+                            rimuoviTane.GeneraTane();
                             break;
                         case 27:
+                            if(Info.localUser.name != plName)
+                                return;
                             break;
                     }
                     break;
@@ -448,10 +503,16 @@ namespace _Scenes.User.telefono
                     switch (value)
                     {
                         case 45:
+                            if(Info.localUser.name != plName)
+                                return;
                             break;
                         case 46:
+                            if(Info.localUser.name != plName)
+                                return;
                             break;
                         case 47:
+                            if(Info.localUser.name != plName)
+                                return;
                             break;
                     }
                     break;
@@ -459,10 +520,20 @@ namespace _Scenes.User.telefono
                     switch (value)
                     {
                         case 55:
+                            if(Info.localUser.name != plName)
+                                return;
                             break;
                         case 56:
+                            if(Info.localUser.name != plName)
+                                return;
+                            NuovaNotifica("Ci sono delle persone disperse, trovale.");
+                            trovaDispersi.GeneraDaTrovare();
                             break;
                         case 57:
+                            if(Info.localUser.name != plName)
+                                return;
+                            NuovaNotifica("Trova l'incedio e spegnilo.");
+                            spegniIncendio.Genera(true);
                             break;
                     }
                     break;
@@ -471,11 +542,10 @@ namespace _Scenes.User.telefono
                     break;
             }
         }
-        public void NuovaNotifica(string testo)
+        private void NuovaNotifica(string testo)
         {
             pallinoRosso.SetActive(true);
             schede[^1].GetComponent<AddNotifica>().SetMessaggio(testo);
         }
-        
     }
 }

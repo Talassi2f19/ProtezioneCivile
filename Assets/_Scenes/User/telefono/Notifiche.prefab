@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 331c9e61ad255974c873c6f565e2ff93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _messaggiMaster: {fileID: 3465558222079358164}
+  notificaManager: {fileID: 3465558222079358164}
 --- !u!1 &2359301213461038814
 GameObject:
   m_ObjectHideFlags: 0
