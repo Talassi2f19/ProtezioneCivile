@@ -1,34 +1,53 @@
 using System;
-using Defective.JSON;
-using Proyecto26;
-using Script.Utility;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 namespace Script.test
 {
     public class ActionButton : MonoBehaviour
     {
-        public bool flax;
+        [SerializeField]private BoundsInt bounds;
+        [SerializeField]private TileBase[] allTiles;
+        [SerializeField] private int ff;
+        [SerializeField] private Tile hh;
+        private Tilemap tilemap;
+        private void Start()
+        {
+           tilemap = GetComponent<Tilemap>();
+            
+            bounds = tilemap.cellBounds;
+            allTiles = tilemap.GetTilesBlock(bounds);
+            ff = allTiles.Length;
+        }
 
+        [SerializeField] private BoundsInt boundssss = new BoundsInt();
+    
         private void Update()
         {
-            if (flax)
+            if (boundssss != tilemap.cellBounds)
             {
-                flax = false;
-                chiama();    
+                boundssss = tilemap.cellBounds;
+                Debug.Log(tilemap.GetTilesBlock(tilemap.cellBounds).Length);
             }
         }
 
-        public void chiama()
+        [ContextMenu("dsadas")]
+        public void gg()
         {
-            RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + ".json").Then(e =>
-            {
-                int h = 0;
-                foreach (var var in new JSONObject(e.Text).list)
-                {
-                    h += var.intValue;
-                }
-            });
+            Debug.Log(allTiles.Length);
         }
+        
+        [ContextMenu("ss")]
+        public void gsg()
+        {
+            tilemap.SetTile(new Vector3Int(50,50,0),hh);
+        }
+        [ContextMenu("sss")]
+        public void gsgs()
+        {
+            tilemap.ClearAllTiles();
+        }
+
     }
 }

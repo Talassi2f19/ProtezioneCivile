@@ -10,17 +10,12 @@ namespace Script.User
 {
     public class SelezioneCoC : MonoBehaviour
     {
-        [SerializeField] private GameObject schermataRuoloPrefab;
-
         [SerializeField] private GameObject buttonPrefab;
         [SerializeField] private Transform buttonParent;
         private List<string> players = new List<string>();
         
         void Start()
         {
-         //   schermataRuoloPrefab.SetActive(false);
-            schermataRuoloPrefab.SetActive(true);
-
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(e =>
             {
                 Debug.Log(e.Text);

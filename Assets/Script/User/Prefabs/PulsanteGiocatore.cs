@@ -17,7 +17,7 @@ namespace Script.User.Prefabs
         {
             nomeGiocatore = str;
             pulsante.GetComponentInChildren<TMP_Text>().text = nomeGiocatore;
-            gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(pulsante.GetComponentInChildren<TMP_Text>().preferredWidth + 20, 40);
+            gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(pulsante.GetComponentInChildren<TMP_Text>().preferredWidth + 20 + 40, 40 + 40);
         }
 
         //al click vota una persona (votazione)

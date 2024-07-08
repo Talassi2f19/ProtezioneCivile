@@ -1,3 +1,4 @@
+using Defective.JSON;
 using Script.Utility;
 using TMPro;
 using UnityEngine;
@@ -31,10 +32,10 @@ namespace Script.User.Prefabs
             nome.GetComponent<TMP_Text>().text = localUser.name;
             nome.GetComponent<RectTransform>().sizeDelta = new Vector2(nome.GetComponent<TMP_Text>().preferredWidth, 25);
         }
-    
-        public void SetUser(GenericUser user)
+        
+        public void Set(JSONObject json)
         {
-            localUser = user;
+            localUser = json.ToUser();
         }
 
         public void Move(Vector2 v)

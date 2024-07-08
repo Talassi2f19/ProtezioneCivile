@@ -71,7 +71,7 @@ namespace Script.Master
                 
                 // Debug.Log("hey");
                 // string kk = data.Split("\"CodeTask\":")[1].Split("}")[0];
-                //
+                //z
                 // Debug.Log("è passato");
                 // int codice = Convert.ToInt32(kk);
                 // taskManager.Assegna(codice);
@@ -103,13 +103,18 @@ namespace Script.Master
 
         private void CaricaPlayer2(JSONObject userList)
         {
-            Dictionary<String, GenericUser> userDictionary = userList.ToUserDictionary();
-            foreach (var tmp in userDictionary)
+            if(!userList)
+                return;
+            foreach (JSONObject json in userList.list)
             {
-                Debug.Log(tmp.Key + "--"+tmp.Value);
-                playerList.Add(tmp.Key, Instantiate(prefab ,tmp.Value.coord,new Quaternion(), parent));
-                playerList[tmp.Key].name = tmp.Key;
-                // playerList[tmp.Key].GetComponent<>().Set();
+                if (!json.GetField("Virtual"))
+                {
+                    string n = json.GetField("Name").stringValue;
+                    playerList.Add(n, Instantiate(prefab ,json.GetField("Coord").ToVector2(),new Quaternion(), parent));
+                    playerList[n].name = n;
+                    //playerList[n].GetComponent<PlayerOnline>().Set(json);
+                }
+                
             }
         }
 

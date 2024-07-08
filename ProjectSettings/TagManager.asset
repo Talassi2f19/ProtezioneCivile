@@ -11,7 +11,7 @@ TagManager:
   - collider
   - Water
   - UI
-  - 
+  - minimappa
   - 
   - 
   - 
@@ -47,9 +47,15 @@ TagManager:
   - name: collider
     uniqueID: 2148293331
     locked: 0
+  - name: mezzo
+    uniqueID: 1777227341
+    locked: 0
   - name: onlinepl
     uniqueID: 515190929
     locked: 0
   - name: player
     uniqueID: 3977251529
+    locked: 0
+  - name: top
+    uniqueID: 2319900637
     locked: 0

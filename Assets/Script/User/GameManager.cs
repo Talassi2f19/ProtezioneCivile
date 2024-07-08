@@ -1,20 +1,21 @@
 using System;
 using System.Collections.Generic;
+using _Scenes.User.telefono;
 using Defective.JSON;
 using Proyecto26;
 using Script.test;
 using Script.User.Prefabs;
 using Script.Utility;
+using TEST;
 using UnityEngine;
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
 namespace Script.User
 {
     public class GameManager : MonoBehaviour
     {
+        
         [SerializeField] private GameObject onlinePlayer;
         [SerializeField] private Transform parent;
-        [SerializeField] private JoyStick joyStick;
-
 
         private Listeners listeners;
         private Dictionary<string, GameObject> playerList = new Dictionary<string, GameObject>();
@@ -22,6 +23,7 @@ namespace Script.User
         private Dictionary<string, Task> taskList = new Dictionary<string, Task>();
 
         [SerializeField]private TaskManager taskManager;
+        [SerializeField] private JoyStick joyStick;
         
         private void Start()
         {
@@ -29,12 +31,14 @@ namespace Script.User
             listeners = new Listeners(Info.DBUrl + Info.sessionCode + "/Game.json");
             listeners.Start(Parse);
             CaricaPlayer();
+            
             // FirstLoadTask();
         }
 
         private void OnApplicationQuit()
         {
-            listeners.Stop();
+            if(listeners != null)
+                listeners.Stop();
         }
 
         private void Parse(string data)
@@ -78,21 +82,22 @@ namespace Script.User
             {
                 // event: put
                 // data: {"path":"/Task/-NyblKDKNWqsCpdQe5Pq","data":{"CodeTask":1}}
-                Debug.Log("hey");
-                string kk = data.Split("\"CodeTask\":")[1].Split("}")[0];
                 
-                Debug.Log("è passato");
-                int codice = Convert.ToInt32(kk);
-                taskManager.Assegna(codice);
+                //{"CodeTask":1, "":""}
+                JSONObject json = new JSONObject(data.Split("data: ")[1]).GetField("data");
+                Debug.Log(json);
+                
+                int codice = json.GetField("CodeTask").intValue;
+                
+                if (json.GetField("Player"))
+                {
+                    taskManager.Assegna(codice, json.GetField("Player").stringValue);
+                }
+                else
+                {
+                    taskManager.Assegna(codice);
+                }
 
-                // data = data.Split("data: ")[1];
-                // Task tmp = GetTask(new JSONObject(data));
-                // if (tmp == null)
-                // {
-                //     taskList.Remove(new JSONObject(data).GetField("path").stringValue.Split("/")[2]);
-                //     return;
-                // }
-                // GestisciTask(tmp);
             }
         }
 
@@ -115,13 +120,17 @@ namespace Script.User
 
         private void CaricaPlayer2(JSONObject userList)
         {
-            Dictionary<String, GenericUser> userDictionary = userList.ToUserDictionary();
-            userDictionary.Remove(Info.localUser.name);
-            foreach (var tmp in userDictionary)
+            userList.RemoveField(Info.localUser.name);
+            if(!userList)
+                return;
+            foreach (JSONObject json in userList.list)
             {
-                playerList.Add(tmp.Key, Instantiate(onlinePlayer ,tmp.Value.coord,new Quaternion(), parent));
-                playerList[tmp.Key].name = tmp.Key;
-                playerList[tmp.Key].GetComponent<PlayerOnline>().SetUser(tmp.Value);
+                if(json.GetField("Virtual"))
+                    return;
+                string n = json.GetField("Name").stringValue;
+                playerList.Add(n, Instantiate(onlinePlayer ,json.GetField("Coord").ToVector2(),new Quaternion(), parent));
+                playerList[n].name = n;
+                playerList[n].GetComponent<PlayerOnline>().Set(json);
             }
         }
 

@@ -62,9 +62,9 @@ namespace Script.Utility
                 case Ruoli.Medico:
                     animator.runtimeAnimatorController = medico;
                     break;
-                case Ruoli.Giornalista:
-                    animator.runtimeAnimatorController = giornalista;
-                    break;
+                // case Ruoli.Giornalista:
+                //     animator.runtimeAnimatorController = giornalista;
+                //     break;
                 case Ruoli.Segreteria:
                     animator.runtimeAnimatorController = segreteria;
                     break;

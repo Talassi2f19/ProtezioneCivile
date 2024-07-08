@@ -14,7 +14,6 @@ namespace Script.Master
         {
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(e =>
             {
-                Debug.Log(e.Text);
                 JSONObject json = new JSONObject(e.Text);
                 for (int i = 0; i < json.count; i++)
                 {

@@ -21,9 +21,13 @@ namespace Script.Utility
         
         public GenericUser()
         {
+#if UNITY_EDITOR
             name = "admin";
+#else
+            name = "";
+#endif
             coord = Vector2.zero;
-            role = Ruoli.Null;
+            role = Ruoli.RefFuoco;
         }
         
         public GenericUser(string name, Ruoli role, Vector2 coord)

@@ -1,22 +1,28 @@
+using System;
+using Defective.JSON;
 using Proyecto26;
 using Script.Utility;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Script.User
 {
-    public class GeneraRuoli
+    public class GeneraRuoli : MonoBehaviour
     {
+        [ContextMenu("hgjhg")]
         public void Genera()
         {
+            
             //scarica la lista di tutti i player
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(e =>
             {
-                //sostisuisci i valori "null" con il ruolo desiganto e ricarica la lista di tutti i player
-                RestClient.Put(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json", Sostituisci(e.Text)).Catch(exception => Debug.LogError(exception));
+                string str = Aggiungi(e.Text);
+                str = Sostituisci(str);
+                RestClient.Put(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json", str).Catch(exception => Debug.LogError(exception));
            }).Catch(Debug.LogError);
         
         }
-
+        
         private string Sostituisci(string s)
         {
             string[] jj = s.Split(Ruoli.Null.ToString());
@@ -36,6 +42,18 @@ namespace Script.User
                 Debug.LogError("Errore nella generazione dei ruoli");
             }
             return def;
+        }
+
+        private string Aggiungi(string s)
+        {
+            int n = Info.MaxPlayer - s.Split("Role").Length + 1;
+
+            for (int i = 0; i < n; i++)
+            {
+                string val = ",\"Computer"+i+"\":{\"Name\":\"Computer"+i+"\",\"Role\":\"Null\",\"Virtual\":true}";
+                s = s.Insert(s.Length - 2, val);
+            }
+            return s;
         }
     }
 }
