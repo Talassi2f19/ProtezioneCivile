@@ -6,26 +6,18 @@ namespace minigame.incendio
 {
     public class IncendioPt1 : MonoBehaviour
     {
-        [SerializeField]private Image image;
+        [SerializeField] private Danni danni;
         [SerializeField] private GameObject minimappaPoint;
         private bool type;
-
-        private Coroutine dannoPunti;
-        private Coroutine dannoVisuale;
         
         private void Start()
         {
-            image.color = new Color(0f, 0f, 0f, 0f);
             minimappaPoint.SetActive(type);
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if(dannoPunti != null)
-                StopCoroutine(dannoPunti);
-            if(dannoVisuale != null)
-                StopCoroutine(dannoVisuale);
-            image.color = new Color(0f, 0f, 0f, 0f);
+            danni.Fine();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -48,28 +40,9 @@ namespace minigame.incendio
 
         private void AltroRuolo()
         {
-            dannoPunti = StartCoroutine(DannoPunti());
-            dannoVisuale = StartCoroutine(DannoVisuale());
+            danni.Inizia();
         }
 
-        private IEnumerator DannoVisuale()
-        {
-            while (true)
-            {
-                image.color = new Color(1f, 0f, 0f, 0.4f);
-                yield return new WaitForSeconds(0.2f);
-                image.color = new Color(0f, 0f, 0f, 0f);
-                yield return new WaitForSeconds(1f);
-            }
-        }
-        private IEnumerator DannoPunti()
-        {
-            while (true)
-            {
-                yield return new WaitForSeconds(5f);
-                Debug.Log("punti");
-            }
-        }
         
         public void SetType(bool val)
         {

@@ -1,10 +1,9 @@
-using minigame.svuotaAcqua;
 using Proyecto26;
+using Script.User;
 using Script.Utility;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-namespace Script.User
+namespace minigame.svuotaAcqua
 {
     public class TogliAcqua : MonoBehaviour
     {
@@ -15,13 +14,10 @@ namespace Script.User
         private Transform parent;
         private GameObject pt1;
         private GameObject pt2;
+        private bool inProgress = false;
         
     
-        private Vector2[] posizioni = { 
-            new Vector2(12f,12f), 
-            new Vector2(5f,9.7f), 
-            new Vector2(9.4f,-2.7f)
-        };
+        private Vector2 posizione = new Vector2(4f,2f);
 
         private void Start()
         {
@@ -41,9 +37,31 @@ namespace Script.User
         
         public void Genera(bool type)
         {
-            pt1 = Instantiate(prefabP1, posizioni[Random.Range(0, posizioni.Length)], new Quaternion(), parent);
-            pt1.GetComponent<Pozza>().SetType(type);
-            pt1.GetComponent<Pozza>().StartPt2(P1Completato);
+            if (type)
+            {
+                Destroy(pt1);
+                pt1 = Instantiate(prefabP1, posizione, new Quaternion(), parent);
+                pt1.GetComponent<Pozza>().SetType(true);
+                pt1.GetComponent<Pozza>().StartPt2(P1Completato);
+                inProgress = true;
+            }
+            else
+            {
+                if (pt1 == null && !inProgress)
+                {
+                    pt1 = Instantiate(prefabP1, posizione, new Quaternion(), parent);
+                    pt1.GetComponent<Pozza>().SetType(false);
+                }
+            }
+        }
+
+        [ContextMenu("Rimuovi")]
+        public void Rimuovi()
+        {
+            if (!inProgress)
+            {
+                Destroy(pt1);
+            }
         }
         
         private void P1Completato()
@@ -60,8 +78,10 @@ namespace Script.User
             DestroyImmediate(pt2);
             mainCanvas.enabled = true;
             playerLocal.PlayerCanMove(true);
+            inProgress = false;
             Debug.Log("Completato");
             RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", "{\"Occupato\":false}");
+            RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":16001}").Catch(Debug.LogError);
             //TODO
         }
     

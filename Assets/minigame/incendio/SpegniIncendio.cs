@@ -14,6 +14,7 @@ namespace minigame.incendio
         private Transform parent;
         private GameObject pt1;
         private GameObject pt2;
+        private bool inProgress = false;
         
         //BUG non gestita l'apparizione e la sparizione della zona in fiamme per gli altri player(non usata)
         private Vector2 posizione = new Vector2(-4.6f,5.65f);
@@ -36,9 +37,31 @@ namespace minigame.incendio
             
         public void Genera(bool type)
         {
-            pt1 = Instantiate(prefabP1, posizione, new Quaternion(), parent);
-            pt1.GetComponent<IncendioPt1>().SetType(type);
-            pt1.GetComponent<IncendioPt1>().StartPt2(P1Completato);
+            if (type)
+            {
+                Destroy(pt1);
+                pt1 = Instantiate(prefabP1, posizione, new Quaternion(), parent);
+                pt1.GetComponent<IncendioPt1>().SetType(true);
+                pt1.GetComponent<IncendioPt1>().StartPt2(P1Completato);
+                inProgress = true;
+            }
+            else
+            {
+                if (pt1 == null && !inProgress)
+                {
+                    pt1 = Instantiate(prefabP1, posizione, new Quaternion(), parent);
+                    pt1.GetComponent<IncendioPt1>().SetType(false);
+                }
+            }
+        }
+        
+        [ContextMenu("Rimuovi")]
+        public void Rimuovi()
+        {
+            if (!inProgress)
+            {
+                Destroy(pt1);
+            }
         }
             
         private void P1Completato()
@@ -55,8 +78,10 @@ namespace minigame.incendio
             DestroyImmediate(pt2);
             mainCanvas.enabled = true;
             playerLocal.PlayerCanMove(true);
+            inProgress = false;
             Debug.Log("Completato");
             RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", "{\"Occupato\":false}");
+            RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":57001}").Catch(Debug.LogError);
             //TODO
         }
     }

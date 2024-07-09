@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-namespace Script.User
+namespace minigame.TrovaDispersi
 {
     public class TrovaDispersi : MonoBehaviour
     {
@@ -31,7 +31,7 @@ namespace Script.User
                 new Vector2(20f, 7.5f), 
                 new Vector2(-7.75f, 7.5f), 
                 new Vector2(6.75f, -4.25f), 
-                new Vector2(-11.5f, -4.25f)}
+                new Vector2(-5f, 3f)}
         };
 
         private void Start()

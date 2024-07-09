@@ -1,4 +1,5 @@
 using System;
+using Proyecto26;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
@@ -14,11 +15,20 @@ namespace Script.test
         private Tilemap tilemap;
         private void Start()
         {
-           tilemap = GetComponent<Tilemap>();
-            
-            bounds = tilemap.cellBounds;
-            allTiles = tilemap.GetTilesBlock(bounds);
-            ff = allTiles.Length;
+            RestClient.Put("https://prtcv-de7d0-default-rtdb.europe-west1.firebasedatabase.app/aa.json",
+                "{\".sv\": {\"increment\":10}}}").Then(e =>
+            {
+                Debug.Log(e.Text);
+            }).Catch(
+                k =>
+                {
+                    Debug.Log(k.Message);
+                });
+           // tilemap = GetComponent<Tilemap>();
+           //  
+           //  bounds = tilemap.cellBounds;
+           //  allTiles = tilemap.GetTilesBlock(bounds);
+           //  ff = allTiles.Length;
         }
 
         [SerializeField] private BoundsInt boundssss = new BoundsInt();

@@ -1,10 +1,9 @@
-using minigame;
 using Proyecto26;
 using Script.Utility;
 using TMPro;
 using UnityEngine;
 
-namespace Script.User
+namespace minigame.TogliTane
 {
     public class TogliTane : MonoBehaviour
     {

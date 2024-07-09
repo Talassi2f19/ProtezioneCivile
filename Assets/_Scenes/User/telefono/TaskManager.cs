@@ -1,7 +1,13 @@
 ﻿using System.Collections.Generic;
 using minigame.AllestimentoCRI;
+using minigame.evacuaCittadini;
 using minigame.incendio;
+using minigame.MaterialePericoloso;
 using minigame.PuntiRaccolta;
+using minigame.SalvaPersone;
+using minigame.svuotaAcqua;
+using minigame.TogliTane;
+using minigame.TrovaDispersi;
 using Script.User;
 using Script.Utility;
 using UnityEngine;
@@ -39,6 +45,11 @@ namespace _Scenes.User.telefono
         [SerializeField] private SpegniIncendio spegniIncendio;
         [SerializeField] private PuntiRaccolta puntiRaccolta;
         [SerializeField] private AllestimentoCRI allestimentoCri;
+        [SerializeField] private TogliMonnezza togliMonnezza;
+        [SerializeField] private SalvaCose salvaPersoneAnimale;
+        [SerializeField] private EvacuaMain evacuaCittadini;
+        
+        
         
         // [Header("MAPPA")]
         // [SerializeField]private Transform mappa;
@@ -151,12 +162,37 @@ namespace _Scenes.User.telefono
                 allestimentoCri.Genera(false);
                 return;
             }
-                
-            // if (Info.localUser.role != Ruoli.VolFuoco && (value == 2000 || value == 2001 || value == 2002))
-            // {
-            //     plFind.GeneraOverlay(value);
-            //     return;
-            // }
+            if (value == 16000)
+            {
+                togliAcqua.Genera(false);
+                return;
+            }
+            if (value == 16001)
+            {
+                togliAcqua.Rimuovi();
+                return;
+            }
+            if (value == 57000)
+            {
+                spegniIncendio.Genera(false);
+                return;
+            }
+            if (value == 57001)
+            {
+                spegniIncendio.Rimuovi();
+                return;
+            }
+            if (value == 27000)
+            {
+                togliMonnezza.Genera(false);
+                return;
+            }
+            if (value == 27001)
+            {
+                togliMonnezza.Rimuovi();
+                return;
+            }
+            
             switch (Info.localUser.role)
             {
                 case Ruoli.Sindaco:
@@ -193,6 +229,10 @@ namespace _Scenes.User.telefono
                             NuovaNotifica("Il COC ha richiesto che autorizzi la richiesta per ottenere più pompieri");
                             schede[1].GetComponentInChildren<TaskSeleziona>().NuovaTask(74);
                             // altri volontari step 2 pompiere
+                            break;
+                        case 95:
+                            NuovaNotifica("Un cittadino si rifiuta di evacuare, vallo a convincere.");
+                            evacuaCittadini.Genera(plName); //plname sarà il numero della casa da visitare
                             break;
                     }
                    break;
@@ -469,12 +509,15 @@ namespace _Scenes.User.telefono
                         case 16:
                             if(Info.localUser.name != plName)
                                 return;
+                            Assegna(16000);
                             NuovaNotifica("Cerca e svuolta la zona allagata");
                             togliAcqua.Genera(true);
                             break;
                         case 17:
                             if(Info.localUser.name != plName)
                                 return;
+                            NuovaNotifica("Vai in tutte le case ad avvisare che è neccessaria l'evacuazione.");
+                            evacuaCittadini.Genera();
                             break;
                         case 18:
                             if(Info.localUser.name != plName)
@@ -494,8 +537,12 @@ namespace _Scenes.User.telefono
                             rimuoviTane.GeneraTane();
                             break;
                         case 27:
+                            
                             if(Info.localUser.name != plName)
                                 return;
+                            NuovaNotifica("Cerca i materiali inquinanti sparsi per la mappa");
+                            togliMonnezza.Genera(true);
+                            Assegna(27000);
                             break;
                     }
                     break;
@@ -522,17 +569,20 @@ namespace _Scenes.User.telefono
                         case 55:
                             if(Info.localUser.name != plName)
                                 return;
+                            NuovaNotifica("Ci sono delle persone o degli animali in pericolo. Cercali per la mappa e cliccali per salvarli");
+                            salvaPersoneAnimale.Genera();
                             break;
                         case 56:
                             if(Info.localUser.name != plName)
                                 return;
-                            NuovaNotifica("Ci sono delle persone disperse, trovale.");
+                            NuovaNotifica("Ci sono delle persone disperse. Cercale per la mappa e cliccale per trovarle.");
                             trovaDispersi.GeneraDaTrovare();
                             break;
                         case 57:
                             if(Info.localUser.name != plName)
                                 return;
-                            NuovaNotifica("Trova l'incedio e spegnilo.");
+                            Assegna(57000);
+                            NuovaNotifica("Una casa ha preso fuoco. Trovala e spegni l'incedio.");
                             spegniIncendio.Genera(true);
                             break;
                     }

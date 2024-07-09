@@ -64,6 +64,11 @@ namespace Script.User
         
         private void Update()
         {
+            if (!canMove)
+            {
+                movementInput = Vector2.zero;
+            }
+                
             Animazione();
         }
 
@@ -128,6 +133,11 @@ namespace Script.User
             animator.SetFloat(X,movementInput.x);
             animator.SetFloat(Y,movementInput.y);
             animator.SetFloat(Speed,movementInput.sqrMagnitude);
+        }
+
+        public Vector2 GetDirection()
+        {
+            return movementInput;
         }
     }
 }
