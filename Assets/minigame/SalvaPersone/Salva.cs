@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class Salva : MonoBehaviour
 {
     [SerializeField]private List<Sprite> sprite;
-    [SerializeField]private RectTransform transform;
+    [SerializeField]private RectTransform transforms;
     [ContextMenu("genera")]
     void Start()
     {
         Sprite tmp = sprite[Random.Range(0, sprite.Count)];
         GetComponent<SpriteRenderer>().sprite = tmp;
-        transform.sizeDelta = tmp.bounds.size;
+        transforms.sizeDelta = tmp.bounds.size;
     }
 }
