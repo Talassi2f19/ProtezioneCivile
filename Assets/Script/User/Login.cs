@@ -54,7 +54,7 @@ namespace Script.User
                 return;
             }
 
-            if (nome.ToUpper() == "NULL" || nome.Contains("Computer"))
+            if (nome.ToUpper() == "NULL" || nome.ToUpper().Contains("COMPUTER"))
             {
                 ErroriDisplay(8);
                 return;

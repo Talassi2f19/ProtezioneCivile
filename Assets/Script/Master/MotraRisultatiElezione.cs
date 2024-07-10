@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Defective.JSON;
 using Proyecto26;
 using Script.User;
@@ -44,18 +45,26 @@ namespace Script.Master
                 playersJson = new JSONObject(onReceived.Text);
                 playersName = playersJson.keys;
                 playersData = playersJson.list;
+                
+                int[] votes = new int[playersName.Count];
+                Debug.Log(votes);
 
                 for (int i = 0; i < playersName.Count; i++) {
+                    Debug.Log(playersData[i]);
+                    if (playersData[i].HasField("Voto"))
+                        votes[playersName.IndexOf(playersData[i]["Voto"].stringValue)]++;
+                    Debug.Log(votes);
+                    /*
                     if (playersJson.HasField(playersData[i]["Voto"].stringValue)) {
                         if (!playersJson[playersData[i]["Voto"].stringValue].HasField("NrVoti"))
                             playersJson[playersData[i]["Voto"].stringValue].AddField("NrVoti", 0);
                         playersJson[playersData[i]["Voto"].stringValue].SetField("NrVoti", playersJson[playersData[i]["Voto"].stringValue]["NrVoti"].intValue + 1);
                     }
+                    */
                 }
-
-                playersData = playersJson.list;
                 
-                int posMaxVoti = MaxVotiCandidato();
+                // int posMaxVoti = MaxVotiCandidato();
+                int posMaxVoti = votes.ToList().IndexOf(votes.Max());
             
                 // for (int i = 0; i < candidati.Count; i++)
                 // {
@@ -79,6 +88,7 @@ namespace Script.Master
             
         }
 
+/*
         private int MaxVotiCandidato()
         {
             int pos = -1;
@@ -96,6 +106,7 @@ namespace Script.Master
                 
             return pos;
         }
+*/
 
         public void AvviaPartita()
         {

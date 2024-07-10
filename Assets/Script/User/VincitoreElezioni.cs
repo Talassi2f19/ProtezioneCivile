@@ -64,13 +64,16 @@ namespace Script.User
                 playersName = playersJson.keys;
                 playersData = playersJson.list;
 
-                int i = 0;
-                while (i < playersName.Count && playersData[i][Global.RuoloPlayerKey].stringValue != Ruoli.Sindaco.ToString())
-                    i++;
-                if (i >= playersName.Count)
-                    Debug.Log("è successo qualcosa di veramente storto");
+                string nomeVincitore;
 
-                string nomeVincitore = playersName[i];
+                int i = 0;
+                while (i < playersName.Count && playersData[i][Global.RuoloPlayerKey].stringValue != "Sindaco")
+                    i++;
+                if (i >= playersName.Count) {
+                    Debug.Log("è successo qualcosa di veramente storto");
+                    nomeVincitore = "ERRORE";
+                } else
+                    nomeVincitore = playersName[i];
                 
                 if (nomeVincitore == Info.localUser.name)
                 {
