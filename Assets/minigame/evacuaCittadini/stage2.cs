@@ -73,7 +73,7 @@ namespace minigame.evacuaCittadini
             "Se davvero insiste nel rimanere, ho qui un modulo di Dichiarazione di accettazione del rischio." ,
             "Questo documento conferma che lei è consapevole del pericolo e accetta di restare a suo rischio e pericolo. La prego di leggerlo attentamente e di firmarlo.",
             
-            "Va ben, firmo il modulo. Non voglio lasciare la mia casa.",
+            "Va bene, firmo il modulo. Non voglio lasciare la mia casa.",
             
             "La ringrazio per la sua collaborazione.",
             "Se cambiasse idea, il centro di accoglienza è sempre pronto ad accoglierla.",
