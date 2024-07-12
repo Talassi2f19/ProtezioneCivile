@@ -118,7 +118,7 @@ namespace Editor
             };
             string buildPath = "build/user";
             BuildTarget buildTarget = BuildTarget.WebGL;
-            BuildOptions buildOptions = BuildOptions.CleanBuildCache;
+            BuildOptions buildOptions = BuildOptions.None;
 
             // Build the project
             BuildPipeline.BuildPlayer(scenes, buildPath, buildTarget, buildOptions);

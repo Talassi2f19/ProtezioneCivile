@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82e627f60af64bf9951909d16f1f21d6, type: 3}
+  m_Name: VolPC
+  m_EditorClassIdentifier: 
+  ruolo: 7
+  Nome: Volontario Protezione Civile
+  Immagine: {fileID: 0}
+  Descrizione: "Ha svolto il corso di formazione e fa servizio di volontariato e
+    assistenza alla popolazione colpita in caso di necessit\xE0 e diponibile per
+    il:\r\n- Montaggio tendopoli e campo;\r\n- Servizio mensa;\r\n- Assistenza magazzino;\r\n-
+    Raccolta macerie;\r\n- Monitoraggio degli argini;\r\n- Affiancamento in segreteria
+    per gestire i volontari e i loro turni di attivit\xE0 o altro che serva per far
+    fronte all'emergenza.\r"

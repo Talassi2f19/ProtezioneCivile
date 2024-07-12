@@ -18,8 +18,6 @@ namespace minigame.PuntiRaccolta
     
     public class Tende : MonoBehaviour
     {
- 
-    
         private bool isDragging;
         private int tendaDragging = -1;
         [SerializeField]private List<Tenda> tenda;
@@ -62,20 +60,19 @@ namespace minigame.PuntiRaccolta
                         betterPos = tmp.defPos - mousePos;
                         isDragging = true;
                         tendaDragging = i;
+                        tmp.spriteObj.enabled = false;
                     }
                 }
             }
 
             if (Input.GetMouseButtonUp(0))
             {
-            
-            
                 if (tendaDragging > -1)
                 {
+                    tenda[tendaDragging].spriteObj.enabled = true;
                     if (errori)
                     {
                         tenda[tendaDragging].tilemap.ClearAllTiles();
-                    
                     }
                     tenda[tendaDragging].obj.transform.position = tenda[tendaDragging].defPos;
                 }

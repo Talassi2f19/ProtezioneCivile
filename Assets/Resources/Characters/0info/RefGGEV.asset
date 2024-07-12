@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82e627f60af64bf9951909d16f1f21d6, type: 3}
+  m_Name: RefGGEV
+  m_EditorClassIdentifier: 
+  ruolo: 14
+  Nome: Referente Guardie Giurate Ecologiche Volontarie
+  Immagine: {fileID: 0}
+  Descrizione: "Ha svolto il corso di formazione e fa servizio di volontariato e
+    assistenza alla popolazione colpita secondo le proprie competenze.\r\nSu richiesta
+    del Sindaco o della Consulta della Protezione Civile attiva i propri volontari
+    e ne coordina le attivit\xE0 in base alle loro competenze e disponibilit\xE0.\r"

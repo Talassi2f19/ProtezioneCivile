@@ -29,7 +29,7 @@ namespace Script.User
         private static readonly int X = Animator.StringToHash("x");
         private static readonly int Y = Animator.StringToHash("y");
         private static readonly int Speed = Animator.StringToHash("speed");
-        private bool canMove;
+        public bool canMove;
         private void Start()
         {
             canMove = true;
@@ -42,11 +42,6 @@ namespace Script.User
             rb = GetComponent<Rigidbody2D>();
             castCollisions = new List<RaycastHit2D>();
             LoadServerPosition();
-        }
-
-        public void PlayerCanMove(bool flag)
-        {
-            canMove = flag;
         }
         
         private void LoadServerPosition()

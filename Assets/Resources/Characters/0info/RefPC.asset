@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82e627f60af64bf9951909d16f1f21d6, type: 3}
+  m_Name: RefPC
+  m_EditorClassIdentifier: 
+  ruolo: 6
+  Nome: Referente Protezione Civile
+  Immagine: {fileID: 0}
+  Descrizione: "Il Referente Protezione Civile gestisce: \r\n1. Emergenza Piena del
+    Fiume:\r\n- Monitoraggio continuo dell\u2019argine maestro fino alla cessazione
+    dell\u2019emergenza.\r\n- Presidio fisso h24 nei punti critici a rischio esondazioni,
+    in particolare dove l\u2019argine ha un\u2019altezza inferiore e il livello dell\u2019acqua
+    rischia di tracimare.\r\n2. Emergenza dovuta alla Rottura dell\u2019Argine Maestro:\r\n-
+    Presidio fisso h24 nella zona di accesso al cantiere di lavoro per il ripristino
+    dell\u2019argine, per evitare che persone non autorizzate entrino in una zona
+    pericolosa.\r\n3. Emergenza Terremoto:\r\n- Collaborazione con il personale comunale
+    per allestire un centro operativo sicuro all\u2019interno di una tensostruttura.\r\n-
+    Prima assistenza alla popolazione all\u2019interno delle tensostrutture adibite
+    a centri pasti e alloggi per le prime notti.\r\n\r\nCompetenze del Referente
+    Protezione Civile durante l\u2019Emergenza:\r\n- Il Referente dell\u2019Associazione
+    ha completato un corso di formazione e svolge attivit\xE0 di volontariato e assistenza
+    alla popolazione con competenza.\r\n- Su richiesta del Sindaco o della Consulta
+    della Protezione Civile, attiva i volontari per coordinare le attivit\xE0 di
+    emergenza secondo le competenze e disposizioni ricevute.\r"

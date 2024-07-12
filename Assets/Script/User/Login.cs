@@ -19,15 +19,15 @@ namespace Script.User
         [SerializeField] private GameObject errore;
         [SerializeField] private Button button;
         private TextMeshProUGUI errorText;
-        private TMP_InputField usernameText;
-        private TMP_InputField stanzaText;
+        private InputField usernameText;
+        private InputField stanzaText;
       
         private void Start()
         {
             errore.SetActive(false);
             errorText = errore.GetComponentInChildren<TextMeshProUGUI>();
-            usernameText = username.GetComponent<TMP_InputField>();
-            stanzaText = stanza.GetComponent<TMP_InputField>();
+            usernameText = username.GetComponent<InputField>();
+            stanzaText = stanza.GetComponent<InputField>();
         }
 
 

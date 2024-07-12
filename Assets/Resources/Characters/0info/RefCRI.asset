@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82e627f60af64bf9951909d16f1f21d6, type: 3}
+  m_Name: RefCRI
+  m_EditorClassIdentifier: 
+  ruolo: 3
+  Nome: 'Referente Croce Rossa Italiana '
+  Immagine: {fileID: 0}
+  Descrizione: "Il Referente Croce Rossa Italiana svolge varie attivit\xE0 di emergenza:\r\nAttivit\xE0
+    in Emergenza: \r\n1. Assistenza sanitaria immediata: Fornisce cure mediche di
+    emergenza.\r\n2. Ricerca dispersi: Utilizza squadre specifiche per trovare persone
+    scomparse.\r\n3. Evacuazione persone con mobilit\xE0 ridotta: Aiuta a evacuare
+    persone con problemi di mobilit\xE0.\r\n4. Allestimento ambulatori medici: Crea
+    Posti Medici Avanzati (PMA) per le prime cure.\r\n5. Trasporto pazienti: Trasferisce
+    pazienti dai PMA a ospedali attrezzati.\r\n6. Distribuzione materiale di prima
+    necessit\xE0: Fornisce alimenti, coperte e altri beni essenziali.\r\n7. Allestimento
+    campi di tende: Organizza luoghi dove le persone possano dormire.\r\n8. Censimento
+    necessit\xE0 della popolazione: Valuta i bisogni della popolazione colpita dall'evento.\r\n9.
+    Raccolta informazioni per ricongiungimenti familiari: Aiuta a riunire le famiglie
+    separate dall'emergenza.\r\n10. Recupero della situazione pre-evento critico:
+    Lavora per ristabilire le condizioni normali.\r\nCompetenze durante l'Emergenza\r\n1.
+    Formazione e servizio: Il referente ha completato un corso di formazione e fornisce
+    assistenza alla popolazione secondo le proprie competenze.\r\n2. Coordinamento
+    volontari: Su richiesta del Sindaco o della Consulta della Protezione Civile,
+    attiva i propri volontari e coordina le attivit\xE0 basandosi sulle competenze
+    e disponibilit\xE0.\r"

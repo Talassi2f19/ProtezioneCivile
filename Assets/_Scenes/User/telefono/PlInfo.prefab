@@ -101,9 +101,9 @@ MonoBehaviour:
   m_fontSize: 40
   m_fontSizeBase: 40
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 40
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -207,8 +207,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 339}
-  m_SizeDelta: {x: 667.1218, y: 103}
+  m_AnchoredPosition: {x: 106, y: 393}
+  m_SizeDelta: {x: 1365.6545, y: 121.5217}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6762489838774673593
 CanvasRenderer:
@@ -268,9 +268,9 @@ MonoBehaviour:
   m_fontSize: 90
   m_fontSizeBase: 90
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 90
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -342,7 +342,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -455.4204, y: -82.809}
-  m_SizeDelta: {x: 521.3256, y: 575.79}
+  m_SizeDelta: {x: 520, y: 630}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1710274904757285536
 CanvasRenderer:
@@ -430,6 +430,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 403be3eecb6327444883bc1a797e7e00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInfo:
+  - {fileID: 11400000, guid: c68e9806ce1339d478a00b18b7f9757e, type: 2}
+  - {fileID: 11400000, guid: 153f01104b56c794893c3f893e32751c, type: 2}
+  - {fileID: 11400000, guid: 97487be7389ad3d4fa8d78fa81fd6840, type: 2}
+  - {fileID: 11400000, guid: d58e1ca40654dc7489042bd1bbe593ae, type: 2}
+  - {fileID: 11400000, guid: 22585912dcb65c040a908dfc7812d7d3, type: 2}
+  - {fileID: 11400000, guid: 838ec556d69839b40a84e8f98d9ae744, type: 2}
+  - {fileID: 11400000, guid: f685b30fab342674ab19279f2ebcca12, type: 2}
+  - {fileID: 11400000, guid: 2c6d4ea7da188c747b08b84a176cdb89, type: 2}
+  - {fileID: 11400000, guid: fb3fe7c133e07c84894779025f7a920d, type: 2}
+  - {fileID: 11400000, guid: e3a063a206c641641933d25820b01e9a, type: 2}
+  - {fileID: 11400000, guid: 061d76074dfcf154dba9e5ccb88c99b8, type: 2}
+  - {fileID: 11400000, guid: 249468dafc3dbac40919a049a8e790d1, type: 2}
+  - {fileID: 11400000, guid: 5207a6e399e6cff48b75a19aabe65db5, type: 2}
+  - {fileID: 11400000, guid: 9d67ac231fae08847baf7a89b3bfbd86, type: 2}
+  - {fileID: 11400000, guid: dba7a9a5902642141a29189913cd210f, type: 2}
   roleImage: {fileID: 8699559587955227073}
   name: {fileID: 1468254873950281669}
   description: {fileID: 9223077332283865885}

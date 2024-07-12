@@ -58,7 +58,7 @@ namespace minigame.evacuaCittadini
             p2.GetComponent<stage2>().Set(sprite[tipoPorta[i]].sprite,tipoDialogo);
             p2.GetComponent<stage2>().Stage2Fine(()=>FinePt2(i, flag));
             mainCanvas.enabled = false;
-            playerLocal.PlayerCanMove(false);
+            playerLocal.canMove = false;
             playerLocal.gameObject.transform.position = posizioni2[i] - new Vector3(0f,0.3f,0f);
         }
         
@@ -67,7 +67,7 @@ namespace minigame.evacuaCittadini
             Destroy(p1);
             Destroy(p2);
             mainCanvas.enabled = true;
-            playerLocal.PlayerCanMove(true);
+            playerLocal.canMove = true;
             if (!flag) //se non è il sindaco
             {
                 if(tipoDialogo == 1)

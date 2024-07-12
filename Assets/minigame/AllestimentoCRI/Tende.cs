@@ -18,8 +18,6 @@ namespace minigame.AllestimentoCRI
     
     public class Tende : MonoBehaviour
     {
- 
-    
         private bool isDragging;
         private int tendaDragging = -1;
         [SerializeField]private List<Tenda> tenda;
@@ -62,16 +60,17 @@ namespace minigame.AllestimentoCRI
                         betterPos = tmp.defPos - mousePos;
                         isDragging = true;
                         tendaDragging = i;
+                        tmp.spriteObj.enabled = false;
                     }
                 }
             }
 
             if (Input.GetMouseButtonUp(0))
             {
-            
-            
+                
                 if (tendaDragging > -1)
                 {
+                    tenda[tendaDragging].spriteObj.enabled = true;
                     if (errori)
                     {
                         tenda[tendaDragging].tilemap.ClearAllTiles();

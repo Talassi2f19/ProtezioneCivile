@@ -47,7 +47,7 @@ namespace minigame.AllestimentoCRI
         private void Pt2Start()
         {
             mainCanvas.enabled = false;
-            playerLocal.PlayerCanMove(false);
+            playerLocal.canMove = false;
             pt2 = Instantiate(prefab2, transform);
             pt2.GetComponent<P2>().Pt2Complete(Pt3Start);
         }
@@ -55,7 +55,7 @@ namespace minigame.AllestimentoCRI
         private void Pt3Start()
         {
             mainCanvas.enabled = true;
-            playerLocal.PlayerCanMove(true);
+            playerLocal.canMove = true;
             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":30000}").Catch(Debug.Log);
             RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", "{\"Occupato\":false}");
             Destroy(pt1);

@@ -67,7 +67,7 @@ namespace minigame.incendio
         private void P1Completato()
         {
             mainCanvas.enabled = false;
-            playerLocal.PlayerCanMove(false);
+            playerLocal.canMove = false;
             pt2 = Instantiate(prefabP2,Info.localUser.coord,new Quaternion(), parent);
             pt2.GetComponent<IncendioPt2>().OnComplete(P2Completato);
         }
@@ -77,7 +77,7 @@ namespace minigame.incendio
             DestroyImmediate(pt1);
             DestroyImmediate(pt2);
             mainCanvas.enabled = true;
-            playerLocal.PlayerCanMove(true);
+            playerLocal.canMove = true;
             inProgress = false;
             Debug.Log("Completato");
             RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", "{\"Occupato\":false}");

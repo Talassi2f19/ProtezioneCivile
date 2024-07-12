@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82e627f60af64bf9951909d16f1f21d6, type: 3}
+  m_Name: COC
+  m_EditorClassIdentifier: 
+  ruolo: 2
+  Nome: Centro Operativo Comunale
+  Immagine: {fileID: 0}
+  Descrizione: "Il  Referente del C.O.C. (Centro Operativo Comunale), ha vari compiti
+    cruciali durante un'emergenza.\r\n1. Rapporto con il Sindaco: Mantiene un contatto
+    costante con il Sindaco, implementando le sue direttive.\r\n2. Coordinamento
+    del C.O.C.: Convoca e coordina immediatamente il gruppo volontari della Protezione
+    Civile Comunale.\r\n3. Contatti con la Consulta di Protezione Civile: Si rapporta
+    con la segreteria della Consulta per qualsiasi necessit\xE0.\r\n4. Assistenza
+    alla popolazione: Fornisce assistenza alla popolazione colpita dall'evento calamitoso.\r\n5.
+    Informazione ai cittadini: Informa i cittadini e fornisce istruzioni sui comportamenti
+    da adottare.\r\n6. Monitoraggio del territorio: Interviene con mezzi e personale
+    per monitorare direttamente il territorio.\r\n7. Mantenimento dei rapporti: Tiene
+    i contatti con tutte le figure interessate nel sistema di protezione civile,
+    facilitando la comunicazione tra loro e il Sindaco.\r"

@@ -49,7 +49,8 @@ namespace _Scenes.User.telefono
         [SerializeField] private SalvaCose salvaPersoneAnimale;
         [SerializeField] private EvacuaMain evacuaCittadini;
         
-        
+        [Header("ALTRO")]
+        [SerializeField] private PlayerLocal _playerLocal;
         
         // [Header("MAPPA")]
         // [SerializeField]private Transform mappa;
@@ -124,9 +125,14 @@ namespace _Scenes.User.telefono
             { 
                 var.GetComponentInChildren<Logica>().SetListaSchede(schede);
             }
-            
+            schede[0].GetComponentInChildren<Logica>().SetBackCallback(IndietroCall);
         }
 
+        private void IndietroCall()
+        {
+            _playerLocal.canMove = true;
+        }
+        
         public void OpenMessaggi()
         {
             OpenManager();
@@ -134,8 +140,9 @@ namespace _Scenes.User.telefono
         }
         
         public void OpenManager()
-        {
-         schede[0].SetActive(true);
+        { 
+            _playerLocal.canMove = false;
+            schede[0].SetActive(true);
         }
         
         public void Assegna(int value, string plName = "")

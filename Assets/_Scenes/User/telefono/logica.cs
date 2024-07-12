@@ -10,6 +10,14 @@ namespace _Scenes.User.telefono
     {
         private List<GameObject> schede = new List<GameObject>();
         
+        
+        public delegate void BackCallback();
+        private BackCallback backCallback;
+        public void SetBackCallback(BackCallback tmp)
+        {
+            backCallback = tmp;
+        }
+        
         public void SetListaSchede(List<GameObject> value)
         {
             schede = value;
@@ -18,6 +26,8 @@ namespace _Scenes.User.telefono
         public void Indietro() //tasto indietro
         {
             transform.parent.parent.gameObject.SetActive(false);
+            if(backCallback != null)
+                backCallback.Invoke();
         }
 
         public void Notifiche() //mostra pagina notifiche
