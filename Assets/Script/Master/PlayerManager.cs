@@ -162,7 +162,7 @@ namespace Script.Master
                 allestimentoCri.Genera(false);
                 return;
             }
-            if (value == 16000)
+            if (value == 16)
             {
                 togliAcqua.Genera(false);
                 return;
@@ -172,7 +172,7 @@ namespace Script.Master
                 togliAcqua.Rimuovi();
                 return;
             }
-            if (value == 57000)
+            if (value == 57)
             {
                 spegniIncendio.Genera(false);
                 return;
@@ -182,7 +182,7 @@ namespace Script.Master
                 spegniIncendio.Rimuovi();
                 return;
             }
-            if (value == 27000)
+            if (value == 27)
             {
                 togliMonnezza.Genera(false);
                 return;
@@ -192,7 +192,7 @@ namespace Script.Master
                 togliMonnezza.Rimuovi();
                 return;
             }
-            if (value == 47000)
+            if (value == 47)
             {
                 incidente.Genera(false);
                 return;

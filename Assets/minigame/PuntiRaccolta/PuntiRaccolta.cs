@@ -52,6 +52,7 @@ namespace minigame.PuntiRaccolta
     
         private void Pt3Start()
         {
+            pt3 = Instantiate(prefab3, mappa);
             mainCanvas.enabled = true;
             playerLocal.canMove = true;
             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":18000}").Catch(Debug.Log);
