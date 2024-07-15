@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class Evacua : MonoBehaviour
 {
-    public Collider2D kk;
     private bool inside;
 
     private GameObject objInside;

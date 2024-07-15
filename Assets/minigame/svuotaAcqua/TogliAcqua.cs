@@ -11,19 +11,12 @@ namespace minigame.svuotaAcqua
         [SerializeField] private PlayerLocal playerLocal;
         [SerializeField]private GameObject prefabP1;
         [SerializeField]private GameObject prefabP2;
-        private Transform parent;
         private GameObject pt1;
         private GameObject pt2;
         private bool inProgress = false;
         
-    
         private Vector2 posizione = new Vector2(4f,2f);
-
-        private void Start()
-        {
-            parent = gameObject.transform;
-        }
-
+        
         [ContextMenu("GeneraTrue")]
         public void GeneraTrue()
         {
@@ -40,7 +33,7 @@ namespace minigame.svuotaAcqua
             if (type)
             {
                 Destroy(pt1);
-                pt1 = Instantiate(prefabP1, posizione, new Quaternion(), parent);
+                pt1 = Instantiate(prefabP1, posizione, new Quaternion(), transform);
                 pt1.GetComponent<Pozza>().SetType(true);
                 pt1.GetComponent<Pozza>().StartPt2(P1Completato);
                 inProgress = true;
@@ -49,7 +42,7 @@ namespace minigame.svuotaAcqua
             {
                 if (pt1 == null && !inProgress)
                 {
-                    pt1 = Instantiate(prefabP1, posizione, new Quaternion(), parent);
+                    pt1 = Instantiate(prefabP1, posizione, new Quaternion(), transform);
                     pt1.GetComponent<Pozza>().SetType(false);
                 }
             }
@@ -68,7 +61,7 @@ namespace minigame.svuotaAcqua
         {
             mainCanvas.enabled = false;
             playerLocal.canMove = false;
-            pt2 = Instantiate(prefabP2,Info.localUser.coord,new Quaternion(), parent);
+            pt2 = Instantiate(prefabP2,Info.localUser.coord,new Quaternion(), transform);
             pt2.GetComponent<PompaGioco>().OnComplete(P2Completato);
         }
     

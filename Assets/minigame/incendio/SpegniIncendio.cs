@@ -11,19 +11,12 @@ namespace minigame.incendio
         [SerializeField] private PlayerLocal playerLocal;
         [SerializeField]private GameObject prefabP1;
         [SerializeField]private GameObject prefabP2;
-        private Transform parent;
         private GameObject pt1;
         private GameObject pt2;
         private bool inProgress = false;
         
-        //BUG non gestita l'apparizione e la sparizione della zona in fiamme per gli altri player(non usata)
         private Vector2 posizione = new Vector2(-4.6f,5.65f);
-    
-        private void Start()
-        {
-            parent = gameObject.transform;
-        }
-    
+        
         [ContextMenu("GeneraTrue")]
         public void GeneraTrue()
         {
@@ -40,7 +33,7 @@ namespace minigame.incendio
             if (type)
             {
                 Destroy(pt1);
-                pt1 = Instantiate(prefabP1, posizione, new Quaternion(), parent);
+                pt1 = Instantiate(prefabP1, posizione, new Quaternion(), transform);
                 pt1.GetComponent<IncendioPt1>().SetType(true);
                 pt1.GetComponent<IncendioPt1>().StartPt2(P1Completato);
                 inProgress = true;
@@ -49,7 +42,7 @@ namespace minigame.incendio
             {
                 if (pt1 == null && !inProgress)
                 {
-                    pt1 = Instantiate(prefabP1, posizione, new Quaternion(), parent);
+                    pt1 = Instantiate(prefabP1, posizione, new Quaternion(), transform);
                     pt1.GetComponent<IncendioPt1>().SetType(false);
                 }
             }
@@ -68,7 +61,7 @@ namespace minigame.incendio
         {
             mainCanvas.enabled = false;
             playerLocal.canMove = false;
-            pt2 = Instantiate(prefabP2,Info.localUser.coord,new Quaternion(), parent);
+            pt2 = Instantiate(prefabP2,Info.localUser.coord,new Quaternion(), transform);
             pt2.GetComponent<IncendioPt2>().OnComplete(P2Completato);
         }
         

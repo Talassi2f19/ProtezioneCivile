@@ -8,7 +8,6 @@ namespace minigame.TogliTane
     public class TogliTane : MonoBehaviour
     {
         [SerializeField]private GameObject prefab;
-        private Transform parent;
         private TextMeshProUGUI text;
         [SerializeField]private GameObject ObjText;
         [SerializeField] private Argine argine;
@@ -33,7 +32,6 @@ namespace minigame.TogliTane
         {
             ObjText.SetActive(false);
             text = ObjText.GetComponent<TextMeshProUGUI>();
-            parent = gameObject.transform;
         }
         
         [ContextMenu("genera")]
@@ -43,19 +41,19 @@ namespace minigame.TogliTane
             //RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":"+ (val+2000) +"}");
             for (int i = 0; i < posizioni.GetLength(1); i++)
             {
-                GameObject tmp = Instantiate(prefab, posizioni[val,i], new Quaternion(), parent);
+                GameObject tmp = Instantiate(prefab, posizioni[val,i], new Quaternion(), transform);
                 tmp.GetComponent<Tana>().OnComplete( () => TanaRimossa(tmp) );
             }
             ObjText.SetActive(true);
-            text.text = "Tane da chiudere: " + parent.childCount;
+            text.text = "Tane da chiudere: " + transform.childCount;
             argine.ArgineAccessibile(true);
         }
         
         private void TanaRimossa(GameObject tmp)
         {
             DestroyImmediate(tmp);
-            text.text = "Tane da chiudere: " + parent.childCount;
-            if (parent.childCount == 0)
+            text.text = "Tane da chiudere: " + transform.childCount;
+            if (transform.childCount == 0)
             {
                 ObjText.SetActive(false);
                 //task done

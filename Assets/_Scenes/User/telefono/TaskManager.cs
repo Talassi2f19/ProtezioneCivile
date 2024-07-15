@@ -123,6 +123,7 @@ namespace _Scenes.User.telefono
             schede.Add( Instantiate(prefNotifiche, parent)); //[^1]
             foreach (var var in schede)
             { 
+                var.SetActive(false);
                 var.GetComponentInChildren<Logica>().SetListaSchede(schede);
             }
             schede[0].GetComponentInChildren<Logica>().SetBackCallback(IndietroCall);
