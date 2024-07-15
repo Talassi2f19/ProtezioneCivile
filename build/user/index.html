@@ -9,6 +9,10 @@
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
+      <div class="cover__filter cover" id="cover">
+        <div id="unity-fullscreen-button"><img src="../play.svg" id="icon_fullscreen" alt=""></div>
+        <div id="unity-rotatescreen-button"><img src="../screen-rotation-button.png" id="icon_rotatescreen" alt=""></div>
+      </div>
       <canvas id="unity-canvas" width=1024 height=576 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
@@ -17,11 +21,6 @@
         </div>
       </div>
       <div id="unity-warning"> </div>
-      <div id="unity-footer">
-        <div id="unity-webgl-logo"></div>
-        <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">testing</div>
-      </div>
     </div>
     <script>
 
@@ -99,6 +98,73 @@
       }
 
       loadingBar.style.display = "block";
+
+      /*--------------------------------
+      Orientamento schermo
+    --------------------------------*/
+    const icon_fullscreen = document.getElementById('unity-fullscreen-button');
+    const icon_rotatescreen = document.getElementById('unity-rotatescreen-button');
+
+    function show_fullscreen(){
+      icon_fullscreen.classList.add("d-flex");
+      icon_fullscreen.classList.remove("d-none");
+        
+      icon_rotatescreen.classList.add("d-none");
+      icon_rotatescreen.classList.remove("d-flex");
+    }
+    function show_rotatescreen(){
+      icon_fullscreen.classList.add("d-none");
+      icon_fullscreen.classList.remove("d-flex");
+        
+      icon_rotatescreen.classList.add("d-flex");
+      icon_rotatescreen.classList.remove("d-none");
+    }
+    function detectOrientation() {
+        let orientation = screen.orientation || screen.mozOrientation || screen.msOrientation;
+
+        if (orientation.type) {
+            console.log("Orientamento corrente: " + orientation.type);
+            if(orientation.type == "portrait-primary" || orientation.type == "portrait-secondary")
+              show_rotatescreen();
+            else
+              show_fullscreen();
+        }
+    }
+
+    // Aggiunge un event listener per rilevare i cambiamenti di orientamento
+    window.addEventListener("orientationchange", function() {
+        console.log("Orientamento cambiato.");
+        detectOrientation();
+    });
+    // Rileva l'orientamento iniziale al caricamento della pagina
+    window.addEventListener("load", function() {
+        detectOrientation();
+    });
+
+      const cover = document.getElementById('cover');
+      
+      function add_cover(){
+        cover.classList.add("cover");
+        cover.classList.remove("nocover");
+      }
+      function remove_cover(){
+        cover.classList.add("nocover");
+        cover.classList.remove("cover");
+      }
+
+      // Funzione per rilevare se la pagina è in modalità fullscreen
+      function detectFullscreen() {
+        let fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+        if (fullscreenElement) 
+            remove_cover();
+        else 
+            add_cover();
+      }
+
+      document.addEventListener("fullscreenchange", detectFullscreen);
+      document.addEventListener("mozfullscreenchange", detectFullscreen);
+      document.addEventListener("webkitfullscreenchange", detectFullscreen);
+      document.addEventListener("msfullscreenchange", detectFullscreen);
 
       var script = document.createElement("script");
       script.src = loaderUrl;
