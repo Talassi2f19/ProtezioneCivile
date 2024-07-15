@@ -27,10 +27,8 @@ namespace Script.User.Prefabs
         
         private PlayerInfo FindRole()
         {
-            Ruoli role = Info.localUser.role;
             int i = 0;
-            
-            while (playerInfo[i].ruolo == role)
+            while (playerInfo[i].ruolo != Info.localUser.role)
                 i++;
             
             if (i < playerInfo.Count)

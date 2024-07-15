@@ -25,8 +25,11 @@ namespace minigame.MaterialePericoloso
         
         private void Start()
         {
-            ObjText.SetActive(false);
-            text = ObjText.GetComponent<TextMeshProUGUI>();
+            if (ObjText != null)
+            {
+                ObjText.SetActive(false);
+                text = ObjText.GetComponent<TextMeshProUGUI>();
+            }
         }
         
         [ContextMenu("GeneraTrue")]

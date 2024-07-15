@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using Defective.JSON;
 using Proyecto26;
 using Script.Master.Prefabs;
@@ -10,18 +12,55 @@ namespace Script.Master
     {
         [SerializeField] private Transform parent;
         [SerializeField] private GameObject prefab;
-        void Start()
+        [SerializeField] private GameObject waitText;
+        private bool waitGen = true;
+        private Coroutine coroutine;
+        
+        private void OnEnable()
         {
-            RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(e =>
+            if (parent.childCount == 0)
             {
-                JSONObject json = new JSONObject(e.Text);
-                for (int i = 0; i < json.count; i++)
-                {
-                    string testo = json.list[i].GetField("Name").stringValue + " - " + json.list[i].GetField("Role").stringValue;
-                    Instantiate(prefab, parent).GetComponent<GenericTextPrefab>().SetGenericText(testo);
-                }
-            }).Catch(Debug.LogError);
+                waitText.SetActive(true);
+                coroutine = StartCoroutine(GetPlayer());
+            }
+            else
+            {
+                waitText.SetActive(false);
+            }
         }
-    
+
+        private void OnDisable()
+        {
+            if(coroutine != null)
+                StopCoroutine(coroutine);
+        }
+
+        private void Genera(string jsonText)
+        {
+            waitGen = false;
+            waitText.SetActive(false);
+            
+            JSONObject json = new JSONObject(jsonText);
+            for (int i = 0; i < json.count; i++)
+            {
+                string testo = json.list[i].GetField("Name").stringValue + " - " + json.list[i].GetField("Role").stringValue;
+                Instantiate(prefab, parent).GetComponent<GenericTextPrefab>().SetGenericText(testo);
+            }
+        }
+
+        private IEnumerator GetPlayer()
+        {
+            while (waitGen)
+            {
+                RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(e =>
+                {
+                    if (!e.Text.ToLower().Contains("null"))
+                    {
+                        Genera(e.Text);
+                    }
+                });
+                yield return new WaitForSeconds(3f);
+            }
+        }
     }
 }

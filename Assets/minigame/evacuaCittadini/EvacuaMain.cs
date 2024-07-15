@@ -80,12 +80,5 @@ namespace minigame.evacuaCittadini
             }
             
         }
-
-        [ContextMenu("kkkkk")]
-        public void hh()
-        {
-            Genera("3");
-        }
-        
     }
 }

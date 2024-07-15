@@ -1,21 +1,17 @@
 using UnityEngine;
 
-namespace minigame.Incidente
+namespace minigame.PrimoSoccorso
 {
     public class Stage1 : MonoBehaviour
     {
         [SerializeField] private Danni danni;
-        private EdgeCollider2D edgeCollider2D;
         private bool type;
         [SerializeField]private GameObject minimappaPoint;
         
         
         private void Start()
         {
-            edgeCollider2D = GetComponent<EdgeCollider2D>();
-            
             minimappaPoint.SetActive(type);
-            edgeCollider2D.enabled = type;
         }
 
         private void OnTriggerExit2D(Collider2D other)

@@ -10,7 +10,6 @@ namespace minigame.TrovaDispersi
     public class TrovaDispersi : MonoBehaviour
     {
         [SerializeField]private GameObject prefab;
-        private Transform parent;
         private TextMeshProUGUI text;
         [SerializeField] private GameObject ObjText;
         
@@ -38,7 +37,6 @@ namespace minigame.TrovaDispersi
         {
             ObjText.SetActive(false);
             text = ObjText.GetComponent<TextMeshProUGUI>();
-            parent = gameObject.transform;
         }
         
         [ContextMenu("genera")]
@@ -48,36 +46,18 @@ namespace minigame.TrovaDispersi
             // RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":"+ (val+2000) +"}");
             for (int i = 0; i < posizioni.GetLength(1); i++)
             {
-                GameObject tmp = Instantiate(prefab, posizioni[val,i], new Quaternion(), parent);
+                GameObject tmp = Instantiate(prefab, posizioni[val,i], new Quaternion(), transform);
                 tmp.GetComponent<Button>().onClick.AddListener(()=> Click(tmp));
             }
             ObjText.SetActive(true);
-            text.text = "Da trovare: " + parent.childCount + " dispersi";
+            text.text = "Da trovare: " + transform.childCount + " dispersi";
         }
-
-        // public void GeneraOverlay(int val)
-        // {
-        //     val -= 2000;
-        //     for (int i = 0; i < posizioni.GetLength(1); i++)
-        //     {
-        //         GameObject tmp = Instantiate(prefab, posizioni[val,i], new Quaternion(), parent);
-        //         tmp.GetComponent<Button>().onClick.AddListener(()=> Click(tmp));
-        //     }
-        // }
-        //
-        // public void RimuoviOverlay()
-        // {
-        //     for (int i = parent.childCount - 1; i >= 0; i--)
-        //     {
-        //         DestroyImmediate(parent.GetChild(i).gameObject);
-        //     }
-        // }
     
         public void Click(GameObject tmp)
         {
             DestroyImmediate(tmp);
-            text.text = "Da trovare: " + parent.childCount + " dispersi";
-            if (parent.childCount == 0)
+            text.text = "Da trovare: " + transform.childCount + " dispersi";
+            if (transform.childCount == 0)
             {
                 ObjText.SetActive(false);
                 //task done

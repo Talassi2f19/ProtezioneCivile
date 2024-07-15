@@ -2,12 +2,14 @@
 using minigame.AllestimentoCRI;
 using minigame.evacuaCittadini;
 using minigame.incendio;
+using minigame.Incidente;
 using minigame.MaterialePericoloso;
 using minigame.PuntiRaccolta;
 using minigame.SalvaPersone;
 using minigame.svuotaAcqua;
 using minigame.TogliTane;
 using minigame.TrovaDispersi;
+using Proyecto26;
 using Script.User;
 using Script.Utility;
 using UnityEngine;
@@ -48,6 +50,7 @@ namespace _Scenes.User.telefono
         [SerializeField] private TogliMonnezza togliMonnezza;
         [SerializeField] private SalvaCose salvaPersoneAnimale;
         [SerializeField] private EvacuaMain evacuaCittadini;
+        [SerializeField] private Incidente incidente;
         
         [Header("ALTRO")]
         [SerializeField] private PlayerLocal _playerLocal;
@@ -123,6 +126,7 @@ namespace _Scenes.User.telefono
             schede.Add( Instantiate(prefNotifiche, parent)); //[^1]
             foreach (var var in schede)
             { 
+                var.SetActive(false);
                 var.GetComponentInChildren<Logica>().SetListaSchede(schede);
             }
             schede[0].GetComponentInChildren<Logica>().SetBackCallback(IndietroCall);
@@ -158,7 +162,6 @@ namespace _Scenes.User.telefono
                 NuovaNotifica("Informazioni da TLC");
                 return;
             }
-
             if (value == 18000)
             {
                 puntiRaccolta.Genera(false);
@@ -169,34 +172,40 @@ namespace _Scenes.User.telefono
                 allestimentoCri.Genera(false);
                 return;
             }
-            if (value == 16000)
+            if (value == 16)
             {
                 togliAcqua.Genera(false);
-                return;
             }
             if (value == 16001)
             {
                 togliAcqua.Rimuovi();
                 return;
             }
-            if (value == 57000)
+            if (value == 57)
             {
                 spegniIncendio.Genera(false);
-                return;
             }
             if (value == 57001)
             {
                 spegniIncendio.Rimuovi();
                 return;
             }
-            if (value == 27000)
+            if (value == 27)
             {
                 togliMonnezza.Genera(false);
-                return;
             }
             if (value == 27001)
             {
                 togliMonnezza.Rimuovi();
+                return;
+            }
+            if (value == 47)
+            {
+                incidente.Genera(false);
+            }
+            if (value == 47001)
+            {
+                incidente.Rimuovi();
                 return;
             }
             
@@ -567,6 +576,8 @@ namespace _Scenes.User.telefono
                         case 47:
                             if(Info.localUser.name != plName)
                                 return;
+                            NuovaNotifica("C'è un incidente, trovalo e riapri la strada il prima possibile");
+                            incidente.Genera(true);
                             break;
                     }
                     break;

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,11 +11,17 @@ namespace minigame.MaterialePericoloso
         [SerializeField] private float incrementSpeed = 0.1f;
         private bool type;
         [SerializeField] private Danni danni;
+        [SerializeField]private GameObject minimappaPoint;
 
         public void SetType(bool flag)
         {
             type = flag;
+        }
+
+        private void OnEnable()
+        {
             image.fillAmount = 0f;
+            minimappaPoint.SetActive(type);
         }
 
         private void OnTriggerEnter2D(Collider2D other)

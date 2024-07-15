@@ -3,9 +3,9 @@ using Script.User;
 using Script.Utility;
 using UnityEngine;
 
-namespace minigame.Incidente
+namespace minigame.PrimoSoccorso
 {
-    public class IncidenteMain : MonoBehaviour
+    public class PrimoSoccorso : MonoBehaviour
     {
         [SerializeField] private Canvas mainCanvas;
         [SerializeField] private PlayerLocal playerLocal;
@@ -53,15 +53,22 @@ namespace minigame.Incidente
                 Destroy(pt1);
             }
         }
-        
+
         private void P1Completato()
         {
             mainCanvas.enabled = false;
             playerLocal.canMove = false;
-            pt2 = Instantiate(prefabP2,Info.localUser.coord,new Quaternion(), transform);
-            // pt2.GetComponent<PompaGioco>().OnComplete(P2Completato);
+            pt2 = Instantiate(prefabP2, Info.localUser.coord, new Quaternion(), transform);
+            pt2.GetComponent<Stage1>().StartPt2(StartP2);
+
+
         }
-    
+
+        private void StartP2()
+        {
+            
+        }
+        
         private void P2Completato()
         {
             DestroyImmediate(pt1);

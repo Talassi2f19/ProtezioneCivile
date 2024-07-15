@@ -76,6 +76,5 @@ namespace minigame.AllestimentoCRI
         {
             completatoCallback = tmp;
         }
-
     }
 }
