@@ -69,10 +69,10 @@ namespace Script.Master
             
             //task
             // event: put
-            // data: {"path":"/Task/-NxsMbI_dagLXyhk5LhS","data":{"CodTask":0,"Destinatario":"abscds","IdRisposta":""}}
+            // data: {"path":"/Task/-NxsMbI_dagLXyhk5LhS","data":{"CodTask":0,}}
             
             // event: put
-            // data: {"path":"/Task/-NxsMbI_dagLXyhk5LhS","data":{"CodTask":0,"Destinatario":"","IdRisposta":"-NxsMbI_dagLXyhk5LhS"}}
+            // data: {"path":"/Task/-NxsMbI_dagLXyhk5LhS","data":{"CodTask":0,"Player":""}}
             
             // event: put
             // data: {"path":"/Task/-NxsMbI_dagLXyhk5LhS","data":null}
@@ -103,47 +103,46 @@ namespace Script.Master
             }
         }
 
-        private void CaricaPlayer()
-        {
-            JSONObject userList;
-            RestClient.Get(Info.DBUrl+Info.sessionCode+"/" + Global.PlayerFolder + ".json").Then(a =>
-            {
-                userList = new JSONObject(a.Text);
-                RestClient.Get(Info.DBUrl+Info.sessionCode+"/Game/Posizione.json").Then(b =>
-                {
-                    userList.Merge(new JSONObject(b.Text));
-                    CaricaPlayer2(userList);
-                }).Catch(Debug.LogError);
-            }).Catch(Debug.LogError);
-        }
-
-        private void CaricaPlayer2(JSONObject userList)
-        {
-            if(!userList)
-                return;
-            foreach (JSONObject json in userList.list)
-            {
-                if (!json.GetField("Virtual"))
-                {
-                    string n = json.GetField("Name").stringValue;
-                    playerList.Add(n, Instantiate(prefab, parent));
-                    playerList[n].name = n;
-                    //playerList[n].GetComponent<PlayerOnline>().Set(json);
-                }
+         private void CaricaPlayer()
+         {
+             JSONObject userList;
+             RestClient.Get(Info.DBUrl+Info.sessionCode+"/" + Global.PlayerFolder + ".json").Then(a =>
+             {
+                 userList = new JSONObject(a.Text);
                 
-            }
-        }
+                 RestClient.Get(Info.DBUrl+Info.sessionCode+"/Game/Posizione.json").Then(b =>
+                 {
+                     userList.Merge(new JSONObject(b.Text));
+                     Debug.Log(userList);
+                     CaricaPlayer2(userList);
+                 }).Catch(Debug.LogError);
+             }).Catch(Debug.LogError);
+         }
 
-        private void MuoviPlayer(JSONObject value)
-        {
-            String nome = value.GetField("path").stringValue.Split("/")[2];
-            Vector2 newPos = value.GetField("data").ToVector2();
+         private void CaricaPlayer2(JSONObject userList)
+         {
+             if(!userList)
+                 return;
+             foreach (JSONObject json in userList.list)
+             {
+                 if(json.GetField("Virtual"))
+                     return;
+                 string n = json.GetField("Name").stringValue;
+                 Debug.LogWarning(json);
+                 Vector2 coord = json.GetField("Coord") ? json.GetField("Coord").ToVector2() : Vector2.zero;
+                 playerList.Add(n, Instantiate(prefab ,coord,new Quaternion(), parent));
+                 playerList[n].name = n;
+             }
+         }
 
-            newPos.x = newPos.x != 0 ? newPos.x : playerList[nome].transform.position.x;
-            newPos.y = newPos.y != 0 ? newPos.y : playerList[nome].transform.position.y;
-            
-            playerList[nome].transform.position = newPos;
-        }
+         private void MuoviPlayer(JSONObject value)
+         {
+             String nome = value.GetField("path").stringValue.Split("/")[2];
+             Vector2 newPos = value.GetField("data").ToVector2();
+             newPos.x = newPos.x!=0 ? newPos.x : playerList[nome].transform.position.x ;
+             newPos.y = newPos.y!=0 ? newPos.y : playerList[nome].transform.position.y ;
+             playerList[nome].transform.position = newPos;
+         }
 
         private void Assegna(int value)
         {

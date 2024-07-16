@@ -63,6 +63,7 @@ namespace minigame.Incidente
         
         private void Pt2Fine()
         {
+            inProgress = false;
             mainCanva.enabled = true;
             playerLocal.canMove = true;
             Destroy(p1);

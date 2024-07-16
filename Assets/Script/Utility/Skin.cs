@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace Script.Utility
@@ -19,62 +20,64 @@ namespace Script.Utility
         [SerializeField]private AnimatorOverrideController vigile;
         [SerializeField]private AnimatorOverrideController normale;
         
-        // public bool flag;
-        // public Ruoli r;
-        // private void Update()
-        // {
-        //     if (flag)
-        //     {
-        //         flag = false;
-        //         SetSkin(r);
-        //     }
-        // }
+        
+        public Ruoli r;
+        [ContextMenu("prova")]
+        public void aggiorna()
+        {
+                SetSkin(r);
+           
+        }
         
         public void SetSkin(Ruoli ruolo)
         {
+            AnimatorOverrideController tmp;
             switch (ruolo)
             {
                 case Ruoli.Coc:
-                    animator.runtimeAnimatorController = coc;
+                    tmp = coc;
                     break;
                 case Ruoli.RefCri:
                 case Ruoli.VolCri:
-                    animator.runtimeAnimatorController = cri;
+                    tmp = cri;
                     break;
                 case Ruoli.RefGgev:
                 case Ruoli.VolGgev:
-                    animator.runtimeAnimatorController = ggev;
+                    tmp = ggev;
                     break;
                 case Ruoli.RefPC:
                 case Ruoli.VolPC:
-                    animator.runtimeAnimatorController = pc;
+                    tmp = pc;
                     break;
                 case Ruoli.RefPolizia:
                 case Ruoli.VolPolizia:
-                    animator.runtimeAnimatorController = vigile;
+                    tmp = vigile;
                     break;
                 case Ruoli.VolFuoco:
-                    animator.runtimeAnimatorController = pompiere;
+                case Ruoli.RefFuoco:
+                    tmp = pompiere;
                     break;
                 case Ruoli.Sindaco:
-                    animator.runtimeAnimatorController = sindaco;
+                    tmp = sindaco;
                     break;
                 case Ruoli.Medico:
-                    animator.runtimeAnimatorController = medico;
+                    tmp = medico;
                     break;
                 // case Ruoli.Giornalista:
                 //     animator.runtimeAnimatorController = giornalista;
                 //     break;
                 case Ruoli.Segreteria:
-                    animator.runtimeAnimatorController = segreteria;
+                    tmp = segreteria;
                     break;
                 case Ruoli.RefTlc:
-                    animator.runtimeAnimatorController = tlc;
+                    tmp = tlc;
                     break;
                 default:
-                    animator.runtimeAnimatorController = normale;
+                    tmp = normale;
                     break;
             }
+
+            animator.runtimeAnimatorController = tmp;
         }
     }
 }

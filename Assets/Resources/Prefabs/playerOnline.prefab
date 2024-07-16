@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nome: {fileID: 649844656897949579}
-  speed: 0.85
+  speed: 1
   skin: {fileID: 9017517894793376311}
 --- !u!212 &202528584503883729
 SpriteRenderer:
@@ -326,7 +326,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 515190929
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -455054137, guid: 66faf7ed4177f42438743f1560efd473, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
