@@ -1,10 +1,27 @@
 ﻿using UnityEditor;
 using Script.Utility;
+using UnityEngine;
 
 namespace Editor
 {
     public class BuildScript
     {
+        
+        private static bool development = false;
+
+        [MenuItem("Build/Build Development")]
+        private static void ToggleBoolValue()
+        {
+            development = !development;
+        }
+
+        [MenuItem("Build/Build Development", true)]
+        private static bool ToggleBoolValueValidate()
+        {
+            Menu.SetChecked("Build/Build Development", development);
+            return true;
+        }
+        
         [MenuItem("Build/Build WebGL ALL")]
         public static void BuildAll()
         {
@@ -19,6 +36,7 @@ namespace Editor
             PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Brotli;
             PlayerSettings.WebGL.decompressionFallback = true;
             PlayerSettings.WebGL.dataCaching = false;
+            PlayerSettings.WebGL.template = "prova";
 
             // Define scenes and build path
             string[] scenes = {
@@ -32,7 +50,7 @@ namespace Editor
             };
             string buildPath = "build/master";
             BuildTarget buildTarget = BuildTarget.WebGL;
-            BuildOptions buildOptions = BuildOptions.CleanBuildCache;
+            BuildOptions buildOptions =  development ? BuildOptions.Development | BuildOptions.CleanBuildCache : BuildOptions.CleanBuildCache;
 
             // Build the project
             BuildPipeline.BuildPlayer(scenes, buildPath, buildTarget, buildOptions);
@@ -45,6 +63,7 @@ namespace Editor
             PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Brotli;
             PlayerSettings.WebGL.decompressionFallback = true;
             PlayerSettings.WebGL.dataCaching = false;
+            PlayerSettings.WebGL.template = "prova";
 
             // Define scenes and build path
             string[] scenes = {
@@ -58,7 +77,7 @@ namespace Editor
             };
             string buildPath = "build/user";
             BuildTarget buildTarget = BuildTarget.WebGL;
-            BuildOptions buildOptions = BuildOptions.CleanBuildCache;
+            BuildOptions buildOptions =  development ? BuildOptions.Development | BuildOptions.CleanBuildCache : BuildOptions.CleanBuildCache;
 
             // Build the project
             BuildPipeline.BuildPlayer(scenes, buildPath, buildTarget, buildOptions);
@@ -78,6 +97,7 @@ namespace Editor
             PlayerSettings.SetManagedStrippingLevel(BuildTargetGroup.WebGL, ManagedStrippingLevel.Low);
             PlayerSettings.WebGL.decompressionFallback = false;
             PlayerSettings.WebGL.dataCaching = false;
+            PlayerSettings.WebGL.template = "prova";
 
             // Define scenes and build path
             string[] scenes = {
@@ -90,7 +110,7 @@ namespace Editor
             };
             string buildPath = "build/master";
             BuildTarget buildTarget = BuildTarget.WebGL;
-            BuildOptions buildOptions = BuildOptions.CleanBuildCache;
+            BuildOptions buildOptions =  development ? BuildOptions.Development | BuildOptions.None : BuildOptions.None;
 
             
             // Build the project
@@ -105,6 +125,7 @@ namespace Editor
             PlayerSettings.SetManagedStrippingLevel(BuildTargetGroup.WebGL, ManagedStrippingLevel.Low);
             PlayerSettings.WebGL.decompressionFallback = false;
             PlayerSettings.WebGL.dataCaching = false;
+            PlayerSettings.WebGL.template = "prova";
 
             // Define scenes and build path
             string[] scenes = {
@@ -118,7 +139,7 @@ namespace Editor
             };
             string buildPath = "build/user";
             BuildTarget buildTarget = BuildTarget.WebGL;
-            BuildOptions buildOptions = BuildOptions.None;
+            BuildOptions buildOptions =  development ? BuildOptions.Development | BuildOptions.None : BuildOptions.None;
 
             // Build the project
             BuildPipeline.BuildPlayer(scenes, buildPath, buildTarget, buildOptions);

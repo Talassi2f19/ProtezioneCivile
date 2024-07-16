@@ -3,22 +3,17 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | {{{ PRODUCT_NAME }}}</title>
+    <title>Unity WebGL Player | testing</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
-#if SHOW_DIAGNOSTICS
-    <link rel="stylesheet" href="<<<TemplateData/diagnostics.css>>>">
-    <script src="<<<TemplateData/diagnostics.js>>>"></script>
-#endif
   </head>
   <body>
-    <div id="overlay">
-        <div id="message" style="color: red">
-            <p>Per continuare, ruota il dispositivo in orizzontale.</p>
-        </div>
-    </div>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width={{{ WIDTH }}} height={{{ HEIGHT }}} tabindex="-1"></canvas>
+      <div class="cover__filter cover" id="cover">
+        <div id="unity-fullscreen-button"><img src="../play.svg" id="icon_fullscreen" alt=""></div>
+        <div id="unity-rotatescreen-button"><img src="../screen-rotation-button.png" id="icon_rotatescreen" alt=""></div>
+      </div>
+      <canvas id="unity-canvas" width=1024 height=576 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -26,25 +21,15 @@
         </div>
       </div>
       <div id="unity-warning"> </div>
-      <div id="unity-footer">
-        <div id="unity-webgl-logo"></div>
-        <div id="unity-fullscreen-button"></div>
-#if SHOW_DIAGNOSTICS
-        <img id="diagnostics-icon" src="TemplateData/webmemd-icon.png">
-#endif
-        <div id="unity-build-title">{{{ PRODUCT_NAME }}}</div>
-      </div>
     </div>
     <script>
+
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
       var loadingBar = document.querySelector("#unity-loading-bar");
       var progressBarFull = document.querySelector("#unity-progress-bar-full");
       var fullscreenButton = document.querySelector("#unity-fullscreen-button");
       var warningBanner = document.querySelector("#unity-warning");
-#if SHOW_DIAGNOSTICS
-      var diagnostics_icon = document.getElementById("diagnostics-icon");
-#endif
 
       // Shows a temporary message banner/ribbon for a few seconds, or
       // a permanent error message on top of the canvas if type=='error'.
@@ -70,13 +55,6 @@
         updateBannerVisibility();
       }
 
-      var overlay = document.querySelector("#overlay");
-      // controllo dell'orientamento dello schermo se landscape(90 | -90) o portrait(0)
-      window.addEventListener('orientationchange', function() {
-        console.log(window.orientation.toString());
-        overlay.style.display = window.orientation.toString() == "90" || window.orientation.toString() == "-90" ? "none" : "block"; 
-      }, false);
-
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}";
       var config = {
@@ -95,9 +73,9 @@
         symbolsUrl: buildUrl + "/{{{ SYMBOLS_FILENAME }}}",
 #endif
         streamingAssetsUrl: "StreamingAssets",
-        companyName: {{{ JSON.stringify(COMPANY_NAME) }}},
-        productName: {{{ JSON.stringify(PRODUCT_NAME) }}},
-        productVersion: {{{ JSON.stringify(PRODUCT_VERSION) }}},
+        companyName: "DefaultCompany",
+        productName: "testing",
+        productVersion: "1.0",
         showBanner: unityShowBanner,
       };
 
@@ -122,26 +100,83 @@
         // performance, uncomment the following line:
         // config.devicePixelRatio = 1;
 
-#if SHOW_DIAGNOSTICS
-        // position the diagnostics icon in the corner on the canvas
-        diagnostics_icon.style.position = "fixed";
-        diagnostics_icon.style.bottom = "10px";
-        diagnostics_icon.style.right = "0px";
-        canvas.after(diagnostics_icon);
-#endif
 
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
-        canvas.style.width = "{{{ WIDTH }}}px";
-        canvas.style.height = "{{{ HEIGHT }}}px";
+        canvas.style.width = "1024px";
+        canvas.style.height = "576px";
       }
 
-#if BACKGROUND_FILENAME
-      canvas.style.background = "url('" + buildUrl + "/{{{ BACKGROUND_FILENAME.replace(/'/g, '%27') }}}') center / cover";
-#endif
       loadingBar.style.display = "block";
+#if !DEVELOPMENT_PLAYER
+      /*--------------------------------
+      Orientamento schermo
+    --------------------------------*/
+    const icon_fullscreen = document.getElementById('unity-fullscreen-button');
+    const icon_rotatescreen = document.getElementById('unity-rotatescreen-button');
 
+    function show_fullscreen(){
+      icon_fullscreen.classList.add("d-flex");
+      icon_fullscreen.classList.remove("d-none");
+        
+      icon_rotatescreen.classList.add("d-none");
+      icon_rotatescreen.classList.remove("d-flex");
+    }
+    function show_rotatescreen(){
+      icon_fullscreen.classList.add("d-none");
+      icon_fullscreen.classList.remove("d-flex");
+        
+      icon_rotatescreen.classList.add("d-flex");
+      icon_rotatescreen.classList.remove("d-none");
+    }
+    function detectOrientation() {
+        let orientation = screen.orientation || screen.mozOrientation || screen.msOrientation;
+
+        if (orientation.type) {
+            console.log("Orientamento corrente: " + orientation.type);
+            if(orientation.type == "portrait-primary" || orientation.type == "portrait-secondary")
+              show_rotatescreen();
+            else
+              show_fullscreen();
+        }
+    }
+
+    // Aggiunge un event listener per rilevare i cambiamenti di orientamento
+    window.addEventListener("orientationchange", function() {
+        console.log("Orientamento cambiato.");
+        detectOrientation();
+    });
+    // Rileva l'orientamento iniziale al caricamento della pagina
+    window.addEventListener("load", function() {
+        detectOrientation();
+    });
+
+      const cover = document.getElementById('cover');
+      
+      function add_cover(){
+        cover.classList.add("cover");
+        cover.classList.remove("nocover");
+      }
+      function remove_cover(){
+        cover.classList.add("nocover");
+        cover.classList.remove("cover");
+      }
+
+      // Funzione per rilevare se la pagina è in modalità fullscreen
+      function detectFullscreen() {
+        let fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+        if (fullscreenElement) 
+            remove_cover();
+        else 
+            add_cover();
+      }
+
+      document.addEventListener("fullscreenchange", detectFullscreen);
+      document.addEventListener("mozfullscreenchange", detectFullscreen);
+      document.addEventListener("webkitfullscreenchange", detectFullscreen);
+      document.addEventListener("msfullscreenchange", detectFullscreen);
+#endif
       var script = document.createElement("script");
       script.src = loaderUrl;
       script.onload = () => {
@@ -149,11 +184,6 @@
           progressBarFull.style.width = 100 * progress + "%";
               }).then((unityInstance) => {
                 loadingBar.style.display = "none";
-#if SHOW_DIAGNOSTICS
-                diagnostics_icon.onclick = () => {
-                  unityDiagnostics.openDiagnosticsDiv(unityInstance.GetMemoryInfo);
-                };
-#endif
                 fullscreenButton.onclick = () => {
                   unityInstance.SetFullscreen(1);
                 };
