@@ -6,13 +6,10 @@
     <title>Unity WebGL Player | testing</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+    <link rel="manifest" href="manifest.webmanifest">
   </head>
   <body>
-    <div id="unity-container" class="unity-desktop">
-      <div class="cover__filter cover" id="cover">
-        <div id="unity-fullscreen-button"><img src="../play.svg" id="icon_fullscreen" alt=""></div>
-        <div id="unity-rotatescreen-button"><img src="../screen-rotation-button.png" id="icon_rotatescreen" alt=""></div>
-      </div>
+    <div id="unity-container">
       <canvas id="unity-canvas" width=1024 height=576 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
@@ -22,13 +19,17 @@
       </div>
       <div id="unity-warning"> </div>
     </div>
-    
     <script>
+      window.addEventListener("load", function () {
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker.register("ServiceWorker.js");
+        }
+      });
+
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
       var loadingBar = document.querySelector("#unity-loading-bar");
       var progressBarFull = document.querySelector("#unity-progress-bar-full");
-      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
       var warningBanner = document.querySelector("#unity-warning");
 
       // Shows a temporary message banner/ribbon for a few seconds, or
@@ -68,7 +69,7 @@
         showBanner: unityShowBanner,
       };
 
-      // By default, Unity keeps WebGL canvas render target size matched with
+      // By default Unity keeps WebGL canvas render target size matched with
       // the DOM size of the canvas element (scaled by window.devicePixelRatio)
       // Set this to false if you want to decouple this synchronization from
       // happening inside the engine, and you would instead like to size up
@@ -77,114 +78,26 @@
 
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         // Mobile device style: fill the whole browser client area with the game canvas:
-
         var meta = document.createElement('meta');
         meta.name = 'viewport';
         meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
         document.getElementsByTagName('head')[0].appendChild(meta);
-        container.className = "unity-mobile";
-        canvas.className = "unity-mobile";
-
-        // To lower canvas resolution on mobile devices to gain some
-        // performance, uncomment the following line:
-        // config.devicePixelRatio = 1;
-
-
-      } else {
-        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
-
-        canvas.style.width = "1024px";
-        canvas.style.height = "576px";
       }
 
       loadingBar.style.display = "block";
-
-    /*--------------------------------
-      Orientamento schermo
-    --------------------------------*/
-    const icon_fullscreen = document.getElementById('unity-fullscreen-button');
-    const icon_rotatescreen = document.getElementById('unity-rotatescreen-button');
-
-    function show_fullscreen(){
-      icon_fullscreen.classList.add("d-flex");
-      icon_fullscreen.classList.remove("d-none");
-        
-      icon_rotatescreen.classList.add("d-none");
-      icon_rotatescreen.classList.remove("d-flex");
-    }
-    function show_rotatescreen(){
-      icon_fullscreen.classList.add("d-none");
-      icon_fullscreen.classList.remove("d-flex");
-        
-      icon_rotatescreen.classList.add("d-flex");
-      icon_rotatescreen.classList.remove("d-none");
-    }
-    function detectOrientation() {
-        let orientation = screen.orientation || screen.mozOrientation || screen.msOrientation;
-
-        if (orientation.type) {
-            console.log("Orientamento corrente: " + orientation.type);
-            if(orientation.type == "portrait-primary" || orientation.type == "portrait-secondary")
-              show_rotatescreen();
-            else
-              show_fullscreen();
-        }
-    }
-
-    // Aggiunge un event listener per rilevare i cambiamenti di orientamento
-    window.addEventListener("orientationchange", function() {
-        console.log("Orientamento cambiato.");
-        detectOrientation();
-    });
-    // Rileva l'orientamento iniziale al caricamento della pagina
-    window.addEventListener("load", function() {
-        detectOrientation();
-    });
-
-      const cover = document.getElementById('cover');
-      
-      function add_cover(){
-        cover.classList.add("cover");
-        cover.classList.remove("nocover");
-      }
-      function remove_cover(){
-        cover.classList.add("nocover");
-        cover.classList.remove("cover");
-      }
-
-      // Funzione per rilevare se la pagina è in modalità fullscreen
-      function detectFullscreen() {
-        let fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
-        if (fullscreenElement) 
-            remove_cover();
-        else 
-            add_cover();
-      }
-
-      document.addEventListener("fullscreenchange", detectFullscreen);
-      document.addEventListener("mozfullscreenchange", detectFullscreen);
-      document.addEventListener("webkitfullscreenchange", detectFullscreen);
-      document.addEventListener("msfullscreenchange", detectFullscreen);
 
       var script = document.createElement("script");
       script.src = loaderUrl;
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
-              }).then((unityInstance) => {
-                loadingBar.style.display = "none";
-                fullscreenButton.onclick = () => {
-                  unityInstance.SetFullscreen(1);
-                  remove_cover();
-                  console.log("Attivato modalità fullscreen");
-                };
-              }).catch((message) => {
-                alert(message);
-              });
-            };
-
+        }).then((unityInstance) => {
+          loadingBar.style.display = "none";
+        }).catch((message) => {
+          alert(message);
+        });
+      };
       document.body.appendChild(script);
-
     </script>
   </body>
 </html>

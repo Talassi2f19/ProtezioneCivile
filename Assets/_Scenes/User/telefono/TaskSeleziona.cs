@@ -20,7 +20,7 @@ namespace _Scenes.User.telefono
     
         public void NuovaTask(int cod)
         {
-            avanti.interactable = false;
+            avanti.interactable = true;
             GameObject tmp = Instantiate(prefab, parent);
             tmp.GetComponentInChildren<TextMeshProUGUI>().text = "testo"+ cod;
             tmp.GetComponent<Button>().onClick.AddListener(()=>Select(cod, tmp));
