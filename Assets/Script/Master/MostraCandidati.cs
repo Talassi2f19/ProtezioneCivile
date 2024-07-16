@@ -151,9 +151,18 @@ namespace Script.Master
                         nVoti++;
                 }
                 testoContatore.text = nVoti + " / " + numeroPlayer;
+                if (nVoti == numeroPlayer)
+                {
+                    StartCoroutine(StanzaPiena());
+                }
             }).Catch(Debug.LogError);
-            
         }
-        
+
+        private IEnumerator StanzaPiena()
+        {
+            yield return new WaitForSeconds(3f);
+            MostraRisultati();
+            yield return null;
+        }
     }
 }

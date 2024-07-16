@@ -9,7 +9,7 @@ namespace minigame.Incidente
         [SerializeField]private Danni danni;
         [SerializeField] private GameObject minimappaPoint;
 
-        private void OnEnable()
+        private void Start()
         {
             minimappaPoint.SetActive(type);
         }

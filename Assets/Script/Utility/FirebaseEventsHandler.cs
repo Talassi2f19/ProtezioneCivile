@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -20,16 +21,16 @@ namespace Script.Utility
             if (DataReceived == null) 
                 return true;
             
-            String encodedData = Encoding.UTF8.GetString(data);
+            string encodedData = Encoding.UTF8.GetString(data);
             foreach (var tmp in encodedData.TrimEnd('\n').Split("\n\n"))
             {
                 DataReceived(tmp.Trim());
-                //Print(tmp.Trim());
+                Print(tmp.Trim());
+                
             }
             return true;
         }
-        
-        
+     
         
         private static int counter = 0;
         private void Print(String text)

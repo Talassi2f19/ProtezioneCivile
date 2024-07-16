@@ -68,8 +68,6 @@ namespace _Scenes.User.telefono
         private void Start()
         {
             Inizializza();
-            Testo.Load();
-            Debug.Log(Testo.testi[1]);
         }
         
        
