@@ -5,43 +5,43 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/User/login.unity
     guid: 10bf9fdf0bc6dbc41a37d61a7595702f
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/User/game.unity
     guid: 27cfde0189efb9a46afd37ec36f6d917
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/User/elezioni.unity
     guid: 4e4b5acecccb8bc44b4de3444f19b8e5
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/User/selezioneCOC.unity
     guid: 0c84d43663d74a54db0e001c946cd42a
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/User/risultatiElezioni.unity
     guid: 62e83ea65abb11746b6091681e6ab598
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/User/attesaRuoli.unity
     guid: 0a0aacaf0ee96cc4aa8e5e74317c2603
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/User/EndGame.unity
     guid: f8c02a56a4c2be54d89989e949e053d7
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Master/start.unity
     guid: c43bad2e0abaf5e4ea448499e5ed81cc
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Master/playerLogin.unity
     guid: 38fd3aac487eb6a43816b7a692b3ea27
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Master/elezioni.unity
     guid: a1bdbcdf4eac3874c875bea4624ed5cb
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Master/risultatiElezioni.unity
     guid: 37f2fe7bae1376a45b0f4af94191d4ed
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Master/game.unity
     guid: 21918d9ef79c15d499e9e2beedee998b
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Master/EndGame.unity
     guid: 3f3950b3348545b40bf6201d72324e23
   - enabled: 0
