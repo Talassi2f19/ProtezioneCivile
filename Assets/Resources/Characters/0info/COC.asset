@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ruolo: 2
   Nome: Centro Operativo Comunale
-  Immagine: {fileID: 0}
+  Immagine: {fileID: 21300000, guid: e1630bd484a19b742aafa14aa2828677, type: 3}
   Descrizione: "Il  Referente del C.O.C. (Centro Operativo Comunale), ha vari compiti
     cruciali durante un'emergenza.\r\n1. Rapporto con il Sindaco: Mantiene un contatto
     costante con il Sindaco, implementando le sue direttive.\r\n2. Coordinamento

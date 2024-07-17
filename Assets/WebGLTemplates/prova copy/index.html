@@ -21,6 +21,19 @@
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
     <link rel="manifest" href="manifest.webmanifest">
+    <style>
+      body { padding: 0; margin: 0; display: flex;justify-content: center;align-items: flex-start;height: 100vh;}
+      .cover__filter{ background: #000; width:100%; height:100%; position: absolute;opacity: 0.8;display: flex;justify-content: center;align-items: center;}
+
+      #unity-rotatescreen-button {cursor: pointer;position:absolute;width: 140px; height: 140px;background-color: white;z-index: 2;display:none;justify-content: center;align-items: center;border-radius: 0.5rem;}
+      #unity-rotatescreen-button img{width: 100px; height: 100px;}
+
+      .cover{z-index: 0;display: flex;}
+      .nocover{z-index: -1;opacity: 0;display: none;}
+
+      .d-flex{display: flex!important;}
+      .d-none{display: none!important;}
+    </style>
   </head>
   <body>
     <div id="unity-container">
@@ -39,11 +52,8 @@
       <div id="unity-warning"> </div>
     </div>
     <script>
-      window.addEventListener("load", function () {
-        if ("serviceWorker" in navigator) {
-          navigator.serviceWorker.register("ServiceWorker.js");
-        }
-      });
+      const icon_rotatescreen = document.getElementById('unity-rotatescreen-button');
+      const cover = document.getElementById('cover');
 
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
@@ -76,11 +86,22 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/user.loader.js";
+      var loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}";
       var config = {
-        dataUrl: buildUrl + "/user.data.unityweb",
-        frameworkUrl: buildUrl + "/user.framework.js.unityweb",
-        codeUrl: buildUrl + "/user.wasm.unityweb",
+        dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
+        frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
+#if USE_THREADS
+        workerUrl: buildUrl + "/{{{ WORKER_FILENAME }}}",
+#endif
+#if USE_WASM
+        codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}",
+#endif
+#if MEMORY_FILENAME
+        memoryUrl: buildUrl + "/{{{ MEMORY_FILENAME }}}",
+#endif
+#if SYMBOLS_FILENAME
+        symbolsUrl: buildUrl + "/{{{ SYMBOLS_FILENAME }}}",
+#endif
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "testing",
@@ -88,7 +109,7 @@
         showBanner: unityShowBanner,
       };
 
-      // By default Unity keeps WebGL canvas render target size matched with
+      // By default, Unity keeps WebGL canvas render target size matched with
       // the DOM size of the canvas element (scaled by window.devicePixelRatio)
       // Set this to false if you want to decouple this synchronization from
       // happening inside the engine, and you would instead like to size up
@@ -97,53 +118,69 @@
 
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         // Mobile device style: fill the whole browser client area with the game canvas:
+
         var meta = document.createElement('meta');
         meta.name = 'viewport';
         meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
         document.getElementsByTagName('head')[0].appendChild(meta);
+        container.className = "unity-mobile";
+        canvas.className = "unity-mobile";
+
+        // To lower canvas resolution on mobile devices to gain some
+        // performance, uncomment the following line:
+        // config.devicePixelRatio = 1;
+
+
+      } else {
+        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
+
+        canvas.style.width = "1024px";
+        canvas.style.height = "576px";
       }
 
       loadingBar.style.display = "block";
-
-      const icon_rotatescreen = document.getElementById('unity-rotatescreen-button');
-      const cover = document.getElementById('cover');
-
-      function hide_rotatescreen(){
+#if !DEVELOPMENT_PLAYER
+    /*--------------------------------
+      Orientamento schermo
+    --------------------------------*/
+    function hide_rotatescreen(){
         cover.classList.add("nocover");
         cover.classList.remove("cover");
 
         icon_rotatescreen.classList.add("d-none");
         icon_rotatescreen.classList.remove("d-flex");
       }
-      function show_rotatescreen(){
-        cover.classList.add("cover");
-        cover.classList.remove("nocover");
+    function show_rotatescreen(){
+      cover.classList.add("cover");
+      cover.classList.remove("nocover");
 
-        icon_rotatescreen.classList.add("d-flex");
-        icon_rotatescreen.classList.remove("d-none");
+      icon_rotatescreen.classList.add("d-flex");
+      icon_rotatescreen.classList.remove("d-none");
+    }
+    function detectOrientation() {
+        let orientation = screen.orientation || screen.mozOrientation || screen.msOrientation;
+
+        if (orientation.type) {
+            console.log("Orientamento corrente: " + orientation.type);
+            if(orientation.type == "portrait-primary" || orientation.type == "portrait-secondary")
+              show_rotatescreen();
+            else
+              hide_rotatescreen();
+        }
       }
-      function detectOrientation() {
-          let orientation = screen.orientation || screen.mozOrientation || screen.msOrientation;
+    /*--------------------------
+      LISTENER
+    ----------------------------*/
+    window.addEventListener("load", function () {
+      if ("serviceWorker" in navigator)
+        navigator.serviceWorker.register("ServiceWorker.js");
+      detectOrientation();
+    });
+    window.addEventListener("orientationchange", function() {
+        detectOrientation();
+    });
 
-          if (orientation.type) {
-              console.log("Orientamento corrente: " + orientation.type);
-              if(orientation.type == "portrait-primary" || orientation.type == "portrait-secondary")
-                show_rotatescreen();
-              else
-                hide_rotatescreen();
-          }
-      }
-
-      // Aggiunge un event listener per rilevare i cambiamenti di orientamento
-      window.addEventListener("orientationchange", function() {
-          console.log("Orientamento cambiato.");
-          detectOrientation();
-      });
-      // Rileva l'orientamento iniziale al caricamento della pagina
-      window.addEventListener("load", function() {
-          detectOrientation();
-      });
-
+#endif
       var script = document.createElement("script");
       script.src = loaderUrl;
       script.onload = () => {

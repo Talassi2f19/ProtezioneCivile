@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ruolo: 14
   Nome: Referente Guardie Giurate Ecologiche Volontarie
-  Immagine: {fileID: 0}
+  Immagine: {fileID: 21300000, guid: 3969192145e6db84f96ce720e94c12f4, type: 3}
   Descrizione: "Ha svolto il corso di formazione e fa servizio di volontariato e
     assistenza alla popolazione colpita secondo le proprie competenze.\r\nSu richiesta
     del Sindaco o della Consulta della Protezione Civile attiva i propri volontari

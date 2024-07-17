@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ruolo: 6
   Nome: Referente Protezione Civile
-  Immagine: {fileID: 0}
+  Immagine: {fileID: 21300000, guid: f43f913e54fc1a84aa9ba6047daee402, type: 3}
   Descrizione: "Il Referente Protezione Civile gestisce: \r\n1. Emergenza Piena del
     Fiume:\r\n- Monitoraggio continuo dell\u2019argine maestro fino alla cessazione
     dell\u2019emergenza.\r\n- Presidio fisso h24 nei punti critici a rischio esondazioni,

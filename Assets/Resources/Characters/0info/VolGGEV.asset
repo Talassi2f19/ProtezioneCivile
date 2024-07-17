@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ruolo: 15
   Nome: Volontario Guardie Giurate Ecologiche Volontarie
-  Immagine: {fileID: 0}
+  Immagine: {fileID: 21300000, guid: e2e990dbcdbfd2a4abb26f2e841af151, type: 3}
   Descrizione: "Ha svolto il corso di formazione e fa servizio di volontariato e
     assistenza alla popolazione colpita secondo le proprie competenze.\r\nSa riconoscere
     gli animali ad abitudini fossorie e le loro tane, sa realizzare interventi specifici

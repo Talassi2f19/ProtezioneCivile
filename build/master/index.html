@@ -10,6 +10,11 @@
   </head>
   <body>
     <div id="unity-container">
+      <div class="cover__filter cover" id="cover">
+        <div id="unity-rotatescreen-button">
+          <img src="../screen-rotation-button.png" id="icon_rotatescreen" alt="">
+        </div>
+      </div>
       <canvas id="unity-canvas" width=1024 height=576 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
@@ -85,6 +90,45 @@
       }
 
       loadingBar.style.display = "block";
+
+      const icon_rotatescreen = document.getElementById('unity-rotatescreen-button');
+      const cover = document.getElementById('cover');
+
+      function hide_rotatescreen(){
+        cover.classList.add("nocover");
+        cover.classList.remove("cover");
+
+        icon_rotatescreen.classList.add("d-none");
+        icon_rotatescreen.classList.remove("d-flex");
+      }
+      function show_rotatescreen(){
+        cover.classList.add("cover");
+        cover.classList.remove("nocover");
+
+        icon_rotatescreen.classList.add("d-flex");
+        icon_rotatescreen.classList.remove("d-none");
+      }
+      function detectOrientation() {
+          let orientation = screen.orientation || screen.mozOrientation || screen.msOrientation;
+
+          if (orientation.type) {
+              console.log("Orientamento corrente: " + orientation.type);
+              if(orientation.type == "portrait-primary" || orientation.type == "portrait-secondary")
+                show_rotatescreen();
+              else
+                hide_rotatescreen();
+          }
+      }
+
+      // Aggiunge un event listener per rilevare i cambiamenti di orientamento
+      window.addEventListener("orientationchange", function() {
+          console.log("Orientamento cambiato.");
+          detectOrientation();
+      });
+      // Rileva l'orientamento iniziale al caricamento della pagina
+      window.addEventListener("load", function() {
+          detectOrientation();
+      });
 
       var script = document.createElement("script");
       script.src = loaderUrl;

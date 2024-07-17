@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ruolo: 10
   Nome: Vigile Urbano
-  Immagine: {fileID: 0}
+  Immagine: {fileID: 21300000, guid: b071cc9938d718f43adc838e638523b0, type: 3}
   Descrizione: "Regolano la circolazione, limitando il traffico nelle zone pi\xF9
     colpite dall\u2019evento calamitoso e creano percorsi alternativi per facilitare
     l\u2019arrivo dei soccorsi. Collaborano con le altre forze dell\u2019ordine per

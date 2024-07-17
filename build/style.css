@@ -39,7 +39,7 @@ Navbar
 .header__content{max-width: 1200px;width: 100%;margin: 0 auto; display: flex;justify-content: space-between;}
 
 .header__logo,
-.header__quick{display: flex; align-items: center;color:var(--menu-color)}
+.header__quick{display: flex; align-items: center;color:var(--menu-color); gap: .5rem}
 
 .header__menu{padding: 0;margin: 0;}
 .header__menu li{display: inline-block;}
@@ -87,6 +87,10 @@ p{font-size: 1rem;margin-bottom:1rem; line-height: 1.5;}
   text-decoration: none;padding: 14px 25px; display: inline-block;
   border-radius: 4px; font-weight: 700;
 }  
+.green{
+  background-color: var(--button-bggreen)!important;
+  color: white!important;
+}
 .button:hover{
   background: var(--button-hovergreen); 
 }

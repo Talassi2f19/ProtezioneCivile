@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ruolo: 4
   Nome: Volontario Croce Rossa Italiana
-  Immagine: {fileID: 0}
+  Immagine: {fileID: 21300000, guid: ab55bc4c6e0b0564db467efc5693d41c, type: 3}
   Descrizione: "Presta servizio all'interno degli ospedali e/o delle aree di attesa
     indivduate dal Piano di Protezione Civile, dando assistenza infermieristica e
     psicologica alla popolazione per affrontare l'emergenza\r"

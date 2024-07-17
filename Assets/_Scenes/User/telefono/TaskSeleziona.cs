@@ -18,11 +18,11 @@ namespace _Scenes.User.telefono
         private int codice;
     
     
-        public void NuovaTask(int cod)
+        public void NuovaTask(string desc, int cod)
         {
             avanti.interactable = true;
             GameObject tmp = Instantiate(prefab, parent);
-            tmp.GetComponentInChildren<TextMeshProUGUI>().text = "testo"+ cod;
+            tmp.GetComponentInChildren<TextMeshProUGUI>().text = desc;
             tmp.GetComponent<Button>().onClick.AddListener(()=>Select(cod, tmp));
         }
 

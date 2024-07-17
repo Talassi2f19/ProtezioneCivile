@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ruolo: 12
   Nome: Volontario Vigili del Fuoco
-  Immagine: {fileID: 0}
+  Immagine: {fileID: 21300000, guid: c44828675db759646b2a7daaef520ad1, type: 3}
   Descrizione: "Assicurano i propri interventi tecnici di soccorso immediato in occasioni
     di incendi, crolli strutturali, frane, piene, alluvioni o di altri eventi calamitosi.\r\n\r\nProvvede
     all'eliminazione delle situazioni di pericolo pi\xF9 urgenti, spegnendo incendi,

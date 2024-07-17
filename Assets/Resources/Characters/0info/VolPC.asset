@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ruolo: 7
   Nome: Volontario Protezione Civile
-  Immagine: {fileID: 0}
+  Immagine: {fileID: 21300000, guid: 39c44f61fffcef445913e71446dc0f88, type: 3}
   Descrizione: "Ha svolto il corso di formazione e fa servizio di volontariato e
     assistenza alla popolazione colpita in caso di necessit\xE0 e diponibile per
     il:\r\n- Montaggio tendopoli e campo;\r\n- Servizio mensa;\r\n- Assistenza magazzino;\r\n-

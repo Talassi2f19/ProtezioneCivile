@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ruolo: 3
   Nome: 'Referente Croce Rossa Italiana '
-  Immagine: {fileID: 0}
+  Immagine: {fileID: 21300000, guid: 5899f0129c95fe04991874e81f8f8ef6, type: 3}
   Descrizione: "Il Referente Croce Rossa Italiana svolge varie attivit\xE0 di emergenza:\r\nAttivit\xE0
     in Emergenza: \r\n1. Assistenza sanitaria immediata: Fornisce cure mediche di
     emergenza.\r\n2. Ricerca dispersi: Utilizza squadre specifiche per trovare persone
