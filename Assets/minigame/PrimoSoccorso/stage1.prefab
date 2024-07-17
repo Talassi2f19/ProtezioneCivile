@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8863227503119265579}
   - component: {fileID: 739039997006614758}
   - component: {fileID: 5696675004614116673}
-  - component: {fileID: 315159357788450313}
+  - component: {fileID: 3835111629032428693}
   m_Layer: 0
   m_Name: stage1
   m_TagString: Untagged
@@ -139,8 +139,8 @@ CapsuleCollider2D:
   m_Offset: {x: -0.005, y: 0}
   m_Size: {x: 0.2, y: 0.3}
   m_Direction: 0
---- !u!68 &315159357788450313
-EdgeCollider2D:
+--- !u!60 &3835111629032428693
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -172,22 +172,27 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.15, y: 0.21}
+    newSize: {x: 0.15, y: 0.21}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   m_Points:
-  - {x: -0.09990057, y: 0.40552375}
-  - {x: -0.32112634, y: 0.39466703}
-  - {x: -0.3583789, y: 0.22139987}
-  - {x: -0.35435787, y: 0.1049514}
-  - {x: -0.27264133, y: -0.14776742}
-  - {x: -0.13759947, y: -0.23571554}
-  - {x: 0.13338014, y: -0.24328545}
-  - {x: 0.28377765, y: -0.0791918}
-  - {x: 0.32790142, y: 0.13264857}
-  - {x: 0.30266237, y: 0.3201504}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+    m_Paths:
+    - - {x: -0.3536401, y: 0.25199914}
+      - {x: -0.3490411, y: -0.06946953}
+      - {x: -0.20528439, y: -0.25572377}
+      - {x: 0.025924765, y: -0.28465557}
+      - {x: 0.23364003, y: -0.24761099}
+      - {x: 0.3019537, y: -0.1576564}
+      - {x: 0.33828214, y: -0.066223934}
+      - {x: 0.32731193, y: 0.2307752}
+      - {x: 0.029641885, y: 0.2607752}
+  m_UseDelaunayMesh: 0
 --- !u!1 &6724587230263438589
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,7 +339,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2814447478014044680
 Transform:
   m_ObjectHideFlags: 0

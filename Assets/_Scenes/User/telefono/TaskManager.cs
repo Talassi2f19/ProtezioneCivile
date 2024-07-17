@@ -54,6 +54,7 @@ namespace _Scenes.User.telefono
         
         [Header("ALTRO")]
         [SerializeField] private PlayerLocal _playerLocal;
+        [SerializeField] private Canvas mainCanvas;
         
         // [Header("MAPPA")]
         // [SerializeField]private Transform mappa;
@@ -133,6 +134,7 @@ namespace _Scenes.User.telefono
         private void IndietroCall()
         {
             _playerLocal.canMove = true;
+            mainCanvas.enabled = true;
         }
         
         public void OpenMessaggi()
@@ -144,6 +146,7 @@ namespace _Scenes.User.telefono
         public void OpenManager()
         { 
             _playerLocal.canMove = false;
+            mainCanvas.enabled = false;
             schede[0].SetActive(true);
         }
         

@@ -1,7 +1,9 @@
+using System;
 using Proyecto26;
 using Script.User;
 using Script.Utility;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace minigame.PrimoSoccorso
 {
@@ -56,30 +58,23 @@ namespace minigame.PrimoSoccorso
 
         private void P1Completato()
         {
+            Destroy(pt1);
             mainCanvas.enabled = false;
             playerLocal.canMove = false;
-            pt2 = Instantiate(prefabP2, Info.localUser.coord, new Quaternion(), transform);
-            pt2.GetComponent<Stage1>().StartPt2(StartP2);
-
-
+            pt2 = Instantiate(prefabP2, posizione, new Quaternion(), transform);
+            pt2.GetComponent<Stage2>().Completato(P2Completato);
         }
 
-        private void StartP2()
-        {
-            
-        }
         
         private void P2Completato()
         {
-            DestroyImmediate(pt1);
-            DestroyImmediate(pt2);
+            Destroy(pt1);
+            Destroy(pt2);
             mainCanvas.enabled = true;
             playerLocal.canMove = true;
             inProgress = false;
-            Debug.Log("Completato");
             RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", "{\"Occupato\":false}");
             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":16001}").Catch(Debug.LogError);
-            //TODO
         }
     }
 }
