@@ -16,10 +16,10 @@ namespace Script.User
         {
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/score.json").Then(e =>
             {
-                testo.text = "Avete ottenuto " + e.Text + " punti!";
+                testo.text = "Avete ottenuto " + e.Text == "null" ? "0" : e.Text + " punti!";
             });
         }
-
+        
         public void FineButton()
         {
             Info.Reset();

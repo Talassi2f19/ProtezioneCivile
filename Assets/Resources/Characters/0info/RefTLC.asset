@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ruolo: 8
   Nome: Referete Telecomunicazioni
-  Immagine: {fileID: 21300000, guid: 5f7a8a1153598064ba745b2921a39436, type: 3}
+  Immagine: {fileID: 21300000, guid: d3d7e2c419c4988419cc24b7910a13f9, type: 3}
   Descrizione: "Competenze in tempo ordinario:\r\n- Aquisizione dei dati relativi
     alle comunicazioni, utili ai fini delle attivit\xE0 di soccorso;\r\n- Predisposizione
     di una rete di telecomunicazione non vulnerabile.\r\nCompetenze d'urante l'emergenza:\r\n-

@@ -27,60 +27,19 @@ namespace Script.User
         
         private void Start()
         {
+            
             joyStick.Enable(true);
             listeners = new Listeners(Info.DBUrl + Info.sessionCode + "/Game.json");
-            listeners.Start(ffff);
+            listeners.Start(Parse);
             CaricaPlayer();
-            
-            // FirstLoadTask();
         }
-
+        
         private void OnApplicationQuit()
         {
             if(listeners != null)
                 listeners.Stop();
         }
         
-        
-        
-
-        private void ffff(string ggg)
-        {
-            
-            if (isRunning)
-            {
-                isRunning = false;
-            }
-            StartCoroutine(CronometroRoutine());
-        }
-        
-
-        private bool isRunning;
-        private float elapsedTime;
-        private IEnumerator CronometroRoutine()
-        {
-            yield return new WaitForSeconds(0.5f);
-            isRunning = true;
-            elapsedTime = 0f;
-
-            while (isRunning)
-            {
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
-            UpdateTimerText(elapsedTime);
-            
-        }
-        
-        private void UpdateTimerText(float time)
-        {
-            int minutes = Mathf.FloorToInt(time / 60F);
-            int seconds = Mathf.FloorToInt(time % 60F);
-            int milliseconds = Mathf.FloorToInt((time * 1000F) % 1000F);
-            Debug.Log($"{minutes:00}:{seconds:00}:{milliseconds:000}");
-        }
-
-
         private void Parse(string data)
         {
             //da ignorare
@@ -160,18 +119,22 @@ namespace Script.User
 
         private void CaricaPlayer2(JSONObject userList)
         {
+            // Info.localUser.role = userList.GetField(Info.localUser.name).ToUser().role;
+            
             userList.RemoveField(Info.localUser.name);
+            
             if(!userList)
                 return;
             foreach (JSONObject json in userList.list)
             {
-                if(json.GetField("Virtual"))
-                    return;
-                string n = json.GetField("Name").stringValue;
-                Vector2 coord = json.GetField("Coord") ? json.GetField("Coord").ToVector2() : Vector2.zero;
-                playerList.Add(n, Instantiate(onlinePlayer ,coord,new Quaternion(), parent));
-                playerList[n].name = n;
-                playerList[n].GetComponent<PlayerOnline>().Set(json);
+                if (!json.GetField("Virtual"))
+                {
+                    string n = json.GetField("Name").stringValue;
+                    Vector2 coord = json.GetField("Coord") ? json.GetField("Coord").ToVector2() : Vector2.zero;
+                    playerList.Add(n, Instantiate(onlinePlayer ,Vector3.zero, new Quaternion(), parent));
+                    playerList[n].name = n;
+                    playerList[n].GetComponent<PlayerOnline>().Set(json);
+                }
             }
         }
 

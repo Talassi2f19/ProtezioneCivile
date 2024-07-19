@@ -18,6 +18,8 @@ namespace Script.Utility
         public const int MinPlayer = 0;             //TODO modificare limite minimo
         
         public const int SessionCodeLength = 4;
+
+        public const int PointForGame = 10;
         
         public static void Reset()
         {

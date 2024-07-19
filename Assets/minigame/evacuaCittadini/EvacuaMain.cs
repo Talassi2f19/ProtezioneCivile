@@ -76,6 +76,10 @@ namespace minigame.evacuaCittadini
                 if (transform.childCount == 0)
                 {
                     RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", "{\"Occupato\":false}");
+                    RestClient.Get(Info.DBUrl + Info.sessionCode + "/score.json").Then(e =>
+                    {
+                        RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", "{\"score\":" + (int.Parse(e.Text == "null" ? "0" : e.Text ) + Info.PointForGame) + "}").Catch(Debug.Log);
+                    }).Catch(Debug.Log);
                 }
             }
             

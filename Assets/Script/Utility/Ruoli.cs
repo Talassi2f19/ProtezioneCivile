@@ -29,9 +29,9 @@
         public static readonly Ruoli[] lista =
         {
             //obbligtori per ogni partita
-            //sindaco, coc
+            // sindaco, coc
             //2 
-            Ruoli.RefPC,
+            // Ruoli.RefPC,
             Ruoli.RefTlc,
             Ruoli.RefPolizia,
             Ruoli.RefFuoco,
@@ -65,6 +65,12 @@
             Ruoli.VolPolizia,
             Ruoli.VolFuoco,
             //30
+            Ruoli.VolPC,
+            Ruoli.VolCri,
+            Ruoli.VolGgev,
+            Ruoli.VolPolizia,
+            Ruoli.VolFuoco,
+            //35
         };
     }
 }

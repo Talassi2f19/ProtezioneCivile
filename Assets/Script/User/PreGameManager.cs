@@ -73,6 +73,12 @@ namespace Script.User
                      SceneManager.LoadScene(Scene.User.Game);
                      break;
                  
+                 case GameStatus.GenRuoli:
+                     gameIsStarted.Stop();
+                     amIRemoved.Stop();
+                     SceneManager.LoadScene(Scene.User.AttesaRuoli);
+                     break;
+                 
                  case GameStatus.End:
                      gameIsStarted.Stop();
                      amIRemoved.Stop();

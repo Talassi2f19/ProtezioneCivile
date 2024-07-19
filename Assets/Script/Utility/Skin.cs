@@ -25,6 +25,7 @@ namespace Script.Utility
         [ContextMenu("prova")]
         public void aggiorna()
         {
+            Info.localUser.role = r;
                 SetSkin(r);
            
         }

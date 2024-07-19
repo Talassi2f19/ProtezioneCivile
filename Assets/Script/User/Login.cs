@@ -100,26 +100,26 @@ namespace Script.User
                     }).Catch(Debug.LogError);
                     return;
                 }
-#if !UNITY_EDITOR                
-                if(json.GetField(Global.GameStatusCodeKey).stringValue != GameStatus.End){
-                    //partita già iniziata
-                    //tenta riconnessione
-                    string cookie = WebGL.GetCookie();
-                    if (cookie.Contains(nome) && json.GetField(Global.PlayerFolder).keys.Contains(nome))
-                    {
-                        RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + nome + "/Role.json").Then(e =>
-                        {
-                            Debug.Log(e.Text);
-                            Info.localUser.role = Enum.Parse<Ruoli>(e.Text);
-                            SceneManager.LoadScene(Scene.User.Elezioni);
-                        }).Catch(Debug.LogError);
-                    }
-                    else
-                    {
-                        ErroriDisplay(7);
-                    }
-                }
-#endif
+// #if !UNITY_EDITOR                
+//                 if(json.GetField(Global.GameStatusCodeKey).stringValue != GameStatus.End){
+//                     //partita già iniziata
+//                     //tenta riconnessione
+//                     string cookie = WebGL.GetCookie();
+//                     if (cookie.Contains(nome) && json.GetField(Global.PlayerFolder).keys.Contains(nome))
+//                     {
+//                         RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + nome + "/Role.json").Then(e =>
+//                         {
+//                             Debug.Log(e.Text);
+//                             Info.localUser.role = Enum.Parse<Ruoli>(e.Text);
+//                             SceneManager.LoadScene(Scene.User.Elezioni);
+//                         }).Catch(Debug.LogError);
+//                     }
+//                     else
+//                     {
+//                         ErroriDisplay(7);
+//                     }
+//                 }
+// #endif
                 if (json.GetField(Global.GameStatusCodeKey).stringValue != GameStatus.WaitPlayer)
                 {
                     ErroriDisplay(5);

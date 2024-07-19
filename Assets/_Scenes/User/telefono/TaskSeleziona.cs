@@ -16,8 +16,12 @@ namespace _Scenes.User.telefono
 
         private GameObject button;
         private int codice;
-    
-    
+
+        private void Start()
+        {
+            avanti.interactable = false;
+        }
+
         public void NuovaTask(string desc, int cod)
         {
             avanti.interactable = true;
@@ -47,7 +51,8 @@ namespace _Scenes.User.telefono
     
         public void ApriAssenga()
         {
-            logica.TaskAssenga(codice);
+            avanti.interactable = false;
+            logica.TaskAssenga(codice, button.GetComponentInChildren<TextMeshProUGUI>().text);
             Rimuovi();
         }
     
@@ -64,11 +69,12 @@ namespace _Scenes.User.telefono
 
         public void Rimuovi()
         {
+            Debug.Log(button.name);
             if(button != null)
                 button.SetActive(false);
             if(parent.childCount <= 1)
                 avanti.interactable = false;
-            //Destroy(button);
+            Destroy(button);
         }
 
         private void OnDisable()

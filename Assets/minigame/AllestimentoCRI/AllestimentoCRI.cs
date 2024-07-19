@@ -62,6 +62,10 @@ namespace minigame.AllestimentoCRI
             Destroy(pt1);
             Destroy(pt2);
             inProgress = false;
+            RestClient.Get(Info.DBUrl + Info.sessionCode + "/score.json").Then(e =>
+            {
+                RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", "{\"score\":" + (int.Parse(e.Text == "null" ? "0" : e.Text ) + Info.PointForGame) + "}").Catch(Debug.Log);
+            }).Catch(Debug.Log);
         }
     }
 }

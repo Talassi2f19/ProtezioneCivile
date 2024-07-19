@@ -40,6 +40,9 @@ namespace Script.Utility
                 if (webReq != null && (webReq.result == UnityWebRequest.Result.ProtocolError || webReq.result == UnityWebRequest.Result.ConnectionError))
                 {
                     Debug.LogError($"Request error: {webReq.error}" + "Il listener è morto");
+                    downloadHandler.DataReceived -= method;
+                    Stop();
+                    Start(method);
                 }
             };
         }

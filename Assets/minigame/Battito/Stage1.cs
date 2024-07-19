@@ -9,9 +9,6 @@ namespace minigame.Battito
         {
             _st1Callback.Invoke();
         }
-
-
-        
         
         public delegate void St1callback();
         private St1callback _st1Callback;

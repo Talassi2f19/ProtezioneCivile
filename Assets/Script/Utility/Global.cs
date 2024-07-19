@@ -41,6 +41,7 @@ namespace Script.Utility
             public const string Game = Scene.Folder + "/" + Scene.Master.MFolder + "/game" ;
             public const string Elezioni = Scene.Folder + "/" + Scene.Master.MFolder + "/elezioni" ;
             public const string EndGame = Scene.Folder + "/" + Scene.Master.MFolder + "/EndGame" ;
+            public const string GenRuoli = Scene.Folder + "/" + Scene.Master.MFolder + "/GenRuoli" ;
         }
     }
     

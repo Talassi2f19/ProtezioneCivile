@@ -53,12 +53,20 @@ namespace _Scenes.User.telefono
         public void RefTlcInforma(GameObject tmp)
         {
             tmp.SetActive(false);
-            RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":6}").Catch(Debug.Log);
+            string[] str = 
+            { 
+                "Dato l'allagamento della città si consiglia di rimanere nelle proprie case",
+                "Chiusura delle strade dovuta a grossa innondazione",
+                "Mantenere la calma e seguire i consigli del comune",
+                "Mantenersi informati tramite tutti i mezzi comunicativi per sapere giornalmente come procedere"
+            };
+            RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":6,\"Player\":\""+str[Random.Range(0,str.Length)]+"\"}").Catch(Debug.Log);
         }
         public void RefTlcInformaSindaco(GameObject tmp)
         {
             tmp.SetActive(false);
-            RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":4}").Catch(Debug.Log);
+            string str = "I volontari sono già stati delegati i vari incarichi. Ognuno stà procedendo con dedizione per aiutare il paese";
+            RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":4,\"Player\":\""+str+"\"}").Catch(Debug.Log);
         }
         
         public void SindacoCOC(GameObject tmp) //convoca il coc
@@ -98,11 +106,11 @@ namespace _Scenes.User.telefono
             schede[3].SetActive(true);
         }
         
-        public void TaskAssenga(int code)
+        public void TaskAssenga(int code, string str)
         {
             Debug.Log(schede[2].name);
             Debug.Log(schede[2].GetComponentInChildren<TaskAssegna>());
-            schede[2].GetComponentInChildren<TaskAssegna>().SetCodice(code);
+            schede[2].GetComponentInChildren<TaskAssegna>().SetCodice(code, str);
             schede[2].SetActive(true);
         }
 

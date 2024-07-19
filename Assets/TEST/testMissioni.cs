@@ -7,66 +7,23 @@ using Script.Utility;
 using Script.Utility.GestioneEventi;
 using UnityEngine;
 
-public partial class NewBehaviourScript : MonoBehaviour
+public class NewBehaviourScript : MonoBehaviour
 {
-    private Dictionary<string, Missione> missioni = new Dictionary<string, Missione>();
     private void Start()
     {
-        RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.MissioniFolder + ".json").Then(e =>
-        { 
+        Debug.Log("dsa");
+        RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + "/Role.json").Then(e =>
+        {
             Debug.Log(e.Text);
-            JSONObject hh = new JSONObject(e.Text);
-            Debug.Log(hh);
-            printAll();
-            missioni = hh.ToMissioneDictionary();
-            printAll();
+            Debug.Log( Info.localUser.role);
+            Info.localUser.role = (Ruoli)Enum.Parse(typeof(Ruoli), e.Text);
+            Debug.Log( Info.localUser.role);
+            
+            Debug.Log(Info.localUser.name);
         });
     }
 
-    public MissioneObj missionObject;
-
-
-    private void printAll()
-    {
-        Debug.Log(missioni.Count);
-        foreach (var VARIABLE in missioni)
-        {
-            Debug.Log(VARIABLE.Key + ":" + VARIABLE.Value.printData());
-        }
-    }
-    // private void Start()
-    // {
-    //     
-    //  
-    //
-    //     RestClient.Post(Info.DBUrl + ".json", ddas(jhgh)).Then(d =>
-    //     {
-    //         Debug.Log(d.Text); //codice missione
-    //     });
-    // }
-
-    private string ddas(MissioneObj missionObject)
-    {
-        JSONObject a = new JSONObject();
-        a.AddField(Global.NomeMissioneKey , missionObject.nomeMissione);
-        a.AddField(Global.FasiFolder, b =>
-        {
-            int i = 0;
-            foreach (var kk in missionObject.fasi)
-            {
-                b.AddField("F"+ i++, c =>
-                {
-                    c.AddField(Global.IsCompletedKey, false);
-                    c.AddField(Global.RuoliFolder, d =>
-                    {
-                        foreach (var rr in kk.Ruoli)
-                        {
-                            d.AddField(rr.ToString(), false);
-                        }
-                    });
-                });
-            }
-        });
-        return a.ToString();
-    }
+  
 }
+
+

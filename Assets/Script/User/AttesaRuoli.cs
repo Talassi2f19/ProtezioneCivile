@@ -13,7 +13,7 @@ namespace Script.User
 
         private void Start()
         {
-            listeners = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + "/" + Global.RuoloPlayerKey + ".json");
+            listeners = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.GameStatusCodeKey + ".json");
             listeners.Start(TrovaRuolo);
         }
 
@@ -24,15 +24,11 @@ namespace Script.User
 
         private void TrovaRuolo(string str)
         {
-            Debug.Log(str);
-            if (!str.ContainsInsensitive("null"))
+            if (str.Contains(GameStatus.Gioco))
             {
                 listeners.Stop();
-                str = str.Split("\"data\":\"")[1].Split("\"")[0];
-                Info.localUser.role = Enum.Parse<Ruoli>(str);
                 SceneManager.LoadScene(Scene.User.Game);
             }
         }
-
     }
 }

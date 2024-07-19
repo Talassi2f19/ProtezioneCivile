@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ruolo: 1
   Nome: Sindaco
-  Immagine: {fileID: 21300000, guid: 74252309f37c16245929fe48a9abba02, type: 3}
+  Immagine: {fileID: 21300000, guid: 035d0ba82e1b177449d8fcce511503d1, type: 3}
   Descrizione: "Il sindaco, come Autorit\xE0 comunale di protezione civile, ha il
     compito di gestire l'impatto immediato di eventi calamitosi e soddisfare le esigenze
     di primo intervento. Le sue responsabilit\xE0 includono:\n1. Attuazione delle

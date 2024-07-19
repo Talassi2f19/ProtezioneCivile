@@ -1,59 +1,78 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
 using Defective.JSON;
 using Proyecto26;
 using Script.Utility;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Scene = Script.Utility.Scene;
 
 namespace Script.User
 {
     public class GeneraRuoli : MonoBehaviour
     {
-        [ContextMenu("hgjhg")]
+
+        [ContextMenu("fds")]
+        public void hh()
+        {
+            Info.sessionCode = "AAA";
+            Genera();
+        }
+        
+        
         public void Genera()
         {
-            
             //scarica la lista di tutti i player
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(e =>
             {
-                string str = Aggiungi(e.Text);
-                str = Sostituisci(str);
-                RestClient.Put(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json", str).Catch(exception => Debug.LogError(exception));
+                Debug.LogWarning("1");
+                string fffd = Carica(e.Text);
+                Debug.Log(fffd);
+                RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json", fffd).Then(e =>
+                {
+                    Debug.LogWarning("2");
+                    StartCoroutine(After2sec());
+                    
+                }).Catch(Debug.LogError);
            }).Catch(Debug.LogError);
         
         }
-        
-        private string Sostituisci(string s)
+
+        private IEnumerator After2sec()
         {
-            string[] jj = s.Split(Ruoli.Null.ToString());
-            string def = "";
-            if (jj.Length - 1 <= PrecedenzaRuoli.lista.Length)
+            yield return new WaitForSeconds(3f);
+            RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", "{\"" + Global.GameStatusCodeKey + "\":\"" + GameStatus.Gioco + "\"}").Then(e =>
             {
-                int j = 0;
-                for (int i = 0; i < jj.Length-1; i++)
-                {
-                    def += jj[i] + PrecedenzaRuoli.lista[j];
-                    j++;
-                }
-                def += jj[jj.Length-1];
-            }
-            else
-            {
-                Debug.LogError("Errore nella generazione dei ruoli");
-            }
-            return def;
+                SceneManager.LoadScene(Scene.Master.Game);
+            }).Catch(Debug.LogError);
         }
+        
+        
 
-        private string Aggiungi(string s)
+
+        private string Carica(string originale)
         {
-            int n = Info.MaxPlayer - s.Split("Role").Length + 1;
+            int numPlOriginale = originale.Split(Global.NomePlayerKey).Length - 1;
 
-            for (int i = 0; i < n; i++)
+            int listaPos = 0;
+            string nuova = "";
+            
+            string[] arr = originale.Split(Ruoli.Null.ToString());
+            for (int i = 0; i < arr.Length - 1 ; i++)
             {
-                string val = ",\"Computer"+i+"\":{\"Name\":\"Computer"+i+"\",\"Role\":\"Null\",\"Virtual\":true}";
-                s = s.Insert(s.Length - 2, val);
+                nuova += arr[i] + PrecedenzaRuoli.lista[listaPos];
+                listaPos++;
             }
-            return s;
+            nuova += arr[arr.Length-1];
+            
+            for (int i = 0; i < 30 - numPlOriginale; i++)
+            {
+                // Debug.Log("npc"+i);
+                nuova = nuova.Insert(nuova.Length - 1, ",\"Computer"+i+"\":{\"Name\":\"Computer"+i+"\",\"Role\":\"" + PrecedenzaRuoli.lista[listaPos]+ "\",\"Virtual\":true}");
+                listaPos++;
+            }
+            
+            return nuova;
         }
     }
 }

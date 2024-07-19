@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ruolo: 5
   Nome: Medico
-  Immagine: {fileID: 21300000, guid: e3bada34bda79ba499ff357af79094fa, type: 3}
+  Immagine: {fileID: 21300000, guid: 47a73024839fa104b8a27e119c673bc9, type: 3}
   Descrizione: "Presta servizio all'interno degli ospedali e delle aree di attesa,
     individuate dal Piano di Protezione Civile, dando assitenza medica e psicologia
     alla popolazione per affrontare l'emergenza.\r\nPresta servizio alla popolazione

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ruolo: 13
   Nome: Segreteria provinciale
-  Immagine: {fileID: 21300000, guid: 77939996ef44b3f47b9036242cf02c9f, type: 3}
+  Immagine: {fileID: 21300000, guid: 1ff14e20731ae4b4b9bf92727bb7bfde, type: 3}
   Descrizione: "Ha svolto il corso di formazione e presta servizio di volontariato
     in segreteria alla consulta provinciale di protezione civile. Si attiva in caso
     di preallarme e allarme.\r\nLe sue mansioni sono:\r\n  - Registrare i volontari

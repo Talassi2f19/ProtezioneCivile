@@ -378,6 +378,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: minimappa
       objectReference: {fileID: 0}
+    - target: {fileID: 2340355666666649991, guid: c9c7f9fd7216db8479c1954623bd7a9e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

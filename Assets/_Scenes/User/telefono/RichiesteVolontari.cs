@@ -1,3 +1,4 @@
+using Defective.JSON;
 using Proyecto26;
 using Script.Utility;
 using UnityEngine;
@@ -58,6 +59,17 @@ namespace _Scenes.User.telefono
         public void ConfermaRichiesta(int code)
         {
             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":"+GenCode(code)+"}").Catch(Debug.Log);
+            if (code >= 80 && code <= 84)
+            {
+                Ruoli[] r = { Ruoli.VolPC ,Ruoli.VolGgev,Ruoli.VolCri, Ruoli.VolPolizia, Ruoli.VolFuoco};
+                RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(e =>
+                {
+                    JSONObject jj = new JSONObject(e.Text, 0, -1, 2);
+                    int num = jj.keys.Count;
+                    string str = "{\"Computer"+num+"\":{\"Name\":\"Computer"+num+"\",\"Role\":\""+r[code-80]+"\",\"Virtual\":true},\"Computer"+(num+1)+"\":{\"Name\":\"Computer"+(num+1)+"\",\"Role\":\""+r[code-80]+"\",\"Virtual\":true}}";
+                    RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json", str).Catch(Debug.LogError);
+                });
+            }
         }
     
     }

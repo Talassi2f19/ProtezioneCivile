@@ -98,7 +98,6 @@ namespace _Scenes.User.telefono
     
         private void Mostra(JSONObject json)
         {
-            Debug.Log("das" + json);
             if(!json)
                 return;
             foreach (var var in json.list)
@@ -206,22 +205,34 @@ namespace _Scenes.User.telefono
                     return 46;
                 case 50:
                     return 55;
-                case 100:
-                    return 56;
-                case 101:
-                    return 57;
-                case 102:
-                    return 36;
-                case 103:
-                    return 57;
-                case 104:
+                case 1015:
+                    return 15;
+                case 1016:
+                    return 16;
+                case 1017:
+                    return 17;
+                case 1018:
+                    return 18;
+                case 1025:
+                    return 25;
+                case 1027:
                     return 27;
-                case 105:
-                    return 37;
-                case 106:
+                case 1035:
+                    return 35;
+                case 1036:
                     return 36;
-                case 107:
+                case 1038:
+                    return 38;
+                case 1046:
+                    return 46;
+                case 1047:
                     return 47;
+                case 1055:
+                    return 55;
+                case 1056:
+                    return 56;
+                case 1057:
+                    return 57;
                 default:
                     return -100;
             }

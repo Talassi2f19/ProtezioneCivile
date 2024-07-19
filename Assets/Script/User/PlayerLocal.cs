@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Defective.JSON;
 using Proyecto26;
@@ -37,13 +38,91 @@ namespace Script.User
             spriteRenderer = GetComponent<SpriteRenderer>();
             spriteRenderer.enabled = false;
             
-            skin.SetSkin(Info.localUser.role);
             animator = GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
             castCollisions = new List<RaycastHit2D>();
             LoadServerPosition();
+            LoadRole();
         }
-        
+
+        private void LoadRole()
+        {
+            RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + "/Role.json").Then(e =>
+            {
+                Debug.Log(e.Text);
+                Ruoli tmp = Ruoli.Null;
+                    switch (e.Text)
+                    {
+                        case "Null":
+                            Debug.Log("Il ruolo è Null");
+                            tmp = Ruoli.Null;
+                            break;
+                        case "Sindaco":
+                            Debug.Log("Il ruolo è Sindaco");
+                            tmp = Ruoli.Sindaco;
+                            break;
+                        case "Coc":
+                            Debug.Log("Il ruolo è Coc");
+                            tmp = Ruoli.Coc;
+                            break;
+                        case "RefCri":
+                            Debug.Log("Il ruolo è Referente Croce Rossa Italiana");
+                            tmp = Ruoli.RefCri;
+                            break;
+                        case "VolCri":
+                            Debug.Log("Il ruolo è Volontario Croce Rossa Italiana");
+                            tmp = Ruoli.VolCri;
+                            break;
+                        case "Medico":
+                            Debug.Log("Il ruolo è Medico");
+                            tmp = Ruoli.Medico;
+                            break;
+                        case "RefPC":
+                            Debug.Log("Il ruolo è Referente Protezione Civile");
+                            tmp = Ruoli.RefPC;
+                            break;
+                        case "VolPC":
+                            Debug.Log("Il ruolo è Volontario Protezione Civile");
+                            tmp = Ruoli.VolPC;
+                            break;
+                        case "RefTlc":
+                            Debug.Log("Il ruolo è Telecomunicazioni");
+                            tmp = Ruoli.RefTlc;
+                            break;
+                        case "RefPolizia":
+                            Debug.Log("Il ruolo è Referente Polizia");
+                            tmp = Ruoli.RefPolizia;
+                            break;
+                        case "VolPolizia":
+                            Debug.Log("Il ruolo è Volontario Polizia");
+                            tmp = Ruoli.VolPolizia;
+                            break;
+                        case "RefFuoco":
+                            Debug.Log("Il ruolo è Referente Vigile del Fuoco");
+                            tmp = Ruoli.RefFuoco;
+                            break;
+                        case "VolFuoco":
+                            Debug.Log("Il ruolo è Volontario Vigile del Fuoco");
+                            tmp = Ruoli.VolFuoco;
+                            break;
+                        case "Segreteria":
+                            Debug.Log("Il ruolo è Segreteria");
+                            tmp = Ruoli.Segreteria;
+                            break;
+                        case "RefGgev":
+                            Debug.Log("Il ruolo è Referente Guardie Giurate Ecologiche Volontarie");
+                            tmp = Ruoli.RefGgev;
+                            break;
+                        case "VolGgev":
+                            Debug.Log("Il ruolo è Volontario Guardie Giurate Ecologiche Volontarie");
+                            tmp = Ruoli.VolGgev;
+                            break;
+                    }
+                    Debug.Log(tmp.ToString());
+                    skin.SetSkin(tmp);
+                });
+
+        }
         private void LoadServerPosition()
         {
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/Game/Posizione/"+ Info.localUser.name+"/Coord.json").Then(

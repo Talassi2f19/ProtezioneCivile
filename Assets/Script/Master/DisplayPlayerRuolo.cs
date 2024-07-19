@@ -43,8 +43,11 @@ namespace Script.Master
             JSONObject json = new JSONObject(jsonText);
             for (int i = 0; i < json.count; i++)
             {
-                string testo = json.list[i].GetField("Name").stringValue + " - " + json.list[i].GetField("Role").stringValue;
-                Instantiate(prefab, parent).GetComponent<GenericTextPrefab>().SetGenericText(testo);
+                if (!json.list[i].GetField("Virtual"))
+                {
+                    string testo = json.list[i].GetField("Name").stringValue + " - " + json.list[i].GetField("Role").stringValue;
+                    Instantiate(prefab, parent).GetComponent<GenericTextPrefab>().SetGenericText(testo);
+                }
             }
         }
 

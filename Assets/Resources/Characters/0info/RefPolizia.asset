@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ruolo: 9
   Nome: Comandante Polizia Municipale
-  Immagine: {fileID: 21300000, guid: b74bd7607eb087143a614d052f98fcdd, type: 3}
+  Immagine: {fileID: 21300000, guid: d1f20273244bcca4fb2b8e0fda81b4f5, type: 3}
   Descrizione: "Si coordina con il COC per valutare le potenziali problematiche nella
     gestione della circolazione, limitando il traffico nelle zone pi\xF9 colpite
     dall\u2019evento calamitoso creando percorsi alternativi per facilitare l\u2019arrivo

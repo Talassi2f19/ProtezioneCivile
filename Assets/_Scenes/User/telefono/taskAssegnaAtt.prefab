@@ -1467,8 +1467,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1981,8 +1981,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2061,11 +2061,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   codice: 0
-  gameObject1: {fileID: 2316283239868089691}
-  gameObject2: {fileID: 676930487152044440}
-  gameObject3: {fileID: 8868084906106207373}
-  gameObject4: {fileID: 3004446914276511437}
-  gameObject5: {fileID: 2513800499376399031}
+  gameObjectPC: {fileID: 2316283239868089691}
+  gameObjectCRI: {fileID: 676930487152044440}
+  gameObjectGGEV: {fileID: 8868084906106207373}
+  gameObjectPolizia: {fileID: 3004446914276511437}
+  gameObjectFuoco: {fileID: 2513800499376399031}
   sbagliato: {fileID: 7779404809356058491}
   corretto: {fileID: 5043651939779958219}
   buttAvanti: {fileID: 5787830588696323046}
@@ -2620,7 +2620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2372972153450981459, guid: 66845dd6e0f51ce488e246f27f7a9f66, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4479993161254380604, guid: 66845dd6e0f51ce488e246f27f7a9f66, type: 3}
       propertyPath: m_LocalPosition.x

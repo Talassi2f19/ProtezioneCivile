@@ -47,13 +47,10 @@ namespace Script.Master
                 playersData = playersJson.list;
                 
                 int[] votes = new int[playersName.Count];
-                Debug.Log(votes);
 
                 for (int i = 0; i < playersName.Count; i++) {
-                    Debug.Log(playersData[i]);
                     if (playersData[i].HasField("Voto"))
                         votes[playersName.IndexOf(playersData[i]["Voto"].stringValue)]++;
-                    Debug.Log(votes);
                     /*
                     if (playersJson.HasField(playersData[i]["Voto"].stringValue)) {
                         if (!playersJson[playersData[i]["Voto"].stringValue].HasField("NrVoti"))
@@ -87,32 +84,12 @@ namespace Script.Master
 
             
         }
-
-/*
-        private int MaxVotiCandidato()
-        {
-            int pos = -1;
-            for (int i = 0; i < playersName.Count; i++)
-            {
-                if (playersData[pos].HasField("NrVoti")) {
-                    if (pos == -1 || playersData[pos]["NrVoti"].intValue < playersData[i]["NrVoti"].intValue)
-                        pos = i;
-                }
-            }
-            if (pos == -1) {
-                System.Random random = new System.Random((int)System.DateTime.Now.Ticks);
-                pos = random.Next(0, playersName.Count - 1);
-            }
-                
-            return pos;
-        }
-*/
-
+        
         public void AvviaPartita()
         {
-            string str = "{\"" + Global.GameStatusCodeKey + "\":\"" + GameStatus.Gioco + "\"}";
+            string str = "{\"" + Global.GameStatusCodeKey + "\":\"" + GameStatus.GenRuoli + "\"}";
             RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str).Catch(Debug.LogError);
-            SceneManager.LoadScene(Scene.Master.Game);
+            SceneManager.LoadScene(Scene.Master.GenRuoli);
         }
         
     }

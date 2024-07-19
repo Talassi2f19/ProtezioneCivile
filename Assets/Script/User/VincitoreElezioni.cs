@@ -105,7 +105,7 @@ namespace Script.User
 */
         private void CambioScena(string str)
         {
-            if (str.Contains(GameStatus.Gioco))
+            if (str.Contains(GameStatus.GenRuoli))
             {
                 listener.Stop();
                 RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + "/" + Global.RuoloPlayerKey + ".json").Then(e =>

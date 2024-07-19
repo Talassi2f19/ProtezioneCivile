@@ -47,12 +47,11 @@ namespace Script.User.Prefabs
                 e =>
                 {
                     //genera gli altri ruoli
-
-                    GeneraRuoli generaRuoli = new GeneraRuoli();
-                    generaRuoli.Genera();
+                    // GeneraRuoli generaRuoli = new GeneraRuoli();
+                    // generaRuoli.Genera();
                     
                     //cambia scena
-                    SceneManager.LoadScene(Scene.User.Game);
+                    SceneManager.LoadScene(Scene.User.AttesaRuoli);
                 }).Catch(Debug.LogError);
         }
         

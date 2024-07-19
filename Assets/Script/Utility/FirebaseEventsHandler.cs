@@ -25,8 +25,7 @@ namespace Script.Utility
             foreach (var tmp in encodedData.TrimEnd('\n').Split("\n\n"))
             {
                 DataReceived(tmp.Trim());
-                Print(tmp.Trim());
-                
+              //  Print(tmp.Trim());
             }
             return true;
         }
