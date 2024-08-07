@@ -25,12 +25,12 @@ namespace Script.User
             //scarica la lista di tutti i player
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(e =>
             {
-                Debug.LogWarning("1");
-                string fffd = Carica(e.Text);
-                Debug.Log(fffd);
-                RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json", fffd).Then(e =>
+                // Debug.LogWarning("1");
+                string testo = Carica(e.Text);
+                // Debug.Log(fffd);
+                RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json", testo).Then(e =>
                 {
-                    Debug.LogWarning("2");
+                    // Debug.LogWarning("2");
                     StartCoroutine(After2sec());
                     
                 }).Catch(Debug.LogError);

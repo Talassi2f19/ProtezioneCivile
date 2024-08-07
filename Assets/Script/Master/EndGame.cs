@@ -16,13 +16,13 @@ namespace Script.Master
         {
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/score.json").Then(e =>
             {
-                testo.text = "Avete ottenuto " + e.Text == "null" ? "0" : e.Text + " punti!";
+                testo.text = "Avete ottenuto " + e.Text.ToLower() == "null" ? "0" : e.Text + " punti!";
             });
         }
 
         public void FineButton()
         {
-            Debug.Log("fine");
+            // Debug.Log("fine");
             Info.Reset();
             SceneManager.LoadScene(Scene.Master.Start);
         }

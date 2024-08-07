@@ -11,6 +11,7 @@ namespace minigame.Percorsi
         [SerializeField] private int tileTot;
         [SerializeField] private Tilemap tileMapNascondi;
         public TextMeshProUGUI text;
+        private bool isDragging;
 
         private void Start()
         {
@@ -20,14 +21,20 @@ namespace minigame.Percorsi
         void Update()
         {
             if (Input.GetMouseButtonDown(0))
-            { 
-                PiazzaCono();
+            {
+                isDragging = true;
             }
             
             if (Input.GetMouseButtonUp(0))
-            { 
+            {
+                isDragging = false;
                 if(tileFatte == tileTot) 
                     _completeCallback.Invoke();
+            }
+
+            if (isDragging)
+            {
+                PiazzaCono();
             }
         }
 

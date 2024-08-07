@@ -19,11 +19,7 @@ namespace Script.User
         {
             //Viene inviato il voto al database
             string str = "{\"" + Info.localUser.name + "\":0}";
-            RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + ".json", str).Catch(exception =>
-            {
-                Debug.Log(exception);
-                Debug.Log(exception.Message);
-            }).Catch(Debug.LogError);
+            RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + ".json", str).Catch(Debug.LogError);
             candidatura.SetActive(false); //Scompare il pulsante
             testoOnClick.SetActive(true);
         }

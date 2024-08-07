@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using _Scenes.User.telefono;
 using Proyecto26;
+using Script.Utility;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -46,8 +48,15 @@ namespace minigame
         {
             while (true)
             {
-                //TODO togli i punti rest
-                yield return new WaitForSeconds(5f);
+                yield return new WaitForSeconds(1f);
+                
+                GameObject.FindWithTag("notifiche")?.GetComponent<TaskManager>()?.NuovaNotifica("Allontanati da questa zona! Stai facendo perdere punti alla classe!");
+                RestClient.Get(Info.DBUrl + Info.sessionCode + "/score.json").Then(e =>
+                {
+                    RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", "{\"score\":" + (int.Parse(e.Text == "null" ? "0" : e.Text ) - 1 ) + "}").Catch(Debug.LogError);
+                }).Catch(Debug.LogError);
+                
+                yield return new WaitForSeconds(4f);
             }
         }
     }

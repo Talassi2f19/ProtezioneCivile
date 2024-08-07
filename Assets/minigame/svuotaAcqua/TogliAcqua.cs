@@ -1,3 +1,4 @@
+using _Scenes.User.telefono;
 using Proyecto26;
 using Script.User;
 using Script.Utility;
@@ -72,7 +73,8 @@ namespace minigame.svuotaAcqua
             mainCanvas.enabled = true;
             playerLocal.canMove = true;
             inProgress = false;
-            Debug.Log("Completato");
+            GameObject.FindWithTag("notifiche")?.GetComponent<TaskManager>()?.NuovaNotifica("Hai terminato la task");
+            RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":200,\"Player\":\""+Info.localUser.name+"\"}").Catch(Debug.Log);
             RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", "{\"Occupato\":false}");
             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":16001}").Catch(Debug.LogError);
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/score.json").Then(e =>

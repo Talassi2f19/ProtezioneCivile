@@ -114,7 +114,7 @@ namespace minigame.evacuaCittadini
         
         private IEnumerator Animazione()
         {
-            Debug.Log(tipo);
+            // Debug.Log(tipo);
             yield return ApriPorta();
             persona.enabled = true;
             yield return new WaitForSeconds(1);

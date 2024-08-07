@@ -20,7 +20,7 @@ namespace Script.Utility
  // #if !UNITY_EDITOR
  //        isMobile = Mobile();
  // #endif
-            Debug.Log("è mobile: " + (isMobile ? "true" : "false"));
+            Debug.Log("Mobile: " + (isMobile ? "true" : "false"));
         }
     }
 }

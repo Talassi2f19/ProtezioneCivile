@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Defective.JSON;
+using FirebaseListener;
 using Proyecto26;
 using Script.Master.Prefabs;
 using Script.Utility;
@@ -51,7 +52,7 @@ namespace Script.Master
             
                 string dataJson = str.Split("\"data\":")[1].Split("}")[0] + "}"; //Oggetto contenente il candidato
             
-                Debug.Log("AddCandidato: stringAfterSplit =" + dataJson);
+                // Debug.Log("AddCandidato: stringAfterSplit =" + dataJson);
             
                 nome = new JSONObject(dataJson).keys[0]; //Nome candidato
                 //TODO inserire script per visualizzare quanti candidati mancano nella schermata con scritta n / 30
@@ -118,13 +119,13 @@ namespace Script.Master
         
         private void AvviaAggiornamento()
         {
-            Debug.Log("avvia aggiornamento");
+            // Debug.Log("avvia aggiornamento");
             StartCoroutine(CallFunctionEverySecond());
         }
         
         private void InterrompiAggiornamento()
         {
-            Debug.Log("interrompi aggiornamento");
+            // Debug.Log("interrompi aggiornamento");
             isRunning = false;
         }
 
@@ -141,7 +142,7 @@ namespace Script.Master
 
         private void AggiornaContatoreVotanti()
         {
-            Debug.Log("exe");
+            // Debug.Log("exe");
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(e =>
             {
                 int nVoti = 0;

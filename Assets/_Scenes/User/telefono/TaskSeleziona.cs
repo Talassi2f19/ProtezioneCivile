@@ -69,7 +69,7 @@ namespace _Scenes.User.telefono
 
         public void Rimuovi()
         {
-            Debug.Log(button.name);
+            // Debug.Log(button.name);
             if(button != null)
                 button.SetActive(false);
             if(parent.childCount <= 1)

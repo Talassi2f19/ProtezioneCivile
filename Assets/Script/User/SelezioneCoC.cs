@@ -18,7 +18,6 @@ namespace Script.User
         {
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(e =>
             {
-                Debug.Log(e.Text);
                 JSONObject json = new JSONObject(e.Text);
                // player = json.ToJsonDictionary();
                 players = json.keys;
@@ -29,15 +28,15 @@ namespace Script.User
 
         private void Genera()
         {
-            Debug.Log("Genera selezione COC");
+            // Debug.Log("Genera selezione COC");
             players.Remove(Info.localUser.name);
-            Debug.Log("Numero player:" + players.Count);
+            // Debug.Log("Numero player:" + players.Count);
             
             foreach(var pl in players)
             {
                 GameObject pulsante =  GameObject.Instantiate(buttonPrefab, buttonParent);
                 pulsante.GetComponent<PulsanteGiocatore>().SetName(pl);
-                Debug.Log("Nome giocatore: " + pl);
+                // Debug.Log("Nome giocatore: " + pl);
             }
         }
 

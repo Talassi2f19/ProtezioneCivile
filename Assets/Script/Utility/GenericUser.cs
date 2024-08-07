@@ -27,7 +27,7 @@ namespace Script.Utility
             name = "";
 #endif
             coord = Vector2.zero;
-            role = Ruoli.Null;
+            role = Ruoli.Sindaco;
         }
         
         public GenericUser(string name, Ruoli role, Vector2 coord)

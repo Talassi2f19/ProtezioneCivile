@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Defective.JSON;
+using FirebaseListener;
 using minigame.AllestimentoCRI;
 using minigame.Battito;
 using minigame.evacuaCittadini;
@@ -90,11 +91,7 @@ namespace Script.Master
             
             if (data.StartsWith("event: patch\ndata: {\"path\":\"/Posizione"))
             {
-                if (!data.StartsWith("event: patch\ndata: {\"path\":\"/Posizione/" + Info.localUser.name))
-                {
-                    MuoviPlayer(new JSONObject(data.Split("data: ")[1]));
-                    return;
-                }
+                MuoviPlayer(new JSONObject(data.Split("data: ")[1]));
                 return;
             }
 
@@ -105,7 +102,7 @@ namespace Script.Master
 
                 //{"CodeTask":1, "":""}
                 JSONObject json = new JSONObject(data.Split("data: ")[1]).GetField("data");
-                Debug.Log(json);
+                // Debug.Log(json);
 
                 int codice = json.GetField("CodeTask").intValue;
 
@@ -114,7 +111,7 @@ namespace Script.Master
                 {
                     if (json.GetField("Player").stringValue.Contains("Computer"))
                     {
-                        StartCoroutine(NPCtimer(json.GetField("Player").stringValue));
+                        StartCoroutine(NPCtimer(json.GetField("Player").stringValue, codice));
                     }
                     else
                     {
@@ -128,15 +125,42 @@ namespace Script.Master
             }
         }
 
-         private IEnumerator NPCtimer(string name)
+         private IEnumerator NPCtimer(string name, int codice)
          {
              yield return new WaitForSeconds(120f);
+             codice = ConvertiCodice(codice);
+             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":" + codice + "}").Catch(Debug.LogError);
              RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + name + ".json", "{\"Occupato\":false}"); 
              RestClient.Get(Info.DBUrl + Info.sessionCode + "/score.json").Then(e =>
              {
-                 RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", "{\"score\":" + (int.Parse(e.Text == "null" ? "0" : e.Text ) + Info.PointForGame/2) + "}").Catch(Debug.Log);
-             }).Catch(Debug.Log);
+                 RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", "{\"score\":" + (int.Parse(e.Text == "null" ? "0" : e.Text ) + Info.PointForGame/2) + "}").Catch(Debug.LogError);
+             }).Catch(Debug.LogError);
          }
+
+         private int ConvertiCodice(int code)
+         {
+             switch (code)
+             {
+                case 16:
+                    return 16001;
+                case 57:
+                    return 57001;
+                case 18:
+                    return 18000;
+                case 35:
+                    return 30000;
+                case 27:
+                    return 27001;
+                case 47:
+                    return 47001;
+                case 36:
+                    return 36001;
+                case 46:
+                    return 46001;
+             }
+             return 0;
+         }
+         
 
          private void CaricaPlayer()
          {
@@ -148,7 +172,6 @@ namespace Script.Master
                  RestClient.Get(Info.DBUrl+Info.sessionCode+"/Game/Posizione.json").Then(b =>
                  {
                      userList.Merge(new JSONObject(b.Text));
-                     Debug.Log(userList);
                      CaricaPlayer2(userList);
                  }).Catch(Debug.LogError);
              }).Catch(Debug.LogError);
@@ -164,14 +187,61 @@ namespace Script.Master
                  {
                     string n = json.GetField("Name").stringValue;
                     Vector2 coord = json.GetField("Coord") ? json.GetField("Coord").ToVector2() : Vector2.zero;
-                    playerList.Add(n, Instantiate(prefab ,coord,new Quaternion(), parent));
+                    GameObject tmp = Instantiate(prefab, coord, new Quaternion(), parent);
+                    string ruolo = json.GetField("Role").stringValue;
+                    tmp.GetComponent<SpriteRenderer>().color = GetColor(Enum.Parse<Ruoli>(ruolo));
+                    playerList.Add(n, tmp);
                     playerList[n].name = n;
                  }
-                  
-                 
              }
          }
 
+         private Color GetColor(Ruoli ruolo)
+         {
+             Color tmp;
+             switch (ruolo)
+             {
+                 case Ruoli.Coc:
+                     tmp = new Color(254/ 255f, 235/ 255f, 52/ 255f);
+                     break;
+                 case Ruoli.RefCri:
+                 case Ruoli.VolCri:
+                     tmp = new Color(102/ 255f, 11/ 255f, 28/ 255f);
+                     break;
+                 case Ruoli.RefGgev:
+                 case Ruoli.VolGgev:
+                     tmp = new Color(0/ 255f, 150/ 255f, 17/ 255f);
+                     break;
+                 case Ruoli.RefPC:
+                 case Ruoli.VolPC:
+                     tmp = new Color(0/ 255f, 71/ 255f, 85/ 255f);
+                     break;
+                 case Ruoli.RefPolizia:
+                 case Ruoli.VolPolizia:
+                     tmp = new Color(21/ 255f, 53/ 255f, 148/ 255f);
+                     break;
+                 case Ruoli.VolFuoco:
+                 case Ruoli.RefFuoco:
+                     tmp = new Color(222/ 255f, 24/ 255f, 24/ 255f);
+                     break;
+                 case Ruoli.Sindaco:
+                     tmp = new Color(65/ 255f, 105/ 255f, 225/ 255f);
+                     break;
+                 case Ruoli.Medico:
+                     tmp = new Color(140/ 255f, 194/ 255f, 230/ 255f);
+                     break;
+                 case Ruoli.Segreteria:
+                     tmp = new Color(200/ 255f, 156/ 255f, 196/ 255f);
+                     break;
+                 case Ruoli.RefTlc:
+                     tmp = new Color(120/ 255f, 105/ 255f, 70/ 255f);
+                     break;
+                 default:
+                     tmp = new Color(0,0,0);
+                     break;
+             }
+             return tmp;
+         }
          private void MuoviPlayer(JSONObject value)
          {
              String nome = value.GetField("path").stringValue.Split("/")[2];
@@ -346,7 +416,7 @@ namespace Script.Master
                     NuovaNotifica("Volontari ottenuti");
                     break;
                 case 1025:
-                    NuovaNotifica("");
+                    NuovaNotifica("Trova le tane sull'argine e chiudile");
                     break;
                 case 1027:
                     NuovaNotifica("Rimuove materiale pericoloso\n");
@@ -476,6 +546,21 @@ namespace Script.Master
                     break;
                 case 57:
                     NuovaNotifica("Incendio in corso, spegnilo.");
+                    break;
+                case 200:
+                    NuovaNotifica(info + " ha terminato la task");
+                    break;
+                case 201:
+                    NuovaNotifica(info + " ha terminato la task");
+                    break;
+                case 202:
+                    NuovaNotifica(info + " ha terminato la task");
+                    break;
+                case 203:
+                    NuovaNotifica(info + " ha terminato la task");
+                    break;
+                case 204:
+                    NuovaNotifica(info + " ha terminato la task");
                     break;
             }
         }

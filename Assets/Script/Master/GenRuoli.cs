@@ -1,10 +1,12 @@
 using System;
+using FirebaseListener;
 using Proyecto26;
 using Script.User;
 using Script.Utility;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Scene = Script.Utility.Scene;
 
 namespace Script.Master
@@ -12,7 +14,7 @@ namespace Script.Master
     public class GenRuoli : MonoBehaviour
     {
         private Listeners listeners;
-        [SerializeField]private GeneraRuoli gg;
+        [FormerlySerializedAs("gg")] [SerializeField]private GeneraRuoli generaRuoli;
 
         private void Start()
         {
@@ -22,17 +24,11 @@ namespace Script.Master
 
         private void WaitGen(string str)
         {
-            Debug.LogWarning(str);
             if (str.Contains(Ruoli.Coc.ToString()))
             {
                 listeners.Stop();
-                Genera();
+                generaRuoli.Genera();
             }
-        }
-        
-        private void Genera()
-        {
-            gg.Genera();
         }
     }
 }

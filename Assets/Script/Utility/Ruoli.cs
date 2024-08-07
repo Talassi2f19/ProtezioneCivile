@@ -31,8 +31,8 @@
             //obbligtori per ogni partita
             // sindaco, coc
             //2 
-            // Ruoli.RefPC,
             Ruoli.RefTlc,
+            Ruoli.RefPC,
             Ruoli.RefPolizia,
             Ruoli.RefFuoco,
             Ruoli.Segreteria,

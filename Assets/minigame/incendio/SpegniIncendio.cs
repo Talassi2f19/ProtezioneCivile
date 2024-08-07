@@ -1,3 +1,4 @@
+using _Scenes.User.telefono;
 using Proyecto26;
 using Script.User;
 using Script.Utility;
@@ -72,13 +73,14 @@ namespace minigame.incendio
             mainCanvas.enabled = true;
             playerLocal.canMove = true;
             inProgress = false;
-            Debug.Log("Completato");
-            RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", "{\"Occupato\":false}");
+            GameObject.FindWithTag("notifiche")?.GetComponent<TaskManager>()?.NuovaNotifica("Hai terminato la task");
+            RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":204,\"Player\":\""+Info.localUser.name+"\"}").Catch(Debug.LogError);
+            RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", "{\"Occupato\":false}").Catch(Debug.LogError);;
             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":57001}").Catch(Debug.LogError);
             RestClient.Get(Info.DBUrl + Info.sessionCode + "/score.json").Then(e =>
             {
-                RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", "{\"score\":" + (int.Parse(e.Text == "null" ? "0" : e.Text ) + Info.PointForGame) + "}").Catch(Debug.Log);
-            }).Catch(Debug.Log);
+                RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", "{\"score\":" + (int.Parse(e.Text == "null" ? "0" : e.Text ) + Info.PointForGame) + "}").Catch(Debug.LogError);
+            }).Catch(Debug.LogError);
         }
     }
 }

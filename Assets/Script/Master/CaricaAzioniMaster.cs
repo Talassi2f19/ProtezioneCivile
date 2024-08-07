@@ -49,7 +49,7 @@ public class CaricaAzioniMaster : MonoBehaviour
         selezioantoObj.GetComponent<Image>().color = Color.white;
         selezioantoObj = null;
         inviaButton.interactable = false;
-        RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":"+selezioantoVal+"}").Catch(Debug.Log);
+        RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":"+selezioantoVal+"}").Catch(Debug.LogError);
     }
     
 }

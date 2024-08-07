@@ -1,4 +1,5 @@
 using System;
+using FirebaseListener;
 using Proyecto26;
 using Script.Utility;
 using UnityEngine;
@@ -41,7 +42,7 @@ namespace Script.User
         {
              if(status.Contains("put"))
                  status = status.Split("\"data\":\"")[1].Split("\"}")[0];
-             Debug.Log(status);
+             // Debug.Log(status);
              
              switch (status)
              {
@@ -51,9 +52,6 @@ namespace Script.User
                      
                  case GameStatus.Candidatura:
                      Set(GameStatus.Candidatura);
-#if !UNITY_EDITOR
-                WebGL.SetCookie("user=" + Info.localUser.name);
-#endif
                      break;
                  
                  case GameStatus.Votazione:
@@ -90,7 +88,7 @@ namespace Script.User
 
         private void Set(string val)
         {
-            Debug.Log(val);
+            // Debug.Log(val);
             wait.SetActive(val == GameStatus.WaitPlayer);
             candidatura.SetActive(val == GameStatus.Candidatura);
             votazione.SetActive(val == GameStatus.Votazione);
@@ -120,7 +118,7 @@ namespace Script.User
         {
             //Viene inviato il voto al database
             string str = "{\"" + Info.localUser.name + "\":0}";
-            RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + ".json", str).Catch(exception => Debug.Log(exception.Message));
+            RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.CandidatiFolder + ".json", str).Catch(Debug.LogError);
             candidatura.SetActive(false); //Scompare il pulsante
             testoOnClick.SetActive(true);
         }

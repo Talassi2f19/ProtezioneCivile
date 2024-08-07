@@ -24,8 +24,8 @@ namespace Script.User
                 JSONObject listaCandidati = new JSONObject(onReceived.Text);
                 nomiGiocatori = listaCandidati.keys;
                 
-                Debug.Log("Sei passato per mostra candidati, quindi teoricamente dovresti vedere che tutti i giocatori" +
-                          "si sono candidati, li vedi? Ti conviene mannaggia a te e Unity e alla protezione civile...");
+                // Debug.Log("Sei passato per mostra candidati, quindi teoricamente dovresti vedere che tutti i giocatori" +
+                          // "si sono candidati, li vedi? Ti conviene mannaggia a te e Unity e alla protezione civile...");
                 
               //  GameObject tmp;
                 for (int i = 0; i < nomiGiocatori.Count; i++)

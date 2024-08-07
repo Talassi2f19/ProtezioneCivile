@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Defective.JSON;
+using FirebaseListener;
 using Proyecto26;
 using Script.Master.Prefabs;
 using Script.Utility;
@@ -90,7 +91,7 @@ namespace Script.Master
                     str = Normalize(str.Split("data: ", 2)[1]);
                     KeyValuePair<string, GenericUser> tmp = (new JSONObject(str).ToUserDictionary()).First();
 
-                    Debug.Log(str);
+                    // Debug.Log(str);
                     
 
                     if (tmp.Value == null)
@@ -99,7 +100,7 @@ namespace Script.Master
                         Destroy(playerList[tmp.Key]);
                         // playerList[tmp.Key].SetActive(false);
                         playerList.Remove(tmp.Key);
-                        Debug.Log("player left:" + tmp.Key);
+                        // Debug.Log("player left:" + tmp.Key);
                     }
                     else
                     {
@@ -109,7 +110,7 @@ namespace Script.Master
                             playerList.Add(tmp.Key, GameObject.Instantiate(playerPrefab, parent));
                             playerList[tmp.Key].GetComponent<PulsantePlayerRemove>().SetName(tmp.Key);
                             playerList[tmp.Key].SetActive(true);
-                            Debug.Log("player join:" + tmp.Key);
+                            // Debug.Log("player join:" + tmp.Key);
                         }
                         else
                         {
@@ -119,7 +120,6 @@ namespace Script.Master
                 }
 
             }
-            Debug.Log(str);
         }
 
         private string Normalize(string str)

@@ -1745,7 +1745,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 780859243248411037}
         m_TargetAssemblyTypeName: _Scenes.User.telefono.Logica, Assembly-CSharp
         m_MethodName: OpenPlInfo
         m_Mode: 1

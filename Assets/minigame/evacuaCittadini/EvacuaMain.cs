@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using _Scenes.User.telefono;
 using Proyecto26;
 using Script.User;
 using Script.Utility;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -24,19 +26,47 @@ namespace minigame.evacuaCittadini
         [SerializeField] private GameObject stage2;
         [SerializeField] private PlayerLocal playerLocal;
         [SerializeField] private Canvas mainCanvas;
+        private TextMeshProUGUI text;
+        [SerializeField] private GameObject ObjText;
         private GameObject p1, p2;
         private int tipoDialogo; //0-positivo, 1-negativo, 3-sindaco
+        
+        private List<int> posCase = new List<int>();
+        [SerializeField] private int numCase = 8;
+        
+        private void Start()
+        {
+            ObjText.SetActive(false);
+            text = ObjText.GetComponent<TextMeshProUGUI>();
+        }
+        
+        private void GeneraPosizioni()
+        {
+            List<int> numbers = new List<int>();
+            for (int i = 0; i <= posizioni1.Count; i++)
+                numbers.Add(i);
+            
+            for (int i = 0; i < numCase; i++)
+            {
+                int index =  Random.Range(0,numbers.Count);
+                posCase.Add(numbers[index]);
+                numbers.RemoveAt(index);
+            }
+        }
         
         
         [ContextMenu("Genera")]
         public void Genera()
         {
-            for(int i = 0; i < posizioni1.Count; i++)
+            GeneraPosizioni();
+            for(int i = 0; i < posCase.Count; i++)
             {
-                GameObject tmp = Instantiate(stage1, posizioni1[i], new Quaternion(), transform);
-                var i1 = i;
+                GameObject tmp = Instantiate(stage1, posizioni1[posCase[i]], new Quaternion(), transform);
+                var i1 = posCase[i];
                 tmp.GetComponent<Evacua>().FineStage1(()=>IniziaPt2(i1, tmp, false));
             }
+            ObjText.SetActive(true);
+            text.text = "Case da visitare: " + numCase;
         }
         public void Genera(string val)
         {
@@ -66,15 +96,20 @@ namespace minigame.evacuaCittadini
         {
             Destroy(p1);
             Destroy(p2);
+            
             mainCanvas.enabled = true;
             playerLocal.canMove = true;
             if (!flag) //se non è il sindaco
             {
+                text.text = "Case da visitare: " + transform.childCount;
                 if(tipoDialogo == 1)
-                    RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":95,\"Player\":\""+i+"\"}").Catch(Debug.Log);
+                    RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":95,\"Player\":\""+i+"\"}").Catch(Debug.LogError);
                             
                 if (transform.childCount == 0)
                 {
+                    ObjText.SetActive(false);
+                    GameObject.FindWithTag("notifiche")?.GetComponent<TaskManager>()?.NuovaNotifica("Hai terminato la task");
+                    RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":200,\"Player\":\""+Info.localUser.name+"\"}").Catch(Debug.Log);
                     RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", "{\"Occupato\":false}");
                     RestClient.Get(Info.DBUrl + Info.sessionCode + "/score.json").Then(e =>
                     {

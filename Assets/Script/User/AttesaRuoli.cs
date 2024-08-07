@@ -1,4 +1,6 @@
 using System;
+using FirebaseListener;
+using Proyecto26;
 using Script.Utility;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -14,7 +16,7 @@ namespace Script.User
         private void Start()
         {
             listeners = new Listeners(Info.DBUrl + Info.sessionCode + "/" + Global.GameStatusCodeKey + ".json");
-            listeners.Start(TrovaRuolo);
+            listeners.Start(IniziaPartita);
         }
 
         private void OnApplicationQuit()
@@ -22,12 +24,17 @@ namespace Script.User
             listeners.Stop();
         }
 
-        private void TrovaRuolo(string str)
+        private void IniziaPartita(string str)
         {
             if (str.Contains(GameStatus.Gioco))
             {
                 listeners.Stop();
-                SceneManager.LoadScene(Scene.User.Game);
+                RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + "/Role.json").Then(e =>
+                {
+                    Info.localUser.role = Enum.Parse<Ruoli>(e.Text.Replace("\"", ""));
+                    SceneManager.LoadScene(Scene.User.Game);
+                });
+                
             }
         }
     }

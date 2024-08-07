@@ -13,6 +13,7 @@ public class LogicaGame : MonoBehaviour
     [SerializeField] private GameObject giocatori;
     [SerializeField] private GameObject azioni;
     [SerializeField] private GameObject messaggi;
+    [SerializeField] private GameObject back;
 
 
     public void OpenMenu()
@@ -29,6 +30,7 @@ public class LogicaGame : MonoBehaviour
 
     public void TerminaMenu()
     {
+        menu.SetActive(false);
         terminaSelection.SetActive(true);
     }
 
@@ -49,33 +51,39 @@ public class LogicaGame : MonoBehaviour
     public void GiocatoriMostra()
     {
         CloseMenu();
+        back.SetActive(true);
         giocatori.SetActive(true);
     }
 
     public void AzioniMostra()
     {
         CloseMenu();
+        back.SetActive(true);
         azioni.SetActive(true);
     }
 
     public void MessaggiMostra()
     {
         CloseMenu();
+        back.SetActive(true);
         messaggi.SetActive(true);
     }
     
     public void GiocatoriChiudi()
     {
+        back.SetActive(false);
         giocatori.SetActive(false);
     }
 
     public void AzioniChiudi()
     {
+        back.SetActive(false);
         azioni.SetActive(false);
     }
 
     public void MessaggiChiudi()
     {
+        back.SetActive(false);
         messaggi.SetActive(false);
     }
 }

@@ -39,7 +39,6 @@ namespace Script.Master
         {
             waitGen = false;
             waitText.SetActive(false);
-            
             JSONObject json = new JSONObject(jsonText);
             for (int i = 0; i < json.count; i++)
             {
@@ -55,7 +54,7 @@ namespace Script.Master
         {
             while (waitGen)
             {
-                RestClient.Get(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + ".json").Then(e =>
+                RestClient.Get(Info.DBUrl+Info.sessionCode+"/"+Global.PlayerFolder+".json").Then(e =>
                 {
                     if (!e.Text.ToLower().Contains("null"))
                     {

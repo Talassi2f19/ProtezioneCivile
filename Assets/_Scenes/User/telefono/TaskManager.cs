@@ -13,12 +13,10 @@ using minigame.SalvaPersone;
 using minigame.svuotaAcqua;
 using minigame.TogliTane;
 using minigame.TrovaDispersi;
-using Proyecto26;
 using Script.User;
 using Script.Utility;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using Scene = Script.Utility.Scene;
 
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
@@ -64,6 +62,7 @@ namespace _Scenes.User.telefono
         [Header("ALTRO")]
         [SerializeField] private PlayerLocal _playerLocal;
         [SerializeField] private Canvas mainCanvas;
+        [SerializeField] private GameObject darkBack;
         
         // [Header("MAPPA")]
         // [SerializeField]private Transform mappa;
@@ -77,6 +76,7 @@ namespace _Scenes.User.telefono
        
         private void Start()
         {
+            
             Inizializza();
         }
         
@@ -106,8 +106,6 @@ namespace _Scenes.User.telefono
                 case Ruoli.Coc:
                     schede.Add( Instantiate(prefCOC, parent)); //0
                     schede.Add( Instantiate(taskSeleziona, parent)); //1
-                    schede.Add( Instantiate(taskAssegna, parent)); //2
-                    schede.Add( Instantiate(taskAssegna, parent)); //2
                     schede.Add( Instantiate(taskAssegna, parent)); //2
                     schede.Add( Instantiate(richiesteVolontari, parent)); //3
                     break;
@@ -146,6 +144,7 @@ namespace _Scenes.User.telefono
         {
             _playerLocal.canMove = true;
             mainCanvas.enabled = true;
+            darkBack.SetActive(false);
         }
         
         public void OpenMessaggi()
@@ -158,6 +157,7 @@ namespace _Scenes.User.telefono
         { 
             _playerLocal.canMove = false;
             mainCanvas.enabled = false;
+            darkBack.SetActive(true);
             schede[0].SetActive(true);
         }
         
@@ -285,9 +285,6 @@ namespace _Scenes.User.telefono
                 case Ruoli.Coc:
                     switch (value)
                     {
-                        /*----------------------------------------------
-                         TODO: inserimento descrizione da 1110 a 1150
-                         ----------------------------------------------*/
                         case 2:
                             NuovaNotifica("Sei stato attivato dal sindaco! Distribuisci in modo corretto i vari incarichi");
                             TaskSeleziona tmp = schede[1].GetComponentInChildren<TaskSeleziona>();
@@ -393,6 +390,9 @@ namespace _Scenes.User.telefono
                             NuovaNotifica("soccorri");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Soccorri", 1038);
                             break;
+                        case 202:
+                            NuovaNotifica(plName + " ha terminato la task");
+                            break;
                     }
                     break;
                 case Ruoli.RefGgev:
@@ -409,12 +409,15 @@ namespace _Scenes.User.telefono
                             NuovaNotifica("Volontari ottenuti");
                             break;
                         case 1025:
-                            NuovaNotifica("");
+                            NuovaNotifica("Rimuovi tane");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Rimuovi tane", 1025);
                             break;
                         case 1027:
                             NuovaNotifica("Rimuove materiale pericoloso\n");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Rimuove materiale pericoloso\n", 1027);
+                            break;
+                        case 201:
+                            NuovaNotifica(plName + " ha terminato la task");
                             break;
                     }
                     break;
@@ -459,6 +462,9 @@ namespace _Scenes.User.telefono
                             NuovaNotifica("Crea punti raccolta");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Crea punti raccolta", 1018);
                             break;
+                        case 200:
+                            NuovaNotifica(plName + " ha terminato la task");
+                            break;
                     }
                     break;
                 case Ruoli.RefPolizia:
@@ -486,6 +492,9 @@ namespace _Scenes.User.telefono
                             NuovaNotifica("Incidente");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Incidente", 1047);
                             break;
+                        case 203:
+                            NuovaNotifica(plName + " ha terminato la task");
+                            break;
                     }
                     break;
                 case Ruoli.RefFuoco:
@@ -512,6 +521,9 @@ namespace _Scenes.User.telefono
                         case 1057:
                             NuovaNotifica("Spegni Incendio");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Spegni Incendio", 1057);
+                            break;
+                        case 204:
+                            NuovaNotifica(plName + " ha terminato la task");
                             break;
                     }
                     break;
@@ -664,7 +676,7 @@ namespace _Scenes.User.telefono
                     break;
             }
         }
-        private void NuovaNotifica(string testo)
+        public void NuovaNotifica(string testo)
         {
             pallinoRosso.SetActive(true);
             schede[^1].GetComponent<AddNotifica>().SetMessaggio(testo);

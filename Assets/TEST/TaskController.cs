@@ -27,10 +27,8 @@ namespace Script.test
         {
             for (int i = 0; i < n; i++)
             {
-                RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", new Task("abscds", i).GetTaks().ToString()).Then(e =>
-                {
-                   Debug.Log(e.Text);
-                });  
+                RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json",
+                    new Task("abscds", i).GetTaks().ToString()).Catch(Debug.LogError);
             }
             
         }

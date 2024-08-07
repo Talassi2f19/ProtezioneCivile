@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using _Scenes.User.telefono;
 using Proyecto26;
 using Script.Utility;
 using TMPro;
@@ -43,6 +44,8 @@ namespace minigame.MonitoraArgini
                 ObjText.SetActive(false);
                 //task done
                 argine.ArgineAccessibile(false);
+                GameObject.FindWithTag("notifiche")?.GetComponent<TaskManager>()?.NuovaNotifica("Hai terminato la task");
+                RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":200,\"Player\":\""+Info.localUser.name+"\"}").Catch(Debug.Log);
                 RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", "{\"Occupato\":false}");
                 RestClient.Get(Info.DBUrl + Info.sessionCode + "/score.json").Then(e =>
                 {

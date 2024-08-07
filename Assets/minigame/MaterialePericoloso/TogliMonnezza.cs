@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _Scenes.User.telefono;
 using Proyecto26;
 using Script.Utility;
 using TMPro;
@@ -46,11 +47,6 @@ namespace minigame.MaterialePericoloso
         {
             if (type)
             {
-                
-            }
-            
-            if (type)
-            {
                 ClearChild();
                 Instanzia(true);
                 inProgress = true;
@@ -95,6 +91,7 @@ namespace minigame.MaterialePericoloso
                 foreach (var t in tipo.posizione)
                 {
                     GameObject tmp = Instantiate(tipo.prefab, t, new Quaternion(), transform);
+                    
                     tmp.GetComponent<Monnezza>().SetType(type);
                     tmp.GetComponent<Monnezza>().OnComplete(()=>Distruggi(tmp));
                 }
@@ -108,7 +105,8 @@ namespace minigame.MaterialePericoloso
             if (transform.childCount == 0)
             {
                 ObjText.SetActive(false);
-                //task done
+                GameObject.FindWithTag("notifiche")?.GetComponent<TaskManager>()?.NuovaNotifica("Hai terminato la task");
+                RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":201,\"Player\":\""+Info.localUser.name+"\"}").Catch(Debug.Log);
                 RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":27001}").Catch(Debug.LogError);
                 RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", "{\"Occupato\":false}");
                 RestClient.Get(Info.DBUrl + Info.sessionCode + "/score.json").Then(e =>

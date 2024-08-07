@@ -16,19 +16,12 @@ namespace Script.test
         private void Start()
         {
             RestClient.Put("https://prtcv-de7d0-default-rtdb.europe-west1.firebasedatabase.app/aa.json",
-                "{\".sv\": {\"increment\":10}}}").Then(e =>
-            {
-                Debug.Log(e.Text);
-            }).Catch(
-                k =>
-                {
-                    Debug.Log(k.Message);
-                });
-           // tilemap = GetComponent<Tilemap>();
-           //  
-           //  bounds = tilemap.cellBounds;
-           //  allTiles = tilemap.GetTilesBlock(bounds);
-           //  ff = allTiles.Length;
+                "{\".sv\": {\"increment\":10}}}").Catch(Debug.LogError);
+            // tilemap = GetComponent<Tilemap>();
+            //  
+            //  bounds = tilemap.cellBounds;
+            //  allTiles = tilemap.GetTilesBlock(bounds);
+            //  ff = allTiles.Length;
         }
 
         [SerializeField] private BoundsInt boundssss = new BoundsInt();
@@ -38,26 +31,26 @@ namespace Script.test
             if (boundssss != tilemap.cellBounds)
             {
                 boundssss = tilemap.cellBounds;
-                Debug.Log(tilemap.GetTilesBlock(tilemap.cellBounds).Length);
+                // Debug.Log(tilemap.GetTilesBlock(tilemap.cellBounds).Length);
             }
         }
 
-        [ContextMenu("dsadas")]
-        public void gg()
-        {
-            Debug.Log(allTiles.Length);
-        }
-        
-        [ContextMenu("ss")]
-        public void gsg()
-        {
-            tilemap.SetTile(new Vector3Int(50,50,0),hh);
-        }
-        [ContextMenu("sss")]
-        public void gsgs()
-        {
-            tilemap.ClearAllTiles();
-        }
+        // [ContextMenu("dsadas")]
+        // public void gg()
+        // {
+        //     Debug.Log(allTiles.Length);
+        // }
+        //
+        // [ContextMenu("ss")]
+        // public void gsg()
+        // {
+        //     tilemap.SetTile(new Vector3Int(50,50,0),hh);
+        // }
+        // [ContextMenu("sss")]
+        // public void gsgs()
+        // {
+        //     tilemap.ClearAllTiles();
+        // }
 
     }
 }

@@ -67,7 +67,7 @@ namespace minigame.incendio
                 return;
             }
         
-            float alpha = tilemapFire.GetColor(pos).a - 0.02f;
+            float alpha = tilemapFire.GetColor(pos).a - 0.05f;
             // if(alpha < 0f) //già completata
             // {
             //     estintoreFumo.SetActive(false);

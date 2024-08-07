@@ -57,7 +57,7 @@ namespace minigame.svuotaAcqua
         private void CambiaColore()
         {
             Vector3Int pos = tilemapWater.WorldToCell(detectPoint.transform.position);
-            float alpha = tilemapWater.GetColor(pos).a - 0.05f;
+            float alpha = tilemapWater.GetColor(pos).a - 0.08f;
             if(alpha < 0f) //già completata
                 return;
             if (alpha < 0.3f && alpha > 0f)//completata

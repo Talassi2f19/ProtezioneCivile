@@ -1,5 +1,6 @@
 using System;
 using Defective.JSON;
+using Proyecto26;
 
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
 namespace TEST
@@ -17,6 +18,7 @@ namespace TEST
             this.idRisposta = idRisposta;
             this.destinatario = nomeDestinatario;
             this.codTask = codTask;
+            RestClient.Get("das");
         }
 
         public Task()

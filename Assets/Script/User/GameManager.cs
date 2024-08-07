@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using _Scenes.User.telefono;
 using Defective.JSON;
+using FirebaseListener;
 using Proyecto26;
 using Script.User.Prefabs;
 using Script.Utility;
@@ -24,6 +25,8 @@ namespace Script.User
 
         [SerializeField]private TaskManager taskManager;
         [SerializeField] private JoyStick joyStick;
+
+        private List<string> taskRecived = new List<string>();
         
         private void Start()
         {
@@ -66,7 +69,6 @@ namespace Script.User
             // event: put
             // data: {"path":"/Task/-NxsMbI_dagLXyhk5LhS","data":null}
             
-            
             if (data.StartsWith("event: patch\ndata: {\"path\":\"/Posizione"))
             {
                 if (!data.StartsWith("event: patch\ndata: {\"path\":\"/Posizione/" + Info.localUser.name))
@@ -82,21 +84,54 @@ namespace Script.User
                 // event: put
                 // data: {"path":"/Task/-NyblKDKNWqsCpdQe5Pq","data":{"CodeTask":1}}
                 
+                // Trova l'inizio del codice (dopo "/Task/")
+                string startDelimiter = "/Task/";
+                int startIndex = data.IndexOf(startDelimiter, StringComparison.Ordinal) + startDelimiter.Length;
+
+                // Trova la fine del codice (prima di ","data)
+                string endDelimiter = "\",\"data";
+                int endIndex = data.IndexOf(endDelimiter, startIndex, StringComparison.Ordinal);
+                
+                string codice = data.Substring(startIndex, endIndex - startIndex);
+                
+                taskRecived.Add(codice);
+                
                 //{"CodeTask":1, "":""}
                 JSONObject json = new JSONObject(data.Split("data: ")[1]).GetField("data");
-                Debug.Log(json);
                 
-                int codice = json.GetField("CodeTask").intValue;
+                SetTask(json);
+                return;
+            }
+            
+            if (data.StartsWith("event: put\ndata: {\"path\":\"/\",\"data\":{"))
+            {
+                JSONObject json = new JSONObject(data.Split("data: ")[1]).GetField("data");
+                if (!json.GetField("Task"))
+                    return;
+                json = json.GetField("Task");
                 
-                if (json.GetField("Player"))
+                foreach (var key in json.keys)
                 {
-                    taskManager.Assegna(codice, json.GetField("Player").stringValue);
+                    if (!taskRecived.Contains(key))
+                    {
+                        taskRecived.Add(key);
+                        SetTask(json[key]);
+                    }    
                 }
-                else
-                {
-                    taskManager.Assegna(codice);
-                }
+            }
+        }
 
+        private void SetTask(JSONObject json)
+        {
+            int codice = json.GetField("CodeTask").intValue;
+                            
+            if (json.GetField("Player"))
+            {
+                taskManager.Assegna(codice, json.GetField("Player").stringValue);
+            }
+            else
+            {
+                taskManager.Assegna(codice);
             }
         }
 
@@ -131,7 +166,7 @@ namespace Script.User
                 {
                     string n = json.GetField("Name").stringValue;
                     Vector2 coord = json.GetField("Coord") ? json.GetField("Coord").ToVector2() : Vector2.zero;
-                    playerList.Add(n, Instantiate(onlinePlayer ,Vector3.zero, new Quaternion(), parent));
+                    playerList.Add(n, Instantiate(onlinePlayer ,coord, new Quaternion(), parent));
                     playerList[n].name = n;
                     playerList[n].GetComponent<PlayerOnline>().Set(json);
                 }
@@ -144,51 +179,5 @@ namespace Script.User
             Vector2 newPos = value.GetField("data").ToVector2();
             playerList[nome].GetComponent<PlayerOnline>().Move(newPos);
         }
-
-        // private Task GetTask(JSONObject value)
-        // {
-        //     if (value.GetField("data").isNull)
-        //         return null;
-        //     
-        //     String id = value.GetField("path").stringValue.Split("/")[2];
-        //     return value.GetField("data").ToTask(id);
-        // }
-
-        // private void GestisciTask(Task value)
-        // {
-        //     if (value.idRisposta == "")
-        //     { //TODO aggiungere il controllo sull'utente e sul tipo si task
-        //         taskList.Add(value.id,value);   
-        //         // TODO esegui cose della task
-        //         return;
-        //     }
-        //
-        //     if (taskList.ContainsKey(value.idRisposta))
-        //     {
-        //         //task completata
-        //         EliminaTask(value.idRisposta);
-        //     }
-        // }
-
-        // private void FirstLoadTask()
-        // {
-        //     RestClient.Get(Info.DBUrl + Info.sessionCode + "/Game/Task.json").Then(e =>
-        //     {
-        //         JSONObject value = new JSONObject(e.Text);
-        //         for(int i = 0; i < value.count; i++)
-        //         {
-        //             GestisciTask(value.list[i].ToTask(value.keys[i]));
-        //         }
-        //     });
-        // }
-
-        // private void EliminaTask(String value)
-        // {
-        //     taskList.Remove(value);
-        //     RestClient.Delete(Info.DBUrl + Info.sessionCode + "/Game/Task/" + value + ".json");
-        // }
-        
-        
-        
     }
 }

@@ -16,12 +16,12 @@ namespace minigame.MaterialePericoloso
         public void SetType(bool flag)
         {
             type = flag;
+            minimappaPoint.SetActive(type);
         }
 
         private void OnEnable()
         {
             image.fillAmount = 0f;
-            minimappaPoint.SetActive(type);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
