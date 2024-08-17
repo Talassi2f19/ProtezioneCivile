@@ -67,6 +67,7 @@ namespace _Scenes.User.telefono
             tmp.SetActive(false);
             string str = "I volontari sono già stati delegati i vari incarichi. Ognuno stà procedendo con dedizione per aiutare il paese";
             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":4,\"Player\":\""+str+"\"}").Catch(Debug.Log);
+            GameObject.FindWithTag("notifiche")?.GetComponent<TaskManager>()?.NuovaNotifica("Sindaco informato");
         }
         
         public void SindacoCOC(GameObject tmp) //convoca il coc
@@ -91,8 +92,9 @@ namespace _Scenes.User.telefono
             schede[1].SetActive(true);
         }
 
-        public void COCChiedeInfo() //il coc chiede informazioni
+        public void COCChiedeInfo(Button tmp) //il coc chiede informazioni
         {
+            tmp.interactable = false;
             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":5}");
         }
 

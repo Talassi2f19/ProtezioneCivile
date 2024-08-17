@@ -47,19 +47,101 @@ namespace Script.Master
         // [SerializeField] private MonitoraArgini monitoraArgini;
         
         
+        private List<string> taskRecived = new List<string>();
+        
         
         private Listeners listeners;
         private Dictionary<string, GameObject> playerList = new Dictionary<string, GameObject>();
         private void Start()
         {
             listeners = new Listeners(Info.DBUrl + Info.sessionCode + "/Game.json");
-            listeners.Start(Parse);
+            listeners.Start(Parse1);
             CaricaPlayer();
         }
 
         private void OnApplicationQuit()
         {
             listeners.Stop();
+        }
+        private void Parse1(string data)
+        {
+            //da ignorare
+             // event: put
+             // data: {"path":"/","data":{"Posizione":{"a":{"Coord":{"x":1,"y":0}},"admin":{"Coord":{"x":0.6016445755958557,"y":0.6407574415206909}}},"Task":"{null}"}..........}
+            
+            // event: patch
+            // data: {"path":"/Posizione/<nome Player locale>/Coord","data":{"x":1.3084839582443237,"y":1.1914124488830566}}
+            
+            // event: keep-alive
+            // data: null
+            
+            //aggiorna pos
+            // event: patch
+            // data: {"path":"/Posizione/admin/Coord","data":{"x":0.6016445755958557,"y":0.6407574415206909}}
+            
+            //task
+            // event: put
+            // data: {"path":"/Task/-NxsMbI_dagLXyhk5LhS","data":{"CodTask":0,"Destinatario":"abscds","IdRisposta":""}}
+            
+            // event: put
+            // data: {"path":"/Task/-NxsMbI_dagLXyhk5LhS","data":{"CodTask":0,"Destinatario":"","IdRisposta":"-NxsMbI_dagLXyhk5LhS"}}
+            
+            // event: put
+            // data: {"path":"/Task/-NxsMbI_dagLXyhk5LhS","data":null}
+            
+            if (data.StartsWith("event: patch\ndata: {\"path\":\"/Posizione"))
+            {
+                MuoviPlayer(new JSONObject(data.Split("data: ")[1]));
+                return;
+            }
+
+            if (data.StartsWith("event: put\ndata: {\"path\":\"/Task"))
+            {
+                // event: put
+                // data: {"path":"/Task/-NyblKDKNWqsCpdQe5Pq","data":{"CodeTask":1}}
+
+                //{"CodeTask":1, "":""}
+                JSONObject json = new JSONObject(data.Split("data: ")[1]).GetField("data");
+                // Debug.Log(json);
+
+                SetTask(json);
+                
+            }
+            
+            if (data.StartsWith("event: put\ndata: {\"path\":\"/\",\"data\":{"))
+            {
+                JSONObject json = new JSONObject(data.Split("data: ")[1]).GetField("data");
+                if (!json.GetField("Task"))
+                    return;
+                json = json.GetField("Task");
+                
+                foreach (var key in json.keys)
+                {
+                    if (!taskRecived.Contains(key))
+                    {
+                        taskRecived.Add(key);
+                        SetTask(json[key]);
+                    }    
+                }
+            }
+        }
+        
+        private void SetTask(JSONObject json)
+        {
+            int codice = json.GetField("CodeTask").intValue;
+                
+            if (json.GetField("Player"))
+            {
+                Assegna(codice, json.GetField("Player").stringValue);
+                if (json.GetField("Player").stringValue.Contains("Computer"))
+                {
+                    StartCoroutine(NPCtimer(json.GetField("Player").stringValue, codice));
+                }
+            }
+            else
+            {
+                Assegna(codice);
+            }
         }
 
          private void Parse(string data)
@@ -109,13 +191,10 @@ namespace Script.Master
                 
                 if (json.GetField("Player"))
                 {
+                    Assegna(codice, json.GetField("Player").stringValue);
                     if (json.GetField("Player").stringValue.Contains("Computer"))
                     {
                         StartCoroutine(NPCtimer(json.GetField("Player").stringValue, codice));
-                    }
-                    else
-                    {
-                        Assegna(codice, json.GetField("Player").stringValue);
                     }
                 }
                 else
@@ -128,8 +207,9 @@ namespace Script.Master
          private IEnumerator NPCtimer(string name, int codice)
          {
              yield return new WaitForSeconds(120f);
-             codice = ConvertiCodice(codice);
-             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":" + codice + "}").Catch(Debug.LogError);
+             
+             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":" + ConvertiCodiceRuolo(codice) + ",\"Player\":\"" + name + "\"}").Catch(Debug.Log);
+             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":" + ConvertiCodice(codice) + "}").Catch(Debug.LogError);
              RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + name + ".json", "{\"Occupato\":false}"); 
              RestClient.Get(Info.DBUrl + Info.sessionCode + "/score.json").Then(e =>
              {
@@ -158,6 +238,20 @@ namespace Script.Master
                 case 46:
                     return 46001;
              }
+             return 0;
+         }
+         private int ConvertiCodiceRuolo(int code)
+         {
+             if (code >= 10 && code <= 19)
+                 return 200;
+             if (code >= 20 && code <= 29)
+                 return 201;
+             if (code >= 30 && code <= 39)
+                 return 202;
+             if (code >= 40 && code <= 49)
+                 return 203;
+             if (code >= 50 && code <= 59)
+                 return 204;
              return 0;
          }
          
@@ -255,7 +349,7 @@ namespace Script.Master
         {
             if (value == 6)
             {
-                NuovaNotifica("Informazioni da referente telecomunicazioni: " + info);
+                NuovaNotifica("per tutti: Informazioni da referente telecomunicazioni per tutti: " + info);
                 return;
             }
             if (value == 18000)
@@ -326,241 +420,241 @@ namespace Script.Master
             switch (value)
             {
                 case 1:
-                    NuovaNotifica("È arrivata una nuova allerta! Convoca il Centro Operativo Comunale!");
+                    NuovaNotifica("per sindaco: È arrivata una nuova allerta! Convoca il Centro Operativo Comunale!");
                     break;
                 case 4:
-                    NuovaNotifica("Informazioni da referente telecomunicazioni: " + info);
+                    NuovaNotifica("per sindaco: Informazioni da referente telecomunicazioni per sindaco: " + info);
                     break;
                 case 70:
-                    NuovaNotifica("Il COC ha richiesto che autorizzi la richiesta per ottenere più volontari PC");
+                    NuovaNotifica("per sindaco: Il COC ha richiesto che autorizzi la richiesta per ottenere più volontari PC");
                     break;
                 case 71:
-                    NuovaNotifica("Il COC ha richiesto che autorizzi la richiesta per ottenere più volontari GGEV");
+                    NuovaNotifica("per sindaco: Il COC ha richiesto che autorizzi la richiesta per ottenere più volontari GGEV");
                     break;
                 case 72:
-                    NuovaNotifica("Il COC ha richiesto che autorizzi la richiesta per ottenere più volontari CRI");
+                    NuovaNotifica("per sindaco: Il COC ha richiesto che autorizzi la richiesta per ottenere più volontari CRI");
                     break;
                 case 73:
-                    NuovaNotifica("Il COC ha richiesto che autorizzi la richiesta per ottenere più vigili");
+                    NuovaNotifica("per sindaco: Il COC ha richiesto che autorizzi la richiesta per ottenere più vigili");
                     break;
                 case 74:
-                    NuovaNotifica("Il COC ha richiesto che autorizzi la richiesta per ottenere più pompieri");
+                    NuovaNotifica("per sindaco: Il COC ha richiesto che autorizzi la richiesta per ottenere più pompieri");
                     break;
                 case 95:
-                    NuovaNotifica("Un cittadino si rifiuta di evacuare, vallo a convincere.");
+                    NuovaNotifica("per sindaco: Un cittadino si rifiuta di evacuare, vallo a convincere.");
                     break;
                 case 2:
-                    NuovaNotifica("Sei stato attivato dal sindaco! Distribuisci in modo corretto i vari incarichi");
+                    NuovaNotifica("per coc: Sei stato attivato dal sindaco! Distribuisci in modo corretto i vari incarichi");
                     break;
                 case 60:
-                    NuovaNotifica("Il referente PC ha bisogno di più volontari");
+                    NuovaNotifica("per coc: Il referente PC ha bisogno di più volontari");
                     break;
                 case 61:
-                    NuovaNotifica("Il referente GGEV ha bisogno di più volontari");
+                    NuovaNotifica("per coc: Il referente GGEV ha bisogno di più volontari");
                     break;
                 case 62:
-                    NuovaNotifica("Il referente CRI ha bisogno di più volontari");
+                    NuovaNotifica("per coc: Il referente CRI ha bisogno di più volontari");
                     break;
                 case 63:
-                    NuovaNotifica("Il referente della polizia ha bisogno di più poliziotti");
+                    NuovaNotifica("per coc: Il referente della polizia ha bisogno di più poliziotti");
                     break;
                 case 64:
-                    NuovaNotifica("Il referente dei pompieri ha bisogno di più volontari");
+                    NuovaNotifica("per coc: Il referente dei pompieri ha bisogno di più volontari");
                     break;
                 case 75:
-                    NuovaNotifica("Il sindaco ha approvato la richiesta di volontari PC, ora mandala alla segreteria provinciale");
+                    NuovaNotifica("per coc: Il sindaco ha approvato la richiesta di volontari PC, ora mandala alla segreteria provinciale");
                     break;
                 case 76:
-                    NuovaNotifica("Il sindaco ha approvato la richiesta di volontari GGEV, ora mandala alla segreteria provinciale");
+                    NuovaNotifica("per coc: Il sindaco ha approvato la richiesta di volontari GGEV, ora mandala alla segreteria provinciale");
                     break;
                 case 77:
-                    NuovaNotifica("Il sindaco ha approvato la richiesta di volontari CRI, ora mandala alla segreteria provinciale");
+                    NuovaNotifica("per coc: Il sindaco ha approvato la richiesta di volontari CRI, ora mandala alla segreteria provinciale");
                     break;
                 case 78:
-                    NuovaNotifica("Il sindaco ha approvato la richiesta di polizia, ora mandala alla segreteria provinciale");
+                    NuovaNotifica("per coc: Il sindaco ha approvato la richiesta di polizia, ora mandala alla segreteria provinciale");
                     break;
                 case 79:
-                    NuovaNotifica("Il sindaco ha approvato la richiesta di pompieri, ora mandala alla segreteria provinciale");
+                    NuovaNotifica("per coc: Il sindaco ha approvato la richiesta di pompieri, ora mandala alla segreteria provinciale");
                     break;
                 case 38:
-                    NuovaNotifica("Qualcuno è svenuto trovalo e aiutalo");
+                    NuovaNotifica("per medico: Qualcuno è svenuto trovalo e aiutalo");
                     break;
                 case 30:
-                    NuovaNotifica("Il COC ha richiesto l'allestimento di ambienti di prime cure");
+                    NuovaNotifica("per refCri: Il COC ha richiesto l'allestimento di ambienti di prime cure");
                     break;
                 case 31:
-                    NuovaNotifica("Il COC ha richiesto operazioni di primo soccorso per i feriti");
+                    NuovaNotifica("per refCri: Il COC ha richiesto operazioni di primo soccorso per i feriti");
                     break;
                 case 67:
-                    NuovaNotifica("Richiesta volontari annullata");
+                    NuovaNotifica("per refCri: Richiesta volontari annullata");
                     break;
                 case 87:
-                    NuovaNotifica("Volontari ottenuti");
+                    NuovaNotifica("per refCri: Volontari ottenuti");
                     break;
                 case 1035:
-                    NuovaNotifica("Allestimento ambienti CRI");
+                    NuovaNotifica("per refCri: È richiesto l'allestimento di un ambiente di prime cure");
                     break;
                 case 1036:
-                    NuovaNotifica("Primo soccorso");
+                    NuovaNotifica("per refCri: È richiesto un interevento di primo soccorso per un ferito");
                     break;
                 case 1038:
-                    NuovaNotifica("soccorri");
+                    NuovaNotifica("per refCri: È richiesto un interevento di primo soccorso");
                     break;
                 case 20:
-                    NuovaNotifica("Il COC ha richiesto la rimozione di tutte le tane degli animali");
+                    NuovaNotifica("per refGgev: Il COC ha richiesto la rimozione di tutte le tane degli animali");
                     break;
                 case 66:
-                    NuovaNotifica("Richiesta volontari annullata");
+                    NuovaNotifica("per refGgev: Richiesta volontari annullata");
                     break;
                 case 86:
-                    NuovaNotifica("Volontari ottenuti");
+                    NuovaNotifica("per refGgev: Volontari ottenuti");
                     break;
                 case 1025:
-                    NuovaNotifica("Trova le tane sull'argine e chiudile");
+                    NuovaNotifica("per refGgev: È richiesta la rimozione di tutte le tane degli animali");
                     break;
                 case 1027:
-                    NuovaNotifica("Rimuove materiale pericoloso\n");
+                    NuovaNotifica("per refGgev: È richiesta la rimozione di materiale pericoloso");
                     break;
                 case 10:
-                    NuovaNotifica("Il COC ha richiesto di monitorare gli argini per non farli straripare");
+                    NuovaNotifica("per RefPC: Il COC ha richiesto di monitorare gli argini per non farli straripare");
                     break;
                 case 11:
-                    NuovaNotifica("Il COC ha richiesto di svuotare tutte le zone alluvionate mettendo le persone in salvo");
+                    NuovaNotifica("per RefPC: Il COC ha richiesto di svuotare tutte le zone alluvionate mettendo le persone in salvo");
                     break;
                 case 12:
-                    NuovaNotifica("Il COC ha richiesto l'evacuazione immediata di tutti i cittadini");
+                    NuovaNotifica("per RefPC: Il COC ha richiesto l'evacuazione immediata di tutti i cittadini");
                     break;
                 case 13:
-                    NuovaNotifica("Il COC ha richiesto la creazione di nuovi punti di raccolta");
+                    NuovaNotifica("per RefPC: Il COC ha richiesto la creazione di nuovi punti di raccolta");
                     break;
                 case 65:
-                    NuovaNotifica("Richiesta volontari annullata");
+                    NuovaNotifica("per RefPC: Richiesta volontari annullata");
                     break;
                 case 85:
-                    NuovaNotifica("Volontari ottenuti");
+                    NuovaNotifica("per RefPC: Volontari ottenuti");
                     break;
                 case 1015:
-                    NuovaNotifica("Monitora argini");
+                    NuovaNotifica("per RefPC: È richiesto di monitorare gli argini per non farli straripare");
                     break;
                 case 1016:
-                    NuovaNotifica("Svuota zone alluvione");
+                    NuovaNotifica("per RefPC: È richiesto di svuotare la zona alluvionata");
                     break;
                 case 1017:
-                    NuovaNotifica("Evacuazione persone");
+                    NuovaNotifica("per RefPC: È richiesta l'evacuazione immediata di tutti i cittadini");
                     break;
                 case 1018:
-                    NuovaNotifica("Crea punti raccolta");
+                    NuovaNotifica("per RefPC: È richieto l'allestimento di un punto di raccolta");
                     break;
                 case 40:
-                    NuovaNotifica("Ci sono strade chiuse! Il COC ha richiesto la regolazione del traffico");
+                    NuovaNotifica("per RefPolizia: Ci sono strade chiuse! Il COC ha richiesto la regolazione del traffico");
                     break;
                 case 41:
-                    NuovaNotifica("Il COC ha richiesto il tuo intervento! Crea percorsi alternativi");
+                    NuovaNotifica("per RefPolizia: Il COC ha richiesto il tuo intervento! Crea percorsi alternativi");
                     break;
                 case 68:
-                    NuovaNotifica("Richiesta volontari annullata");
+                    NuovaNotifica("per RefPolizia: Richiesta volontari annullata");
                     break;
                 case 88:
-                    NuovaNotifica("Volontari ottenuti");
+                    NuovaNotifica("per RefPolizia: Volontari ottenuti");
                     break;
                 case 1046:
-                    NuovaNotifica("modifica le strade");
+                    NuovaNotifica("per RefPolizia: È richiesto l'intervento per mettere in sicurezza alcuni tratti di strada");
                     break;
                 case 1047:
-                    NuovaNotifica("Incidente");
+                    NuovaNotifica("per RefPolizia: È richiesto l'intervento per risolvere un incidente");
                     break;
                 case 50:
-                    NuovaNotifica("Il COC ha richiesto urgentemente il tuo aiuto per salvare animale e persone");
+                    NuovaNotifica("per RefFuoco: Il COC ha richiesto urgentemente il tuo aiuto per salvare animale e persone");
                     break;
                 case 69:
-                    NuovaNotifica("Richiesta volontari annullata");
+                    NuovaNotifica("per RefFuoco: Richiesta volontari annullata");
                     break;
                 case 89:
-                    NuovaNotifica("Volontari ottenuti");
+                    NuovaNotifica("per RefFuoco: Volontari ottenuti");
                     break;
                 case 1055:
-                    NuovaNotifica("Salva animali/persone");
+                    NuovaNotifica("per RefFuoco: È richiesto il tuo aiuto per salvare animali e persone");
                     break;
                 case 1056:
-                    NuovaNotifica("Ricerca dispersi");
+                    NuovaNotifica("per RefFuoco: È richiesto il tuo aiuto per cercare i dispersi");
                     break;
                 case 1057:
-                    NuovaNotifica("Spegni Incendio");
+                    NuovaNotifica("per RefFuoco: È richiesto il tuo aiuto per spegnere un incendio");
                     break;
                 case 80:
-                    NuovaNotifica("Richiesta di volontari PC");
+                    NuovaNotifica("per segreteria: Richiesta di volontari PC");
                     break;
                 case 81:
-                    NuovaNotifica("Richiesta di volontari GGEV");
+                    NuovaNotifica("per segreteria: Richiesta di volontari GGEV");
                     break;
                 case 82:
-                    NuovaNotifica("Richiesta di volontari CRI");
+                    NuovaNotifica("per segreteria: Richiesta di volontari CRI");
                     break;
                 case 83:
-                    NuovaNotifica("Richiesta di polizia");
+                    NuovaNotifica("per segreteria: Richiesta di polizia");
                     break;
                 case 84:
-                    NuovaNotifica("Richiesta di vigili del fuoco");
+                    NuovaNotifica("per segreteria: Richiesta di vigili del fuoco");
                     break;
                 case 3:
-                    NuovaNotifica("Il sindaco ti ha chiesto delle informazioni");
+                    NuovaNotifica("per refTlc: Il sindaco ti ha chiesto delle informazioni");
                     break;
                 case 5:
-                    NuovaNotifica("Il COC ti ha chiesto di informare la popolazione");
+                    NuovaNotifica("per refTlc: Il COC ti ha chiesto di informare la popolazione");
                     break;
                 case 35:
-                    NuovaNotifica("Trova la zona e costruisci un ambiete per fornire le cure mediche durante l'emergenza");
+                    NuovaNotifica("per volCri: Trova la zona e costruisci un ambiete per fornire le cure mediche durante l'emergenza");
                     break;
                 case 36:
-                    NuovaNotifica("Trova la persona che ha bisogno di un primo soccorso");
+                    NuovaNotifica("per volCri: Trova la persona che ha bisogno di un primo soccorso");
                     break;
                 case 15:
-                    NuovaNotifica("vai sugli argini a controllare nei punti indicati");
+                    NuovaNotifica("per volPC: vai sugli argini a controllare nei punti indicati");
                     break;
                 case 16:
-                    NuovaNotifica("Cerca e svuolta la zona allagata");
+                    NuovaNotifica("per volPC: Cerca e svuolta la zona allagata");
                     break;
                 case 17:
-                    NuovaNotifica("Vai in tutte le case ad avvisare che è neccessaria l'evacuazione.");
+                    NuovaNotifica("per volPC: Vai in tutte le case ad avvisare che è neccessaria l'evacuazione.");
                     break;
                 case 18:
-                    NuovaNotifica("Trova la zona e contruisci un ambiente sicuro come punto di raccolta per i cittadini");
+                    NuovaNotifica("per volPC: Trova la zona e contruisci un ambiente sicuro come punto di raccolta per i cittadini");
                     break;
                 case 25:
-                    NuovaNotifica("Cerca le tane sull'argine e chiudile");
+                    NuovaNotifica("per VolGgev : Cerca le tane sull'argine e chiudile");
                     break;
                 case 27:
-                    NuovaNotifica("Cerca i materiali inquinanti sparsi per la mappa");
+                    NuovaNotifica("per VolGgev : Cerca i materiali inquinanti sparsi per la mappa");
                     break;
                 case 46:
-                    NuovaNotifica("Ci sono delle parti della strada allagate, vai a segnalarle circondandole di coni. Per piazzare i coni clicca intorno alla zona da segnalare");
+                    NuovaNotifica("per polizia : Ci sono delle parti della strada allagate, vai a segnalarle circondandole di coni. Per piazzare i coni clicca intorno alla zona da segnalare");
                     break;
                 case 47:
-                    NuovaNotifica("C'è un incidente, trovalo e riapri la strada il prima possibile");
+                    NuovaNotifica("per polizia : C'è un incidente, trovalo e riapri la strada il prima possibile");
                     break;
                 case 55:
-                    NuovaNotifica("Ci sono delle persone o degli animali in pericolo. Cercali per la mappa e cliccali per salvarli");
+                    NuovaNotifica("per volFuoco : Ci sono delle persone o degli animali in pericolo. Cercali per la mappa e cliccali per salvarli");
                     break;
                 case 56:
-                    NuovaNotifica("Ci sono dei dispersi, cercali.");
+                    NuovaNotifica("per volFuoco : Ci sono dei dispersi, cercali.");
                     break;
                 case 57:
-                    NuovaNotifica("Incendio in corso, spegnilo.");
+                    NuovaNotifica("per volFuoco : Incendio in corso, spegnilo.");
                     break;
                 case 200:
-                    NuovaNotifica(info + " ha terminato la task");
+                    NuovaNotifica("per refPC : " + info + " ha terminato la task");
                     break;
                 case 201:
-                    NuovaNotifica(info + " ha terminato la task");
+                    NuovaNotifica("per refGgev : " + info + " ha terminato la task");
                     break;
                 case 202:
-                    NuovaNotifica(info + " ha terminato la task");
+                    NuovaNotifica("per refCRI : " + info + " ha terminato la task");
                     break;
                 case 203:
-                    NuovaNotifica(info + " ha terminato la task");
+                    NuovaNotifica("per refPolizia : " + info + " ha terminato la task");
                     break;
                 case 204:
-                    NuovaNotifica(info + " ha terminato la task");
+                    NuovaNotifica("per refFuoco : " + info + " ha terminato la task");
                     break;
             }
         }

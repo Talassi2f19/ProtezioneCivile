@@ -172,7 +172,6 @@ namespace _Scenes.User.telefono
             if (value == 6)
             {
                 NuovaNotifica("Informazioni da referente telecomunicazioni: " + plName);
-                return;
             }
             if (value == 18000)
             {
@@ -349,6 +348,9 @@ namespace _Scenes.User.telefono
                             schede[3].GetComponentInChildren<TaskSeleziona>().NuovaTask("Inoltra richiesta pompieri",79);
                             // altri volontari step 3 pompiere
                             break;
+                        case 6:
+                            schede[0].transform.GetChild(0).GetChild(5).gameObject.SetActive(true);
+                            break;
                     }
                     break;
                 case Ruoli.Medico:
@@ -365,7 +367,7 @@ namespace _Scenes.User.telefono
                     switch (value)
                     {
                         case 30:
-                            NuovaNotifica("Il COC ha richiesto l'allestimento di ambienti di prime cure");
+                            NuovaNotifica("Il COC ha richiesto l'allestimento di un ambiente di prime cure");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Allestimento ambienti CRI", 30);
                             break;  
                         case 31:
@@ -379,15 +381,15 @@ namespace _Scenes.User.telefono
                             NuovaNotifica("Volontari ottenuti");
                             break;
                         case 1035:
-                            NuovaNotifica("Allestimento ambienti CRI");
+                            NuovaNotifica("È richiesto l'allestimento di un ambiente di prime cure");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Allestimento ambienti CRI", 1035);
                             break;
                         case 1036:
-                            NuovaNotifica("Primo soccorso");
+                            NuovaNotifica("È richiesto un interevento di primo soccorso per un ferito");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Primo soccorso", 1036);
                             break;
                         case 1038:
-                            NuovaNotifica("soccorri");
+                            NuovaNotifica("È richiesto un interevento di primo soccorso");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Soccorri", 1038);
                             break;
                         case 202:
@@ -409,12 +411,12 @@ namespace _Scenes.User.telefono
                             NuovaNotifica("Volontari ottenuti");
                             break;
                         case 1025:
-                            NuovaNotifica("Rimuovi tane");
+                            NuovaNotifica("È richiesta la rimozione di tutte le tane degli animali");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Rimuovi tane", 1025);
                             break;
                         case 1027:
-                            NuovaNotifica("Rimuove materiale pericoloso\n");
-                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Rimuove materiale pericoloso\n", 1027);
+                            NuovaNotifica("È richiesta la rimozione di materiale pericoloso");
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Rimuove materiale pericoloso", 1027);
                             break;
                         case 201:
                             NuovaNotifica(plName + " ha terminato la task");
@@ -429,7 +431,7 @@ namespace _Scenes.User.telefono
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Monitora argini", 10);
                             break;
                         case 11:
-                            NuovaNotifica("Il COC ha richiesto di svuotare tutte le zone alluvionate mettendo le persone in salvo");
+                            NuovaNotifica("Il COC ha richiesto di svuotare la zona alluvionata mettendo le persone in salvo");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Svuota zone alluvione", 11);
                             break;
                         case 12:
@@ -447,20 +449,20 @@ namespace _Scenes.User.telefono
                             NuovaNotifica("Volontari ottenuti");
                             break;
                         case 1015:
-                            NuovaNotifica("Monitora argini");
+                            NuovaNotifica("È richiesto di monitorare gli argini per non farli straripare");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Monitora argini", 1015);
                             break;
                         case 1016:
-                            NuovaNotifica("Svuota zone alluvione");
+                            NuovaNotifica("È richiesto di svuotare la zona alluvionata");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Svuota zone alluvione", 1016);
                             break;
                         case 1017:
-                            NuovaNotifica("Evacuazione persone");
+                            NuovaNotifica("È richiesta l'evacuazione immediata di tutti i cittadini");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Evacuazione persone", 1017);
                             break;
                         case 1018:
-                            NuovaNotifica("Crea punti raccolta");
-                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Crea punti raccolta", 1018);
+                            NuovaNotifica("È richieto l'allestimento di un punto di raccolta");
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Crea punto raccolta", 1018);
                             break;
                         case 200:
                             NuovaNotifica(plName + " ha terminato la task");
@@ -485,11 +487,11 @@ namespace _Scenes.User.telefono
                             NuovaNotifica("Volontari ottenuti");
                             break;
                         case 1046:
-                            NuovaNotifica("modifica le strade");
+                            NuovaNotifica("È richiesto l'intervento per mettere in sicurezza alcuni tratti di strada");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Modifica le strade", 1046);
                             break;
                         case 1047:
-                            NuovaNotifica("Incidente");
+                            NuovaNotifica("È richiesto l'intervento per risolvere un incidente");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Incidente", 1047);
                             break;
                         case 203:
@@ -511,15 +513,15 @@ namespace _Scenes.User.telefono
                             NuovaNotifica("Volontari ottenuti");
                             break;
                         case 1055:
-                            NuovaNotifica("Salva animali/persone");
+                            NuovaNotifica("È richiesto il tuo aiuto per salvare animali e persone");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Salva animali/persone", 1055);
                             break;
                         case 1056:
-                            NuovaNotifica("Ricerca dispersi");
+                            NuovaNotifica("È richiesto il tuo aiuto per cercare i dispersi");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Ricerca dispersi", 1056);
                             break;
                         case 1057:
-                            NuovaNotifica("Spegni Incendio");
+                            NuovaNotifica("È richiesto il tuo aiuto per spegnere un incendio");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Spegni Incendio", 1057);
                             break;
                         case 204:
@@ -531,23 +533,23 @@ namespace _Scenes.User.telefono
                     switch (value)
                     {
                         case 80:
-                            NuovaNotifica("Richiesta di volontari PC");
+                            NuovaNotifica("Richiesta di nuovi volontari per la protezione civile");
                             schede[1].GetComponentInChildren<TaskSeleziona>().NuovaTask("Richiesta PC", 80);
                             break;
                         case 81:
-                            NuovaNotifica("Richiesta di volontari GGEV");
+                            NuovaNotifica("Richiesta di nuovi volontari per le guardie ecologiche");
                             schede[1].GetComponentInChildren<TaskSeleziona>().NuovaTask("Richiesta GGEV",81);
                             break;
                         case 82:
-                            NuovaNotifica("Richiesta di volontari CRI");
+                            NuovaNotifica("Richiesta di nuovi volontari per la corce rossa");
                             schede[1].GetComponentInChildren<TaskSeleziona>().NuovaTask("Richiesta CRI",82);
                             break;
                         case 83:
-                            NuovaNotifica("Richiesta di polizia");
+                            NuovaNotifica("Richiesta di nuovi polizia");
                             schede[1].GetComponentInChildren<TaskSeleziona>().NuovaTask("Richiesta vigili",83);
                             break;
                         case 84:
-                            NuovaNotifica("Richiesta di vigili del fuoco");
+                            NuovaNotifica("Richiesta di nuovi vigili del fuoco");
                             schede[1].GetComponentInChildren<TaskSeleziona>().NuovaTask("Richiesta pompieri",84);
                             break;
                     }
@@ -558,12 +560,10 @@ namespace _Scenes.User.telefono
                         case 3:
                             NuovaNotifica("Il sindaco ti ha chiesto delle informazioni");
                             schede[0].transform.GetChild(0).GetChild(4).gameObject.SetActive(true);
-                            //task informa
                             break;
                         case 5:
                             NuovaNotifica("Il COC ti ha chiesto di informare la popolazione");
                             schede[0].transform.GetChild(0).GetChild(5).gameObject.SetActive(true);
-                            //task informa
                             break;
                     }
                     break;

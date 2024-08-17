@@ -247,6 +247,7 @@ namespace _Scenes.User.telefono
                 RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", json).Catch(Debug.Log);
                 RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + nome + ".json", "{\"Occupato\":true}").Catch(Debug.Log);
             } 
+            GameObject.FindWithTag("notifiche")?.GetComponent<TaskManager>()?.NuovaNotifica("Task assegnata a " + string.Join(", ", selezionati));
             Fine();
         }
 
