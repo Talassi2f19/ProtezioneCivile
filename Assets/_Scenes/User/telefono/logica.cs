@@ -56,7 +56,7 @@ namespace _Scenes.User.telefono
             string[] str = 
             { 
                 "Dato l'allagamento della città si consiglia di rimanere nelle proprie case",
-                "Chiusura delle strade dovuta a grossa innondazione",
+                "Chiusura delle strade dovuta a grossa inondazione",
                 "Mantenere la calma e seguire i consigli del comune",
                 "Mantenersi informati tramite tutti i mezzi comunicativi per sapere giornalmente come procedere"
             };
@@ -65,7 +65,7 @@ namespace _Scenes.User.telefono
         public void RefTlcInformaSindaco(GameObject tmp)
         {
             tmp.SetActive(false);
-            string str = "I volontari sono già stati delegati i vari incarichi. Ognuno stà procedendo con dedizione per aiutare il paese";
+            string str = "I volontari sono già stati delegati per i vari incarichi. Ognuno sta procedendo con dedizione per aiutare il paese";
             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":4,\"Player\":\""+str+"\"}").Catch(Debug.Log);
             GameObject.FindWithTag("notifiche")?.GetComponent<TaskManager>()?.NuovaNotifica("Sindaco informato");
         }

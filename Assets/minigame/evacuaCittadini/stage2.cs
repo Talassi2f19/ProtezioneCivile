@@ -23,7 +23,7 @@ namespace minigame.evacuaCittadini
 
         private string[] testiPos =
         {
-            "Buongiorno, signore. Sono qui come volontario per informarla che dobbiamo evacuare la zona immediatamente.",
+            "Buongiorno signore. Sono qui come volontario per informarla che dobbiamo evacuare la zona immediatamente.",
             "Il fiume è in piena e potrebbe straripare da un momento all'altro.",
             
             "Il fiume in piena? Non avevo idea che la situazione fosse così grave!",
@@ -40,7 +40,7 @@ namespace minigame.evacuaCittadini
 
         private string[] testiNeg =
         {
-            "Buongiorno, signore. Sono qui come volontario per informarla che dobbiamo evacuare la zona immediatamente.",
+            "Buongiorno signore. Sono qui come volontario per informarla che dobbiamo evacuare la zona immediatamente.",
             "Il fiume è in piena e potrebbe straripare da un momento all'altro.",
             
             "Il fiume in piena? Non avevo idea che la situazione fosse così grave! Ma non penso di poter lasciare la mia casa adesso.",
@@ -62,9 +62,9 @@ namespace minigame.evacuaCittadini
         
         private string[] testiSindaco =
         {
-            "Buongiorno, signore. Sono il sindaco. Ho saputo che non intende evacuare la sua casa nonostante il rischio imminente del fiume in piena.",
+            "Buongiorno signore. Sono il sindaco. Ho saputo che non intende evacuare la sua casa nonostante il rischio imminente del fiume in piena.",
             
-            "Buongiorno, signor sindaco. Sì, è corretto. Non voglio abbandonare la mia casa. È tutto ciò che ho.",
+            "Buongiorno signor sindaco. Sì, è corretto. Non voglio abbandonare la mia casa. È tutto ciò che ho.",
             
             "Capisco quanto sia difficile. Però la situazione è estremamente pericolosa. Se il fiume straripa, potrebbe mettere seriamente a rischio la sua vita.",
             
@@ -78,7 +78,7 @@ namespace minigame.evacuaCittadini
             "La ringrazio per la sua collaborazione.",
             "Se cambiasse idea, il centro di accoglienza è sempre pronto ad accoglierla.",
             
-            "Non penso cambierò idea.",
+            "Non penso che cambierò idea.",
             
             "Arrivederci, buona giornata."
         };

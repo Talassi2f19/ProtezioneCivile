@@ -349,7 +349,7 @@ namespace Script.Master
         {
             if (value == 6)
             {
-                NuovaNotifica("per tutti: Informazioni da referente telecomunicazioni per tutti: " + info);
+                NuovaNotifica("per tutti: Informazioni dal referente telecomunicazioni per tutti: " + info);
                 return;
             }
             if (value == 18000)
@@ -423,7 +423,7 @@ namespace Script.Master
                     NuovaNotifica("per sindaco: È arrivata una nuova allerta! Convoca il Centro Operativo Comunale!");
                     break;
                 case 4:
-                    NuovaNotifica("per sindaco: Informazioni da referente telecomunicazioni per sindaco: " + info);
+                    NuovaNotifica("per sindaco: Informazioni dal referente telecomunicazioni per il sindaco: " + info);
                     break;
                 case 70:
                     NuovaNotifica("per sindaco: Il COC ha richiesto che autorizzi la richiesta per ottenere più volontari PC");
@@ -441,7 +441,7 @@ namespace Script.Master
                     NuovaNotifica("per sindaco: Il COC ha richiesto che autorizzi la richiesta per ottenere più pompieri");
                     break;
                 case 95:
-                    NuovaNotifica("per sindaco: Un cittadino si rifiuta di evacuare, vallo a convincere.");
+                    NuovaNotifica("per sindaco: Un cittadino si rifiuta di evacuare, vai a convincerlo.");
                     break;
                 case 2:
                     NuovaNotifica("per coc: Sei stato attivato dal sindaco! Distribuisci in modo corretto i vari incarichi");
@@ -456,7 +456,7 @@ namespace Script.Master
                     NuovaNotifica("per coc: Il referente CRI ha bisogno di più volontari");
                     break;
                 case 63:
-                    NuovaNotifica("per coc: Il referente della polizia ha bisogno di più poliziotti");
+                    NuovaNotifica("per coc: Il referente della polizia ha bisogno di più vigili");
                     break;
                 case 64:
                     NuovaNotifica("per coc: Il referente dei pompieri ha bisogno di più volontari");
@@ -471,13 +471,13 @@ namespace Script.Master
                     NuovaNotifica("per coc: Il sindaco ha approvato la richiesta di volontari CRI, ora mandala alla segreteria provinciale");
                     break;
                 case 78:
-                    NuovaNotifica("per coc: Il sindaco ha approvato la richiesta di polizia, ora mandala alla segreteria provinciale");
+                    NuovaNotifica("per coc: Il sindaco ha approvato la richiesta di vigili, ora mandala alla segreteria provinciale");
                     break;
                 case 79:
                     NuovaNotifica("per coc: Il sindaco ha approvato la richiesta di pompieri, ora mandala alla segreteria provinciale");
                     break;
                 case 38:
-                    NuovaNotifica("per medico: Qualcuno è svenuto trovalo e aiutalo");
+                    NuovaNotifica("per medico: Qualcuno è svenuto, trovalo e aiutalo");
                     break;
                 case 30:
                     NuovaNotifica("per refCri: Il COC ha richiesto l'allestimento di ambienti di prime cure");
@@ -495,10 +495,10 @@ namespace Script.Master
                     NuovaNotifica("per refCri: È richiesto l'allestimento di un ambiente di prime cure");
                     break;
                 case 1036:
-                    NuovaNotifica("per refCri: È richiesto un interevento di primo soccorso per un ferito");
+                    NuovaNotifica("per refCri: È richiesto un intervento di primo soccorso per un ferito");
                     break;
                 case 1038:
-                    NuovaNotifica("per refCri: È richiesto un interevento di primo soccorso");
+                    NuovaNotifica("per refCri: È richiesto un intervento di primo soccorso");
                     break;
                 case 20:
                     NuovaNotifica("per refGgev: Il COC ha richiesto la rimozione di tutte le tane degli animali");
@@ -525,7 +525,7 @@ namespace Script.Master
                     NuovaNotifica("per RefPC: Il COC ha richiesto l'evacuazione immediata di tutti i cittadini");
                     break;
                 case 13:
-                    NuovaNotifica("per RefPC: Il COC ha richiesto la creazione di nuovi punti di raccolta");
+                    NuovaNotifica("per RefPC: Il COC ha richiesto l'allestimento di nuovi punti di raccolta");
                     break;
                 case 65:
                     NuovaNotifica("per RefPC: Richiesta volontari annullata");
@@ -564,7 +564,7 @@ namespace Script.Master
                     NuovaNotifica("per RefPolizia: È richiesto l'intervento per risolvere un incidente");
                     break;
                 case 50:
-                    NuovaNotifica("per RefFuoco: Il COC ha richiesto urgentemente il tuo aiuto per salvare animale e persone");
+                    NuovaNotifica("per RefFuoco: Il COC ha richiesto urgentemente il tuo aiuto per salvare animali e persone");
                     break;
                 case 69:
                     NuovaNotifica("per RefFuoco: Richiesta volontari annullata");
@@ -591,7 +591,7 @@ namespace Script.Master
                     NuovaNotifica("per segreteria: Richiesta di volontari CRI");
                     break;
                 case 83:
-                    NuovaNotifica("per segreteria: Richiesta di polizia");
+                    NuovaNotifica("per segreteria: Richiesta di vigili");
                     break;
                 case 84:
                     NuovaNotifica("per segreteria: Richiesta di vigili del fuoco");
@@ -603,22 +603,22 @@ namespace Script.Master
                     NuovaNotifica("per refTlc: Il COC ti ha chiesto di informare la popolazione");
                     break;
                 case 35:
-                    NuovaNotifica("per volCri: Trova la zona e costruisci un ambiete per fornire le cure mediche durante l'emergenza");
+                    NuovaNotifica("per volCri: Trova la zona e costruisci un ambiente per fornire le cure mediche durante l'emergenza");
                     break;
                 case 36:
-                    NuovaNotifica("per volCri: Trova la persona che ha bisogno di un primo soccorso");
+                    NuovaNotifica("per volCri: Trova la persona che ha bisogno di primo soccorso");
                     break;
                 case 15:
                     NuovaNotifica("per volPC: vai sugli argini a controllare nei punti indicati");
                     break;
                 case 16:
-                    NuovaNotifica("per volPC: Cerca e svuolta la zona allagata");
+                    NuovaNotifica("per volPC: Cerca e svuota la zona allagata");
                     break;
                 case 17:
                     NuovaNotifica("per volPC: Vai in tutte le case ad avvisare che è neccessaria l'evacuazione.");
                     break;
                 case 18:
-                    NuovaNotifica("per volPC: Trova la zona e contruisci un ambiente sicuro come punto di raccolta per i cittadini");
+                    NuovaNotifica("per volPC: Trova la zona e costruisci un ambiente sicuro come punto di raccolta per i cittadini");
                     break;
                 case 25:
                     NuovaNotifica("per VolGgev : Cerca le tane sull'argine e chiudile");

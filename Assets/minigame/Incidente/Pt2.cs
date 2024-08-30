@@ -12,9 +12,9 @@ namespace minigame.Incidente
         private string[] testi =
         {
             "Chiudi le strade vicino all'incidente, trascina il cono nelle caselle rosse",
-            "Sposta i veiccoli fuori dalla strada",
-            "Pulisci la strada, trascina la scopa sulle macchie della strada",
-            "Apri la strada, clicca sui coni nella strada per rimuoverle",
+            "Sposta i veicoli fuori dalla strada",
+            "Pulisci la strada, trascina la scopa sulle macchie",
+            "Apri la strada, clicca sui coni in strada per rimuoverli",
         };
         
         private void Start()

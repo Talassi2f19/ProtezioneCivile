@@ -171,7 +171,7 @@ namespace _Scenes.User.telefono
             }
             if (value == 6)
             {
-                NuovaNotifica("Informazioni da referente telecomunicazioni: " + plName);
+                NuovaNotifica("Informazioni dal referente Telecomunicazioni: " + plName);
             }
             if (value == 18000)
             {
@@ -248,7 +248,7 @@ namespace _Scenes.User.telefono
                             schede[0].transform.GetChild(0).GetChild(4).gameObject.SetActive(true);
                             break;
                         case 4:
-                            NuovaNotifica("Informazioni da referente telecomunicazioni: "+plName);
+                            NuovaNotifica("Informazioni dal referente Telecomunicazioni: "+plName);
                             break;
                         case 70:
                             NuovaNotifica("Il COC ha richiesto che autorizzi la richiesta per ottenere più volontari PC");
@@ -276,7 +276,7 @@ namespace _Scenes.User.telefono
                             // altri volontari step 2 pompiere
                             break;
                         case 95:
-                            NuovaNotifica("Un cittadino si rifiuta di evacuare, vallo a convincere.");
+                            NuovaNotifica("Un cittadino si rifiuta di evacuare, vai a convincerlo.");
                             evacuaCittadini.Genera(plName); //plname sarà il numero della casa da visitare
                             break;
                     }
@@ -314,7 +314,7 @@ namespace _Scenes.User.telefono
                             // altri volontari step 1 cri
                             break;
                         case 63:
-                            NuovaNotifica("Il referente della polizia ha bisogno di più poliziotti");
+                            NuovaNotifica("Il referente della polizia ha bisogno di più vigili");
                             schede[3].GetComponentInChildren<TaskSeleziona>().NuovaTask("Altri volontari vigili",63);
                             // altri volontari step 1 polizia
                             break;
@@ -339,7 +339,7 @@ namespace _Scenes.User.telefono
                             // altri volontari step 3 cri
                             break;
                         case 78:
-                            NuovaNotifica("Il sindaco ha approvato la richiesta di polizia, ora mandala alla segreteria provinciale");
+                            NuovaNotifica("Il sindaco ha approvato la richiesta di vigili, ora mandala alla segreteria provinciale");
                             schede[3].GetComponentInChildren<TaskSeleziona>().NuovaTask("Inoltra richiesta vigili",78);
                             // altri volontari step 3 polizia
                             break;
@@ -358,7 +358,7 @@ namespace _Scenes.User.telefono
                     {
                         case 38:
                             //svenuto
-                            NuovaNotifica("Qualcuno è svenuto trovalo e aiutalo");
+                            NuovaNotifica("Qualcuno è svenuto, trovalo e aiutalo");
                             battito.Genera();
                             break;
                     }
@@ -432,14 +432,14 @@ namespace _Scenes.User.telefono
                             break;
                         case 11:
                             NuovaNotifica("Il COC ha richiesto di svuotare la zona alluvionata mettendo le persone in salvo");
-                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Svuota zone alluvione", 11);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Svuota zone alluvionate", 11);
                             break;
                         case 12:
                             NuovaNotifica("Il COC ha richiesto l'evacuazione immediata di tutti i cittadini");
-                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Evacuazione persone", 12);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Evacuazione cittadini", 12);
                             break;
                         case 13:
-                            NuovaNotifica("Il COC ha richiesto la creazione di nuovi punti di raccolta");
+                            NuovaNotifica("Il COC ha richiesto l'allestimento di nuovi punti di raccolta");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Crea punti raccolta", 13);
                             break;
                         case 65:
@@ -454,11 +454,11 @@ namespace _Scenes.User.telefono
                             break;
                         case 1016:
                             NuovaNotifica("È richiesto di svuotare la zona alluvionata");
-                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Svuota zone alluvione", 1016);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Svuota zone alluvionate", 1016);
                             break;
                         case 1017:
                             NuovaNotifica("È richiesta l'evacuazione immediata di tutti i cittadini");
-                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Evacuazione persone", 1017);
+                            schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Evacuazione cittadini", 1017);
                             break;
                         case 1018:
                             NuovaNotifica("È richieto l'allestimento di un punto di raccolta");
@@ -503,7 +503,7 @@ namespace _Scenes.User.telefono
                     switch (value)
                     {
                         case 50:
-                            NuovaNotifica("Il COC ha richiesto urgentemente il tuo aiuto per salvare animale e persone");
+                            NuovaNotifica("Il COC ha richiesto urgentemente il tuo aiuto per salvare animali e persone");
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Salva animali/persone", 50);
                             break;
                         case 69:
@@ -533,19 +533,19 @@ namespace _Scenes.User.telefono
                     switch (value)
                     {
                         case 80:
-                            NuovaNotifica("Richiesta di nuovi volontari per la protezione civile");
+                            NuovaNotifica("Richiesta di nuovi volontari per la Protezione Civile");
                             schede[1].GetComponentInChildren<TaskSeleziona>().NuovaTask("Richiesta PC", 80);
                             break;
                         case 81:
-                            NuovaNotifica("Richiesta di nuovi volontari per le guardie ecologiche");
+                            NuovaNotifica("Richiesta di nuovi volontari per le Guardie Ecologiche");
                             schede[1].GetComponentInChildren<TaskSeleziona>().NuovaTask("Richiesta GGEV",81);
                             break;
                         case 82:
-                            NuovaNotifica("Richiesta di nuovi volontari per la corce rossa");
+                            NuovaNotifica("Richiesta di nuovi volontari per la croce rossa");
                             schede[1].GetComponentInChildren<TaskSeleziona>().NuovaTask("Richiesta CRI",82);
                             break;
                         case 83:
-                            NuovaNotifica("Richiesta di nuovi polizia");
+                            NuovaNotifica("Richiesta di nuovi vigili");
                             schede[1].GetComponentInChildren<TaskSeleziona>().NuovaTask("Richiesta vigili",83);
                             break;
                         case 84:
@@ -573,13 +573,13 @@ namespace _Scenes.User.telefono
                         case 35:
                             if(Info.localUser.name != plName)
                                 return;
-                            NuovaNotifica("Trova la zona e costruisci un ambiete per fornire le cure mediche durante l'emergenza");
+                            NuovaNotifica("Trova la zona e costruisci un ambiente per fornire le cure mediche durante l'emergenza");
                             allestimentoCri.Genera(true);
                             break;
                         case 36:
                             if(Info.localUser.name != plName)
                                 return;
-                            NuovaNotifica("Trova la persona che ha bisogno di un primo soccorso");
+                            NuovaNotifica("Trova la persona che ha bisogno di primo soccorso");
                             primoSoccorso.Genera(true);
                             break;
                     }
@@ -590,13 +590,13 @@ namespace _Scenes.User.telefono
                         case 15:
                             if(Info.localUser.name != plName)
                                 return;
-                            NuovaNotifica("vai sugli argini a controllare nei punti indicati");
+                            NuovaNotifica("Vai sugli argini a controllare i punti indicati");
                             monitoraArgini.Genera();
                             break;
                         case 16:
                             if(Info.localUser.name != plName)
                                 return;
-                            NuovaNotifica("Cerca e svuolta la zona allagata");
+                            NuovaNotifica("Cerca e svuota la zona allagata");
                             togliAcqua.Genera(true);
                             break;
                         case 17:
@@ -608,7 +608,7 @@ namespace _Scenes.User.telefono
                         case 18:
                             if(Info.localUser.name != plName)
                                 return;
-                            NuovaNotifica("Trova la zona e contruisci un ambiente sicuro come punto di raccolta per i cittadini");
+                            NuovaNotifica("Trova la zona e costruisci un ambiente sicuro come punto di raccolta per i cittadini");
                             puntiRaccolta.Genera(true);
                             break;
                     }
