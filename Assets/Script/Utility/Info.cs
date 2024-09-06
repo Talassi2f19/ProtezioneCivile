@@ -6,7 +6,7 @@ namespace Script.Utility
     {
         public const string DBUrl = "https://prtcv-de7d0-default-rtdb.europe-west1.firebasedatabase.app/";
 #if UNITY_EDITOR
-        public static string sessionCode = "ADMIN";
+        public static string sessionCode = "AIXZ";
 #else
         public static string sessionCode = "";
 #endif
@@ -14,7 +14,7 @@ namespace Script.Utility
 
         public const int MaxPlayer = 30;
         
-        public const int MinPlayer = 0;             //TODO modificare limite minimo
+        public const int MinPlayer = 10;            
         
         public const int SessionCodeLength = 4;
 

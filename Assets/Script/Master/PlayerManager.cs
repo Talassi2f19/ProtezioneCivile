@@ -55,7 +55,7 @@ namespace Script.Master
         private void Start()
         {
             listeners = new Listeners(Info.DBUrl + Info.sessionCode + "/Game.json");
-            listeners.Start(Parse1);
+            listeners.Start(Parse);
             CaricaPlayer();
         }
 
@@ -63,7 +63,7 @@ namespace Script.Master
         {
             listeners.Stop();
         }
-        private void Parse1(string data)
+        private void Parse(string data)
         {
             //da ignorare
              // event: put
@@ -129,11 +129,11 @@ namespace Script.Master
         private void SetTask(JSONObject json)
         {
             int codice = json.GetField("CodeTask").intValue;
-                
+            Debug.Log(json);
             if (json.GetField("Player"))
             {
                 Assegna(codice, json.GetField("Player").stringValue);
-                if (json.GetField("Player").stringValue.Contains("Computer"))
+                if (codice > 0 && codice < 60 && json.GetField("Player").stringValue.Contains("Computer"))
                 {
                     StartCoroutine(NPCtimer(json.GetField("Player").stringValue, codice));
                 }
@@ -144,73 +144,89 @@ namespace Script.Master
             }
         }
 
-         private void Parse(string data)
-        {
-            //da ignorare
-             // event: put
-             // data: {"path":"/","data":{"Posizione":{"a":{"Coord":{"x":1,"y":0}},"admin":{"Coord":{"x":0.6016445755958557,"y":0.6407574415206909}}},"Task":"{null}"}..........}
-            
-            // event: patch
-            // data: {"path":"/Posizione/<nome Player locale>/Coord","data":{"x":1.3084839582443237,"y":1.1914124488830566}}
-            
-            // event: keep-alive
-            // data: null
-            
-            //aggiorna pos
-            // event: patch
-            // data: {"path":"/Posizione/admin/Coord","data":{"x":0.6016445755958557,"y":0.6407574415206909}}
-            
-            //task
-            // event: put
-            // data: {"path":"/Task/-NxsMbI_dagLXyhk5LhS","data":{"CodTask":0,}}
-            
-            // event: put
-            // data: {"path":"/Task/-NxsMbI_dagLXyhk5LhS","data":{"CodTask":0,"Player":""}}
-            
-            // event: put
-            // data: {"path":"/Task/-NxsMbI_dagLXyhk5LhS","data":null}
-            
-            
-            if (data.StartsWith("event: patch\ndata: {\"path\":\"/Posizione"))
-            {
-                MuoviPlayer(new JSONObject(data.Split("data: ")[1]));
-                return;
-            }
-
-            if (data.StartsWith("event: put\ndata: {\"path\":\"/Task"))
-            {
-                // event: put
-                // data: {"path":"/Task/-NyblKDKNWqsCpdQe5Pq","data":{"CodeTask":1}}
-
-                //{"CodeTask":1, "":""}
-                JSONObject json = new JSONObject(data.Split("data: ")[1]).GetField("data");
-                // Debug.Log(json);
-
-                int codice = json.GetField("CodeTask").intValue;
-
-                
-                if (json.GetField("Player"))
-                {
-                    Assegna(codice, json.GetField("Player").stringValue);
-                    if (json.GetField("Player").stringValue.Contains("Computer"))
-                    {
-                        StartCoroutine(NPCtimer(json.GetField("Player").stringValue, codice));
-                    }
-                }
-                else
-                {
-                    Assegna(codice);
-                }
-            }
-        }
+        //  private void Parse(string data)
+        // {
+        //     //da ignorare
+        //      // event: put
+        //      // data: {"path":"/","data":{"Posizione":{"a":{"Coord":{"x":1,"y":0}},"admin":{"Coord":{"x":0.6016445755958557,"y":0.6407574415206909}}},"Task":"{null}"}..........}
+        //     
+        //     // event: patch
+        //     // data: {"path":"/Posizione/<nome Player locale>/Coord","data":{"x":1.3084839582443237,"y":1.1914124488830566}}
+        //     
+        //     // event: keep-alive
+        //     // data: null
+        //     
+        //     //aggiorna pos
+        //     // event: patch
+        //     // data: {"path":"/Posizione/admin/Coord","data":{"x":0.6016445755958557,"y":0.6407574415206909}}
+        //     
+        //     //task
+        //     // event: put
+        //     // data: {"path":"/Task/-NxsMbI_dagLXyhk5LhS","data":{"CodTask":0,}}
+        //     
+        //     // event: put
+        //     // data: {"path":"/Task/-NxsMbI_dagLXyhk5LhS","data":{"CodTask":0,"Player":""}}
+        //     
+        //     // event: put
+        //     // data: {"path":"/Task/-NxsMbI_dagLXyhk5LhS","data":null}
+        //     
+        //     
+        //     if (data.StartsWith("event: patch\ndata: {\"path\":\"/Posizione"))
+        //     {
+        //         MuoviPlayer(new JSONObject(data.Split("data: ")[1]));
+        //         return;
+        //     }
+        //
+        //     if (data.StartsWith("event: put\ndata: {\"path\":\"/Task"))
+        //     {
+        //         // event: put
+        //         // data: {"path":"/Task/-NyblKDKNWqsCpdQe5Pq","data":{"CodeTask":1}}
+        //
+        //         //{"CodeTask":1, "":""}
+        //         JSONObject json = new JSONObject(data.Split("data: ")[1]).GetField("data");
+        //         // Debug.Log(json);
+        //
+        //         int codice = json.GetField("CodeTask").intValue;
+        //
+        //         if (codice == 0) 
+        //             return;
+        //         Debug.Log(json);
+        //         if (json.GetField("Player"))
+        //         {
+        //             Assegna(codice, json.GetField("Player").stringValue);
+        //             if (json.GetField("Player").stringValue.Contains("Computer"))
+        //             {
+        //                 StartCoroutine(NPCtimer(json.GetField("Player").stringValue, codice));
+        //             }
+        //         }
+        //         else
+        //         {
+        //             Assegna(codice);
+        //         }
+        //
+        //     }
+        // }
 
          private IEnumerator NPCtimer(string name, int codice)
          {
              yield return new WaitForSeconds(120f);
+
+             int codTaskEndRuolo = ConvertiCodiceRuolo(codice);
+             int codMapUpdate = ConvertiCodice(codice);
              
-             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":" + ConvertiCodiceRuolo(codice) + ",\"Player\":\"" + name + "\"}").Catch(Debug.Log);
-             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":" + ConvertiCodice(codice) + "}").Catch(Debug.LogError);
+             //Debug.LogWarning("codice: "+codice + ", ruolo: " + codTaskEndRuolo + ", map: " + codMapUpdate);
+             
+             //messaggio volontario ha terminato la task
+             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":" + codTaskEndRuolo + ",\"Player\":\"" + name + "\"}").Catch(Debug.Log);
+             
+             //codice di risposta alla task
+             if(codMapUpdate != 0)
+                RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":" + codMapUpdate + "}").Catch(Debug.LogError);
+             
+             //libera il volontario
              RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + name + ".json", "{\"Occupato\":false}"); 
+             
+             //aggiorna il punteggio
              RestClient.Get(Info.DBUrl + Info.sessionCode + "/score.json").Then(e =>
              {
                  RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", "{\"score\":" + (int.Parse(e.Text == "null" ? "0" : e.Text ) + Info.PointForGame/2) + "}").Catch(Debug.LogError);
@@ -236,7 +252,7 @@ namespace Script.Master
                 case 36:
                     return 36001;
                 case 46:
-                    return 46001;
+                    return 46000;
              }
              return 0;
          }

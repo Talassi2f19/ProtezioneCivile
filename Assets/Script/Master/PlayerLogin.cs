@@ -129,7 +129,7 @@ namespace Script.Master
 
         public void ProssimaScena()
         {
-            if (playerList.Count > Info.MinPlayer)
+            if (playerList.Count >= Info.MinPlayer)
             {
                 string str = "{\"" + Global.GameStatusCodeKey + "\":\"" + GameStatus.Candidatura + "\"}";
                 RestClient.Patch(Info.DBUrl + Info.sessionCode + ".json", str).Catch(Debug.LogError);
@@ -138,7 +138,6 @@ namespace Script.Master
             }
             else
             {
-                //popUpPrefab.SetActive(true);
                 ErroriDisplay(1);
             }
         }

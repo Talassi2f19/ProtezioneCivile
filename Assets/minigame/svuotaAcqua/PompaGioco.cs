@@ -12,7 +12,7 @@ namespace minigame.svuotaAcqua
         private SpriteRenderer spriteRendererPompa;
         private bool isDragging;
         private Vector2 defPos;
-        private int TileFatte;
+        [SerializeField]private int TileFatte;
         [SerializeField] private int num;
         [SerializeField ]private Vector2 betterPos;
 
@@ -57,7 +57,8 @@ namespace minigame.svuotaAcqua
         private void CambiaColore()
         {
             Vector3Int pos = tilemapWater.WorldToCell(detectPoint.transform.position);
-            float alpha = tilemapWater.GetColor(pos).a - 0.08f;
+            float alpha = tilemapWater.GetColor(pos).a - 0.4f;
+            Debug.Log(pos + ", " + alpha);
             if(alpha < 0f) //già completata
                 return;
             if (alpha < 0.3f && alpha > 0f)//completata

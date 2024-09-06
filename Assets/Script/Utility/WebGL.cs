@@ -17,9 +17,9 @@ namespace Script.Utility
         
         private void Start()
         {
- // #if !UNITY_EDITOR
- //        isMobile = Mobile();
- // #endif
+ #if !UNITY_EDITOR
+        isMobile = Mobile();
+ #endif
             Debug.Log("Mobile: " + (isMobile ? "true" : "false"));
         }
     }

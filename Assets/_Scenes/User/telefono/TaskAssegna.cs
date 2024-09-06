@@ -94,40 +94,42 @@ namespace _Scenes.User.telefono
             gameObjectPolizia.SetActive(false);
             gameObjectFuoco.SetActive(false);
 
-    
-            //1 refPC
-            //2 refCri
-            //3 refGGEV
-            //4 refPolizia
-            //5 refFuoco
+
+            const int refPC = 1;
+            const int refCri = 2;
+            const int refGGEV = 3;
+            const int refPolizia = 4;
+            const int refFuoco = 5;
+            
+            
             switch (codice)
             {
                 case 1110:
-                    ControllaP2(1,10);
+                    ControllaP2(refPC,10);
                     break;
                 case 1111:
-                    ControllaP2(1,11);
+                    ControllaP2(refPC,11);
                     break;
                 case 1112:
-                    ControllaP2(1,12);
+                    ControllaP2(refPC,12);
                     break;
                 case 1113:
-                    ControllaP2(1,13);
+                    ControllaP2(refPC,13);
                     break;
                 case 1120:
-                    ControllaP2(3,20);
+                    ControllaP2(refGGEV,20);
                     break;
                 case 1130:
-                    ControllaP2(2,30);
+                    ControllaP2(refCri,30);
                     break;
                 case 1131:
-                    ControllaP2(3,31);
+                    ControllaP2(refCri,31);
                     break;
                 case 1141:
-                    ControllaP2(4,41);
+                    ControllaP2(refPolizia,41);
                     break;
                 case 1150:
-                    ControllaP2(5, 50);
+                    ControllaP2(refFuoco, 50);
                     break;
             }
         }

@@ -124,6 +124,9 @@ namespace Script.User
         private void SetTask(JSONObject json)
         {
             int codice = json.GetField("CodeTask").intValue;
+            
+            if (codice == 0) 
+                return;
                             
             if (json.GetField("Player"))
             {

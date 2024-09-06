@@ -81,7 +81,7 @@ namespace _Scenes.User.telefono
             schede[1].SetActive(true);
         }
 
-        public void SindacoInformazioni(Button tmp) //chiedi informazioni alla giornalista tramite la segretaria
+        public void SindacoInformazioni(Button tmp) //chiedi informazioni al refTcl
         {
             tmp.interactable = false;
             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":3}");

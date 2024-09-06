@@ -17,6 +17,7 @@ using Script.User;
 using Script.Utility;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Scene = Script.Utility.Scene;
 
 // ReSharper disable CommentTypo IdentifierTypo StringLiteralTypo
@@ -165,7 +166,6 @@ namespace _Scenes.User.telefono
         {
             if (value == -1)
             {
-                //termina partita
                 SceneManager.LoadScene(Scene.User.EndGame);
                 return;
             }
@@ -249,6 +249,7 @@ namespace _Scenes.User.telefono
                             break;
                         case 4:
                             NuovaNotifica("Informazioni dal referente Telecomunicazioni: "+plName);
+                            schede[0].transform.GetChild(0).GetChild(3).GetComponent<Button>().interactable = true;
                             break;
                         case 70:
                             NuovaNotifica("Il COC ha richiesto che autorizzi la richiesta per ottenere più volontari PC");
@@ -349,7 +350,7 @@ namespace _Scenes.User.telefono
                             // altri volontari step 3 pompiere
                             break;
                         case 6:
-                            schede[0].transform.GetChild(0).GetChild(5).gameObject.SetActive(true);
+                            schede[0].transform.GetChild(0).GetChild(2).GetComponent<Button>().interactable = true;
                             break;
                     }
                     break;

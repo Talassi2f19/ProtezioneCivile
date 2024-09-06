@@ -19,12 +19,11 @@ namespace _Scenes.User.telefono
 
         private void Start()
         {
-            avanti.interactable = false;
+            SelectReset();
         }
 
         public void NuovaTask(string desc, int cod)
         {
-            avanti.interactable = true;
             GameObject tmp = Instantiate(prefab, parent);
             tmp.GetComponentInChildren<TextMeshProUGUI>().text = desc;
             tmp.GetComponent<Button>().onClick.AddListener(()=>Select(cod, tmp));
@@ -41,6 +40,7 @@ namespace _Scenes.User.telefono
 
         private void Select(int k, GameObject h)
         {
+            SelectReset();
             avanti.interactable = true;
             if(button != null)
                 button.GetComponent<Image>().color = Color.white;
@@ -51,7 +51,6 @@ namespace _Scenes.User.telefono
     
         public void ApriAssenga()
         {
-            avanti.interactable = false;
             logica.TaskAssenga(codice, button.GetComponentInChildren<TextMeshProUGUI>().text);
             Rimuovi();
         }
@@ -65,16 +64,16 @@ namespace _Scenes.User.telefono
         {
             richiesteVolontari.ConfermaRichiesta(codice);
             Rimuovi();
+            SelectReset();
         }
 
         public void Rimuovi()
         {
-            // Debug.Log(button.name);
             if(button != null)
-                button.SetActive(false);
+                Destroy(button);
             if(parent.childCount <= 1)
                 avanti.interactable = false;
-            Destroy(button);
+            SelectReset();
         }
 
         private void OnDisable()
