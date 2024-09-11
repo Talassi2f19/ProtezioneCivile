@@ -58,7 +58,7 @@ namespace minigame.AllestimentoCRI
             pt3 = Instantiate(prefab3, mappa);
             mainCanvas.enabled = true;
             playerLocal.canMove = true;
-            GameObject.FindWithTag("notifiche")?.GetComponent<TaskManager>()?.NuovaNotifica("Hai terminato la task");
+            GameObject.FindWithTag("notifiche")?.GetComponent<TaskManager>()?.NuovaNotifica("Hai terminato il task");
             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":30000}").Catch(Debug.Log);
             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":202,\"Player\":\""+Info.localUser.name+"\"}").Catch(Debug.Log);
             RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", "{\"Occupato\":false}");

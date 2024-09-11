@@ -67,7 +67,7 @@ namespace minigame.Incidente
             playerLocal.canMove = true;
             Destroy(p1);
             Destroy(p2);
-            GameObject.FindWithTag("notifiche")?.GetComponent<TaskManager>()?.NuovaNotifica("Hai terminato la task");
+            GameObject.FindWithTag("notifiche")?.GetComponent<TaskManager>()?.NuovaNotifica("Hai terminato il task");
             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":203,\"Player\":\""+Info.localUser.name+"\"}").Catch(Debug.LogError);
 			RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", "{\"Occupato\":false}").Catch(Debug.LogError);;
             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":47001}").Catch(Debug.LogError);

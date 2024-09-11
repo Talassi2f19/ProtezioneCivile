@@ -216,10 +216,10 @@ namespace Script.Master
              
              //Debug.LogWarning("codice: "+codice + ", ruolo: " + codTaskEndRuolo + ", map: " + codMapUpdate);
              
-             //messaggio volontario ha terminato la task
+             //messaggio volontario ha terminato il task
              RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":" + codTaskEndRuolo + ",\"Player\":\"" + name + "\"}").Catch(Debug.Log);
              
-             //codice di risposta alla task
+             //codice di risposta alil task
              if(codMapUpdate != 0)
                 RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":" + codMapUpdate + "}").Catch(Debug.LogError);
              
@@ -658,19 +658,19 @@ namespace Script.Master
                     NuovaNotifica("per volFuoco : Incendio in corso, spegnilo.");
                     break;
                 case 200:
-                    NuovaNotifica("per refPC : " + info + " ha terminato la task");
+                    NuovaNotifica("per refPC : " + info + " ha terminato il task");
                     break;
                 case 201:
-                    NuovaNotifica("per refGgev : " + info + " ha terminato la task");
+                    NuovaNotifica("per refGgev : " + info + " ha terminato il task");
                     break;
                 case 202:
-                    NuovaNotifica("per refCRI : " + info + " ha terminato la task");
+                    NuovaNotifica("per refCRI : " + info + " ha terminato il task");
                     break;
                 case 203:
-                    NuovaNotifica("per refPolizia : " + info + " ha terminato la task");
+                    NuovaNotifica("per refPolizia : " + info + " ha terminato il task");
                     break;
                 case 204:
-                    NuovaNotifica("per refFuoco : " + info + " ha terminato la task");
+                    NuovaNotifica("per refFuoco : " + info + " ha terminato il task");
                     break;
             }
         }

@@ -394,7 +394,7 @@ namespace _Scenes.User.telefono
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Soccorri", 1038);
                             break;
                         case 202:
-                            NuovaNotifica(plName + " ha terminato la task");
+                            NuovaNotifica(plName + " ha terminato il task");
                             break;
                     }
                     break;
@@ -420,7 +420,7 @@ namespace _Scenes.User.telefono
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Rimuove materiale pericoloso", 1027);
                             break;
                         case 201:
-                            NuovaNotifica(plName + " ha terminato la task");
+                            NuovaNotifica(plName + " ha terminato il task");
                             break;
                     }
                     break;
@@ -466,7 +466,7 @@ namespace _Scenes.User.telefono
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Crea punto raccolta", 1018);
                             break;
                         case 200:
-                            NuovaNotifica(plName + " ha terminato la task");
+                            NuovaNotifica(plName + " ha terminato il task");
                             break;
                     }
                     break;
@@ -496,7 +496,7 @@ namespace _Scenes.User.telefono
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Incidente", 1047);
                             break;
                         case 203:
-                            NuovaNotifica(plName + " ha terminato la task");
+                            NuovaNotifica(plName + " ha terminato il task");
                             break;
                     }
                     break;
@@ -526,7 +526,7 @@ namespace _Scenes.User.telefono
                             schede[2].GetComponentInChildren<TaskSeleziona>().NuovaTask("Spegni Incendio", 1057);
                             break;
                         case 204:
-                            NuovaNotifica(plName + " ha terminato la task");
+                            NuovaNotifica(plName + " ha terminato il task");
                             break;
                     }
                     break;

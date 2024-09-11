@@ -48,8 +48,8 @@ namespace Script.Utility.GestioneEventi
             return ruoli;
         }
 
-        //Ritorna true se con questa esecuzione ha chiuso la task
-        //Ritorna false se la task era già finita
+        //Ritorna true se con questa esecuzione ha chiuso il task
+        //Ritorna false se il task era già finita
         public bool taskFinished()
         {
             if (!isCompleted)

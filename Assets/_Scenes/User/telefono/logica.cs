@@ -98,7 +98,7 @@ namespace _Scenes.User.telefono
             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":5}");
         }
 
-        public void COCGiocoAssegnazione() // minigioco di asseganre la task al referente corretto
+        public void COCGiocoAssegnazione() // minigioco di asseganre il task al referente corretto
         {
             schede[1].SetActive(true);
         }

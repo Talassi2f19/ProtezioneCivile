@@ -105,7 +105,7 @@ namespace minigame.MaterialePericoloso
             if (transform.childCount == 0)
             {
                 ObjText.SetActive(false);
-                GameObject.FindWithTag("notifiche")?.GetComponent<TaskManager>()?.NuovaNotifica("Hai terminato la task");
+                GameObject.FindWithTag("notifiche")?.GetComponent<TaskManager>()?.NuovaNotifica("Hai terminato il task");
                 RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":201,\"Player\":\""+Info.localUser.name+"\"}").Catch(Debug.Log);
                 RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":27001}").Catch(Debug.LogError);
                 RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", "{\"Occupato\":false}");

@@ -59,7 +59,7 @@ namespace minigame.TogliTane
                 ObjText.SetActive(false);
                 //task done
                 argine.ArgineAccessibile(false);
-                GameObject.FindWithTag("notifiche")?.GetComponent<TaskManager>()?.NuovaNotifica("Hai terminato la task");
+                GameObject.FindWithTag("notifiche")?.GetComponent<TaskManager>()?.NuovaNotifica("Hai terminato il task");
                 RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":201,\"Player\":\""+Info.localUser.name+"\"}").Catch(Debug.Log);
                 RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", "{\"Occupato\":false}");
                 RestClient.Get(Info.DBUrl + Info.sessionCode + "/score.json").Then(e =>

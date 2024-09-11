@@ -67,7 +67,7 @@ namespace minigame.Percorsi
             inProgress = false;
             Destroy(p1);
             p1 = Instantiate(stage2, transform);
-            GameObject.FindWithTag("notifiche")?.GetComponent<TaskManager>()?.NuovaNotifica("Hai terminato la task");
+            GameObject.FindWithTag("notifiche")?.GetComponent<TaskManager>()?.NuovaNotifica("Hai terminato il task");
             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":203,\"Player\":\""+Info.localUser.name+"\"}").Catch(Debug.LogError);;
 			RestClient.Patch(Info.DBUrl + Info.sessionCode + "/" + Global.PlayerFolder + "/" + Info.localUser.name + ".json", "{\"Occupato\":false}").Catch(Debug.LogError);;
             RestClient.Post(Info.DBUrl + Info.sessionCode + "/Game/Task.json", "{\"CodeTask\":46000}").Catch(Debug.LogError);
